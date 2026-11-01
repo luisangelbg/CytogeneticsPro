@@ -138,14 +138,10 @@ dice «el maíz de ejemplo», no «el maíz».
 
 **No lo corrijas.** Anótalo al final de tu entrega con el bloque, cómo reproducirlo, qué esperabas y
 qué salió (con la captura si ayuda), y escribe el capítulo con lo que la app hace hoy, sin presentar
-el error como correcto. Ya anotados (no hace falta repetirlos):
-
-- En inglés, las etiquetas de las células de los ejemplos siguen en español («Célula 1 · 28» en el
-  Bloque 3): vienen de los datos del ejemplo, no de la interfaz.
-- En el Bloque 3, el texto de la opción de Clasificación («Levan et al. 1964 · razón…») queda cortado
-  en el campo a 1400 px de ancho.
-- `CHANGELOG.md` (etapa 3) todavía nombra «PolenApp», hoy PalynoPro.
-- En la portada de la app, «Cómo funciona» tiene siete pasos en una tira con desplazamiento horizontal: a 1400 px de ancho el séptimo («Publicar») queda cortado. La receta `i-flujo` usa una ventana de 1800 px.
+el error como correcto. Los errores que se anotaron al escribir la primera versión del manual se
+corrigieron en la app (commit 46d3cd0, 659 pruebas): las etiquetas de los ejemplos en el idioma de la
+interfaz, el campo «Clasificación» más ancho, la tira «Cómo funciona» completa a 1400 px y las demás de
+esa lista. `CHANGELOG.md` conserva el nombre antiguo «PolenApp» sólo en la entrada histórica de la etapa 3.
 
 ## 6. Tamaño
 

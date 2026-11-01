@@ -15,7 +15,7 @@
     m(2, q('.suite-link'), -12),
     m(3, q('.lang-seg'), -4, 20),
     m(4, q('#themeBtn'), 60, 20),
-    m(5, q('.lnav-side-nav'), 236, 0),
+    m(5, q('.lnav-side-nav'), 182, -31),
     m(6, q('.lnav-crumbs'), -10),
     m(7, q('.lnav-seg'), -10),
     m(8, buscar, -10),
