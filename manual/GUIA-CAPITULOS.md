@@ -145,6 +145,7 @@ el error como correcto. Ya anotados (no hace falta repetirlos):
 - En el Bloque 3, el texto de la opción de Clasificación («Levan et al. 1964 · razón…») queda cortado
   en el campo a 1400 px de ancho.
 - `CHANGELOG.md` (etapa 3) todavía nombra «PolenApp», hoy PalynoPro.
+- En la portada de la app, «Cómo funciona» tiene siete pasos en una tira con desplazamiento horizontal: a 1400 px de ancho el séptimo («Publicar») queda cortado. La receta `i-flujo` usa una ventana de 1800 px.
 
 ## 6. Tamaño
 
