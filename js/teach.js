@@ -173,7 +173,7 @@
   };
   const TEXTS = {
     interphase: ['El ADN ya se replicó en la fase S: cada cromosoma tiene dos cromátidas hermanas, todavía descondensadas dentro del núcleo. Los colores marcan el origen de cada homólogo: azul, del padre; bermellón, de la madre.',
-      'DNA was replicated in the S phase: each chromosome has two sister chromatids, still decondensed inside the nucleus. The colours mark where each homologue came from: blue, the father; vermilion, the mother.'],
+      'DNA was replicated in the S phase: each chromosome has two sister chromatids, still decondensed inside the nucleus. The colors mark where each homologue came from: blue, the father; vermilion, the mother.'],
     prophase: ['Los cromosomas se condensan y se ven las dos cromátidas unidas por el centrómero. En mitosis los homólogos no se aparean: cada cromosoma va por su cuenta.',
       'The chromosomes condense and the two chromatids joined at the centromere become visible. In mitosis homologues do not pair: each chromosome goes on its own.'],
     prometaphase: ['La envoltura nuclear se deshace; los microtúbulos del huso se unen a los cinetocoros de cada cromátida y mueven los cromosomas hacia el ecuador.',
@@ -193,7 +193,7 @@
     pachytene: ['La sinapsis es completa: cada par es un bivalente (dos homólogos, cuatro cromátidas). Aquí ocurre el entrecruzamiento entre cromátidas no hermanas.',
       'Synapsis is complete: each pair is a bivalent (two homologues, four chromatids). Crossing-over between non-sister chromatids happens here.'],
     diplotene: ['Los homólogos se separan salvo en los quiasmas, donde se ve el intercambio: las cromátidas recombinantes llevan los dos colores.',
-      'The homologues pull apart except at the chiasmata, where the exchange shows: the recombinant chromatids carry both colours.'],
+      'The homologues pull apart except at the chiasmata, where the exchange shows: the recombinant chromatids carry both colors.'],
     diakinesis: ['Los bivalentes se condensan al máximo y se apartan a la periferia del núcleo. Es el mejor momento para contar bivalentes y quiasmas.',
       'The bivalents condense fully and move to the edge of the nucleus. It is the best moment to count bivalents and chiasmata.'],
     metaphase1: ['Los bivalentes se alinean en la placa con un homólogo hacia cada polo. Qué homólogo va a cada lado es al azar en cada par: hay 2ⁿ combinaciones (segregación independiente).',
@@ -513,7 +513,7 @@
       'Con cuatro homólogos, sus extremos pueden aparearse con distintos compañeros y formar multivalentes. Un alopoliploide con apareamiento preferencial forma sólo bivalentes.', 'With four homologues, their ends can pair with different partners and form multivalents. An allopolyploid with preferential pairing forms only bivalents.'],
     ['mei', 'El índice meiótico de Love (1951) es…', ['el porcentaje de tétradas normales; por debajo de 90 la meiosis es irregular', 'el número de quiasmas por célula', 'la proporción de polen teñido', 'el número de bivalentes por célula'],
       'Love’s (1951) meiotic index is…', ['the percentage of normal tetrads; below 90 meiosis is irregular', 'the number of chiasmata per cell', 'the proportion of stained pollen', 'the number of bivalents per cell'], 0,
-      'Love propuso que una planta con índice menor de 90 % tiene problemas meióticos que afectan su fertilidad.', 'Love proposed that a plant with an index below 90% has meiotic problems that affect its fertility.'],
+      'Love propuso que una planta con índice menor de 90 % tiene problemas meióticos que afectan su fertilidad.', 'Love proposed that a plant with an index below 90 % has meiotic problems that affect its fertility.'],
     ['mei', 'El índice de recombinación de una célula se calcula como…', ['n + quiasmas por célula', '2n − quiasmas', 'quiasmas / bivalentes', 'bivalentes × 2'],
       'The recombination index of a cell is computed as…', ['n + chiasmata per cell', '2n − chiasmata', 'chiasmata / bivalents', 'bivalents × 2'], 0,
       'Cada par aporta una unidad por la segregación independiente y cada quiasma una más (Darlington).', 'Each pair adds one unit for independent assortment and each chiasma one more (Darlington).'],
@@ -552,7 +552,7 @@
       'Inhiben el huso: las células se detienen en metafase con los cromosomas cortos y separados.', 'They inhibit the spindle: cells stop in metaphase with short, separate chromosomes.'],
     ['tec', 'El fijador de Carnoy más usado (3:1) es…', ['etanol y ácido acético, 3:1', 'metanol y agua, 3:1', 'ácido clorhídrico y etanol, 3:1', 'formaldehído y etanol, 3:1'],
       'The most used Carnoy fixative (3:1) is…', ['ethanol and acetic acid, 3:1', 'methanol and water, 3:1', 'hydrochloric acid and ethanol, 3:1', 'formaldehyde and ethanol, 3:1'], 0,
-      'Se prepara al momento; el material fijado se guarda en etanol al 70 % en frío.', 'It is prepared fresh; fixed material is stored in 70% ethanol in the cold.'],
+      'Se prepara al momento; el material fijado se guarda en etanol al 70 % en frío.', 'It is prepared fresh; fixed material is stored in 70 % ethanol in the cold.'],
     ['tec', 'En la reacción de Feulgen, la hidrólisis con HCl…', ['libera grupos aldehído de la desoxirribosa que reaccionan con el reactivo de Schiff', 'tiñe las proteínas', 'quita el ARN solamente', 'fija los cromosomas'],
       'In the Feulgen reaction, the HCl hydrolysis…', ['frees aldehyde groups of the deoxyribose that react with Schiff’s reagent', 'stains the proteins', 'removes RNA only', 'fixes the chromosomes'], 0,
       'Por eso la tinción de Feulgen es específica del ADN y su intensidad es proporcional a su cantidad.', 'That is why Feulgen staining is specific to DNA and its intensity is proportional to its amount.'],
@@ -674,20 +674,20 @@
   const PROTOCOL = {
     pre: [
       ['hq', '8-hidroxiquinolina 0.002 M, 3–4 h a 16–18 °C', '8-hydroxyquinoline 0.002 M, 3–4 h at 16–18 °C', 'Sharma y Sharma 1980'],
-      ['col', 'Colchicina 0.05–0.1 %, 2–4 h a temperatura ambiente (tóxica: guantes)', 'Colchicine 0.05–0.1%, 2–4 h at room temperature (toxic: gloves)', 'Sharma y Sharma 1980'],
+      ['col', 'Colchicina 0.05–0.1 %, 2–4 h a temperatura ambiente (tóxica: guantes)', 'Colchicine 0.05–0.1 %, 2–4 h at room temperature (toxic: gloves)', 'Sharma y Sharma 1980'],
       ['ice', 'Agua con hielo (0–4 °C), 18–24 h', 'Ice water (0–4 °C), 18–24 h', 'Darlington y La Cour 1976'],
       ['abn', 'Solución saturada de α-bromonaftaleno, 2–4 h (en campana)', 'Saturated α-bromonaphthalene, 2–4 h (in a fume hood)', 'Guerra y Souza 2002'],
     ],
-    fix: [['carnoy', 'Carnoy 3:1 (etanol absoluto : ácido acético glacial), recién hecho, 24 h a 4 °C; guardar en etanol al 70 % en frío', 'Carnoy 3:1 (absolute ethanol : glacial acetic acid), freshly made, 24 h at 4 °C; store in 70% ethanol in the cold', 'Darlington y La Cour 1976']],
+    fix: [['carnoy', 'Carnoy 3:1 (etanol absoluto : ácido acético glacial), recién hecho, 24 h a 4 °C; guardar en etanol al 70 % en frío', 'Carnoy 3:1 (absolute ethanol : glacial acetic acid), freshly made, 24 h at 4 °C; store in 70 % ethanol in the cold', 'Darlington y La Cour 1976']],
     hyd: [
       ['hcl1', 'HCl 1 N a 60 °C, 8–12 min (con orceína o carmín)', '1 N HCl at 60 °C, 8–12 min (with orcein or carmine)', 'Sharma y Sharma 1980'],
       ['hcl5', 'HCl 5 N a temperatura ambiente, 20–60 min (para Feulgen)', '5 N HCl at room temperature, 20–60 min (for Feulgen)', 'Guerra y Souza 2002'],
-      ['enz', 'Mezcla de celulasa y pectinasa (2 % y 20 %) a 37 °C, 1–2 h (para bandeo o FISH)', 'Cellulase and pectinase mix (2% and 20%) at 37 °C, 1–2 h (for banding or FISH)', 'Schwarzacher y Heslop-Harrison 2000'],
+      ['enz', 'Mezcla de celulasa y pectinasa (2 % y 20 %) a 37 °C, 1–2 h (para bandeo o FISH)', 'Cellulase and pectinase mix (2 % and 20 %) at 37 °C, 1–2 h (for banding or FISH)', 'Schwarzacher y Heslop-Harrison 2000'],
     ],
     stain: [
-      ['orc', 'Aceto-orceína al 2 %, 10–30 min', '2% aceto-orcein, 10–30 min', 'Darlington y La Cour 1976'],
-      ['car', 'Acetocarmín o carmín propiónico al 1 %, 10–30 min', '1% acetocarmine or propionic carmine, 10–30 min', 'Sharma y Sharma 1980'],
-      ['feu', 'Reactivo de Schiff (Feulgen), 1–2 h en oscuridad; después, una gota de ácido acético al 45 %', 'Schiff’s reagent (Feulgen), 1–2 h in the dark; then a drop of 45% acetic acid', 'Guerra y Souza 2002'],
+      ['orc', 'Aceto-orceína al 2 %, 10–30 min', '2 % aceto-orcein, 10–30 min', 'Darlington y La Cour 1976'],
+      ['car', 'Acetocarmín o carmín propiónico al 1 %, 10–30 min', '1 % acetocarmine or propionic carmine, 10–30 min', 'Sharma y Sharma 1980'],
+      ['feu', 'Reactivo de Schiff (Feulgen), 1–2 h en oscuridad; después, una gota de ácido acético al 45 %', 'Schiff’s reagent (Feulgen), 1–2 h in the dark; then a drop of 45 % acetic acid', 'Guerra y Souza 2002'],
     ],
   };
   function protocolSteps(choice) {
@@ -701,13 +701,13 @@
       ['Lavado', 'Rinse', 'Lavar en agua destilada, 3 × 5 min.', 'Rinse in distilled water, 3 × 5 min.', 'Guerra y Souza 2002'],
       ['Hidrólisis', 'Hydrolysis', hyd[1], hyd[2], hyd[3]],
       ['Tinción', 'Staining', st[1], st[2], st[3]],
-      ['Aplastado', 'Squash', 'Cortar el meristemo (1–2 mm de la punta), ponerlo en una gota de ácido acético al 45 % o del colorante, cubrir y aplastar con el pulgar sobre papel filtro, sin deslizar el cubreobjetos.', 'Cut the meristem (1–2 mm of the tip), put it in a drop of 45% acetic acid or of the stain, cover and squash with the thumb over filter paper, without sliding the coverslip.', 'Darlington y La Cour 1976'],
+      ['Aplastado', 'Squash', 'Cortar el meristemo (1–2 mm de la punta), ponerlo en una gota de ácido acético al 45 % o del colorante, cubrir y aplastar con el pulgar sobre papel filtro, sin deslizar el cubreobjetos.', 'Cut the meristem (1–2 mm of the tip), put it in a drop of 45 % acetic acid or of the stain, cover and squash with the thumb over filter paper, without sliding the coverslip.', 'Darlington y La Cour 1976'],
       ['Observación', 'Observation', 'Buscar metafases con cromosomas separados a 400× y fotografiarlas a 1000× (inmersión). Para preparaciones permanentes: congelar, quitar el cubreobjetos y montar.', 'Look for metaphases with separate chromosomes at 400× and photograph them at 1000× (immersion). For permanent slides: freeze, remove the coverslip and mount.', 'Singh 2017'],
     ];
   }
   const SAFETY = [['El ácido clorhídrico y el ácido acético glacial son corrosivos: bata, guantes y lentes; trabajar en campana.', 'Hydrochloric acid and glacial acetic acid are corrosive: lab coat, gloves and glasses; work in a fume hood.'],
     ['La colchicina y el α-bromonaftaleno son tóxicos: no tocar sin guantes y desechar como residuo peligroso.', 'Colchicine and α-bromonaphthalene are toxic: do not touch without gloves and discard as hazardous waste.'],
-    ['El reactivo de Schiff y los fijadores se guardan cerrados y rotulados.', 'Schiff’s reagent and fixatives are kept closed and labelled.']];
+    ['El reactivo de Schiff y los fijadores se guardan cerrados y rotulados.', 'Schiff’s reagent and fixatives are kept closed and labeled.']];
 
   window.Teach = { chromSet, paint, crossOver, recombinant, meiosisPlan, STEPS, NAMES, TEXTS, counts, draw, products, exercise, grade,
     BANK, GEN, quiz, TOPICS, GLOSSARY, glossArt, PROTOCOL, protocolSteps, SAFETY, HC };

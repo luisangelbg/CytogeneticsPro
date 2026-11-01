@@ -31,7 +31,15 @@
     const o = opts();
     let res;
     if (o.mode === 'cells' && K.cells.length) {
-      const per = K.cells.map(c => Asym.compute(c.groups.filter(Boolean).flatMap(g => g.homolog.map(h => ({ s: h.s, l: h.l }))), { pop: o.pop })).filter(Boolean);
+      /* the indices with every chromosome of the cell; the length of ONE set is
+         the sum over the groups of the mean length of their homologues (not
+         the whole complement of the cell) */
+      const per = K.cells.map(c => {
+        const gs = c.groups.filter(g => g && g.homolog.length);
+        const R = Asym.compute(gs.flatMap(g => g.homolog.map(h => ({ s: h.s, l: h.l }))), { pop: o.pop });
+        if (R) R.THL = gs.reduce((a, g) => a + Stats.mean(g.homolog.map(h => h.s + h.l)), 0);
+        return R;
+      }).filter(Boolean);
       const R = {}, sd = {};
       Asym.ORDER.concat(['THL', 'ratioLS', 'CG', 'meanCI']).forEach(k => {
         const v = per.map(p => p[k]).filter(x => isFinite(x));
@@ -50,7 +58,7 @@
   const asym = acc => (state.asym && state.asym[acc]) || compute(acc);
   const ready = () => state.accessions.filter(a => window.Block3 && Block3.cellsFor(a.id).length);
   const val = (r, k) => r.R[k];
-  const show = (r, k) => { const v = r.R[k]; if (!isFinite(v)) return '—'; const s = r.sd && isFinite(r.sd[k]) ? r.sd[k] : null; return s != null ? fmtMS(v, s, digits(k)) : fmtFixed(v, digits(k)); };
+  const show = (r, k) => { const v = r.R[k]; if (!isFinite(v)) return '—'; const s = r.sd && isFinite(r.sd[k]) ? r.sd[k] : null; return s != null ? msHtml(v, s, digits(k)) : fmtFixed(v, digits(k)); };
 
   /* ---------------- rendering ---------------- */
   function render() {
@@ -75,12 +83,12 @@
     const cols = [
       { key: 'a', label: L2('Accesión', 'Accession'), get: r => accName(r.acc) },
       { key: 'n2', label: '2n', num: true, get: r => r.R.n2 },
-      { key: 'THL', label: L2('Juego', 'Set') + ' (' + rows[0].unit + ')', num: true, get: r => show(r, 'THL') },
+      { key: 'THL', label: L2('Juego', 'Set') + ' (' + rows[0].unit + ')', num: true, html: true, get: r => show(r, 'THL') },
     ].concat(ks.map(k => {
       const m = Asym.INDICES.find(x => x.k === k);
-      return { key: k, label: `<abbr title="${esc(m.f + ' — ' + m.ref)}">${esc(m.name)}</abbr>${m.recommended ? ' ★' : ''}`, num: true, get: r => show(r, k) };
+      return { key: k, label: `<abbr title="${esc(m.f + ' — ' + m.ref)}">${esc(m.name)}</abbr>${m.recommended ? ' ★' : ''}`, num: true, html: true, get: r => show(r, k) };
     })).concat([{ key: 'st', label: 'Stebbins', get: r => r.R.stebbins }]);
-    buildTable('b4Table', cols, rows, { foot: `<tr><td colspan="${cols.length}" class="hint">${L2(
+    buildTable('b4Table', cols, rows, { className: 'fit', foot: `<tr><td colspan="${cols.length}" class="hint">${L2(
       `★ recomendados (Peruzzi y Eroğlu 2013). ${rows[0].mode === 'cells' ? 'Media ± de entre células' : 'Sobre las medias de los pares'}; desviación ${opts().pop ? 'poblacional (n)' : 'muestral (n − 1)'}.`,
       `★ recommended (Peruzzi and Eroğlu 2013). ${rows[0].mode === 'cells' ? 'Mean ± sd among cells' : 'On the means of the pairs'}; ${opts().pop ? 'population (n)' : 'sample (n − 1)'} deviation.`)}</td></tr>` });
     const mca = rows.map(r => r.R.MCA).filter(isFinite), cvcl = rows.map(r => r.R.CVCL).filter(isFinite);
@@ -91,9 +99,9 @@
       [T('Categorías de Stebbins', 'Stebbins categories'), [...new Set(rows.map(r => r.R.stebbins))].join(', ')],
     ]);
     clearMessages('b4Msg');
-    rows.filter(r => !isFinite(r.R.CVCI)).forEach(r => showMessage('b4Msg', 'info', T(`En «${esc(accName(r.acc))}» todos los cromosomas son telocéntricos: CVCI no está definido (0/0).`, `In «${esc(accName(r.acc))}» every chromosome is telocentric: CVCI is undefined (0/0).`)));
+    rows.filter(r => !isFinite(r.R.CVCI)).forEach(r => showMessage('b4Msg', 'info', T(`En «${esc(accName(r.acc))}» todos los cromosomas son telocéntricos: CVCI no está definido (0/0).`, `In “${esc(accName(r.acc))}” every chromosome is telocentric: CVCI is undefined (0/0).`)));
     rows.filter(r => r.mode === 'cells' && r.R.stebbinsAll && new Set(r.R.stebbinsAll).size > 1).forEach(r => showMessage('b4Msg', 'info',
-      T(`«${esc(accName(r.acc))}» cae en categorías de Stebbins distintas según la célula (${r.R.stebbinsAll.join(', ')}); se muestra la más frecuente.`, `«${esc(accName(r.acc))}» falls in different Stebbins categories depending on the cell (${r.R.stebbinsAll.join(', ')}); the most frequent is shown.`)));
+      T(`«${esc(accName(r.acc))}» cae en categorías de Stebbins distintas según la célula (${r.R.stebbinsAll.join(', ')}); se muestra la más frecuente.`, `“${esc(accName(r.acc))}” falls in different Stebbins categories depending on the cell (${r.R.stebbinsAll.join(', ')}); the most frequent is shown.`)));
   }
   /* the grid of Stebbins with every accession, numbered, and its legend */
   function stebbinsSvg(rows) {

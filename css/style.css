@@ -105,7 +105,7 @@ sub, sup { line-height: 0; }
 
 /* ---------- Workflow strip ---------- */
 .workflow { display: flex; gap: 0; align-items: stretch; overflow-x: auto; padding: 6px 0 12px; }
-.wf-step { flex: 1; min-width: 132px; position: relative; padding: 12px 14px 12px 18px; background: var(--card-bg); border: 1px solid var(--border); }
+.wf-step { flex: 1; min-width: 108px; position: relative; padding: 12px 10px 12px 16px; background: var(--card-bg); border: 1px solid var(--border); }
 .wf-step:first-child { border-radius: 10px 0 0 10px; }
 .wf-step:last-child { border-radius: 0 10px 10px 0; }
 .wf-step + .wf-step { border-left: none; }
@@ -254,6 +254,9 @@ input[type=text], input[type=number], input[type=search], select, textarea {
 .inline-label { font-size: 0.86rem; color: var(--text-muted); display: inline-flex; gap: 7px; align-items: center; flex-wrap: wrap; max-width: 100%; min-width: 0; }
 .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 10px 14px; margin: 10px 0; align-items: end; }
 .field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+/* menus with long options (classification, chromosomes of the indices, standards, protocols) get room for them */
+.form-grid.cols-wide { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+@media (min-width: 700px) { .form-grid > .field.wide { grid-column: span 2; } }
 .field > label, .field > .field-label { font-size: 0.74rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
 .checkbox-label { display: flex; align-items: center; gap: 8px; font-size: 0.86rem; cursor: pointer; margin: 4px 0; }
 .btn-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 10px 0 0; }
@@ -272,6 +275,11 @@ tbody td { padding: 7px 12px; border-bottom: 1px solid var(--border); }
 tbody tr:last-child td { border-bottom: none; }
 td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .table-scroll { overflow: auto; max-width: 100%; }
+/* result tables with many columns (Blocks 4 and 5): headings wrap, cells are tighter and a
+   deviation goes under its mean, so they fit the width of the page */
+.table-scroll table.fit th, .table-scroll table.fit td { padding: 6px 7px; }
+.table-scroll table.fit thead th { white-space: normal; vertical-align: bottom; min-width: 3em; line-height: 1.25; }
+table.fit .ms small { display: block; color: var(--text-muted); font-size: .86em; }
 .table-scroll.tall { max-height: 460px; }
 .badge { display: inline-block; font-size: 0.72rem; padding: 2px 9px; border-radius: 999px; background: var(--bg-soft); border: 1px solid var(--border); color: var(--text-muted); }
 .badge.ok { color: var(--success-text); border-color: color-mix(in srgb, var(--success) 45%, transparent); }
@@ -444,6 +452,7 @@ ul.prod { margin: 6px 0; padding-left: 20px; }
 .ex-cut { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card-bg); min-width: 64px; }
 .ex-cut.ok { border-color: var(--success); box-shadow: inset 0 0 0 1px var(--success); }
 .ex-cut.bad { border-color: var(--warning); box-shadow: inset 0 0 0 1px var(--warning); }
+.ex-cut.renum { border-color: var(--warning); border-style: dashed; }
 .ex-cut-num { font-weight: 700; color: var(--text); }
 .ex-cut-img canvas { display: block; }
 .ex-cut select { width: 4.6em; padding: 2px 4px; font-size: .85rem; }

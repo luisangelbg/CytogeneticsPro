@@ -22,7 +22,7 @@
      (demiploidy), each with its cost (the kinds of event follow Mayrose et al.
      2010). The cost between two numbers is the cheapest sequence of events;
      every node gets the set of its optimal numbers (most parsimonious
-     reconstructions) and one optimal history is spelt out branch by branch. */
+     reconstructions) and one optimal history is spelled out branch by branch. */
 (function () {
   'use strict';
   const S = () => window.Stats;

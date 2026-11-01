@@ -4,7 +4,7 @@ Este documento dice, elemento por elemento, qué partes de CytogeneticsPro son
 obra propia y de dónde salen las ideas que no lo son, para que cualquiera pueda
 comprobar lo que aquí se afirma.
 
-Última revisión: 6 de octubre de 2026 (versión 1.0.0 en construcción).
+Última revisión: 1 de noviembre de 2026 (versión 1.0.0).
 
 ---
 
@@ -128,11 +128,23 @@ números igual de parsimoniosos de cada nodo y dibuja una de las historias
 - **DI** usa las medianas del brazo corto y de la longitud, como lo define el
   resumen de Lavania y Srivastava (1992).
 - **Señales en un solo homólogo.** Al contar los sitios de una sonda por juego
-  cromosómico (Bloques 7 y 8), un sitio en un solo homólogo cuenta medio.
-- **Datos faltantes en la comparación.** La distancia de Gower y la euclidiana
-  usan, en cada pareja, las variables que ambas tienen (la euclidiana se
-  reescala al total de variables). El análisis de componentes pone las celdas
-  vacías en la media y sólo usa las variables que varían.
+  cromosómico, un sitio en un solo homólogo cuenta medio, con el mismo criterio
+  en todas partes: el patrón de la accesión y sus regiones, la tabla de todas las
+  accesiones (Bloque 7) y la matriz de la comparación (Bloque 8).
+- **Datos faltantes en la comparación.** Por omisión, al agrupamiento y al
+  análisis de componentes sólo entran las filas que tienen todas las variables
+  elegidas; las demás siguen en la matriz, en el árbol de los números y en el
+  mapa, y la app dice cuáles quedan fuera y qué les falta. Se puede elegir, en
+  cambio, usar sólo las variables que tienen todas las filas, o comparar cada
+  pareja con las variables que ambas tienen (la distancia de Gower tal como la
+  definió su autor; la euclidiana se reescala al total de variables). En este
+  último caso, un taxón escrito sólo con 2n y x queda comparado con las
+  accesiones únicamente por esos dos números, y dos cariotipos distintos pueden
+  quedar a distancia 0: la app lo avisa cuando una pareja comparte la mitad de
+  las variables o menos. El análisis de componentes pone las celdas vacías en la
+  media y sólo usa las variables que varían. Los taxones de «Otros taxones» del
+  ejemplo del chayote traen sólo 2n y x porque son especies reales y la app no
+  inventa sus valores cariológicos.
 - **Ward** trabaja con las distancias al cuadrado y da las alturas en la escala
   de la distancia (igual que el método «ward.D2» de R).
 - **Simuladores de la docencia.** La mitosis y la meiosis son dibujos

@@ -64,6 +64,49 @@
     });
   }
 
+  /* the generic labels of the examples (cells, roots, plants, bulbs, treatments
+     and the names of the fictitious populations) in the language of the
+     interface; only labels that still read exactly as the example wrote them
+     are touched, so a name changed by the user stays as it is */
+  const WORDS = [['Célula', 'Cell'], ['Raíz', 'Root'], ['Planta', 'Plant'], ['planta', 'plant'], ['Bulbo', 'Bulb']];
+  const FIXED = [['Testigo (agua destilada)', 'Control (distilled water)'], ['Población diploide', 'Diploid population'], ['Población tetraploide', 'Tetraploid population'],
+    ['Población hexaploide', 'Hexaploid population'], ['Tetraploide con patrón de tomate', 'Tetraploid with tomato standard'], ['Especie ficticia A', 'Fictitious species A'],
+    ['Maíz criollo · Texcoco', 'Landrace maize · Texcoco'], ['Chayote silvestre · Coscomatepec', 'Wild chayote · Coscomatepec'], ['Cebolla · raíces', 'Onion · roots'],
+    ['Banda C (nudo)', 'C-band (knob)'], ['ADNr 45S (NOR)', '45S rDNA (NOR)'], ['ADNr 45S', '45S rDNA'], ['ADNr 5S', '5S rDNA']];
+  function localize(text, lang) {
+    if (typeof text !== 'string' || !text) return text;
+    const en = lang === 'en', from = en ? 0 : 1, to = en ? 1 : 0;
+    for (const f of FIXED) if (text === f[from]) return f[to];
+    let m = new RegExp('^(.*?)(' + WORDS.map(w => w[from]).join('|') + ') (\\d+(?:-\\d+)?)( \\((?:imagen|image)\\))?$').exec(text);
+    if (m) {
+      const w = WORDS.find(x => x[from] === m[2]);
+      const pre = m[1] ? localize(m[1].replace(/ · $/, ''), lang) + ' · ' : '';
+      return pre + w[to] + ' ' + m[3] + (m[4] ? (en ? ' (image)' : ' (imagen)') : '');
+    }
+    m = (en ? /^Extracto ficticio (.+)$/ : /^Fictitious extract (.+)$/).exec(text);
+    if (m) return (en ? 'Fictitious extract ' : 'Extracto ficticio ') + m[1];
+    return text;
+  }
+  function localizeProject(lang) {
+    if (!state.meta || !state.meta.example) return;
+    const L = v => localize(v, lang);
+    state.accessions.forEach(a => { a.name = L(a.name); a.taxon = L(a.taxon); });
+    state.cells.forEach(c => { c.label = L(c.label); });
+    ['configs', 'phases', 'tetrads', 'pollen'].forEach(k => (state.meiosis[k] || []).forEach(r => { if (r.ind != null) r.ind = L(r.ind); if (r.id != null && k === 'pollen') r.id = L(r.id); }));
+    (state.ploidy.counts || []).forEach(r => { r.cell = L(r.cell); });
+    (state.ploidy.fcm || []).forEach(r => { r.sample = L(r.sample); });
+    (state.ploidy.histos || []).forEach(r => { r.name = L(r.name); });
+    (state.ploidy.mitosis || []).forEach(r => { r.rep = L(r.rep); r.trt = L(r.trt); });
+    if (state.ploidy.control) state.ploidy.control = L(state.ploidy.control);
+    (state.bands.probes || []).forEach(p => { p.name = L(p.name); });
+    if (state.karyo) Object.values(state.karyo).forEach(K => { if (K && K.cellLabels) Object.keys(K.cellLabels).forEach(id => { K.cellLabels[id] = L(K.cellLabels[id]); }); });
+  }
+  document.addEventListener('langchange', e => {
+    if (!state.meta || !state.meta.example) return;
+    localizeProject(e.detail.lang);
+    /* the blocks redraw on the same event; the karyotypes keep their labels in step */
+  });
+
   function open(key) {
     const D = DATA[key];
     if (!D) return false;
@@ -77,6 +120,7 @@
     if (D.ploidy) Object.assign(state.ploidy, clone(D.ploidy));
     if (D.bands) Object.assign(state.bands, clone(D.bands));
     if (D.compare) Object.assign(state.compare, clone(D.compare));
+    if (I18N.lang === 'en') localizeProject('en');
     document.dispatchEvent(new CustomEvent('projectchange', { detail: { reason: 'example', example: key } }));
     blockDone();
     const to = STEP_OF[key] || 2;
@@ -85,5 +129,5 @@
     return true;
   }
 
-  window.Examples = Object.assign(window.Examples || {}, { BASE: { zea: ZEA }, basePairs, DATA, open, buildCells, STEP_OF });
+  window.Examples = Object.assign(window.Examples || {}, { BASE: { zea: ZEA }, basePairs, DATA, open, buildCells, STEP_OF, localize });
 })();

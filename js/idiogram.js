@@ -26,7 +26,6 @@
    (0) to the telomere (1); size, its extent as a fraction of the arm. */
 (function () {
   'use strict';
-  let seq = 0;
   const r1 = v => Math.round(v * 10) / 10;
   const TYPE_VAR = { M: '--ty-m', m: '--ty-m', sm: '--ty-sm', st: '--ty-st', a: '--ty-st', t: '--ty-t', T: '--ty-t' };
   const escX = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -101,7 +100,6 @@
       sd: false, colorBy: 'none', ruler: true, title: '', legend: null, satIncluded: true, cenGap: 3,
       order: null, font: 11, margin: 14, minWidth: 0,
     }, opts || {});
-    const id = 'idio' + (++seq);
     const order = o.order || pairs.map((p, i) => i);
     const P = order.map(i => pairs[i]).filter(Boolean);
     if (!P.length) return { svg: '', width: 0, height: 0 };
@@ -121,6 +119,7 @@
       const x0 = x;
       group.forEach((c, k) => {
         body += `<g class="idio-chr" data-pair="${escX(P[gi].label != null ? P[gi].label : gi + 1)}"${group.length > 1 ? ` data-homolog="${k + 1}"` : ''}>` + chromosome(c, x, y0, sc, o, group.length > 1 ? k : null);
+        /* the deviation among cells is that of the pairs: drawn only with one chromosome per pair */
         if (o.sd && c.sd && !diploid) {
           const ex = x + o.chromWidth / 2 + 3;
           body += `<line class="idio-err" x1="${r1(ex)}" x2="${r1(ex)}" y1="${r1(y0 - (c.s - c.sd.s) * sc)}" y2="${r1(y0 - (c.s + c.sd.s) * sc)}"/>` +
@@ -160,22 +159,41 @@
     /* legend (probes, classes): a column at the right */
     let legend = '';
     if (o.legend && o.legend.length) {
-      const lx = width + 4, ly = top + 4;
-      legend = `<g data-role="legend" class="idio-legend">`;
-      o.legend.forEach((e, i) => {
-        const y = ly + i * (o.font + 7);
-        legend += `<rect data-li="${i}" x="${lx}" y="${r1(y - o.font + 2)}" width="${o.font}" height="${o.font - 1}" rx="2" fill="${e.color}"/>` +
-          `<text data-li="${i}" class="idio-leg" x="${lx + o.font + 5}" y="${r1(y)}" font-size="${o.font}">${escX(e.label)}</text>`;
-      });
-      legend += '</g>';
       const longest = Math.max(...o.legend.map(e => String(e.label).length));
-      height = Math.max(height, ly + o.legend.length * (o.font + 7) + 8);
-      o._legendW = 18 + longest * o.font * 0.58 + 10;
+      const colW = 18 + longest * o.font * 0.58 + 10;
+      /* a column at the right; below the chromosomes when the figure is already
+         wide (the homologues of a large karyotype), so it never ends up beyond
+         the width of the page */
+      const below = o.legendPos === 'bottom' || (o.legendPos !== 'right' && width + colW > 720);
+      legend = `<g data-role="legend" class="idio-legend">`;
+      if (!below) {
+        const lx = width + 4, ly = top + 4;
+        o.legend.forEach((e, i) => {
+          const y = ly + i * (o.font + 7);
+          legend += `<rect data-li="${i}" x="${lx}" y="${r1(y - o.font + 2)}" width="${o.font}" height="${o.font - 1}" rx="2" fill="${e.color}"/>` +
+            `<text data-li="${i}" class="idio-leg" x="${lx + o.font + 5}" y="${r1(y)}" font-size="${o.font}">${escX(e.label)}</text>`;
+        });
+        height = Math.max(height, ly + o.legend.length * (o.font + 7) + 8);
+        o._legendW = colW;
+      } else {
+        /* rows of entries, wrapped at the width of the figure */
+        let lx = o.margin + 4, ly = height + o.font - 2;
+        o.legend.forEach((e, i) => {
+          const w = o.font + 5 + String(e.label).length * o.font * 0.58 + 16;
+          if (lx > o.margin + 4 && lx + w > width - o.margin) { lx = o.margin + 4; ly += o.font + 7; }
+          legend += `<rect data-li="${i}" x="${r1(lx)}" y="${r1(ly - o.font + 2)}" width="${o.font}" height="${o.font - 1}" rx="2" fill="${e.color}"/>` +
+            `<text data-li="${i}" class="idio-leg" x="${r1(lx + o.font + 5)}" y="${r1(ly)}" font-size="${o.font}">${escX(e.label)}</text>`;
+          lx += w;
+        });
+        height = ly + 10;
+        o._legendW = 0;
+      }
+      legend += '</g>';
     }
     const W = Math.ceil(width + (o._legendW || 0));
     const H = Math.ceil(height);
     const title = o.title ? `<text class="idio-title" x="${o.margin}" y="${o.margin + 12}" font-size="${o.font + 2}" font-weight="700">${escX(o.title)}</text>` : '';
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" class="idio" id="${id}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img"` +
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" class="idio" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img"` +
       ` data-plot="${left} ${r1(top)} ${r1(width - left)} ${r1(bottom - top)}" aria-label="${escX(o.aria || o.title || 'Idiograma')}">` +
       title + ruler + body + labels + legend + '</svg>';
     return { svg, width: W, height: H, scale: sc, y0, xs };

@@ -34,7 +34,7 @@
   }
   function unitOf(acc) {
     const cs = accCells(acc).filter(c => Img.cellMeasurements(c).length);
-    const px = cs.filter(c => c.image && c.chromosomes.some(x => x.trace) && !Img.umPerPx(c)).length;
+    const px = cs.filter(c => ((c.image && c.chromosomes.some(x => x.trace)) || c.unit === 'px') && !Img.umPerPx(c)).length;
     return { unit: px && px === cs.length ? 'px' : 'µm', mixed: px > 0 && px < cs.length };
   }
   /* the karyotype of an accession (kept in state.karyo until its data change) */
@@ -61,7 +61,7 @@
       const lim = el('b3Limits').value.split(/[;,\s]+/).map(num).filter(v => v > 0).sort((x, y) => x - y);
       const lab = el('b3Labels').value.split(/[;,]+/).map(x => x.trim()).filter(Boolean);
       if (lim.length && lab.length === lim.length + 1) { s.custom = { by: 'r', limits: lim, labels: lab, es: T('Límites propios', 'Own limits') }; clearMessages('b3Msg'); }
-      else { clearMessages('b3Msg'); showMessage('b3Msg', 'warning', T('Los nombres deben ser uno más que los límites.', 'There must be one more name than limits.'), T('Ejemplo: límites «1.7, 3, 7» y nombres «m, sm, st, t».', 'Example: limits «1.7, 3, 7» and names «m, sm, st, t».')); }
+      else { clearMessages('b3Msg'); showMessage('b3Msg', 'warning', T('Los nombres deben ser uno más que los límites.', 'There must be one more name than limits.'), T('Ejemplo: límites «1.7, 3, 7» y nombres «m, sm, st, t».', 'Example: limits “1.7, 3, 7” and names “m, sm, st, t”.')); }
     }
     s.k = +el('b3K').value; s.order = el('b3Order').value; s.stArms = +el('b3StArms').value; s.pop = el('b3Pop').value === '1';
     s.includeSat = el('b3Sat').checked; s.strict = el('b3Strict').checked; s.satInFormula = el('b3SatF').checked;
@@ -109,7 +109,7 @@
       T('Los pares de las células incompletas se promedian con los que tengan; revisa el emparejamiento.', 'The pairs of incomplete cells are averaged with what they have; check the pairing.'));
     if (K.n2 % K.k) showMessage('b3Msg', 'info', T(`Con ${K.n2} cromosomas y ${K.k} homólogos por grupo queda un grupo incompleto.`, `With ${K.n2} chromosomes and ${K.k} homologues per group one group is incomplete.`));
     const cvBad = K.pairs.filter(p => p.n > 1 && p.c.sd / p.c.mean > 0.2);
-    if (cvBad.length) showMessage('b3Msg', 'info', T(`Los pares ${cvBad.map(p => p.j + 1).join(', ')} varían más de 20 % entre células.`, `Pairs ${cvBad.map(p => p.j + 1).join(', ')} vary by more than 20% among cells.`),
+    if (cvBad.length) showMessage('b3Msg', 'info', T(`Los pares ${cvBad.map(p => p.j + 1).join(', ')} varían más de 20 % entre células.`, `Pairs ${cvBad.map(p => p.j + 1).join(', ')} vary by more than 20 % among cells.`),
       T('Puede ser condensación distinta (mira la longitud relativa) o un homólogo mal emparejado.', 'It may be different condensation (look at the relative length) or a mispaired homologue.'));
   }
   /* ---------- the board of homologues ---------- */
@@ -145,7 +145,7 @@
       let im = byImg.get(q.cell.image);
       if (!im) {
         im = await new Promise(res => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = state.images[q.cell.image].dataUrl; });
-        const cv = document.createElement('canvas'); cv.width = im.width; cv.height = im.height; cv.getContext('2d').drawImage(im, 0, 0);
+        const cv = document.createElement('canvas'); cv.width = im.width; cv.height = im.height; cv.getContext('2d', { willReadFrequently: true }).drawImage(im, 0, 0);
         im = cv; byImg.set(q.cell.image, im);
       }
       if (!im) continue;
@@ -277,6 +277,9 @@
     const host = el('b3Idio');
     if (!K) { host.innerHTML = ''; return; }
     const o = idioOpts();
+    /* the deviation among cells belongs to the pairs: the view of the homologues does not draw it */
+    const dip = o.view === 'diploid';
+    el('b3Sd').disabled = dip; el('b3SdNote').hidden = !dip;
     if (!o.title) { const A = accession(curAcc) || {}; el('b3Title').placeholder = (A.taxon ? A.taxon + ' · ' : '') + (A.name || ''); }
     host.innerHTML = idiogram(K, o).svg;
     const fb = host.closest('.fig-block');

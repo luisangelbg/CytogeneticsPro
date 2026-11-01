@@ -138,7 +138,7 @@
       const r = genera[+pick.value], A = accession(cur);
       if (!r || !A) return;
       A.x = r.x; el('b6X').value = r.x; changed(); renderCounts(); renderX(); renderFcm();
-      toast(T(`x = ${r.x} puesto en «${A.name}».`, `x = ${r.x} set in «${A.name}».`), 'success');
+      toast(T(`x = ${r.x} puesto en «${A.name}».`, `x = ${r.x} set in “${A.name}”.`), 'success');
     });
   }
 
@@ -158,8 +158,9 @@
       { key: 'c1', label: '1C (pg)', num: true, get: r => fmtFixed(r.c2 / 2, 3) }, { key: 'L', label: L2('Nivel', 'Level'), num: true, get: r => r.L ? r.L + 'x' : '—' },
       { key: 'c1x', label: '1Cx (pg)', num: true, get: r => fmtFixed(r.c1x, 3) }, { key: 'mbx', label: '1Cx (Mpb)', num: true, get: r => fmtNum(Ploidy.pgToMbp(r.c1x), 0) }], sum);
     sum.forEach(r => {
-      if (r.flags.includes('cv')) showMessage('b6FcmMsg', 'warning', T(`«${esc(r.a.name)}»: algún pico tiene un CV mayor de 5 %.`, `«${esc(r.a.name)}»: some peak has a CV above 5%.`), T('Repite la preparación: un CV alto suele ser núcleos dañados o restos.', 'Repeat the preparation: a high CV is usually damaged nuclei or debris.'));
-      if (r.flags.includes('overlap')) showMessage('b6FcmMsg', 'warning', T(`«${esc(r.a.name)}»: la muestra y el patrón casi coinciden (razón cercana a 1).`, `«${esc(r.a.name)}»: sample and standard nearly coincide (ratio close to 1).`), T('Elige un patrón con un contenido más distinto para que los picos no se encimen.', 'Choose a standard with a more different content so the peaks do not overlap.'));
+      if (r.flags.includes('cv')) showMessage('b6FcmMsg', 'warning', T(`«${esc(r.a.name)}»: algún pico tiene un CV mayor de 5 %.`, `“${esc(r.a.name)}”: some peak has a CV above 5 %.`), T('Repite la preparación: un CV alto suele ser núcleos dañados o restos.', 'Repeat the preparation: a high CV is usually damaged nuclei or debris.'));
+      if (r.flags.includes('far')) showMessage('b6FcmMsg', 'warning', T(`«${esc(r.a.name)}»: la muestra y el patrón difieren más de tres veces en su contenido de ADN.`, `“${esc(r.a.name)}”: sample and standard differ more than threefold in DNA content.`), T('Tan lejos, la respuesta del citómetro puede dejar de ser lineal: elige un patrón de tamaño más cercano al de la muestra, sin que los picos se encimen (Doležel, Greilhuber y Suda 2007).', 'That far apart, the response of the cytometer may stop being linear: choose a standard closer in size to the sample, without overlapping peaks (Doležel, Greilhuber and Suda 2007).'));
+      if (r.flags.includes('overlap')) showMessage('b6FcmMsg', 'warning', T(`«${esc(r.a.name)}»: la muestra y el patrón casi coinciden (razón cercana a 1).`, `“${esc(r.a.name)}”: sample and standard nearly coincide (ratio close to 1).`), T('Elige un patrón con un contenido más distinto para que los picos no se encimen.', 'Choose a standard with a more different content so the peaks do not overlap.'));
     });
     /* relative ploidy */
     const sel = el('b6Ref');
@@ -172,7 +173,7 @@
     buildTable('b6FcmRel', [{ key: 'a', label: L2('Accesión', 'Accession'), get: r => r.a.name }, { key: 'q', label: L2('2C ÷ 2C de la referencia', '2C ÷ reference 2C'), num: true, get: r => fmtFixed(r.c2 / ref.c2, 3) },
       { key: 'e', label: L2('Nivel estimado', 'Estimated level'), num: true, get: r => fmtFixed(refL * r.c2 / ref.c2, 2) + 'x' },
       { key: 'c', label: L2('Nivel por conteo', 'Level by counting'), num: true, get: r => r.L ? r.L + 'x' : '—' }], sum,
-      { foot: `<tr><td colspan="4" class="hint">${L2(`Referencia: «${esc(ref.a.name)}» como ${refL}x. Un poliploide reciente suele tener algo menos del doble (reducción del genoma).`, `Reference: «${esc(ref.a.name)}» as ${refL}x. A recent polyploid often has somewhat less than double (genome downsizing).`)}</td></tr>` });
+      { foot: `<tr><td colspan="4" class="hint">${L2(`Referencia: «${esc(ref.a.name)}» como ${refL}x. Un poliploide reciente suele tener algo menos del doble (reducción del genoma).`, `Reference: “${esc(ref.a.name)}” as ${refL}x. A recent polyploid often has somewhat less than double (genome downsizing).`)}</td></tr>` });
   }
 
   /* ---------------- histogram ---------------- */

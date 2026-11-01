@@ -112,7 +112,7 @@
         })));
     }
     const pAcc = state.accessions.filter(a => state.meiosis.pollen.some(r => r.acc === a.id));
-    if (pAcc.length) h += `<h3>${esc(T('Viabilidad del polen', 'Pollen viability'))}</h3>` + Report.htmlTable([[T('Accesión', 'Accession'), T('Granos', 'Grains'), T('% viables', '% viable'), T('Wilson 95 %', 'Wilson 95%')]]
+    if (pAcc.length) h += `<h3>${esc(T('Viabilidad del polen', 'Pollen viability'))}</h3>` + Report.htmlTable([[T('Accesión', 'Accession'), T('Granos', 'Grains'), T('% viables', '% viable'), T('Wilson 95 %', 'Wilson 95 %')]]
       .concat(pAcc.map(a => { const P = Meiosis.pollen(state.meiosis.pollen.filter(r => r.acc === a.id), 0.95); return [accName(a.id), P.n, fmtFixed(100 * P.p, 1), fmtFixed(100 * P.wilson.lo, 1) + ' – ' + fmtFixed(100 * P.wilson.hi, 1)]; })));
     const fAcc = state.accessions.filter(a => state.ploidy.fcm.some(r => r.acc === a.id));
     if (fAcc.length) h += `<h3>${esc(T('Contenido de ADN', 'DNA content'))}</h3>` + Report.htmlTable([[T('Accesión', 'Accession'), T('Corridas', 'Runs'), '2C (pg)', '1Cx (pg)', '2C (Mpb)']]

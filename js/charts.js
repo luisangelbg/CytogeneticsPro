@@ -20,12 +20,14 @@
   const r1 = v => Math.round(v * 10) / 10;
   const e = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const PAL = ['var(--chart1)', 'var(--chart2)', 'var(--chart3)', 'var(--chart4)', 'var(--chart5)', 'var(--chart6)', 'var(--pr5)', 'var(--pr7)'];
-  /* ticks: about n nice values covering [a, b] */
-  function ticks(a, b, n) {
+  /* ticks: about n nice values within [a, b]; with cover, the last tick reaches b
+     (so the top of an axis is never below the largest bar, whisker or count) */
+  function ticks(a, b, n, cover) {
     if (!(b > a)) { b = a + 1; }
     const step = (window.niceNum ? niceNum : x => x)((b - a) / (n || 5), true);
     const t0 = Math.ceil(a / step - 1e-9) * step, out = [];
     for (let v = t0; v <= b + step * 1e-6; v += step) out.push(Math.abs(v) < step * 1e-9 ? 0 : v);
+    if (cover && out.length && out[out.length - 1] < b - step * 1e-6) out.push(out[out.length - 1] + step);
     return { ticks: out, step };
   }
   const fmtT = (v, step) => { const d = step >= 1 ? 0 : Math.min(6, Math.ceil(-Math.log10(step))); const s = v.toFixed(d); return s.startsWith('-') ? '−' + s.slice(1) : s; };
@@ -87,11 +89,17 @@
     const font = o.font || 12, cats = o.categories, S = o.series;
     const legendW = S.length > 1 || o.forceLegend ? 16 + Math.max(...S.map(s => String(s.name).length)) * font * 0.58 + 16 : 0;
     const W = o.width || Math.max(360, 70 + cats.length * (S.length * 22 + 18) + legendW), H = o.height || 300;
-    const F = frame(o, W, H, 58, o.title ? 34 : 14, 12 + legendW, o.rotate ? 78 : 44);
+    /* labels turned 35°: room below for the longest one, and at the left for the first one */
+    const labW = o.rotate ? Math.max(...cats.map(c => String(c).length)) * (font - 1) * 0.56 : 0;
+    const catW0 = (W - 58 - 12 - legendW) / cats.length;
+    const left = o.rotate ? Math.max(58, Math.ceil(labW * 0.82 - catW0 / 2 + 10)) : 58;
+    const Hx = o.rotate && !o.height ? H + Math.max(0, Math.ceil(labW * 0.58 + 26) - 78) : H;
+    const Wx = o.width ? W : W + left - 58;
+    const F = frame(o, Wx, Hx, left, o.title ? 34 : 14, 12 + legendW, o.rotate ? Math.max(78, Math.ceil(labW * 0.58 + 26)) : 44);
     let ymax = o.yMax != null ? o.yMax : Math.max(0, ...S.flatMap(s => s.values.map((v, i) => Math.max((+v || 0) + (s.err && isFinite(s.err[i]) ? s.err[i] : 0), s.hi && isFinite(s.hi[i]) ? s.hi[i] : 0))));
     if (o.refLine != null) ymax = Math.max(ymax, o.refLine);
     const ymin = o.yMin != null ? o.yMin : 0;
-    const T0 = ticks(ymin, ymax * 1.05 || 1, 5), top = T0.ticks[T0.ticks.length - 1] || 1;
+    const T0 = ticks(ymin, ymax * 1.05 || 1, 5, o.yMax == null), top = Math.max(T0.ticks[T0.ticks.length - 1] || 1, o.yMax != null ? o.yMax : -Infinity);
     const Y = v => F.y0 + F.h - (v - ymin) / (top - ymin) * F.h;
     const bw = Math.min(30, (F.w / cats.length - 10) / S.length), gw = bw * S.length;
     let g = '';
@@ -117,9 +125,9 @@
     if (o.refLine != null) g += `<line class="ch-ref" x1="${F.x0}" x2="${F.x0 + F.w}" y1="${r1(Y(o.refLine))}" y2="${r1(Y(o.refLine))}"/>` + (o.refLabel ? `<text class="mut" x="${F.x0 + F.w - 2}" y="${r1(Y(o.refLine) - 4)}" font-size="${font - 2}" text-anchor="end">${e(o.refLabel)}</text>` : '');
     g += `<line class="ax" data-role="axis" x1="${F.x0}" x2="${F.x0 + F.w}" y1="${r1(Y(ymin))}" y2="${r1(Y(ymin))}"/><line class="ax" data-role="axis" x1="${F.x0}" x2="${F.x0}" y1="${F.y0}" y2="${F.y0 + F.h}"/>`;
     if (o.ylab) g += `<text class="flab" data-role="ylab" transform="translate(14 ${r1(F.y0 + F.h / 2)}) rotate(-90)" font-size="${font}" text-anchor="middle">${e(o.ylab)}</text>`;
-    if (o.xlab) g += `<text class="flab" data-role="xlab" x="${r1(F.x0 + F.w / 2)}" y="${H - 6}" font-size="${font}" text-anchor="middle">${e(o.xlab)}</text>`;
+    if (o.xlab) g += `<text class="flab" data-role="xlab" x="${r1(F.x0 + F.w / 2)}" y="${Hx - 6}" font-size="${font}" text-anchor="middle">${e(o.xlab)}</text>`;
     if (legendW) g += legend(S.map((s, k) => ({ label: s.name, color: s.color || PAL[k % PAL.length] })), F.x0 + F.w + 14, F.y0 + 12, font);
-    return wrap(o, W, H, F, g);
+    return wrap(o, Wx, Hx, F, g);
   }
   /* ---------------- scatter ---------------- */
   function scatter(o) {
@@ -174,7 +182,7 @@
     const xa = o.xRange ? o.xRange[0] : xv[0], xb = o.xRange ? o.xRange[1] : xv[xv.length - 1];
     const tr = v => o.log ? Math.log10(1 + v) : v;
     const ymax = Math.max(1, ...yv.map(tr));
-    const TX = ticks(xa, xb, 6), TY = o.log ? { ticks: [0, 1, 2, 3, 4, 5].filter(k => k <= ymax + 0.01), step: 1 } : ticks(0, ymax, 5);
+    const TX = ticks(xa, xb, 6), TY = o.log ? { ticks: [0, 1, 2, 3, 4, 5].filter(k => k <= ymax + 0.01), step: 1 } : ticks(0, ymax, 5, true);
     const top = o.log ? Math.max(1, Math.ceil(ymax)) : TY.ticks[TY.ticks.length - 1] || 1;
     const X = v => F.x0 + (v - xa) / (xb - xa) * F.w, Y = v => F.y0 + F.h - tr(v) / top * F.h, Yr = v => F.y0 + F.h - v / top * F.h;
     let g = '';

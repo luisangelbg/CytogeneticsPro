@@ -119,7 +119,8 @@
     const TN = { m: ['metacéntrico', 'metacentric'], sm: ['submetacéntrico', 'submetacentric'], st: ['subtelocéntrico', 'subtelocentric'], t: ['telocéntrico', 'telocentric'] };
     G.items.forEach(it => {
       const node = el('b9ExCuts').querySelector(`.ex-cut[data-i="${it.i - 1}"]`);
-      if (node) { node.classList.toggle('ok', it.pairOk && it.typeOk && it.numberOk); node.classList.toggle('bad', !(it.pairOk && it.typeOk)); }
+      /* green: all right; amber: wrong pair or type; dashed amber: right pair and type, but the pair takes another number */
+      if (node) { node.classList.toggle('ok', it.pairOk && it.typeOk && it.numberOk); node.classList.toggle('bad', !(it.pairOk && it.typeOk)); node.classList.toggle('renum', it.pairOk && it.typeOk && !it.numberOk); }
       if (!it.typeOk) showMessage(box, 'warning', esc(T(`El ${it.i} es ${TN[it.trueType][0]} (${it.trueType}): su razón de brazos es r = ${fmtFixed(it.r, 2)}${it.type ? `, no ${it.type}` : ''}.`,
         `Number ${it.i} is ${TN[it.trueType][1]} (${it.trueType}): its arm ratio is r = ${fmtFixed(it.r, 2)}${it.type ? `, not ${it.type}` : ''}.`)));
     });
@@ -242,7 +243,7 @@
     el('b9Step').addEventListener('input', e => { stopPlay(); sim.step = +e.target.value; renderSim(); });
     el('b9ExNew').addEventListener('click', () => newExercise());
     el('b9ExPairs').addEventListener('change', () => newExercise());
-    el('b9ExCuts').addEventListener('change', e => { const s = e.target.closest('select[data-k]'); if (s) { exAns[+s.dataset.i][s.dataset.k] = s.value; s.closest('.ex-cut').classList.remove('ok', 'bad'); } });
+    el('b9ExCuts').addEventListener('change', e => { const s = e.target.closest('select[data-k]'); if (s) { exAns[+s.dataset.i][s.dataset.k] = s.value; s.closest('.ex-cut').classList.remove('ok', 'bad', 'renum'); } });
     el('b9ExCheck').addEventListener('click', checkExercise);
     el('b9ExShow').addEventListener('click', showSolution);
     el('b9QTopics').addEventListener('click', e => {

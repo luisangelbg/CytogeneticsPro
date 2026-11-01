@@ -10,8 +10,8 @@
    at the root of this program, or <https://www.gnu.org/licenses/>. */
 
 /* CytogeneticsPro — an editable table for records (Grid).
-   The counts of Blocks 5, 6 and 7 are typed in tables: one row per cell, per
-   individual or per signal. Grid.make draws one bound to an array of plain
+   The records of Blocks 5 to 8 are typed in tables: one row per cell, per
+   individual, per signal or per taxon. Grid.make draws one bound to an array of plain
    objects (cfg.rows()): each change writes into the object and calls onChange;
    cfg.filter shows only some rows (those of one accession) while the array
    keeps all of them; a block of cells copied from a spreadsheet is pasted over
@@ -119,7 +119,7 @@
       input.value = '';
       if (!f) return;
       const n = importText(await readFileText(f));
-      toast(n ? T(`Se leyeron ${n} filas de ${f.name}.`, `${n} rows read from ${f.name}.`) : T('El archivo no tenía columnas reconocibles.', 'The file had no recognisable columns.'), n ? 'success' : 'warning');
+      toast(n ? T(`Se leyeron ${n} filas de ${f.name}.`, `${n} rows read from ${f.name}.`) : T('El archivo no tenía columnas reconocibles.', 'The file had no recognizable columns.'), n ? 'success' : 'warning');
     }
     /* a CSV with headers: each header is matched with the key, the csv name, either label or an alias of a column */
     const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '');

@@ -213,7 +213,7 @@
         ' Con c = 1 se llega al máximo que permite el apareamiento al azar.'
         : 'Con apareamiento sólo dentro de cada genoma no hay multivalentes: todo son bivalentes y univalentes.'),
       `Genome formula <b>${f}</b> with x = ${x}: 2n = ${f.length}x = ${n2}. <b>${fmtFixed(E.xtaPerCell, 1)} chiasmata per cell</b> are expected (${E.pairedArms} paired arms × c). ` +
-      (mv > 1e-9 ? (one ? `Each group of homologues forms a multivalent with probability <b>${fmtFixed(100 * mv, 1)}%</b>, and a cell has <b>${fmtFixed(mv * x, 2)}</b> on average.`
+      (mv > 1e-9 ? (one ? `Each group of homologues forms a multivalent with probability <b>${fmtFixed(100 * mv, 1)} %</b>, and a cell has <b>${fmtFixed(mv * x, 2)}</b> on average.`
         : `Each group of homologues forms <b>${fmtFixed(mv, 3)}</b> multivalents on average, and a cell, <b>${fmtFixed(mv * x, 2)}</b>.`) +
         ' With c = 1 the maximum that random pairing allows is reached.'
         : 'With pairing only within each genome there are no multivalents: everything is bivalents and univalents.'));

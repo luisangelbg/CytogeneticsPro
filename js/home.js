@@ -29,7 +29,7 @@
     { n: 6, es: 'Ploidía y genoma', en: 'Ploidy and genome', tag: ['Contar', 'Count'],
       d: ['Conteos de 2n con su moda, nivel de ploidía por el número básico, citometría de flujo en pg y Mpb con su histograma, e índice mitótico y aberraciones de la prueba de Allium.', 'Counts of 2n with their mode, ploidy level from the base number, flow cytometry in pg and Mbp with its histogram, and mitotic index and aberrations of the Allium test.'] },
     { n: 7, es: 'Bandeo y FISH', en: 'Banding and FISH', tag: ['Marcar', 'Mark'],
-      d: ['Bandas C y N, fluorocromos y señales de hibridación in situ por cromosoma y posición, con heteromorfismos, dibujadas sobre el idiograma con un color por sonda.', 'C and N bands, fluorochromes and in-situ hybridization signals by chromosome and position, with heteromorphisms, drawn on the idiogram with one colour per probe.'] },
+      d: ['Bandas C y N, fluorocromos y señales de hibridación in situ por cromosoma y posición, con heteromorfismos, dibujadas sobre el idiograma con un color por sonda.', 'C and N bands, fluorochromes and in-situ hybridization signals by chromosome and position, with heteromorphisms, drawn on the idiogram with one color per probe.'] },
     { n: 8, es: 'Comparación', en: 'Comparison', tag: ['Comparar', 'Compare'],
       d: ['Matriz de parámetros cariológicos, distancias, UPGMA, Ward, ACP con biplot, idiogramas en paralelo, evolución del número cromosómico sobre un árbol y mapa de citotipos.', 'Matrix of karyological parameters, distances, UPGMA, Ward, PCA with biplot, parallel idiograms, chromosome number evolution on a tree and a map of cytotypes.'] },
     { n: 9, es: 'Docencia', en: 'Teaching', tag: ['Enseñar', 'Teach'],
@@ -66,8 +66,8 @@
     cmp: ['Comparación', 'Comparison'], est: ['Estadística', 'Statistics'],
   };
   const METHODS = [
-    ['img', 'Calibración con la barra de escala', 'Calibration with the scale bar', 'µm por píxel'],
-    ['img', 'Longitud a lo largo de la curvatura', 'Length along the curvature', 'polilínea / polyline'],
+    ['img', 'Calibración con la barra de escala', 'Calibration with the scale bar', ['µm por píxel', 'µm per pixel']],
+    ['img', 'Longitud a lo largo de la curvatura', 'Length along the curvature', ['trazo con una polilínea', 'traced as a polyline']],
     ['kar', 'Posición del centrómero', 'Centromere position', 'Levan et al. 1964'],
     ['kar', 'Nomenclatura revisada', 'Revised nomenclature', 'Guerra 1986'],
     ['kar', 'Satélites y constricciones secundarias', 'Satellites and secondary constrictions', 'Battaglia 1955'],
@@ -186,13 +186,13 @@
       en: '<p>The <b>base number x</b> is the number of chromosomes of one monoploid set of the group; the <b>ploidy level</b> is how many sets a plant has (2n = 4x = 28 with x = 7 is a tetraploid). Levels that are multiples of x form a <b>euploid series</b>. Gaining or losing single chromosomes is <b>aneuploidy</b> (2n = 2x + 1, a trisomic). <b>Dysploidy</b> is something else: a change of the base number by fusions or fissions of chromosomes, with no sudden change in the amount of DNA (Guerra 2008; Schubert and Lysak 2011). Block 8 reconstructs these events on a tree.</p>' },
     { h: ['El tamaño del genoma: valores C y Cx', 'Genome size: C- and Cx-values'], tag: ['Bloque 6', 'Block 6'],
       es: '<p>El <b>valor 2C</b> es la cantidad de ADN del núcleo de una célula somática antes de replicarse; el <b>1C</b>, la mitad (la de un gameto). El <b>valor 1Cx</b> es la cantidad de un solo juego monoploide: 2C dividido entre el nivel de ploidía (Greilhuber et al. 2005). En la <b>citometría de flujo</b> los núcleos teñidos de la muestra se miden junto con los de un <b>patrón interno</b> de contenido conocido: 2C muestra = (pico de la muestra / pico del patrón) × 2C patrón. Un buen pico tiene un <b>coeficiente de variación</b> bajo (menos de 3 a 5 %). Para pasar de picogramos a pares de bases, 1 pg = 978 Mpb (Doležel et al. 2003).</p>',
-      en: '<p>The <b>2C-value</b> is the amount of DNA of a somatic nucleus before it replicates; <b>1C</b>, half of it (that of a gamete). The <b>1Cx-value</b> is the amount of a single monoploid set: 2C divided by the ploidy level (Greilhuber et al. 2005). In <b>flow cytometry</b> the stained nuclei of the sample are measured together with those of an <b>internal standard</b> of known content: sample 2C = (sample peak / standard peak) × standard 2C. A good peak has a low <b>coefficient of variation</b> (under 3 to 5%). To go from picograms to base pairs, 1 pg = 978 Mbp (Doležel et al. 2003).</p>' },
+      en: '<p>The <b>2C-value</b> is the amount of DNA of a somatic nucleus before it replicates; <b>1C</b>, half of it (that of a gamete). The <b>1Cx-value</b> is the amount of a single monoploid set: 2C divided by the ploidy level (Greilhuber et al. 2005). In <b>flow cytometry</b> the stained nuclei of the sample are measured together with those of an <b>internal standard</b> of known content: sample 2C = (sample peak / standard peak) × standard 2C. A good peak has a low <b>coefficient of variation</b> (under 3 to 5 %). To go from picograms to base pairs, 1 pg = 978 Mbp (Doležel et al. 2003).</p>' },
     { h: ['Bandeo e hibridación in situ', 'Banding and in-situ hybridization'], tag: ['Bloque 7', 'Block 7'],
       es: '<p>Las <b>bandas</b> reconocen cromosomas que se parecen por su tamaño y forma. Las <b>bandas C</b> muestran la heterocromatina constitutiva; los <b>fluorocromos</b> la distinguen por su composición: CMA⁺ marca regiones ricas en GC (a menudo las NOR) y DAPI⁺, ricas en AT (Guerra 2000). La <b>hibridación in situ fluorescente</b> (FISH) pone una sonda de ADN marcada sobre los cromosomas: los <b>ADNr 5S y 45S</b> y los <b>telómeros</b> son las sondas más usadas en plantas, y la hibridación genómica (GISH) distingue los genomas de un híbrido o un alopoliploide (Jiang y Gill 2006). Cada señal se registra por su cromosoma, su brazo y su posición relativa desde el centrómero.</p>',
-      en: '<p><b>Bands</b> tell apart chromosomes that look alike by size and shape. <b>C-bands</b> show constitutive heterochromatin; <b>fluorochromes</b> distinguish it by composition: CMA⁺ marks GC-rich regions (often the NORs) and DAPI⁺, AT-rich ones (Guerra 2000). <b>Fluorescence in situ hybridization</b> (FISH) lays a labelled DNA probe on the chromosomes: the <b>5S and 45S rDNA</b> and the <b>telomeres</b> are the most used probes in plants, and genomic hybridization (GISH) tells apart the genomes of a hybrid or an allopolyploid (Jiang and Gill 2006). Each signal is recorded by its chromosome, its arm and its relative position from the centromere.</p>' },
+      en: '<p><b>Bands</b> tell apart chromosomes that look alike by size and shape. <b>C-bands</b> show constitutive heterochromatin; <b>fluorochromes</b> distinguish it by composition: CMA⁺ marks GC-rich regions (often the NORs) and DAPI⁺, AT-rich ones (Guerra 2000). <b>Fluorescence in situ hybridization</b> (FISH) lays a labeled DNA probe on the chromosomes: the <b>5S and 45S rDNA</b> and the <b>telomeres</b> are the most used probes in plants, and genomic hybridization (GISH) tells apart the genomes of a hybrid or an allopolyploid (Jiang and Gill 2006). Each signal is recorded by its chromosome, its arm and its relative position from the centromere.</p>' },
     { h: ['Comparar cariotipos y la evolución del número', 'Comparing karyotypes and number evolution'], tag: ['Bloque 8', 'Block 8'],
       es: '<p>Para comparar taxones se reúnen sus parámetros cariológicos (2n, x, longitud haploide, MCA, CVCL, CVCI, contenido 2C, posiciones de las señales) en una matriz y se analizan con métodos multivariados: distancias, agrupamiento y componentes principales (Peruzzi y Altınordu 2014). Sobre un árbol de los taxones, la <b>parsimonia</b> reconstruye los números de los antepasados con el menor costo de eventos: duplicación (poliploidía), <b>disploidía</b> ascendente o descendente y demiploidía (Sankoff 1975; los tipos de evento siguen a Mayrose et al. 2010).</p>',
-      en: '<p>To compare taxa their karyological parameters (2n, x, haploid length, MCA, CVCL, CVCI, 2C content, positions of the signals) are gathered in a matrix and analysed with multivariate methods: distances, clustering and principal components (Peruzzi and Altınordu 2014). On a tree of the taxa, <b>parsimony</b> reconstructs the numbers of the ancestors with the lowest cost of events: duplication (polyploidy), ascending or descending <b>dysploidy</b> and demiploidy (Sankoff 1975; the kinds of event follow Mayrose et al. 2010).</p>' },
+      en: '<p>To compare taxa their karyological parameters (2n, x, haploid length, MCA, CVCL, CVCI, 2C content, positions of the signals) are gathered in a matrix and analyzed with multivariate methods: distances, clustering and principal components (Peruzzi and Altınordu 2014). On a tree of the taxa, <b>parsimony</b> reconstructs the numbers of the ancestors with the lowest cost of events: duplication (polyploidy), ascending or descending <b>dysploidy</b> and demiploidy (Sankoff 1975; the kinds of event follow Mayrose et al. 2010).</p>' },
   ];
 
   /* ---------------- builders ---------------- */
@@ -223,7 +223,6 @@
       if (!b) return;
       const n = b.dataset.go;
       if (stepOn(n)) goStep(n);
-      else toast(T('Ese bloque llega en una próxima etapa de esta construcción.', 'That block arrives in a later stage of this build.'));
     });
   }
   function buildExamples() {
@@ -236,7 +235,6 @@
       const b = e.target.closest('[data-example]');
       if (!b) return;
       if (window.Examples && Examples.open) Examples.open(b.dataset.example);
-      else toast(T('Los ejemplos se abren cuando lleguen los bloques que los usan.', 'The examples open when the blocks that use them arrive.'));
     });
   }
   function buildMethods() {
@@ -246,7 +244,7 @@
       Object.keys(FAMS).map(f => `<button type="button" class="chip" data-f="${f}" aria-pressed="false">${L2(FAMS[f][0], FAMS[f][1])}</button>`).join('');
     host.innerHTML = METHODS.map(m => `<div class="method-card" data-fam="${m[0]}">` +
       `<span class="m-fam ${m[0]}">${L2(FAMS[m[0]][0], FAMS[m[0]][1])}</span>` +
-      `<div class="m-name">${L2(m[1], m[2])}</div><div class="m-sub">${L2(m[3], m[3].replace(/ y /g, ' &amp; '))}</div></div>`).join('');
+      `<div class="m-name">${L2(m[1], m[2])}</div><div class="m-sub">${Array.isArray(m[3]) ? L2(m[3][0], m[3][1]) : L2(m[3], m[3].replace(/ y /g, ' &amp; '))}</div></div>`).join('');
     filt.addEventListener('click', e => {
       const b = e.target.closest('.chip');
       if (!b) return;
@@ -348,7 +346,7 @@
     bindProjectFile();
     const go = (id, f) => { const b = el(id); if (b) b.addEventListener('click', f); };
     const scrollTo = id => { const t = el(id); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
-    go('startBtn', () => { if (stepOn(2)) goStep(2); else { scrollTo('labs'); toast(T('La medición sobre imágenes llega con el Bloque 2; mientras, prueba los laboratorios.', 'Measuring on images arrives with Block 2; meanwhile, try the labs.')); } });
+    go('startBtn', () => goStep(2));
     go('labsBtn', () => scrollTo('labs'));
     go('theoryBtn', () => scrollTo('theory'));
     go('openProjBtn', () => { const f = el('projectFile'); if (f) f.click(); });

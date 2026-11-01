@@ -1,5 +1,53 @@
 # Cambios de CytogeneticsPro
 
+## Versión 1.0.0 · Correcciones halladas al escribir el manual — 1 de noviembre de 2026
+
+Sin cambio de versión. Treinta errores que salieron al escribir y capturar el manual.
+
+- **Cálculos y datos**:
+  - Bloque 2: el CSV de mediciones vuelve a entrar completo: el taxón pasa a la accesión y una unidad «px» deja la
+    célula en píxeles (antes se tomaban como micras); la columna de accesión ya no acepta la de taxón (una tabla con
+    taxón y sin accesión da una accesión por taxón); pegar medidas con nombre de accesión en un proyecto vacío ya no
+    deja una «Accesión 1» vacía; singulares («1 célula», «1 accesión nueva», «una fila»).
+  - Bloque 4: en «Cada célula con todos sus cromosomas», «Juego (µm)» es la longitud de un juego (la suma de la
+    media de los homólogos de cada grupo), no la célula entera (en el chayote de Huatusco, 29.14 ± 1.88 µm en lugar de
+    58.27 ± 3.76); la nota dice que TF%, AsK% y Syi cambian muy poco de una manera a otra, no que dan lo mismo.
+  - Bloque 7: un sitio en un solo homólogo cuenta medio en todas partes: los sitios por juego y las regiones del
+    patrón (antes 1), la tabla de todas las accesiones y el Bloque 8 (Uruapan: 1.5 sitios de 45S, antes 2); la
+    columna «Dónde» va en el orden de los pares, y una nota explica el medio sitio.
+  - Bloque 6: aparece el aviso de la citometría cuando muestra y patrón difieren más de tres veces.
+  - Bloque 5: con una sola hipótesis desaparece «…y no a —»; el aviso propone sólo las fórmulas intermedias del nivel
+    que no se han probado (AAAABB o AAABBB en un hexaploide; ninguna en un tetraploide) o dice que ya no se ajustan.
+  - Bloque 8, filas incompletas: los taxones del ejemplo escritos a mano traen sólo 2n y x (son especies reales y no
+    se inventan sus valores), y con la distancia de Gower por parejas la silvestre quedaba a 0.000 de *Cucumis melo*.
+    Ahora un menú «Filas incompletas» elige entre sólo las filas con todas las variables (por omisión), sólo las
+    variables que tienen todas las filas, o cada pareja con lo que comparte; la app dice qué filas quedan fuera y por
+    qué, y en el modo por parejas avisa cuando una pareja comparte la mitad de las variables o menos. Los métodos del
+    Bloque 10 lo dicen.
+- **Figuras**: el tope del eje cubre el máximo en barras e histogramas (`Chart.ticks` con `cover`); el título del
+  cariograma cabe en su ancho; las etiquetas giradas tienen sitio a la izquierda y abajo; en el idiograma ancho (los
+  homólogos de un cariotipo grande) la leyenda va debajo; el botón del estudio de figuras ya no se repite en cada
+  redibujo (el idiograma llevaba un `id` nuevo cada vez, del que salía la clave de la figura; ya no lo lleva); el
+  estudio ya no ofrece «Marcar todas / Desmarcar todas» del Bloque 10; «Desviación entre células» se desactiva en la
+  vista de los homólogos y dice por qué; las marcas de conteo se dibujan sobre los trazos; en el ejercicio de
+  cariotipo, un recorte con par y tipo bien pero número equivocado lleva borde ámbar punteado, con su explicación.
+- **Textos**: espacio antes de % en los dos idiomas (`fmtPct` y 20 textos); la insignia dice «Índices validados contra
+  implementaciones independientes» y la ayuda de las tablas ya no nombra un programa; la ayuda de Figuras describe el
+  botón de lápiz y regla; la ficha de la longitud a lo largo de la curvatura y la de la calibración en cada idioma;
+  encabezados de las tablas de registros en el idioma (conteos: accesión, célula, 2n; la tabla del polen recupera la
+  planta); métodos: la frase de las células con imagen y sin ella, la del trazo sólo si hay imágenes y «subsp.» en
+  redonda; sin restos de construcción en el Inicio ni en `PROCEDENCIA.md`; las etiquetas de los ejemplos (células,
+  raíces, plantas, bulbos, tratamientos, poblaciones ficticias y sondas) en el idioma de la interfaz; interfaz inglesa
+  con ortografía estadounidense y comillas “ ” en lo corregido.
+- **Diseño a 1400 px**: caben los menús de la clasificación, de los cromosomas de los índices, del patrón de la
+  citometría y de la hoja de práctica, la tira de los siete pasos y las tablas de los Bloques 4 y 5 (encabezados en
+  dos renglones y la desviación debajo de la media).
+- **Nota sobre la historia**: la etapa 3 nombra «PolenApp», que hoy se llama PalynoPro; en la app ya dice PalynoPro
+  (botones, avisos, comentarios y el archivo `polen_<accesión>_palynopro.csv`).
+- **Pruebas**: 659 (36 nuevas: 35 en `tests/t_fixes.js` y una en `t_bands.js`, cuya prueba del resumen ahora espera
+  medio sitio). **Validación**: 9 310 comparaciones con R
+  4.4.2, 0 fallan.
+
 ## Versión 1.0.0 · Etapa 5: docencia, figuras e informe, validación — 7 de octubre de 2026
 
 Con esta etapa quedan los diez bloques de la versión 1.0.0.

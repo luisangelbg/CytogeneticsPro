@@ -32,7 +32,7 @@
     return base.map(v => ({ k: v[0], label: T(v[1], v[2]) })).concat(probes.map(v => ({ k: v[0], label: v[1] })));
   }
   const vars = () => { if (!Array.isArray(C().vars)) C().vars = DEFAULT_VARS.slice(); return C().vars; };
-  const settings = () => { C().settings = Object.assign({ dist: 'gower', method: 'upgma', pcx: 0, pcy: 1, parScale: 'um', parMarks: true, gain: 1, loss: 1, dup: 1, demi: 1.5, show: 'n' }, C().settings || {}); return C().settings; };
+  const settings = () => { C().settings = Object.assign({ dist: 'gower', method: 'upgma', missing: 'complete', pcx: 0, pcy: 1, parScale: 'um', parMarks: true, gain: 1, loss: 1, dup: 1, demi: 1.5, show: 'n' }, C().settings || {}); return C().settings; };
 
   /* ---------------- the rows: the accessions of the project and the other taxa ---------------- */
   function accRow(a) {
@@ -86,18 +86,46 @@
     const shown = L.filter(v => R.some(r => isFinite(val(r, v.k))));
     buildTable('b8Matrix', [{ key: 'name', label: L2('Accesión o taxón', 'Accession or taxon'), get: r => r.name + (r.kind === 'extra' ? ' ¹' : '') }]
       .concat(shown.map(v => ({ key: v.k, label: esc(v.label) + (vars().includes(v.k) ? ' ✓' : ''), num: true, get: r => isFinite(val(r, v.k)) ? fmtFixed(val(r, v.k), digitsOf(v.k)) : '' }))), R,
-    { foot: `<tr><td colspan="${shown.length + 1}" class="hint">${L2('¹ Taxón escrito a mano en «Otros taxones». ✓ Variable del análisis.', '¹ Taxon typed by hand in «Other taxa». ✓ Variable of the analysis.')}</td></tr>` });
+    { foot: `<tr><td colspan="${shown.length + 1}" class="hint">${L2('¹ Taxón escrito a mano en «Otros taxones». ✓ Variable del análisis.', '¹ Taxon typed by hand in “Other taxa”. ✓ Variable of the analysis.')}</td></tr>` });
   }
 
   /* ---------------- the analysis: distances, clustering, PCA ---------------- */
+  /* rows with missing values (settings().missing):
+     - 'complete': only the rows that have every chosen variable (the default);
+     - 'common': every row, with only the chosen variables that all of them have;
+     - 'pairwise': every row; each pair with the variables both have (Gower 1971).
+     A taxon typed with 2n and x only is then compared with the accessions on
+     those two numbers alone, and two different karyotypes can come out at
+     distance 0: the block says so. */
+  const nameOfVar = k => (varList().find(v => v.k === k) || { label: k }).label;
+  const listNames = (a, n) => a.slice(0, n).join(', ') + (a.length > n ? T(` y ${a.length - n} más`, ` and ${a.length - n} more`) : '');
   function analyse(R) {
     const msgs = [];
-    const V = vars().filter(k => varList().some(v => v.k === k));
+    let V = vars().filter(k => varList().some(v => v.k === k));
     if (V.length < 1) return { msgs: [['warning', T('Elige al menos una variable.', 'Choose at least one variable.')]] };
     let use = R.filter(r => V.filter(k => isFinite(val(r, k))).length >= 1);
     const dropped = R.length - use.length;
-    if (dropped) msgs.push(['info', T(`${dropped} fila(s) sin ninguna de las variables elegidas quedan fuera.`, `${dropped} row(s) with none of the chosen variables are left out.`)]);
-    if (use.length < 3) return { msgs: msgs.concat([['warning', T('Hacen falta al menos tres accesiones o taxones con datos para comparar.', 'At least three accessions or taxa with data are needed to compare.')]]) };
+    if (dropped) msgs.push(['info', dropped === 1 ? T('Una fila sin ninguna de las variables elegidas queda fuera.', 'One row with none of the chosen variables is left out.')
+      : T(`${dropped} filas sin ninguna de las variables elegidas quedan fuera.`, `${dropped} rows with none of the chosen variables are left out.`)]);
+    const mode = settings().missing;
+    const has = (r, k) => isFinite(val(r, k));
+    if (mode === 'complete') {
+      const out = use.filter(r => !V.every(k => has(r, k)));
+      if (out.length) {
+        const lack = [...new Set(out.flatMap(r => V.filter(k => !has(r, k))))].map(nameOfVar);
+        msgs.push(['info', T(`Sólo entran al agrupamiento y al ACP las filas con todas las variables elegidas. Quedan fuera ${out.length === 1 ? 'una fila' : out.length + ' filas'} (${listNames(out.map(r => r.name), 4)}), a las que les falta ${listNames(lack, 6)}; siguen en la matriz, en el árbol de los números y en el mapa. Para incluirlas, elige sólo las variables que tienen o cambia «Filas incompletas».`,
+          `Only the rows with every chosen variable enter the clustering and the PCA. ${out.length === 1 ? 'One row is' : out.length + ' rows are'} left out (${listNames(out.map(r => r.name), 4)}), lacking ${listNames(lack, 6)}; they stay in the matrix, in the number tree and on the map. To include them, choose only the variables they have or change “Incomplete rows”.`)]);
+      }
+      use = use.filter(r => V.every(k => has(r, k)));
+    } else if (mode === 'common') {
+      const common = V.filter(k => use.every(r => has(r, k)));
+      const gone = V.filter(k => !common.includes(k));
+      if (!common.length) return { msgs: msgs.concat([['warning', T('Ninguna de las variables elegidas está en todas las filas.', 'None of the chosen variables is in every row.')]]) };
+      if (gone.length) msgs.push(['info', T(`Sólo se usan las variables que tienen todas las filas (${listNames(common.map(nameOfVar), 8)}); quedan fuera ${listNames(gone.map(nameOfVar), 8)}.`, `Only the variables every row has are used (${listNames(common.map(nameOfVar), 8)}); ${listNames(gone.map(nameOfVar), 8)} ${gone.length === 1 ? 'is' : 'are'} left out.`)]);
+      V = common;
+    }
+    if (use.length < 3) return { msgs: msgs.concat([['warning', T('Hacen falta al menos tres accesiones o taxones con datos para comparar.', 'At least three accessions or taxa with data are needed to compare.') +
+      (mode === 'complete' ? T(' Con «Filas incompletas» en otra opción pueden entrar las que tienen sólo algunas variables.', ' With another choice in “Incomplete rows”, the rows with only some variables can come in.') : '')]]) };
     const X = use.map(r => V.map(k => val(r, k)));
     const s = settings();
     let D;
@@ -106,7 +134,17 @@
     const bad = [];
     for (let i = 0; i < D.length; i++) for (let j = i + 1; j < D.length; j++) if (!isFinite(D[i][j])) bad.push(use[i].name + ' – ' + use[j].name);
     if (bad.length) return { msgs: msgs.concat([['error', T('Estas parejas no comparten ninguna variable: ', 'These pairs share no variable: ') + bad.slice(0, 4).join('; ') + (bad.length > 4 ? '…' : '') + T('. Quita variables o completa los datos.', '. Remove variables or complete the data.')]]) };
-    if (X.some(r => r.some(v => !isFinite(v)))) msgs.push(['info', T('Hay celdas vacías: la distancia usa en cada pareja las variables que ambas tienen.', 'There are empty cells: the distance uses, for each pair, the variables both have.')]);
+    if (X.some(r => r.some(v => !isFinite(v)))) {
+      msgs.push(['info', T('Hay celdas vacías: la distancia usa en cada pareja las variables que ambas tienen.', 'There are empty cells: the distance uses, for each pair, the variables both have.')]);
+      /* pairs that share few variables: their distance rests on those few */
+      let worst = null;
+      for (let i = 0; i < X.length; i++) for (let j = i + 1; j < X.length; j++) {
+        const sh = V.filter((k, q) => isFinite(X[i][q]) && isFinite(X[j][q]));
+        if (sh.length * 2 <= V.length && (!worst || sh.length < worst.sh.length || (sh.length === worst.sh.length && D[i][j] < worst.d))) worst = { i, j, sh, d: D[i][j] };
+      }
+      if (worst) msgs.push(['warning', T(`Algunas parejas comparten pocas variables: «${use[worst.i].name}» y «${use[worst.j].name}» sólo tienen en común ${listNames(worst.sh.map(nameOfVar), 6)} (${worst.sh.length} de ${V.length}), y su distancia, ${fmtFixed(worst.d, 3)}, sale sólo de ${worst.sh.length === 1 ? 'esa' : 'esas'}. Dos cariotipos distintos pueden quedar a distancia 0 si coinciden en lo poco que comparten; lee el dendrograma con cuidado o cambia «Filas incompletas».`,
+        `Some pairs share few variables: “${use[worst.i].name}” and “${use[worst.j].name}” only have ${listNames(worst.sh.map(nameOfVar), 6)} in common (${worst.sh.length} of ${V.length}), and their distance, ${fmtFixed(worst.d, 3)}, comes from ${worst.sh.length === 1 ? 'that one' : 'those'} alone. Two different karyotypes can end up at distance 0 if they agree on the little they share; read the dendrogram with care or change “Incomplete rows”.`)]);
+    }
     const CL = Compare.cluster(D, s.method);
     const coph = Compare.upperCorr(D, Compare.cophenetic(CL.tree, use.length));
     /* PCA: only the variables with spread */
@@ -123,7 +161,7 @@
     const xl = s.dist === 'euclid' ? T('Distancia euclidiana (valores estandarizados)', 'Euclidean distance (standardized values)') : T('Distancia de Gower', 'Gower distance');
     el('b8Dendro').innerHTML = Compare.dendrogramSvg(A.CL.tree, labs, { xlab: xl + (s.method === 'ward' ? ' · Ward' : ' · UPGMA'), aria: T('Dendrograma de ', 'Dendrogram of ') + labs.length + T(' taxones', ' taxa') });
     statTiles('b8CluTiles', [[L2('Taxones', 'Taxa'), A.use.length], [L2('Variables', 'Variables'), A.V.length],
-      [L2('Correlación cofenética', 'Cophenetic correlation'), fmtFixed(A.coph, 3), A.coph >= 0.8 ? L2('el árbol resume bien las distancias', 'the tree summarises the distances well') : L2('el árbol deforma las distancias (r < 0.8)', 'the tree distorts the distances (r < 0.8)'), A.coph >= 0.8 ? null : 'warn']]);
+      [L2('Correlación cofenética', 'Cophenetic correlation'), fmtFixed(A.coph, 3), A.coph >= 0.8 ? L2('el árbol resume bien las distancias', 'the tree summarizes the distances well') : L2('el árbol deforma las distancias (r < 0.8)', 'the tree distorts the distances (r < 0.8)'), A.coph >= 0.8 ? null : 'warn']]);
     const head = '<tr><th scope="col"></th>' + labs.map(l => `<th scope="col">${esc(l)}</th>`).join('') + '</tr>';
     const body = A.D.map((r, i) => `<tr><th scope="row">${esc(labs[i])}</th>` + r.map((v, j) => `<td class="num">${i === j ? '·' : fmtFixed(v, 3)}</td>`).join('') + '</tr>').join('');
     el('b8DistTable').innerHTML = `<table class="dis"><caption>${L2('Matriz de distancias', 'Distance matrix')}</caption><thead>${head}</thead><tbody>${body}</tbody></table>`;
@@ -211,7 +249,7 @@
     const out = { info, states, msgs };
     if ([...states.values()].filter(v => v.length).length < 2) { msgs.push(['warning', T('Hacen falta al menos dos puntas con número.', 'At least two tips with a number are needed.')]); return out; }
     const miss = info.filter(I => !(states.get(I.name) || []).length);
-    if (miss.length) msgs.push(['info', T(`${miss.length} punta(s) sin número: la reconstrucción las trata como desconocidas.`, `${miss.length} tip(s) without a number: the reconstruction treats them as unknown.`)]);
+    if (miss.length) msgs.push(['info', T(miss.length === 1 ? 'Una punta sin número: la reconstrucción la trata como desconocida.' : `${miss.length} puntas sin número: la reconstrucción las trata como desconocidas.`, miss.length === 1 ? 'One tip without a number: the reconstruction treats it as unknown.' : `${miss.length} tips without a number: the reconstruction treats them as unknown.`)]);
     try { out.P = Compare.numberParsimony(root, states, { gain: s.gain, loss: s.loss, dup: s.dup, demi: s.demi }); } catch (e) { msgs.push(['error', e.message]); return out; }
     if (out.P.ambiguous) msgs.push(['info', T('Los nodos con borde punteado tienen más de un número igual de parsimonioso (anotados debajo); el árbol muestra una de las historias óptimas.', 'The nodes with a dotted border have more than one equally parsimonious number (written below them); the tree shows one of the optimal histories.')]);
     return out;
@@ -249,7 +287,7 @@
   }
   function renderMap(R) {
     el('b8GeoClear').hidden = !C().geo;
-    el('b8Map').innerHTML = mapFigure(R) || `<p class="hint">${L2('Ninguna accesión ni taxón tiene coordenadas: escríbelas en la ficha de la accesión (Bloque 2) o en «Otros taxones».', 'No accession or taxon has coordinates: type them in the accession record (Block 2) or in «Other taxa».')}</p>`;
+    el('b8Map').innerHTML = mapFigure(R) || `<p class="hint">${L2('Ninguna accesión ni taxón tiene coordenadas: escríbelas en la ficha de la accesión (Bloque 2) o en «Otros taxones».', 'No accession or taxon has coordinates: type them in the accession record (Block 2) or in “Other taxa”.')}</p>`;
   }
 
   /* ---------------- everything ---------------- */
@@ -269,13 +307,13 @@
   }
   function readForm() {
     const s = settings();
-    s.dist = el('b8Dist').value; s.method = el('b8Method').value; s.parScale = el('b8ParScale').value; s.parMarks = el('b8ParMarks').checked; s.show = el('b8Show').value;
+    s.dist = el('b8Dist').value; s.method = el('b8Method').value; s.missing = el('b8Missing').value; s.parScale = el('b8ParScale').value; s.parMarks = el('b8ParMarks').checked; s.show = el('b8Show').value;
     s.pcx = +el('b8PcX').value || 0; s.pcy = el('b8PcY').value === '' ? 1 : +el('b8PcY').value;
     [['gain', 'b8CGain'], ['loss', 'b8CLoss'], ['dup', 'b8CDup'], ['demi', 'b8CDemi']].forEach(([k, id]) => { const v = num(el(id).value); s[k] = isFinite(v) && v >= 0 ? v : s[k]; });
   }
   function writeForm() {
     const s = settings();
-    el('b8Dist').value = s.dist; el('b8Method').value = s.method; el('b8ParScale').value = s.parScale; el('b8ParMarks').checked = !!s.parMarks; el('b8Show').value = s.show;
+    el('b8Dist').value = s.dist; el('b8Method').value = s.method; el('b8Missing').value = s.missing; el('b8ParScale').value = s.parScale; el('b8ParMarks').checked = !!s.parMarks; el('b8Show').value = s.show;
     el('b8CGain').value = s.gain; el('b8CLoss').value = s.loss; el('b8CDup').value = s.dup; el('b8CDemi').value = s.demi;
   }
   function render() {
@@ -294,7 +332,7 @@
       if (i >= 0) V.splice(i, 1); else V.push(k);
       renderAll();
     });
-    ['b8Dist', 'b8Method', 'b8PcX', 'b8PcY', 'b8ParScale', 'b8ParMarks', 'b8Show', 'b8CGain', 'b8CLoss', 'b8CDup', 'b8CDemi'].forEach(id => el(id).addEventListener('change', () => { readForm(); renderAll(); }));
+    ['b8Dist', 'b8Method', 'b8Missing', 'b8PcX', 'b8PcY', 'b8ParScale', 'b8ParMarks', 'b8Show', 'b8CGain', 'b8CLoss', 'b8CDup', 'b8CDemi'].forEach(id => el(id).addEventListener('change', () => { readForm(); renderAll(); }));
     el('b8Newick').addEventListener('input', () => { clearTimeout(nwkTimer); nwkTimer = setTimeout(() => { C().newick = el('b8Newick').value; renderAll(); }, 400); });
     el('b8NwkOpen').addEventListener('click', () => el('b8NwkFile').click());
     el('b8NwkFile').addEventListener('change', async e => {

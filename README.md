@@ -73,7 +73,7 @@ se calcula en el propio equipo: los datos no salen de él.
 | Carpeta | Qué hay |
 |---|---|
 | `index.html`, `css/`, `js/` | el programa |
-| `tests/` | las pruebas automáticas (623): abrir `tests/index.html` |
+| `tests/` | las pruebas automáticas (659): abrir `tests/index.html` |
 | `validation/` | los guiones en R que recalculan los índices, la estadística y la comparación con fórmulas independientes, y sus informes (`validation/LEEME.md`) |
 | `data/` | cómo se simularon los ejemplos (ya incrustados en `js/examples.js`) |
 | `manual/` | el manual de usuario (pendiente) |

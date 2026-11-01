@@ -37,6 +37,8 @@
     return r ? r[0] : null;
   }
   const stripTags = s => String(s).replace(/<[^>]+>/g, '');
+  /* a scientific name in italics, with the rank words in roman: «Sechium edule subsp. sylvestre» */
+  const taxonHtml = t => '<i>' + esc(t).replace(/\s+(subsp\.|ssp\.|var\.|subvar\.|f\.|cv\.|aff\.|cf\.|×)\s+/g, '</i> $1 <i>') + '</i>';
   /* the name of a variable of the comparison in the language of the methods */
   function varName(k, L) {
     const N = { n2: ['2n', '2n'], THL: ['la longitud de un juego (THL)', 'the length of one set (THL)'], C2: ['el contenido 2C', 'the 2C content'], TF: ['TF%', 'TF%'] };
@@ -54,8 +56,17 @@
     if (nCells) {
       const nChr = H.cells.reduce((s, c) => s + c.chromosomes.length, 0), withImg = H.cells.filter(c => c.image).length;
       const taxa = [...new Set(state.accessions.filter(a => H.cells.some(c => c.acc === a.id)).map(a => a.taxon).filter(Boolean))];
-      P.push(w(`Se midieron ${nChr} cromosomas en ${nCells} células metafásicas de ${plural(new Set(H.cells.map(c => c.acc)).size, 'accesión', 'accesiones')}${taxa.length ? ' (' + taxa.map(t => '<i>' + esc(t) + '</i>').join(', ') + ')' : ''}${withImg ? `, ${withImg === nCells ? 'todas' : withImg} sobre fotomicrografías calibradas con una barra de escala` : ''}. En cada cromosoma se trazó la línea media siguiendo su curvatura y se marcaron el centrómero y, cuando la hubo, la constricción secundaria${Block3.settings().includeSat ? '; la longitud del satélite se sumó a la de su brazo' : '; los satélites no se sumaron a su brazo'}.`,
-        `${nChr} chromosomes were measured in ${nCells} metaphase cells of ${(k => k + (k === 1 ? ' accession' : ' accessions'))(new Set(H.cells.map(c => c.acc)).size)}${taxa.length ? ' (' + taxa.map(t => '<i>' + esc(t) + '</i>').join(', ') + ')' : ''}${withImg ? `, ${withImg === nCells ? 'all' : withImg} on photomicrographs calibrated with a scale bar` : ''}. In each chromosome the midline was traced along its curvature and the centromere and, when present, the secondary constriction were marked${Block3.settings().includeSat ? '; the length of the satellite was added to its arm' : '; satellites were not added to their arm'}.`));
+      const nA = new Set(H.cells.map(c => c.acc)).size, tx = taxa.length ? ' (' + taxa.map(taxonHtml).join(', ') + ')' : '';
+      const satEs = Block3.settings().includeSat ? 'la longitud del satélite se sumó a la de su brazo' : 'los satélites no se sumaron a su brazo';
+      const satEn = Block3.settings().includeSat ? 'the length of the satellite was added to its arm' : 'satellites were not added to their arm';
+      const imgEs = !withImg ? '' : withImg === nCells ? ', todas sobre fotomicrografías calibradas con una barra de escala'
+        : `; ${withImg === 1 ? 'una de ellas se midió' : withImg + ' de ellas se midieron'} sobre fotomicrografías calibradas con una barra de escala y ${nCells - withImg === 1 ? 'la otra' : 'las otras ' + (nCells - withImg)}, a partir de medidas capturadas`;
+      const imgEn = !withImg ? '' : withImg === nCells ? ', all on photomicrographs calibrated with a scale bar'
+        : `; ${withImg === 1 ? 'one of them was' : withImg + ' of them were'} measured on photomicrographs calibrated with a scale bar and ${nCells - withImg === 1 ? 'the other one' : 'the other ' + (nCells - withImg)} from typed measurements`;
+      P.push(w(`Se midieron ${nChr} cromosomas en ${plural(nCells, 'célula metafásica', 'células metafásicas')} de ${plural(nA, 'accesión', 'accesiones')}${tx}${imgEs}. ` +
+        (withImg ? `En cada cromosoma de las fotomicrografías se trazó la línea media siguiendo su curvatura y se marcaron el centrómero y, cuando la hubo, la constricción secundaria; ${satEs}.` : `Se registraron la longitud de los dos brazos y, cuando lo hubo, del satélite; ${satEs}.`),
+        `${nChr} chromosomes were measured in ${plural(nCells, 'metaphase cell', 'metaphase cells')} of ${plural(nA, 'accession', 'accessions')}${tx}${imgEn}. ` +
+        (withImg ? `In each chromosome of the photomicrographs the midline was traced along its curvature and the centromere and, when present, the secondary constriction were marked; ${satEn}.` : `The length of both arms and, when present, of the satellite was recorded; ${satEn}.`)));
     }
     if (nAcc) {
       const S = Block3.settings(), sch = typeof S.scheme === 'string' ? Karyo.SCHEMES[S.scheme] : null;
@@ -75,8 +86,8 @@
       if (H.meiosis) {
         cite('Sybenga 1975');
         const nc = state.meiosis.configs.length;
-        parts.push(w(`En ${nc} células en metafase I se registraron las configuraciones (univalentes, bivalentes en varilla y en anillo, multivalentes) y se estimaron los quiasmas por célula y por bivalente y el índice de recombinación (n + quiasmas por célula) (${cite('Sybenga 1975')}; ${cite('Colombo 1992')})`,
-          `In ${nc} metaphase I cells the configurations (univalents, rod and ring bivalents, multivalents) were recorded and the chiasmata per cell and per bivalent and the recombination index (n + chiasmata per cell) were estimated (Sybenga 1975; Colombo 1992)`));
+        parts.push(w(`En ${plural(nc, 'célula', 'células')} en metafase I se registraron las configuraciones (univalentes, bivalentes en varilla y en anillo, multivalentes) y se estimaron los quiasmas por célula y por bivalente y el índice de recombinación (n + quiasmas por célula) (${cite('Sybenga 1975')}; ${cite('Colombo 1992')})`,
+          `In ${plural(nc, 'metaphase I cell', 'metaphase I cells')} the configurations (univalents, rod and ring bivalents, multivalents) were recorded and the chiasmata per cell and per bivalent and the recombination index (n + chiasmata per cell) were estimated (Sybenga 1975; Colombo 1992)`));
         if (state.meiosis.hyp) parts.push(w(`las frecuencias observadas se compararon con las esperadas bajo un modelo de apareamiento al azar de los extremos de los homólogos según la fórmula genómica (${cite('Jackson y Casey 1982')}), con una prueba de χ²`, `the observed frequencies were compared with those expected under a model of random pairing of the ends of the homologues according to the genomic formula (Jackson and Casey 1982), with a χ² test`));
       }
       if (H.tetrads) parts.push(w(`el índice meiótico se calculó como el porcentaje de tétradas normales (${cite('Love 1951')}), con intervalos de ${cite('Wilson 1927')}`, `the meiotic index was computed as the percentage of normal tetrads (Love 1951), with Wilson (1927) intervals`));
@@ -88,8 +99,8 @@
       if (H.counts) {
         const per = state.accessions.map(a => ({ a, C: Ploidy.counts(state.ploidy.counts.filter(r => r.acc === a.id)) })).filter(x => x.C);
         cite('Guerra 2008');
-        parts.push(w(`El número cromosómico se determinó como la moda de ${state.ploidy.counts.length} células contadas (${per.map(x => `${esc(accName(x.a.id))}: 2n = ${x.C.mode != null ? x.C.mode : '?'}`).join('; ')}); el nivel de ploidía se dedujo del número básico x del grupo (${cite('Guerra 2008')})`,
-          `The chromosome number was determined as the mode of ${state.ploidy.counts.length} counted cells (${per.map(x => `${esc(accName(x.a.id))}: 2n = ${x.C.mode != null ? x.C.mode : '?'}`).join('; ')}); the ploidy level was inferred from the base number x of the group (Guerra 2008)`));
+        parts.push(w(`El número cromosómico se determinó como la moda de ${plural(state.ploidy.counts.length, 'célula contada', 'células contadas')} (${per.map(x => `${esc(accName(x.a.id))}: 2n = ${x.C.mode != null ? x.C.mode : '?'}`).join('; ')}); el nivel de ploidía se dedujo del número básico x del grupo (${cite('Guerra 2008')})`,
+          `The chromosome number was determined as the mode of ${plural(state.ploidy.counts.length, 'counted cell', 'counted cells')} (${per.map(x => `${esc(accName(x.a.id))}: 2n = ${x.C.mode != null ? x.C.mode : '?'}`).join('; ')}); the ploidy level was inferred from the base number x of the group (Guerra 2008)`));
       }
       if (H.fcm) {
         cite('Doležel, Greilhuber y Suda 2007', 'Doležel et al. 2003', 'Greilhuber et al. 2005');
@@ -116,7 +127,10 @@
       cite('Peruzzi y Altınordu 2014', s.dist === 'euclid' ? 'Sneath y Sokal 1973' : 'Gower 1971', s.method === 'ward' ? 'Ward 1963' : 'Sneath y Sokal 1973', 'Sokal y Rohlf 1962');
       let t = w(`Las ${A.use.length} accesiones y taxones${nExtra ? ` (${nExtra} tomados de la literatura)` : ''} se compararon con ${list(names.map(esc), L)} (${'Peruzzi y Altınordu 2014'}), mediante ${s.dist === 'euclid' ? 'la distancia euclidiana sobre valores estandarizados' : 'la distancia de Gower (Gower 1971)'} y un agrupamiento ${s.method === 'ward' ? 'de Ward (Ward 1963)' : 'UPGMA (Sneath y Sokal 1973)'}; la correlación cofenética fue r = ${fmtFixed(A.coph, 3)} (Sokal y Rohlf 1962).`,
         `The ${A.use.length} accessions and taxa${nExtra ? ` (${nExtra} taken from the literature)` : ''} were compared with ${list(names.map(esc), L)} (Peruzzi and Altınordu 2014), by ${s.dist === 'euclid' ? 'the Euclidean distance on standardized values' : 'the Gower distance (Gower 1971)'} and ${s.method === 'ward' ? 'Ward clustering (Ward 1963)' : 'UPGMA clustering (Sneath and Sokal 1973)'}; the cophenetic correlation was r = ${fmtFixed(A.coph, 3)} (Sokal and Rohlf 1962).`);
-      if (A.P) { cite('Jolliffe 2002', 'Gabriel 1971'); t += ' ' + w(`Un análisis de componentes principales de la matriz de correlaciones (Jolliffe 2002), mostrado como biplot (Gabriel 1971), resumió ${fmtPct(A.P.explained[0] + (A.P.explained[1] || 0), 1)} de la varianza en los dos primeros componentes.`, `A principal component analysis of the correlation matrix (Jolliffe 2002), shown as a biplot (Gabriel 1971), summarised ${fmtPct(A.P.explained[0] + (A.P.explained[1] || 0), 1)} of the variance in the first two components.`); }
+      const miss = s.missing || 'complete';
+      if (A.X && A.X.some(r => r.some(v => !isFinite(v)))) t += ' ' + w('En cada pareja se usaron las variables que ambas tienen.', 'Each pair was compared on the variables both have.');
+      else if (miss === 'complete' && A.use.length < Block8.rows().length) t += ' ' + w('Sólo entraron las filas con todas las variables.', 'Only the rows with every variable were included.');
+      if (A.P) { cite('Jolliffe 2002', 'Gabriel 1971'); t += ' ' + w(`Un análisis de componentes principales de la matriz de correlaciones (Jolliffe 2002), mostrado como biplot (Gabriel 1971), resumió ${fmtPct(A.P.explained[0] + (A.P.explained[1] || 0), 1)} de la varianza en los dos primeros componentes.`, `A principal component analysis of the correlation matrix (Jolliffe 2002), shown as a biplot (Gabriel 1971), summarized ${fmtPct(A.P.explained[0] + (A.P.explained[1] || 0), 1)} of the variance in the first two components.`); }
       const E = Block8.evolution();
       if (E.P) {
         cite('Sankoff 1975', 'Mayrose, Barker y Otto 2010');
@@ -137,10 +151,16 @@
   const methodsText = lang => { const M = methods(lang); return M.paragraphs.map(stripTags).join('\n\n') + '\n\n' + (lang === 'en' ? 'References' : 'Referencias') + '\n\n' + M.refs.map(stripTags).join('\n') + '\n'; };
 
   /* ---------------- tables ---------------- */
-  function objRows(list, skip) {
+  /* the headings of the record tables in the language of the interface (the
+     codes of configurations, phases and aberrations stay as they are) */
+  const HEADS = { acc: ['accesión', 'accession'], cell: ['célula', 'cell'], n2: ['2n', '2n'], ind: ['planta', 'plant'], plant: ['planta', 'plant'], phase: ['fase', 'phase'],
+    normal: ['normales', 'normal'], viable: ['viables', 'viable'], inviable: ['inviables', 'inviable'], trt: ['tratamiento', 'treatment'], rep: ['repetición', 'replicate'],
+    source: ['origen', 'source'], xta: ['quiasmas', 'chiasmata'], micronuclei: ['con_micronúcleos', 'with_micronuclei'], dyads: ['díadas', 'dyads'], triads: ['tríadas', 'triads'], polyads: ['políadas', 'polyads'] };
+  function objRows(list, skip, rename) {
     const keys = [];
     list.forEach(r => Object.keys(r).forEach(k => { if (!keys.includes(k) && !(skip || []).includes(k) && typeof r[k] !== 'object') keys.push(k); }));
-    return [keys.map(k => (k === 'acc' ? T('accesión', 'accession') : k))].concat(list.map(r => keys.map(k => (k === 'acc' ? accName(r[k]) : r[k] == null ? '' : r[k]))));
+    const head = k => { const h = (rename && rename[k]) || HEADS[k]; return h ? T(h[0], h[1]) : k; };
+    return [keys.map(head)].concat(list.map(r => keys.map(k => (k === 'acc' ? accName(r[k]) : r[k] == null ? '' : r[k]))));
   }
   function tables() {
     const out = [], H = has();
@@ -153,7 +173,7 @@
     if (H.meiosis) add('meiosis_configuraciones', 'Configuraciones meióticas por célula', 'Meiotic configurations per cell', objRows(state.meiosis.configs, ['id']));
     if (state.meiosis.phases.length) add('meiosis_anormalidades', 'Anormalidades por fase', 'Abnormalities by phase', objRows(state.meiosis.phases, ['id']));
     if (H.tetrads) add('tetradas', 'Tétradas', 'Tetrads', objRows(state.meiosis.tetrads, ['id']));
-    if (H.pollen) add('polen', 'Viabilidad del polen', 'Pollen viability', objRows(state.meiosis.pollen, ['id']));
+    if (H.pollen) add('polen', 'Viabilidad del polen', 'Pollen viability', objRows(state.meiosis.pollen, [], { id: ['planta', 'plant'] }));
     if (H.counts) add('conteos', 'Conteos de 2n', '2n counts', objRows(state.ploidy.counts, ['id']));
     if (H.fcm) add('citometria', 'Citometría de flujo', 'Flow cytometry', [[T('accesión', 'accession'), T('muestra', 'sample'), T('patrón', 'standard'), T('pico_patron', 'standard_peak'), T('pico_muestra', 'sample_peak'), 'CV_' + T('patron', 'standard'), 'CV_' + T('muestra', 'sample'), '2C_pg', '1C_pg', '1Cx_pg', '2C_Mbp']]
       .concat(state.ploidy.fcm.map(r => { const g = Block6.run(r) || {}; return [accName(r.acc), r.sample || '', r.std || '', r.stdPeak, r.samplePeak, r.cvStd ?? '', r.cvSample ?? '', g.c2 ?? '', g.c1 ?? '', g.c1x ?? '', g.mbp2 ?? '']; })));
@@ -184,7 +204,7 @@
     if (!pick) return null;
     const { kc, src } = pick, k = Img.umPerPx(src);
     const im = await loadImage(state.images[src.image].dataUrl);
-    const cv = document.createElement('canvas'); cv.width = im.width; cv.height = im.height; cv.getContext('2d').drawImage(im, 0, 0);
+    const cv = document.createElement('canvas'); cv.width = im.width; cv.height = im.height; cv.getContext('2d', { willReadFrequently: true }).drawImage(im, 0, 0);
     const width = Math.max(14, Math.min(40, k ? 1.4 / k : 18));
     const pairs = K.order.map(j => ({ j, P: K.pairs[j], cut: (kc.groups[j] ? kc.groups[j].homolog : []).map(h => Img.straighten(cv, src.chromosomes.find(x => x.id === h.id), width)) }));
     const perRow = Math.min(pairs.length, pairs.length > 12 ? 8 : 7), gapIn = 6, gapPair = 26, font = 12;
@@ -208,13 +228,15 @@
       W = Math.max(W, x - gapPair + 30);
       y += up + down + 2 * font + 30;
     });
+    /* the figure is at least as wide as its title */
+    const title = `${accName(acc)} · ${src.label || ''} · ${K.formula}`;
+    W = Math.max(W, 30 + title.length * (font + 2) * 0.6 + 16);
     if (k) {
       const um = [1, 2, 5, 10, 20].find(v => v / k >= 40) || 5, px = um / k;
       body += `<line class="kg-bar" x1="${(W - px - 20).toFixed(1)}" x2="${(W - 20).toFixed(1)}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--text)" stroke-width="4"/>` +
         `<text class="txt" x="${(W - px / 2 - 20).toFixed(1)}" y="${(y - 8).toFixed(1)}" font-size="${font}" text-anchor="middle">${um} µm</text>`;
       y += 20;
     }
-    const title = `${accName(acc)} · ${src.label || ''} · ${K.formula}`;
     return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="fig karyogram" viewBox="0 0 ${Math.ceil(W)} ${Math.ceil(y)}" width="${Math.ceil(W)}" height="${Math.ceil(y)}" role="img" aria-label="${esc(T('Cariograma de ', 'Karyogram of ') + title)}">` +
       `<text class="ttl" x="30" y="24" font-size="${font + 2}">${esc(title)}</text>${body}</svg>`;
   }
@@ -253,5 +275,5 @@ figure{margin:10px 0;page-break-inside:avoid;break-inside:avoid}figure svg{max-w
       rows.slice(1).map(r => '<tr>' + r.map(v => `<td${isNum(v) ? ' class="num"' : ''}>${esc(fmt(v))}</td>`).join('') + '</tr>').join('') + '</tbody></table>';
   }
 
-  window.Report = { methods, methodsText, tables, karyogram, page, printHtml, htmlTable, refFor, CSS };
+  window.Report = { methods, methodsText, tables, karyogram, page, printHtml, htmlTable, refFor, taxonHtml, CSS };
 })();

@@ -29,7 +29,7 @@
       newRow: () => ({ id: uid('p'), name: T('Sonda nueva', 'New probe'), kind: 'FISH', color: 'var(--pr6)' }),
       columns: [{ key: 'name', es: 'Nombre', en: 'Name', type: 'text', width: '10em' },
         { key: 'kind', es: 'Tipo', en: 'Kind', type: 'select', options: Bands.KINDS },
-        { key: 'color', es: 'Color', en: 'Colour', type: 'select', options: Bands.COLORS },
+        { key: 'color', es: 'Color', en: 'Color', type: 'select', options: Bands.COLORS },
         { key: 'shape', es: 'Dibujo', en: 'Drawing', type: 'select', options: [['band', 'Banda', 'Band'], ['dot', 'Puntos en las cromátidas', 'Dots on the chromatids']] }],
       onChange: () => { Bands.probes().forEach(p => { p.dot = p.shape === 'dot'; }); changed(); if (grids.sig) grids.sig.render(); renderAll(); },
     });
@@ -91,12 +91,13 @@
   }
   function renderSummary() {
     const S = Bands.summary(cur);
-    const cls = c => Object.keys(c).map(k => c[k] + ' ' + T(Bands.POS_NAMES[k])).join(', ');
+    const cls = c => ['proximal', 'interstitial', 'terminal'].filter(k => c[k]).map(k => fmtNum(c[k], 1) + ' ' + T(Bands.POS_NAMES[k])).join(', ');
     buildTable('b7Sum', [{ key: 'p', label: L2('Sonda o banda', 'Probe or band'), get: r => `<span class="sw" style="background:${r.probe.color}"></span>${esc(r.probe.name)}`, html: true },
       { key: 'k', label: L2('Tipo', 'Kind'), get: r => { const k = Bands.KINDS.find(x => x[0] === r.probe.kind); return k ? T(k[1], k[2]) : r.probe.kind; } },
-      { key: 'sites', label: L2('Sitios por juego', 'Sites per set'), num: true }, { key: 'pairs', label: L2('Pares', 'Pairs'), get: r => r.pairs.join(', ') },
+      { key: 'sites', label: L2('Sitios por juego', 'Sites per set'), num: true, get: r => fmtNum(r.sites, 1) }, { key: 'pairs', label: L2('Pares', 'Pairs'), get: r => r.pairs.join(', ') },
       { key: 'where', label: L2('Dónde', 'Where'), get: r => r.list.map(s => `${s.pair}${s.arm}${s.homolog ? '(' + s.homolog + ')' : ''} ${Math.round(s.pos * 100)} %`).join('; ') },
-      { key: 'cls', label: L2('Regiones', 'Regions'), get: r => cls(r.classes) }, { key: 'het', label: L2('En un solo homólogo', 'On one homologue only'), num: true, get: r => r.hetero }], S);
+      { key: 'cls', label: L2('Regiones', 'Regions'), get: r => cls(r.classes) }, { key: 'het', label: L2('En un solo homólogo', 'On one homologue only'), num: true, get: r => r.hetero }], S,
+      { foot: S.some(r => r.hetero) ? `<tr><td colspan="7" class="hint">${L2('Un sitio en un solo homólogo cuenta medio en los sitios por juego y en las regiones, igual que en la tabla de todas las accesiones y en el Bloque 8; «(1)» en «Dónde» dice en qué homólogo está.', 'A site on one homologue only counts as half in the sites per set and in the regions, as in the table of all the accessions and in Block 8; “(1)” in “Where” tells which homologue it is on.')}</td></tr>` : '' });
     const C = Bands.concordance(cur);
     if (!C) el('b7Conc').innerHTML = `<p class="hint">${L2('No hay señales registradas célula por célula en esta accesión.', 'There are no signals recorded cell by cell in this accession.')}</p>`;
     else buildTable('b7Conc', [{ key: 'pair', label: L2('Par', 'Pair'), num: true }, { key: 'probe', label: L2('Sonda', 'Probe'), get: r => r.probe.name }, { key: 'arm', label: L2('Brazo', 'Arm') },

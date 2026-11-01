@@ -24,7 +24,7 @@ function emptyState() {
     meta: { title: '', author: '', notes: '', example: null },
     accessions: [],      // {id, name, taxon, locality, lat, lon, x, color}
     images: {},          // id → {name, dataUrl, w, h}
-    cells: [],           // {id, acc, label, image, scale, chromosomes, markers, groups, adjust}
+    cells: [],           // {id, acc, label, image, scale, chromosomes, markers, groups, adjust, unit? ('px' when read back in pixels)}
     settings: {
       scheme: 'levan', custom: null, includeSat: true, strict: false, stArms: 1, k: 2,
       order: 'length', pop: false, unit: 'µm', satInFormula: true,
@@ -176,7 +176,8 @@ function fmtFixed(v, d) {
 }
 function fmtPct(x, d) {
   if (x == null || !isFinite(x)) return '—';
-  return (x * 100).toFixed(d == null ? 1 : d) + '%';
+  /* the suite writes a space before % in both languages: «63.7 %» */
+  return (x * 100).toFixed(d == null ? 1 : d) + ' %';
 }
 /* a p-value as journals write it */
 function fmtP(p) {
@@ -190,6 +191,11 @@ function pEq(p) { const s = fmtP(p); return s.startsWith('<') ? 'p ' + s : 'p = 
 function fmtMS(m, s, d) {
   if (m == null || !isFinite(m)) return '—';
   return fmtFixed(m, d == null ? 2 : d) + (s != null && isFinite(s) ? ' ± ' + fmtFixed(s, d == null ? 2 : d) : '');
+}
+/* mean ± sd for a narrow table cell: the deviation goes on a second line */
+function msHtml(m, s, d) {
+  if (m == null || !isFinite(m)) return '—';
+  return '<span class="ms">' + fmtFixed(m, d == null ? 2 : d) + (s != null && isFinite(s) ? '<small>± ' + fmtFixed(s, d == null ? 2 : d) + '</small>' : '') + '</span>';
 }
 function plural(n, one, many) { return `${n} ${n === 1 ? one : many}`; }
 const num = v => { if (v == null || v === '') return NaN; const n = Number(String(v).trim().replace(',', '.')); return n; };

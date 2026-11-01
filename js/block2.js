@@ -89,10 +89,15 @@
   }
 
   /* ---------------- pasted measurements ----------------
-     Columns recognised by name, or by their number (2: p q; 3: chromosome p q;
-     4: cell chromosome p q; 5–7: accession cell chromosome p q [sat] [arm]). */
+     Columns recognized by name, or by their number (2: p q; 3: chromosome p q;
+     4: cell chromosome p q; 5–7: accession cell chromosome p q [sat] [arm]).
+     The CSV that this block writes (accession, taxon, cell, chromosome, p, q,
+     satellite, satellite arm, unit, source) is read back whole: the taxon goes
+     to the accession and a unit «px» keeps the cell in pixels. */
   const HEAD = {
-    acc: /^(acc|accesi[oó]n|accession|muestra|sample|poblaci[oó]n|population|tax[oó]n|taxon)/i,
+    acc: /^(acc|accesi[oó]n|accession|muestra|sample|poblaci[oó]n|population)/i,
+    tax: /^(tax[oó]n|taxon|especie|species)/i,
+    unit: /^(unidad|unit)/i,
     cell: /^(c[eé]l|cell|placa|plate|metafase|metaphase)/i,
     chr: /^(crom|chrom|n[uú]m|no\.?$|#|id)/i,
     p: /^(p$|corto|short|brazo ?corto|short ?arm|s$)/i,
@@ -109,7 +114,7 @@
       const named = {};
       first.forEach((h, i) => {
         const t = h.trim();
-        for (const k of ['arm', 'p', 'q', 'sat', 'acc', 'cell', 'chr']) if (named[k] == null && HEAD[k].test(t)) { named[k] = i; break; }
+        for (const k of ['arm', 'p', 'q', 'sat', 'acc', 'tax', 'unit', 'cell', 'chr']) if (named[k] == null && HEAD[k].test(t)) { named[k] = i; break; }
       });
       if (named.p != null && named.q != null) { map = named; body = rows.slice(1); }
     }
@@ -124,8 +129,10 @@
       const sat = map.sat != null ? num(r[map.sat]) : 0;
       let arm = map.arm != null ? String(r[map.arm] || '').trim().toLowerCase() : '';
       arm = /^(q|l|largo|long)/.test(arm) ? 'q' : sat > 0 ? 'p' : null;
-      out.push({ acc: map.acc != null ? String(r[map.acc]).trim() : null, cell: map.cell != null ? String(r[map.cell]).trim() : null,
-        chr: map.chr != null ? String(r[map.chr]).trim() : null, p, q, sat: sat > 0 ? sat : 0, satArm: sat > 0 ? arm : null });
+      const txt = k => (map[k] != null && r[map[k]] != null && String(r[map[k]]).trim() !== '' ? String(r[map[k]]).trim() : null);
+      const unit = txt('unit');
+      out.push({ acc: txt('acc'), taxon: txt('tax'), cell: txt('cell'),
+        chr: txt('chr'), p, q, sat: sat > 0 ? sat : 0, satArm: sat > 0 ? arm : null, unit: unit && /^px|^p[ií]xel/i.test(unit) ? 'px' : null });
     });
     return { rows: out, bad };
   }
@@ -133,30 +140,45 @@
     const r = parseMeasurements(text);
     if (r.error) { showMsg('error', r.error); return; }
     if (!r.rows.length) { showMsg('error', T('Ninguna fila tenía dos números válidos para p y q.', 'No row had two valid numbers for p and q.')); return; }
-    const acc0 = ensureAccession();
+    /* the accession of the rows without a name: the current one, created only
+       if some row needs it (a pasted table that names its accessions does not
+       leave an empty «Accession 1» behind) */
     const accByName = new Map(state.accessions.map(a => [String(a.name).toLowerCase(), a]));
     const cellKey = new Map();
-    let nCells = 0, nAcc = 0;
+    let nCells = 0, nAcc = 0, nPx = 0;
+    const addAcc = (name, taxon) => {
+      const a = { id: uid('a'), name, taxon: taxon || '', locality: '', lat: null, lon: null, x: null };
+      state.accessions.push(a); accByName.set(name.toLowerCase(), a); nAcc++;
+      return a;
+    };
     r.rows.forEach(row => {
-      let acc = acc0;
-      if (row.acc) {
-        acc = accByName.get(row.acc.toLowerCase());
-        if (!acc) { acc = { id: uid('a'), name: row.acc, taxon: '', locality: '', lat: null, lon: null, x: null }; state.accessions.push(acc); accByName.set(row.acc.toLowerCase(), acc); nAcc++; }
-      }
+      let acc;
+      /* a table with taxa but no accession column: one accession per taxon */
+      const name = row.acc || (row.taxon && !row.acc ? row.taxon : null);
+      if (name) acc = accByName.get(name.toLowerCase()) || addAcc(name, row.taxon);
+      else acc = accession(curAcc) || state.accessions[0] || addAcc(T('Accesión ', 'Accession ') + (state.accessions.length + 1));
+      if (row.taxon && !acc.taxon) acc.taxon = row.taxon;
       const ck = acc.id + '|' + (row.cell || '·');
       let c = cellKey.get(ck);
       if (!c) { c = newCell(acc.id, row.cell || null); cellKey.set(ck, c); nCells++; }
+      /* measurements in pixels (an uncalibrated cell exported earlier) stay in pixels */
+      if (row.unit === 'px' && c.unit !== 'px') { c.unit = 'px'; nPx++; }
       c.chromosomes.push({ id: uid('m'), label: row.chr || nextLabel(c), p: row.p, q: row.q, sat: row.sat || 0, satArm: row.satArm });
     });
+    /* an empty «Accession 1» made before (by opening another block) and left unused goes away */
+    const used = id => state.cells.some(c => c.acc === id) || state.meiosis.configs.concat(state.meiosis.phases, state.meiosis.tetrads, state.meiosis.pollen,
+      state.ploidy.counts, state.ploidy.fcm, state.ploidy.mitosis, state.bands.signals).some(x => x.acc === id);
+    state.accessions = state.accessions.filter(a => used(a.id) || !/^(Accesión|Accession) \d+$/.test(a.name || '') || a.taxon || a.locality || a.lat != null || a.lon != null || a.x != null);
     const firstCell = [...cellKey.values()][0];
     curAcc = firstCell.acc; curCell = firstCell.id;
     state.accessions.forEach(a => changed(a.id));
-    render();
-    el('b2PasteBox').hidden = true;
+    if (el('panel-2')) { render(); el('b2PasteBox').hidden = true; }
     clearMessages('b2Msg');
-    showMessage('b2Msg', 'success', T(`Se leyeron ${r.rows.length} cromosomas en ${nCells} células`, `${r.rows.length} chromosomes read in ${nCells} cells`) +
-      (nAcc ? T(` y ${nAcc} accesiones nuevas`, ` and ${nAcc} new accessions`) : '') + '.' +
+    showMessage('b2Msg', 'success', T(`Se leyeron ${plural(r.rows.length, 'cromosoma', 'cromosomas')} en ${plural(nCells, 'célula', 'células')}`, `${plural(r.rows.length, 'chromosome', 'chromosomes')} read in ${plural(nCells, 'cell', 'cells')}`) +
+      (nAcc ? T(` y ${plural(nAcc, 'accesión nueva', 'accesiones nuevas')}`, ` and ${plural(nAcc, 'new accession', 'new accessions')}`) : '') + '.' +
+      (nPx ? T(` ${nPx === 1 ? 'Una célula viene' : nPx + ' células vienen'} en píxeles (sin calibrar).`, ` ${nPx === 1 ? 'One cell comes' : nPx + ' cells come'} in pixels (not calibrated).`) : '') +
       (r.bad.length ? T(` Se saltaron las filas ${r.bad.slice(0, 8).join(', ')}${r.bad.length > 8 ? '…' : ''} (sin números válidos).`, ` Rows ${r.bad.slice(0, 8).join(', ')}${r.bad.length > 8 ? '…' : ''} were skipped (no valid numbers).`) : ''));
+    return { rows: r.rows.length, cells: nCells, accessions: nAcc, px: nPx };
   }
   function showMsg(type, text) { clearMessages('b2Msg'); showMessage('b2Msg', type, text); }
 
@@ -200,7 +222,7 @@
       const thumb = img ? `<img src="${img.dataUrl}" alt="">` : `<span class="cell-noimg" aria-hidden="true">✎</span>`;
       return `<button type="button" class="cell-tile${c.id === curCell ? ' on' : ''}" data-cell="${esc(c.id)}" aria-pressed="${c.id === curCell}">` +
         `${thumb}<b>${esc(c.label)}</b><small>${ms.length} ${T('medidos', 'measured')}${inc ? ' · ' + inc + T(' incompletos', ' incomplete') : ''}` +
-        `${img ? (Img.umPerPx(c) ? ' · µm' : ' · ' + T('sin calibrar', 'not calibrated')) : ''}${(c.markers || []).length ? ' · 2n ' + c.markers.length : ''}</small></button>`;
+        `${img ? (Img.umPerPx(c) ? ' · µm' : ' · ' + T('sin calibrar', 'not calibrated')) : c.unit === 'px' ? ' · px' : ''}${(c.markers || []).length ? ' · 2n ' + c.markers.length : ''}</small></button>`;
     }).join('') + (curAcc ? `<button type="button" class="cell-tile add" id="b2CellAdd"><span aria-hidden="true">+</span><b>${T('Célula sin imagen', 'Cell without image')}</b></button>` : '');
     const c = cell();
     el('b2CellBar').hidden = !c;
@@ -277,7 +299,7 @@
     const c = cell();
     const host = el('b2Table');
     if (!c || !host) return;
-    const k = Img.umPerPx(c), unit = c.image && !k ? 'px' : 'µm';
+    const k = Img.umPerPx(c), unit = Img.cellInPx(c) ? 'px' : 'µm';
     const rows = (c.chromosomes || []).map(ch => {
       let p, q, sat, satArm, traced = !!ch.trace, done = true;
       if (traced) {
@@ -303,24 +325,25 @@
         `<td>${r.N ? Karyo.classify(r.N.s, r.N.l, state.settings.scheme) : (r.traced ? `<span class="badge warn">${L2('sin centrómero', 'no centromere')}</span>` : '—')}</td>` +
         `<td>${r.traced ? L2('trazo', 'trace') : L2('a mano', 'typed')}</td>` +
         `<td><button type="button" class="icon-btn b2-del" data-del="${esc(r.ch.id)}" aria-label="${esc(T('Borrar el cromosoma ', 'Delete chromosome ') + r.ch.label)}" title="${esc(T('Borrar', 'Delete'))}">×</button></td></tr>`).join('') +
-      `</tbody></table>` + (rows.length ? '' : `<p class="hint" style="padding:8px 12px">${L2('Sin cromosomas todavía: traza sobre la imagen o usa «+ Cromosoma».', 'No chromosomes yet: trace on the image or use «+ Chromosome».')}</p>`);
+      `</tbody></table>` + (rows.length ? '' : `<p class="hint" style="padding:8px 12px">${L2('Sin cromosomas todavía: traza sobre la imagen o usa «+ Cromosoma».', 'No chromosomes yet: trace on the image or use “+ Chromosome”.')}</p>`);
   }
   function renderSummary() {
     if (!el('b2Tiles')) return;
     const all = state.cells;
     const meas = all.map(c => Img.cellMeasurements(c));
     const nChr = meas.reduce((a, m) => a + m.length, 0);
-    const imgCells = all.filter(c => c.image), cal = imgCells.filter(c => Img.umPerPx(c));
+    const imgCells = all.filter(c => c.image), cal = imgCells.filter(c => Img.umPerPx(c)), pxCells = all.filter(c => !c.image && Img.cellInPx(c));
     statTiles('b2Tiles', [
       [T('Accesiones', 'Accessions'), state.accessions.length],
       [T('Células', 'Cells'), all.length, imgCells.length ? imgCells.length + T(' con imagen', ' with image') : ''],
       [T('Cromosomas medidos', 'Chromosomes measured'), nChr],
-      [T('Células calibradas', 'Calibrated cells'), imgCells.length ? cal.length + ' / ' + imgCells.length : '—', '', imgCells.length && cal.length < imgCells.length ? 'warn' : null],
+      [T('Células calibradas', 'Calibrated cells'), imgCells.length ? cal.length + ' / ' + imgCells.length : '—', pxCells.length ? pxCells.length + T(' sin imagen, en píxeles', ' without image, in pixels') : '',
+        (imgCells.length && cal.length < imgCells.length) || pxCells.length ? 'warn' : null],
     ]);
     const rows = state.accessions.map(a => {
       const cs = cellsOf(a.id), ms = cs.map(c => Img.cellMeasurements(c).length).filter(n => n > 0);
       const mo = ms.length ? Stats.modes(ms) : null;
-      return { a, cells: cs.length, measured: ms.length, chr: ms.reduce((x, y) => x + y, 0), mode: mo ? mo.modes.join(', ') : '—', varies: mo && mo.table.size > 1, uncal: cs.filter(c => c.image && !Img.umPerPx(c)).length };
+      return { a, cells: cs.length, measured: ms.length, chr: ms.reduce((x, y) => x + y, 0), mode: mo ? mo.modes.join(', ') : '—', varies: mo && mo.table.size > 1, uncal: cs.filter(c => Img.cellInPx(c)).length };
     });
     buildTable('b2SumTable', [
       { key: 'a', label: L2('Accesión', 'Accession'), get: r => r.a.name || r.a.taxon || r.a.id },
@@ -332,10 +355,10 @@
     ], rows);
     clearMessages('b2SumMsg');
     rows.forEach(r => {
-      if (r.varies) showMessage('b2SumMsg', 'warning', T(`En «${esc(r.a.name)}» no todas las células tienen el mismo número de cromosomas medidos (moda ${r.mode}).`, `In «${esc(r.a.name)}» not every cell has the same number of measured chromosomes (mode ${r.mode}).`),
+      if (r.varies) showMessage('b2SumMsg', 'warning', T(`En «${esc(r.a.name)}» no todas las células tienen el mismo número de cromosomas medidos (moda ${r.mode}).`, `In “${esc(r.a.name)}” not every cell has the same number of measured chromosomes (mode ${r.mode}).`),
         T('Revisa que no falte ni sobre ninguno; el Bloque 3 agrupa lo que haya en cada célula.', 'Check that none is missing or duplicated; Block 3 groups whatever each cell has.'));
-      if (r.uncal) showMessage('b2SumMsg', 'warning', T(`«${esc(r.a.name)}» tiene ${r.uncal} célula(s) con imagen sin calibrar: sus medidas están en píxeles.`, `«${esc(r.a.name)}» has ${r.uncal} cell(s) with an uncalibrated image: their measurements are in pixels.`),
-        T('Calibra con la barra de escala para mezclarlas con las demás.', 'Calibrate with the scale bar to mix them with the others.'));
+      if (r.uncal) showMessage('b2SumMsg', 'warning', T(`«${esc(r.a.name)}» tiene ${r.uncal === 1 ? 'una célula' : r.uncal + ' células'} sin calibrar: sus medidas están en píxeles.`, `“${esc(r.a.name)}” has ${r.uncal === 1 ? 'one uncalibrated cell' : r.uncal + ' uncalibrated cells'}: their measurements are in pixels.`),
+        T('Calibra con la barra de escala (o captura las medidas en micras) para mezclarlas con las demás.', 'Calibrate with the scale bar (or type the measurements in microns) to mix them with the others.'));
     });
   }
 
@@ -373,7 +396,7 @@
       const a = accession(curAcc);
       if (!a) return;
       const n = cellsOf(a.id).length;
-      if (n && !window.confirm(T(`¿Borrar «${a.name}» y sus ${n} células?`, `Delete «${a.name}» and its ${n} cells?`))) return;
+      if (n && !window.confirm(T(n === 1 ? `¿Borrar «${a.name}» y su célula?` : `¿Borrar «${a.name}» y sus ${n} células?`, n === 1 ? `Delete “${a.name}” and its cell?` : `Delete “${a.name}” and its ${n} cells?`))) return;
       state.cells = state.cells.filter(c => c.acc !== a.id);
       state.accessions = state.accessions.filter(x => x !== a);
       curAcc = state.accessions[0] ? state.accessions[0].id : null; curCell = null;
@@ -398,7 +421,7 @@
     el('b2CellDel').addEventListener('click', () => {
       const c = cell();
       if (!c) return;
-      if ((c.chromosomes || []).length && !window.confirm(T(`¿Borrar «${c.label}» y sus mediciones?`, `Delete «${c.label}» and its measurements?`))) return;
+      if ((c.chromosomes || []).length && !window.confirm(T(`¿Borrar «${c.label}» y sus mediciones?`, `Delete “${c.label}” and its measurements?`))) return;
       state.cells = state.cells.filter(x => x !== c);
       if (c.image && !state.cells.some(x => x.image === c.image)) delete state.images[c.image];
       curCell = null; changed(c.acc); render();
@@ -444,7 +467,7 @@
       if (i >= 0) list[i] = row; else list.push(row);
       document.dispatchEvent(new CustomEvent('datachange', { detail: { block: 6 } }));
       blockDone();
-      toast(T(`Conteo enviado al Bloque 6: 2n = ${row.n2} en «${c.label}».`, `Count sent to Block 6: 2n = ${row.n2} in «${c.label}».`), 'success');
+      toast(T(`Conteo enviado al Bloque 6: 2n = ${row.n2} en «${c.label}».`, `Count sent to Block 6: 2n = ${row.n2} in “${c.label}”.`), 'success');
     });
     el('b2SelInfo').addEventListener('click', e => {
       const b = e.target.closest('[data-act]'), c = cell();
@@ -498,7 +521,7 @@
         ri++;
       });
       changed(c.acc); render();
-      toast(T(`Se pegaron ${rows.length} filas.`, `${rows.length} rows pasted.`), 'success');
+      toast(T(rows.length === 1 ? 'Se pegó una fila.' : `Se pegaron ${rows.length} filas.`, rows.length === 1 ? 'One row pasted.' : `${rows.length} rows pasted.`), 'success');
     });
     el('b2AddRow').addEventListener('click', () => {
       let c = cell();
@@ -516,7 +539,7 @@
   function csvRows(cells) {
     const out = [[T('accesión', 'accession'), T('taxón', 'taxon'), T('célula', 'cell'), T('cromosoma', 'chromosome'), 'p', 'q', T('satélite', 'satellite'), T('brazo_satélite', 'satellite_arm'), T('unidad', 'unit'), T('origen', 'source')]];
     cells.forEach(c => {
-      const a = accession(c.acc) || {}, unit = c.image && !Img.umPerPx(c) ? 'px' : 'µm';
+      const a = accession(c.acc) || {}, unit = Img.cellInPx(c) ? 'px' : 'µm';
       Img.cellMeasurements(c).forEach(m => out.push([a.name || '', a.taxon || '', c.label, m.label, +m.p.toFixed(4), +m.q.toFixed(4), +(m.sat || 0).toFixed(4), m.satArm || '', unit, m.traced ? T('trazo', 'trace') : T('a mano', 'typed')]));
     });
     return out;

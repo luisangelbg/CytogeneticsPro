@@ -30,7 +30,7 @@
     ['FISH', 'FISH (sonda de ADN)', 'FISH (DNA probe)'], ['GISH', 'GISH (genoma)', 'GISH (genome)'], ['other', 'Otra', 'Other']];
   const COLORS = [['var(--idio-het)', 'Heterocromatina (oscura)', 'Heterochromatin (dark)'], ['var(--pr1)', 'Bermellón', 'Vermilion'], ['var(--pr2)', 'Verde azulado', 'Bluish green'],
     ['var(--pr3)', 'Azul', 'Blue'], ['var(--pr4)', 'Naranja', 'Orange'], ['var(--pr5)', 'Púrpura rojizo', 'Reddish purple'], ['var(--pr6)', 'Celeste', 'Sky blue'],
-    ['var(--pr7)', 'Amarillo', 'Yellow'], ['var(--pr8)', 'Gris', 'Grey']];
+    ['var(--pr7)', 'Amarillo', 'Yellow'], ['var(--pr8)', 'Gris', 'Gray']];
   const DEFAULT_PROBES = [
     { id: 'cband', name: 'Banda C', kind: 'C', color: 'var(--idio-het)' },
     { id: 'cma', name: 'CMA⁺', kind: 'fluor', color: 'var(--pr4)' },
@@ -79,16 +79,21 @@
     const used = [...new Set(pattern(acc).map(s => s.probe))];
     return probes().filter(p => used.includes(p.id)).map(p => ({ label: p.name, color: p.color }));
   }
-  /* sites per probe in one set: pairs, positions, heteromorphisms */
+  /* the weight of a site when sites are counted per chromosome set: one on
+     both homologues counts 1; one on a single homologue (a heteromorphism),
+     half. The same rule everywhere: the pattern (Block 7), all the
+     accessions (Block 7) and the comparison (Block 8). */
+  const weight = s => (s.homolog ? 0.5 : 1);
+  /* sites per probe in one set: pairs, positions (in the order of the pairs), heteromorphisms */
   function summary(acc) {
     const P = pattern(acc);
     return probes().map(p => {
-      const ss = P.filter(s => s.probe === p.id);
+      const ss = P.filter(s => s.probe === p.id).sort((a, b) => +a.pair - +b.pair || (a.arm === b.arm ? 0 : a.arm === 's' ? -1 : 1) || a.pos - b.pos || String(a.homolog || '').localeCompare(String(b.homolog || '')));
       if (!ss.length) return null;
       const pairs = [...new Set(ss.map(s => +s.pair))].sort((a, b) => a - b);
       const cls = {};
-      ss.forEach(s => { const c = posClass(s.pos); cls[c] = (cls[c] || 0) + 1; });
-      return { probe: p, sites: ss.length, pairs, classes: cls, hetero: ss.filter(s => s.homolog).length,
+      ss.forEach(s => { const c = posClass(s.pos); cls[c] = (cls[c] || 0) + weight(s); });
+      return { probe: p, sites: ss.reduce((a, s) => a + weight(s), 0), pairs, classes: cls, hetero: ss.filter(s => s.homolog).length,
         list: ss.map(s => ({ pair: +s.pair, arm: s.arm === 's' ? 'p' : 'q', pos: s.pos, cls: posClass(s.pos), homolog: s.homolog || null })) };
     }).filter(Boolean);
   }
@@ -112,7 +117,7 @@
   /* the number of sites of each probe in each accession (for the comparison of Block 8) */
   function siteCounts(acc) {
     const P = pattern(acc), out = {};
-    P.forEach(s => { out[s.probe] = (out[s.probe] || 0) + (s.homolog ? 0.5 : 1); });
+    P.forEach(s => { out[s.probe] = (out[s.probe] || 0) + weight(s); });
     return out;
   }
 
@@ -148,5 +153,5 @@
   }
   const r1 = v => Math.round(v * 10) / 10;
 
-  window.Bands = { KINDS, COLORS, DEFAULT_PROBES, probes, probe, posClass, POS_NAMES, pattern, marksFor, legendFor, summary, concordance, siteCounts, singleMap, valid };
+  window.Bands = { KINDS, COLORS, DEFAULT_PROBES, probes, probe, posClass, POS_NAMES, pattern, marksFor, legendFor, summary, concordance, siteCounts, singleMap, valid, weight };
 })();

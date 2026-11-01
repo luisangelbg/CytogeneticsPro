@@ -90,6 +90,8 @@
   }
   /* micrometres per pixel of a cell (null if not calibrated) */
   const umPerPx = cell => cell && cell.scale && cell.scale.px > 0 && cell.scale.um > 0 ? cell.scale.um / cell.scale.px : null;
+  /* a cell whose measurements are in pixels: an image not calibrated, or typed or read back with the unit «px» */
+  const cellInPx = cell => !!cell && !umPerPx(cell) && !!(cell.image || cell.unit === 'px');
   /* every chromosome of a cell as {id, label, p, q, sat, satArm} in µm (or px
      when the cell is not calibrated), skipping the incomplete traces */
   function cellMeasurements(cell) {
@@ -217,12 +219,12 @@
     out.width = W; out.height = H;
     const g = out.getContext('2d');
     const sw = source.width, sh = source.height;
-    const sctx = source.getContext ? source.getContext('2d') : null;
+    const sctx = source.getContext ? source.getContext('2d', { willReadFrequently: true }) : null;
     let data = null;
     if (sctx) data = sctx.getImageData(0, 0, sw, sh).data;
     else {
       const tmp = document.createElement('canvas'); tmp.width = sw; tmp.height = sh;
-      tmp.getContext('2d').drawImage(source, 0, 0); data = tmp.getContext('2d').getImageData(0, 0, sw, sh).data;
+      const tg = tmp.getContext('2d', { willReadFrequently: true }); tg.drawImage(source, 0, 0); data = tg.getImageData(0, 0, sw, sh).data;
     }
     const outImg = g.createImageData(W, H), od = outImg.data;
     /* the short arm goes up: if the first stretch is the long arm, read the trace backwards */
@@ -555,14 +557,7 @@
       const t = c.scale && !o.calibDraft ? c.scale.um + ' µm' : Math.round(dist(sl[0], sl[1])) + ' px';
       g.textAlign = 'center'; g.lineWidth = 3; g.strokeStyle = OVER.halo; g.strokeText(t, x, y - 8); g.fillStyle = OVER.calib; g.fillText(t, x, y - 8);
     }
-    /* markers */
-    (c.markers || []).forEach((m, i) => {
-      const [x, y] = map(m[0], m[1]), r = Math.max(7, font * 0.75);
-      g.beginPath(); g.arc(x, y, r, 0, 2 * Math.PI); g.fillStyle = OVER.mark; g.fill(); g.lineWidth = 1.5; g.strokeStyle = '#111'; g.stroke();
-      g.fillStyle = '#111'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = `700 ${Math.round(font * 0.85)}px system-ui, sans-serif`;
-      g.fillText(String(i + 1), x, y + 0.5); g.textBaseline = 'alphabetic'; g.font = `700 ${font}px system-ui, sans-serif`;
-    });
-    /* traces */
+    /* traces (the count marks go on top of them, below) */
     (c.chromosomes || []).forEach(ch => {
       if (!ch.trace) return;
       const sel = ch.id === o.sel;
@@ -581,6 +576,13 @@
       const t = String(ch.label), nx = -mid.ty * 14, ny = mid.tx * 14;
       g.textAlign = 'center'; g.lineWidth = 3.2; g.strokeStyle = OVER.halo; g.strokeText(t, x + nx, y + ny + 4);
       g.fillStyle = ch.cen == null ? OVER.sat : (sel ? OVER.sel : '#ffffff'); g.fillText(t, x + nx, y + ny + 4);
+    });
+    /* count marks, over the traces so their numbers are never hidden */
+    (c.markers || []).forEach((m, i) => {
+      const [x, y] = map(m[0], m[1]), r = Math.max(7, font * 0.75);
+      g.beginPath(); g.arc(x, y, r, 0, 2 * Math.PI); g.fillStyle = OVER.mark; g.fill(); g.lineWidth = 1.5; g.strokeStyle = '#111'; g.stroke();
+      g.fillStyle = '#111'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = `700 ${Math.round(font * 0.85)}px system-ui, sans-serif`;
+      g.fillText(String(i + 1), x, y + 0.5); g.textBaseline = 'alphabetic'; g.font = `700 ${font}px system-ui, sans-serif`;
     });
     /* the trace being drawn */
     if (o.draft && o.draft.length) {
@@ -611,5 +613,5 @@
     });
   }
 
-  window.Img = { cumLengths, polyLength, pointAt, project, segDist, measure, umPerPx, cellMeasurements, synth, centreLine, straighten, Editor, annotated, drawOverlay, TOOLS };
+  window.Img = { cumLengths, polyLength, pointAt, project, segDist, measure, umPerPx, cellInPx, cellMeasurements, synth, centreLine, straighten, Editor, annotated, drawOverlay, TOOLS };
 })();
