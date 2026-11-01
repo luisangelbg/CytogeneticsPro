@@ -59,7 +59,7 @@
 
   <p>Las columnas son <span class="ui">Planta</span>, <span class="ui">Célula</span>, una por configuración (<span class="ui">I</span>, <span class="ui">II varilla</span>, <span class="ui">II anillo</span>, <span class="ui">III</span>, <span class="ui">IV cadena</span>, <span class="ui">IV anillo</span>, <span class="ui">V</span>, <span class="ui">VI cadena</span>, <span class="ui">VI anillo</span>) y <span class="ui">Quiasmas contados</span>. Las dos últimas, que no se editan, las calcula la app: <span class="ui">Cromosomas</span> suma los cromosomas de todas las configuraciones (un II tiene dos, un IV cuatro) y <span class="ui">Quiasmas</span> los estima: una cadena de <i>k</i> cromosomas tiene <i>k</i> − 1 quiasmas y un anillo <i>k</i>; así, varilla 1, anillo 2, III 2, IV en cadena 3, IV en anillo 4. Es el mínimo compatible con la configuración. Si contaste los quiasmas, escríbelos en <span class="ui">Quiasmas contados</span> y mandan sobre la estimación.</p>
 
-  <figure>
+  <figure class="w80">
     <div class="marco"><img src="../img/b5-config-resumen.png" alt="Las seis cifras de la meiosis del tetraploide, el resumen por planta y la gráfica de barras de configuraciones por célula"></div>
     <figcaption><b>Figura 5.3.</b> El resumen del tetraploide: 50 células de 28 cromosomas, 21.78 ± 2.34 quiasmas por célula, 1.55 por bivalente, índice de recombinación 35.78 y multivalentes en todas las células. La gráfica da la media ± desviación de cada configuración por planta.</figcaption>
   </figure>
@@ -93,7 +93,7 @@
   <ul>
     <li>si se ajusta una sola hipótesis (<i>p</i> ≥ 0.05): «Los datos se ajustan a…» y a cuáles no;</li>
     <li>si se ajusta más de una: hacen falta más células para decidir;</li>
-    <li>si no se ajusta ninguna: cuál es la mejor y la sugerencia de probar una fórmula intermedia, porque rechazar la autopoliploidía puede indicar control genético del apareamiento o algún tipo de alopoliploidía (Jackson y Casey 1982);</li>
+    <li>si no se ajusta ninguna: cuál es la mejor y la sugerencia de probar una fórmula intermedia, con las de ese nivel que aún no probaste (en un hexaploide, AAAABB o AAABBB), porque rechazar la autopoliploidía puede indicar control genético del apareamiento o algún tipo de alopoliploidía (Jackson y Casey 1982);</li>
     <li>y, aparte, cada hipótesis que no permite alguna configuración observada —un multivalente donde sólo caben bivalentes— queda <span class="ui">rechazada</span> sin más, aunque su χ² en las demás clases sea pequeño.</li>
   </ul>
 
@@ -115,10 +115,10 @@
 
   <div class="caja ejemplo">
     <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · el hexaploide de ejemplo no se ajusta a nada</div>
-    <p>En el hexaploide la app propone AAAAAA y AABBCC, con <i>c</i> = 0.850. La autohexaploidía queda muy lejos (χ² = 2777.05, 5 g. l., <i>p</i> &lt; 0.001): espera 158.1 configuraciones de cinco o seis cromosomas y no se vio ninguna. AABBCC explica bien los univalentes y los bivalentes (χ² = 2.39 con 1 g. l.), pero no permite los 22 multivalentes observados (1 III, 3 IV en cadena y 18 en anillo) y queda rechazada. Si escribes AAAABB como tercera hipótesis, tampoco se ajusta (χ² = 447.33, 4 g. l.). La lectura es la de un alohexaploide con apareamientos ocasionales fuera de su propio genoma, que es justo como se simuló: un 16 % de sus células salieron del modelo AAAABB.</p>
+    <p>En el hexaploide la app propone AAAAAA y AABBCC, con <i>c</i> = 0.850. La autohexaploidía queda muy lejos (χ² = 2777.05, 5 g. l., <i>p</i> &lt; 0.001): espera 158.1 configuraciones de cinco o seis cromosomas y no se vio ninguna. AABBCC explica bien los univalentes y los bivalentes (χ² = 2.39 con 1 g. l.), pero no permite los 22 multivalentes observados (1 III, 3 IV en cadena y 18 en anillo) y queda rechazada. Si escribes AAAABB como tercera hipótesis, tampoco se ajusta (χ² = 447.33, 4 g. l.), y el aviso sugiere entonces sólo la que falta, AAABBB. La lectura es la de un alohexaploide con apareamientos ocasionales fuera de su propio genoma, que es justo como se simuló: un 16 % de sus células salieron del modelo AAAABB.</p>
   </div>
 
-  <figure class="w70">
+  <figure class="w60">
     <div class="marco"><img src="../img/b5-hexaploide.png" alt="La tabla de hipótesis del hexaploide de ejemplo con AAAAAA, AABBCC y AAAABB y los avisos de rechazo"></div>
     <figcaption><b>Figura 5.5.</b> El hexaploide con tres hipótesis. AABBCC queda rechazada por sus 22 multivalentes y ninguna se ajusta; la «mejor», AAAABB, también tiene <i>p</i> &lt; 0.001.</figcaption>
   </figure>
@@ -128,9 +128,9 @@
   <p class="lead">Una fila por planta y fase, con cuántas células normales viste y cuántas con cada anormalidad.</p>
   <p>Las columnas son <span class="ui">Planta</span>, <span class="ui">Fase</span> (de <span class="ui">Metafase I</span> a <span class="ui">Telofase II</span>), <span class="ui">Normales</span> y siete anormalidades: <span class="ui">Puentes</span>, <span class="ui">Fragmentos</span>, <span class="ui">Rezagados</span>, <span class="ui">Migración precoz</span>, <span class="ui">Husos múltiples o anormales</span>, <span class="ui">Micronúcleos</span> y <span class="ui">Otras</span>. Cuenta cada célula anormal una sola vez, en su anormalidad principal: la app suma las anormales y las normales para obtener el total de células de la fase.</p>
 
-  <figure>
+  <figure class="w70">
     <div class="marco"><img src="../img/b5-fases.png" alt="La tabla de anormalidades por fase del tetraploide de ejemplo, el resumen por fase y la gráfica del porcentaje de células anormales"></div>
-    <figcaption><b>Figura 5.6.</b> El tetraploide de ejemplo: entre 10.2 y 12.7 % de células anormales en casi todas las fases y 21.0 % en anafase II (162 células, 19 con rezagados, 8 con puentes y 7 con fragmentos). En la gráfica, la barra de anafase II pasa el tope del eje y no lleva su cifra.</figcaption>
+    <figcaption><b>Figura 5.6.</b> El tetraploide de ejemplo: entre 10.2 y 12.7 % de células anormales en casi todas las fases y 21.0 % en anafase II (162 células, 19 con rezagados, 8 con puentes y 7 con fragmentos). A este ancho de ventana, las columnas <span class="ui">Micronúcleos</span> y <span class="ui">Otras</span> de la tabla de captura quedan a la derecha.</figcaption>
   </figure>
 
   <p>El resumen junta las plantas por fase: células, normales, cada anormalidad y el <span class="ui">% anormales</span>. La gráfica <span class="ui">Células anormales por fase (%)</span> lo dibuja con las fases abreviadas (MI, AI…). Como referencia, en el diploide de ejemplo ninguna fase pasa de 3.7 %.</p>
@@ -161,7 +161,7 @@
   </figure>
 
   <p>La tabla de la planta tiene la columna calculada <span class="ui">% viables</span>. Debajo, tres cifras: <b>Granos contados</b> con el número de plantas, <b>Viabilidad</b> de todos los granos juntos con su intervalo de Wilson, y <b>Homogeneidad entre plantas</b>, con el valor <i>p</i> y los estadísticos χ² y G de la tabla de plantas × viables/inviables. La tabla de resultados da cada planta con sus granos, viables, porcentaje y los intervalos de Wilson y de Clopper–Pearson, y la gráfica, cada planta con su intervalo de Wilson. Si las plantas difieren (<i>p</i> &lt; 0.05), un aviso aconseja informarlas por separado; si hay polen en más de una accesión, otro aviso compara las accesiones con χ².</p>
-  <p>Dos botones más enlazan con la app de palinología de la suite: <span class="ui">Leer el CSV de fertilidad de PolenApp</span> lee su archivo de fertilidad (las columnas <code>landrace_code</code>, <code>n_granos_completos</code> y <code>pct_atipico</code>) y convierte el porcentaje de granos de forma atípica en inviables; un aviso recuerda que ese porcentaje viene de la forma del grano en microscopía electrónica, no de una tinción, y es sólo una aproximación. <span class="ui">CSV con columnas de PolenApp</span> escribe los datos de esta tabla en ese mismo formato.</p>
+  <p>Dos botones más enlazan con PalynoPro, la app de palinología de la suite: <span class="ui">Leer el CSV de fertilidad de PalynoPro</span> lee su archivo de fertilidad (las columnas <code>landrace_code</code>, <code>n_granos_completos</code> y <code>pct_atipico</code>) y convierte el porcentaje de granos de forma atípica en inviables; un aviso recuerda que ese porcentaje viene de la forma del grano en microscopía electrónica, no de una tinción, y es sólo una aproximación. <span class="ui">CSV con columnas de PalynoPro</span> escribe los datos de esta tabla en ese mismo formato, en el archivo <code>polen_&lt;accesión&gt;_palynopro.csv</code>.</p>
 
   <div class="caja teoria">
     <div class="caja-t"><span class="ico">θ</span>Teoría en breve · Wilson y Clopper–Pearson</div>

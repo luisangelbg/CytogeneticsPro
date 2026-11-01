@@ -1,5 +1,5 @@
 // ventana 1400x1000
-/* Capítulo 5: la tabla de configuraciones del tetraploide de ejemplo (las primeras filas; a 1400 px las últimas columnas quedan fuera y la tabla se recorre de lado) */
+/* Capítulo 5: la tabla de configuraciones del tetraploide de ejemplo (las primeras filas) */
 (async () => {
   await bloque(5, 'poly');
   const s = porId('b5AccSel'); s.value = 'p4'; s.dispatchEvent(new Event('change')); await W(500);

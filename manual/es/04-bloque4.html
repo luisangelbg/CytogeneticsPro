@@ -44,7 +44,7 @@
     <li><span class="ui">Desviación estándar</span>: <span class="ui">Muestral (n − 1)</span> o <span class="ui">Poblacional (n)</span>. Cambia los índices que son coeficientes de variación (A2, CVCL, CVCI y los que dependen de ellos: AI y DI) y las desviaciones entre células. Es el mismo ajuste que el del Bloque 3. Las fuentes de los índices no dicen cuál usar; la app usa la muestral por omisión.</li>
     <li><span class="ui">Índices en la tabla</span>: <span class="ui">Todos</span> o <span class="ui">Los recomendados (MCA, CVCL, CVCI)</span>. Sólo cambia las columnas que se ven; el archivo CSV lleva siempre todos.</li>
   </ul>
-  <p>La nota de la tarjeta recuerda que A1 (Romero Zarco 1986) y A (Watanabe et al. 1999) se definieron sobre los pares de homólogos, mientras que MCA, CVCL y CVCI pueden calcularse con todos los cromosomas de cada célula.</p>
+  <p>La nota de la tarjeta recuerda que A1 (Romero Zarco 1986) y A (Watanabe et al. 1999) se definieron sobre los pares de homólogos, mientras que MCA, CVCL y CVCI pueden calcularse con todos los cromosomas de cada célula. Añade que TF%, AsK% y Syi cambian muy poco de una manera a otra, pero no son idénticos, porque la media de los cocientes de cada célula no es el cociente de las medias (TF% del chayote de Huatusco: 40.67 sobre los pares, 40.66 ± 0.18 célula por célula), y que en las dos maneras la longitud es la de un juego.</p>
 
   <div class="caja importante">
     <div class="caja-t"><span class="ico">!</span>Pares o células: no mezcles</div>
@@ -55,9 +55,9 @@
   <h2 id="s4-2"><span class="num">4.2</span>Índices por accesión</h2>
   <p class="lead">Cuatro cifras de resumen y una tabla con una fila por accesión: su 2n, la longitud de un juego, los doce índices y su categoría de Stebbins.</p>
 
-  <figure>
+  <figure class="w80">
     <div class="marco"><img src="../img/b4-indices.png" alt="La tarjeta Índices por accesión con las cuatro accesiones del chayote y los doce índices"></div>
-    <figcaption><b>Figura 4.2.</b> Los índices del chayote sobre las medias de los pares. Las cuatro accesiones caen en 2A; MCA va de 18.7 (la silvestre) a 19.9 (Uruapan) y CVCL de 21.2 a 22.1. Los recomendados llevan ★. En la captura las columnas van un poco más juntas que en pantalla, donde la tabla se recorre de lado si no cabe.</figcaption>
+    <figcaption><b>Figura 4.2.</b> Los índices del chayote sobre las medias de los pares. Las cuatro accesiones caen en 2A; MCA va de 18.7 (la silvestre) a 19.9 (Uruapan) y CVCL de 21.2 a 22.1. Los recomendados llevan ★. Los encabezados largos se parten en dos renglones y la tabla cabe sin desplazamiento lateral.</figcaption>
   </figure>
 
   <p>Las cifras de arriba dan el número de accesiones, el intervalo de MCA (asimetría intracromosómica) y el de CVCL (asimetría intercromosómica) entre ellas, y las categorías de Stebbins que aparecen. Al pasar el puntero sobre el nombre de un índice en la tabla, la app muestra su fórmula y su autor. La tabla 4.1 los reúne.</p>
@@ -87,11 +87,11 @@
   </div>
 
   <h3>Célula por célula</h3>
-  <p>Con <span class="ui">Cada célula con todos sus cromosomas; media ± de</span>, cada celda lleva la media ± la desviación entre células. La categoría de Stebbins es entonces la más frecuente entre las células, y un aviso dice qué accesiones caen en categorías distintas según la célula.</p>
+  <p>Con <span class="ui">Cada célula con todos sus cromosomas; media ± de</span>, cada celda lleva la media y, en un segundo renglón, ± la desviación entre células. La categoría de Stebbins es entonces la más frecuente entre las células, y un aviso dice qué accesiones caen en categorías distintas según la célula.</p>
 
-  <figure class="w80">
+  <figure class="w70">
     <div class="marco"><img src="../img/b4-celulas.png" alt="La tabla de los índices recomendados calculados célula por célula, con tres avisos sobre categorías de Stebbins distintas según la célula"></div>
-    <figcaption><b>Figura 4.3.</b> Los índices recomendados célula por célula. Chilchotla y Uruapan pasan a 2B, y tres accesiones tienen células en 2A y en 2B. En este modo la columna «Juego» muestra la longitud de toda la célula (58.27 ± 3.76 µm en Huatusco), no la de un juego.</figcaption>
+    <figcaption><b>Figura 4.3.</b> Los índices recomendados célula por célula. Chilchotla y Uruapan pasan a 2B, y tres accesiones tienen células en 2A y en 2B. La columna «Juego (µm)» da la longitud de un juego en cada célula, como media ± desviación: 29.14 ± 1.88 µm en Huatusco.</figcaption>
   </figure>
 
   <p>Las categorías cambian porque cada célula tiene todos sus cromosomas, y el más largo y el más corto de una célula concreta pueden pasar del doble aunque las medias de los pares no lleguen (1.95 en Huatusco). Hay otro aviso posible debajo de la tabla: cuando todos los cromosomas de una accesión son telocéntricos, CVCI no está definido (0/0) y sale «—».</p>
@@ -129,7 +129,7 @@
   <p class="lead">La disimilitud de Gower (1971) resume en un número qué tan distintos son dos cariotipos según los índices que elijas: 0 si son iguales, 1 si son lo más distintos posible dentro de las accesiones del proyecto.</p>
   <p>Para cada par de accesiones, la app toma la diferencia en cada índice, la divide entre el intervalo de ese índice en todas las accesiones y promedia. Los índices se eligen con los botones: los doce y la <span class="ui">Longitud de un juego</span>; por omisión, MCA, CVCI y CVCL. Siempre queda al menos uno elegido. Hacen falta al menos dos accesiones. Es la medida con que Peruzzi y Altınordu (2014) comparan cariotipos; el Bloque 8 la usa con más parámetros y con ella agrupa los taxones.</p>
 
-  <figure>
+  <figure class="w80">
     <div class="marco"><img src="../img/b4-disimilitud.png" alt="La tarjeta Disimilitud entre cariotipos con MCA, CVCI y CVCL elegidos y la matriz de las cuatro accesiones del chayote"></div>
     <figcaption><b>Figura 4.5.</b> Con MCA, CVCI y CVCL, Huatusco y Chilchotla son casi iguales (0.127) y Uruapan y la silvestre las más distintas (0.885).</figcaption>
   </figure>
