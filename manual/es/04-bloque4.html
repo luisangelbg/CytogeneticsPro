@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · Manual de usuario · Capítulo 4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-4" data-pestana="4" data-orden="4" style="--acento: var(--b4)">
+  <div class="cap-apertura">
+    <div class="cap-num">4</div>
+    <div class="cap-etiqueta">Capítulo cuatro · Bloque 4</div>
+    <h1 data-corto="Asimetría">Asimetría y parámetros cariológicos</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Un cariotipo simétrico tiene cromosomas parecidos en tamaño y con el centrómero cerca del centro; uno asimétrico, cromosomas de tamaños desiguales o con el centrómero cerca de un extremo. El Bloque 4 mide esas dos asimetrías con doce índices sobre los cariotipos del Bloque 3, ubica cada accesión en la cuadrícula de Stebbins, las compara en una dispersión y con la disimilitud de Gower, y explica qué mide cada índice y cuáles conviene informar.</p>
+    <div class="cap-franja"><span class="k3"></span><span class="k4"></span><span class="k4"></span><span class="k8"></span><span class="k10"></span></div>
+    <ul class="cap-contenido">
+      <li><b>4.1</b>Cómo se calculan</li>
+      <li><b>4.2</b>Índices por accesión</li>
+      <li><b>4.3</b>Categorías de Stebbins y dispersión</li>
+      <li><b>4.4</b>Disimilitud entre cariotipos</li>
+      <li><b>4.5</b>Qué mide cada índice</li>
+    </ul>
+  </div>
+
+  <!-- 4.1 -->
+  <h2 id="s4-1"><span class="num">4.1</span>Cómo se calculan</h2>
+  <p class="lead">El bloque calcula los índices de todas las accesiones que tienen un cariotipo en el Bloque 3, sin botón de calcular. Si todavía no hay ninguno, muestra <span class="ui">Todavía no hay un cariotipo</span> con <span class="ui">Ir al Bloque 2</span> y <span class="ui">Abrir el ejemplo del chayote</span>.</p>
+  <p>Todas las cifras de este capítulo salen del ejemplo del chayote, con sus cuatro accesiones simuladas: tres cultivadas con 2n = 28 (Huatusco, Chilchotla y Uruapan) y una silvestre con 2n = 24 (Coscomatepec).</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b4-ajustes.png" alt="La tarjeta Cómo se calculan con sus tres campos: sobre qué cromosomas, desviación estándar e índices en la tabla"></div>
+    <figcaption><b>Figura 4.1.</b> Los tres ajustes del bloque, con sus valores por omisión.</figcaption>
+  </figure>
+
+  <ul>
+    <li><span class="ui">Sobre qué cromosomas</span>: <span class="ui">Las medias de los pares (un juego)</span>, la opción por omisión, calcula cada índice una vez con un cromosoma por par, el promedio de sus homólogos en todas las células; <span class="ui">Cada célula con todos sus cromosomas; media ± de</span> lo calcula en cada célula con todos sus cromosomas y da la media ± la desviación entre células.</li>
+    <li><span class="ui">Desviación estándar</span>: <span class="ui">Muestral (n − 1)</span> o <span class="ui">Poblacional (n)</span>. Cambia los índices que son coeficientes de variación (A2, CVCL, CVCI y los que dependen de ellos: AI y DI) y las desviaciones entre células. Es el mismo ajuste que el del Bloque 3. Las fuentes de los índices no dicen cuál usar; la app usa la muestral por omisión.</li>
+    <li><span class="ui">Índices en la tabla</span>: <span class="ui">Todos</span> o <span class="ui">Los recomendados (MCA, CVCL, CVCI)</span>. Sólo cambia las columnas que se ven; el archivo CSV lleva siempre todos.</li>
+  </ul>
+  <p>La nota de la tarjeta recuerda que A1 (Romero Zarco 1986) y A (Watanabe et al. 1999) se definieron sobre los pares de homólogos, mientras que MCA, CVCL y CVCI pueden calcularse con todos los cromosomas de cada célula.</p>
+
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Pares o células: no mezcles</div>
+    <p>Los índices de dispersión de longitudes no dan lo mismo de las dos maneras: CVCL del chayote de Huatusco es 21.23 sobre las medias de los pares y 21.04 ± 0.36 célula por célula, y la desviación poblacional lo baja a 20.46. Al comparar con otros trabajos, usa la misma manera y la misma desviación que ellos, y dilo en los métodos.</p>
+  </div>
+
+  <!-- 4.2 -->
+  <h2 id="s4-2"><span class="num">4.2</span>Índices por accesión</h2>
+  <p class="lead">Cuatro cifras de resumen y una tabla con una fila por accesión: su 2n, la longitud de un juego, los doce índices y su categoría de Stebbins.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b4-indices.png" alt="La tarjeta Índices por accesión con las cuatro accesiones del chayote y los doce índices"></div>
+    <figcaption><b>Figura 4.2.</b> Los índices del chayote sobre las medias de los pares. Las cuatro accesiones caen en 2A; MCA va de 18.7 (la silvestre) a 19.9 (Uruapan) y CVCL de 21.2 a 22.1. Los recomendados llevan ★. En la captura las columnas van un poco más juntas que en pantalla, donde la tabla se recorre de lado si no cabe.</figcaption>
+  </figure>
+
+  <p>Las cifras de arriba dan el número de accesiones, el intervalo de MCA (asimetría intracromosómica) y el de CVCL (asimetría intercromosómica) entre ellas, y las categorías de Stebbins que aparecen. Al pasar el puntero sobre el nombre de un índice en la tabla, la app muestra su fórmula y su autor. La tabla 4.1 los reúne.</p>
+
+  <table class="compacta">
+    <caption><b>Tabla 4.1.</b> Los doce índices, con <i>s</i> y <i>l</i> el brazo corto y el largo de cada cromosoma, <i>c</i> = <i>s</i> + <i>l</i> su longitud y <i>n</i> el número de cromosomas</caption>
+    <thead><tr><th style="width:0.6in">Índice</th><th style="width:2.35in">Fórmula</th><th>Autor · qué asimetría</th></tr></thead>
+    <tbody>
+      <tr><td>TF%</td><td>100 · Σ<i>s</i> / Σ(<i>s</i> + <i>l</i>)</td><td>Huziwara 1962 · intra; baja con la asimetría (50 = todos metacéntricos)</td></tr>
+      <tr><td>AsK%</td><td>100 · Σ<i>l</i> / Σ(<i>s</i> + <i>l</i>)</td><td>Arano 1963 · intra; es 100 − TF%</td></tr>
+      <tr><td>Syi</td><td>100 · <i>s̄</i> / <i>l̄</i></td><td>Greilhuber y Speta 1976 · intra; función de TF%</td></tr>
+      <tr><td>A1</td><td>1 − (1/<i>n</i>) Σ (<i>s</i><sub>i</sub> / <i>l</i><sub>i</sub>)</td><td>Romero Zarco 1986 · intra; 0 si todos son metacéntricos</td></tr>
+      <tr><td>A</td><td>(1/<i>n</i>) Σ (<i>l</i><sub>i</sub> − <i>s</i><sub>i</sub>) / (<i>l</i><sub>i</sub> + <i>s</i><sub>i</sub>)</td><td>Watanabe et al. 1999 · intra; de 0 a 1</td></tr>
+      <tr><td>MCA ★</td><td>100 · A</td><td>Peruzzi y Eroğlu 2013 · intra; la recomendada</td></tr>
+      <tr><td>CVCI ★</td><td>100 · de(IC) / media(IC)</td><td>Paszko 2006 · heterogeneidad de los centrómeros</td></tr>
+      <tr><td>Rec</td><td>100 · (1/<i>n</i>) Σ (<i>c</i><sub>i</sub> / <i>c</i><sub>máx</sub>)</td><td>Greilhuber y Speta 1976 · inter; 100 si todos miden lo mismo</td></tr>
+      <tr><td>A2</td><td>de(<i>c</i>) / media(<i>c</i>)</td><td>Romero Zarco 1986 · inter</td></tr>
+      <tr><td>CVCL ★</td><td>100 · A2</td><td>Paszko 2006 · inter; la recomendada</td></tr>
+      <tr><td>AI</td><td>CVCL · CVCI / 100</td><td>Paszko 2006 · las dos; histórico</td></tr>
+      <tr><td>DI</td><td>CG · CVCL / 100, con CG = 100 · mediana(<i>s</i>) / mediana(<i>c</i>)</td><td>Lavania y Srivastava 1992 · las dos; histórico</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · lo que dicen los índices del chayote</div>
+    <p>Las cuatro accesiones tienen cariotipos muy simétricos y casi iguales: TF% cerca de 40, MCA entre 18.66 y 19.87, CVCL entre 21.22 y 22.15. Uruapan tiene la MCA más alta (19.87) y el CVCI más alto (16.26): sus centrómeros están, en promedio, un poco más lejos del centro y son más variados, porque en el ejemplo una o dos de sus razones de brazos cambiaron. La silvestre, con dos pares más largos por fusión, tiene el CVCL más alto (22.15). Su Rec es también el más alto (71.89), lo que parece contradecir lo anterior: Rec sólo compara cada cromosoma con el más largo, CVCL mira toda la dispersión. Por eso se informa CVCL.</p>
+  </div>
+
+  <h3>Célula por célula</h3>
+  <p>Con <span class="ui">Cada célula con todos sus cromosomas; media ± de</span>, cada celda lleva la media ± la desviación entre células. La categoría de Stebbins es entonces la más frecuente entre las células, y un aviso dice qué accesiones caen en categorías distintas según la célula.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b4-celulas.png" alt="La tabla de los índices recomendados calculados célula por célula, con tres avisos sobre categorías de Stebbins distintas según la célula"></div>
+    <figcaption><b>Figura 4.3.</b> Los índices recomendados célula por célula. Chilchotla y Uruapan pasan a 2B, y tres accesiones tienen células en 2A y en 2B. En este modo la columna «Juego» muestra la longitud de toda la célula (58.27 ± 3.76 µm en Huatusco), no la de un juego.</figcaption>
+  </figure>
+
+  <p>Las categorías cambian porque cada célula tiene todos sus cromosomas, y el más largo y el más corto de una célula concreta pueden pasar del doble aunque las medias de los pares no lleguen (1.95 en Huatusco). Hay otro aviso posible debajo de la tabla: cuando todos los cromosomas de una accesión son telocéntricos, CVCI no está definido (0/0) y sale «—».</p>
+  <p><span class="ui">Tabla (CSV)</span> y <span class="ui">Tabla (TSV)</span> guardan una fila por accesión con su taxón, 2n, la longitud de un juego, los doce índices con seis decimales, sus desviaciones (si se calcularon célula por célula), la categoría de Stebbins y la manera de cálculo.</p>
+
+  <!-- 4.3 -->
+  <h2 id="s4-3"><span class="num">4.3</span>Categorías de Stebbins y dispersión</h2>
+  <p class="lead">Dos figuras ponen las accesiones lado a lado: la cuadrícula de Stebbins (1971), clásica, y la dispersión de dos índices, por omisión MCA × CVCL.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b4-stebbins.png" alt="La cuadrícula de Stebbins con las cuatro accesiones del chayote en la casilla 2A y la dispersión MCA por CVCL"></div>
+    <figcaption><b>Figura 4.4.</b> Arriba, las cuatro accesiones en la casilla 2A. Abajo, la dispersión MCA × CVCL separa lo que la cuadrícula junta: la silvestre (4) arriba a la izquierda, con las longitudes más desiguales, Uruapan (3) a la derecha, con los centrómeros más alejados del centro.</figcaption>
+  </figure>
+
+  <p>La <b>cuadrícula</b> tiene doce casillas. La fila (A, B, C) la da el cociente entre el cromosoma más largo y el más corto: menos de 2, de 2 a 4, más de 4. La columna (1 a 4) la da la proporción de cromosomas con razón de brazos menor que 2: todos (1.00), de 0.99 a 0.51, de 0.50 a 0.01, ninguno (0.00). Cada accesión es un círculo numerado del color de la accesión, con su nombre en la leyenda. Los cariotipos más simétricos quedan arriba a la izquierda (1A) y los más asimétricos abajo a la derecha (4C).</p>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · por qué Huatusco es 2A</div>
+    <p>De sus 14 pares, sólo el 6 (<i>r</i> = 2.51) y el 10 (<i>r</i> = 2.10) tienen una razón de 2 o más: 12 de 14, una proporción de 0.86, que cae en la columna 2. El par más largo mide 1.95 veces el más corto, menos de 2: fila A. El par 3, con <i>r</i> = 1.96, está muy cerca del corte; si pasara de 2, Huatusco seguiría en la columna 2 con 11 de 14.</p>
+  </div>
+
+  <p>En la <b>dispersión</b>, <span class="ui">Eje x</span> y <span class="ui">Eje y</span> ofrecen los doce índices, la longitud de un juego y 2n; los puntos llevan el número de la accesión. Peruzzi y Eroğlu (2013) proponen MCA × CVCL porque sus dos ejes miden cosas distintas: a la derecha, centrómeros más alejados del centro; arriba, longitudes más desiguales. Las dos figuras se exportan con <span class="ui">SVG</span> y <span class="ui">PNG</span>, o se editan con ✎ y en el estudio de figuras.</p>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión · la cuadrícula de Stebbins</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>Fila</b> por el cociente mayor / menor</td><td>A si es menor que 2; B de 2 a 4, con los dos extremos; C si pasa de 4.</td></tr>
+      <tr><td><b>Columna</b> por la proporción con <i>r</i> &lt; 2</td><td>1 si es 1.00; 2 de 0.99 a 0.51; 3 de 0.50 a 0.01; 4 si es 0.00. Un cromosoma con <i>r</i> = 2 exacto no cuenta como «menor que 2».</td></tr>
+    </tbody></table>
+    <p class="regla-pie">La cuadrícula reduce el cariotipo a doce casillas: sirve para un vistazo, no para separar accesiones parecidas.</p>
+  </div>
+
+  <!-- 4.4 -->
+  <h2 id="s4-4"><span class="num">4.4</span>Disimilitud entre cariotipos</h2>
+  <p class="lead">La disimilitud de Gower (1971) resume en un número qué tan distintos son dos cariotipos según los índices que elijas: 0 si son iguales, 1 si son lo más distintos posible dentro de las accesiones del proyecto.</p>
+  <p>Para cada par de accesiones, la app toma la diferencia en cada índice, la divide entre el intervalo de ese índice en todas las accesiones y promedia. Los índices se eligen con los botones: los doce y la <span class="ui">Longitud de un juego</span>; por omisión, MCA, CVCI y CVCL. Siempre queda al menos uno elegido. Hacen falta al menos dos accesiones. Es la medida con que Peruzzi y Altınordu (2014) comparan cariotipos; el Bloque 8 la usa con más parámetros y con ella agrupa los taxones.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b4-disimilitud.png" alt="La tarjeta Disimilitud entre cariotipos con MCA, CVCI y CVCL elegidos y la matriz de las cuatro accesiones del chayote"></div>
+    <figcaption><b>Figura 4.5.</b> Con MCA, CVCI y CVCL, Huatusco y Chilchotla son casi iguales (0.127) y Uruapan y la silvestre las más distintas (0.885).</figcaption>
+  </figure>
+
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · Gower con pocas accesiones</div>
+    <p>Como cada diferencia se divide entre el intervalo de ese índice en el proyecto, la disimilitud es relativa: las dos accesiones más alejadas en un índice aportan 1 en ese índice aunque la diferencia sea pequeña en términos absolutos. En el chayote, MCA sólo va de 18.66 a 19.87, y aun así Uruapan y la silvestre suman 0.885. Úsala para ordenar las accesiones del proyecto entre sí, no para decir si dos cariotipos son «muy» distintos; añadir o quitar una accesión cambia todos los valores.</p>
+  </div>
+
+  <!-- 4.5 -->
+  <h2 id="s4-5"><span class="num">4.5</span>Qué mide cada índice</h2>
+  <p class="lead">La última tarjeta explica los doce índices, uno por renglón desplegable, con su fórmula, su autor y lo que mide.</p>
+  <p>Cada renglón lleva a la derecha su etiqueta: <span class="ui">intracromosómica</span>, <span class="ui">intercromosómica</span> o <span class="ui">las dos</span>, y además ★ si es de los recomendados, <span class="ui">redundante</span> si no añade nada a otro (AsK% y Syi, que se deducen de TF%) o <span class="ui">histórico</span> si hoy se desaconseja (AI y DI). El primero, TF%, viene abierto.</p>
+
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · dos asimetrías, tres números</div>
+    <p>La asimetría <b>intracromosómica</b> dice dónde está el centrómero; la <b>intercromosómica</b>, cuánto varían las longitudes. Muchos índices miden lo mismo con otra escala: AsK% es 100 − TF%, Syi es función de TF%, CVCL es 100 · A2 y MCA es 100 · A. CVCI no mide asimetría sino heterogeneidad: un cariotipo con todos los cromosomas submetacéntricos es asimétrico pero tiene un CVCI bajo (Zuo y Yuan 2011). AI sigue casi sólo a CVCI y DI usa medianas; los dos se conservan para comparar con trabajos antiguos (Peruzzi et al. 2009). Hoy se recomienda describir un cariotipo con <b>MCA</b> y <b>CVCL</b>, más <b>CVCI</b> (Peruzzi y Eroğlu 2013).</p>
+  </div>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/b4-info.png" alt="La tarjeta Qué mide cada índice con TF% y MCA desplegados y los demás índices cerrados con sus etiquetas"></div>
+    <figcaption><b>Figura 4.6.</b> La explicación de los índices, con TF% y MCA desplegados.</figcaption>
+  </figure>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión · qué informar</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>Para describir</b> la asimetría</td><td>MCA (dónde está el centrómero) y CVCL (cuánto varían las longitudes); añade CVCI si los centrómeros son muy distintos entre cromosomas.</td></tr>
+      <tr><td><b>Para comparar</b> con trabajos antiguos</td><td>TF%, AsK%, Syi, A1, A2, AI o DI, los que usó el otro trabajo, calculados de la misma manera.</td></tr>
+      <tr><td><b>Para ubicar</b> el cariotipo en la literatura</td><td>La categoría de Stebbins, junto con MCA y CVCL.</td></tr>
+      <tr><td><b>Para comparar accesiones</b></td><td>La dispersión MCA × CVCL y la disimilitud de Gower; para más parámetros y agrupamientos, el Bloque 8.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Escribe siempre si los índices se calcularon sobre las medias de los pares o célula por célula, y con qué desviación.</p>
+  </div>
+
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Cuando algo sale mal</div>
+    <p><b>El bloque dice «Todavía no hay un cariotipo».</b> No hay células medidas: vuelve al Bloque 2 o abre un ejemplo. <b>CVCI sale «—».</b> Todos los cromosomas de esa accesión son telocéntricos y el índice no está definido. <b>La disimilitud dice que faltan accesiones.</b> Hacen falta al menos dos con cariotipo. <b>Cambié la desviación aquí y cambió la tabla del Bloque 3.</b> Es el mismo ajuste en los dos bloques. <b>Los índices no coinciden con un trabajo publicado.</b> Revisa si ellos sumaron el satélite al brazo (Bloque 3), si usaron pares o células y qué desviación.</p>
+  </div>
+</section>
+
+</body>
+</html>

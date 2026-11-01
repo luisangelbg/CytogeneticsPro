@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · Manual de usuario · Capítulo 3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-3" data-pestana="3" data-orden="3" style="--acento: var(--b3)">
+  <div class="cap-apertura">
+    <div class="cap-num">3</div>
+    <div class="cap-etiqueta">Capítulo tres · Bloque 3</div>
+    <h1 data-corto="Cariotipo">Cariotipo</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Con las medidas de cada célula, el Bloque 3 arma el cariotipo de la accesión: agrupa los homólogos de cada célula, empata el mismo par en todas las células, promedia los brazos, calcula la longitud relativa, el índice centromérico y la razón de brazos, clasifica cada par, escribe la fórmula cariotípica con su número fundamental y dibuja el idiograma. Lo que aquí se decide —la clasificación, el número básico, los homólogos corregidos a mano— lo usan después los Bloques 4, 7, 8 y 10.</p>
+    <div class="cap-franja"><span class="k2"></span><span class="k3"></span><span class="k3"></span><span class="k4"></span><span class="k7"></span><span class="k8"></span><span class="k10"></span></div>
+    <ul class="cap-contenido">
+      <li><b>3.1</b>Ajustes del cariotipo</li>
+      <li><b>3.2</b>Emparejamiento de homólogos</li>
+      <li><b>3.3</b>Cariotipo de la accesión</li>
+      <li><b>3.4</b>Fórmula, longitud y número fundamental</li>
+      <li><b>3.5</b>Idiograma</li>
+    </ul>
+  </div>
+
+  <!-- 3.1 -->
+  <h2 id="s3-1"><span class="num">3.1</span>Ajustes del cariotipo</h2>
+  <p class="lead">El bloque no tiene botón de calcular: en cuanto hay al menos una célula medida, el cariotipo está hecho, y cada cambio en esta tarjeta lo vuelve a calcular junto con la tabla, la fórmula y el idiograma.</p>
+  <p>Si todavía no hay mediciones, el bloque muestra el aviso <span class="ui">Todavía no hay mediciones</span> con dos botones: <span class="ui">Ir al Bloque 2</span>, para medir, y <span class="ui">Abrir el ejemplo del chayote</span>, que carga cuatro accesiones de <i>Sechium edule</i> con tres células cada una. Las figuras de este capítulo usan ese ejemplo y el del maíz (<span class="ruta">Bloque 1<span class="sep">›</span>Ejemplos incluidos</span>); recuerda que los dos son simulados.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b3-ajustes.png" alt="La tarjeta Ajustes del cariotipo con la accesión Chayote · Huatusco, la clasificación de Levan, número básico 14, dos homólogos por grupo, orden por longitud, un brazo para los st, desviación muestral y las tres casillas"></div>
+    <figcaption><b>Figura 3.1.</b> Los ajustes por omisión con el chayote de Huatusco: clasificación de Levan et al. (1964) por la razón de brazos, número básico x = 14 (lo trae el ejemplo), pares de homólogos, desviación muestral, el satélite sumado a su brazo y marcado en la fórmula.</figcaption>
+  </figure>
+
+  <p>La tarjeta tiene siete campos y tres casillas:</p>
+  <table class="compacta">
+    <caption><b>Tabla 3.1.</b> Los controles de <span class="ui">Ajustes del cariotipo</span></caption>
+    <thead><tr><th style="width:1.75in">Control</th><th>Qué hace</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Accesión</span></td><td>La accesión cuyo cariotipo se muestra. Sólo aparecen las que tienen al menos una célula medida. Cada accesión tiene su propio cariotipo; los demás ajustes valen para todas.</td></tr>
+      <tr><td><span class="ui">Clasificación</span></td><td>El sistema con que se nombra cada par: <span class="ui">Levan et al. 1964 · razón de brazos</span> (la opción por omisión), <span class="ui">Levan et al. 1964 · índice centromérico</span>, <span class="ui">Guerra 1986 · m, sm, a</span> o <span class="ui">Límites propios</span>. Con la última aparecen dos campos más: <span class="ui">Límites de r (separados por comas)</span>, que empieza en «1.7, 3, 7», y <span class="ui">Nombres de las clases</span>, «m, sm, st, t». Tiene que haber un nombre más que límites; si no, un aviso lo recuerda y se usan los últimos límites propios válidos o, si no los hubo, los de Levan por la razón de brazos.</td></tr>
+      <tr><td><span class="ui">Número básico x</span></td><td>El número cromosómico básico de la accesión. Sólo cambia la fórmula: con x, la fórmula dice el nivel de ploidía (2n = 2x = 28); sin x, lo omite (2n = 28). Se guarda con la accesión y lo comparten los Bloques 5, 6 y 8.</td></tr>
+      <tr><td><span class="ui">Homólogos por grupo</span></td><td><span class="ui">2 (pares)</span> para un diploide; 3, 4, 6 u 8 para agrupar los homólogos de un autopoliploide en grupos de ese tamaño.</td></tr>
+      <tr><td><span class="ui">Orden de los pares</span></td><td><span class="ui">Por longitud</span> (de mayor a menor) o <span class="ui">Por tipo y longitud</span>: primero los m, luego los sm, etc., y dentro de cada clase de mayor a menor. Sólo cambia el orden del idiograma; la numeración de los pares sigue siendo por longitud.</td></tr>
+      <tr><td><span class="ui">Brazos de un st en el NF</span></td><td>Cuántos brazos cuenta un subtelocéntrico en el número fundamental: 1 (por omisión) o 2.</td></tr>
+      <tr><td><span class="ui">Desviación estándar</span></td><td><span class="ui">Muestral (n − 1)</span> o <span class="ui">Poblacional (n)</span>, para las desviaciones entre células de la tabla. Es el mismo ajuste que la <span class="ui">Desviación estándar</span> del Bloque 4: cambiarlo en uno lo cambia en el otro.</td></tr>
+      <tr><td><span class="ui">Sumar el satélite a la longitud de su brazo</span></td><td>Encendida por omisión: el satélite (lo que queda más allá de la constricción secundaria, que se marca en el Bloque 2) cuenta en la longitud del brazo que lo lleva. Apagada, el satélite queda fuera de las longitudes y de la razón de brazos.</td></tr>
+      <tr><td><span class="ui">Distinguir M (r = 1) y T (sin brazo corto)</span></td><td>Apagada por omisión. Encendida, un cromosoma con los dos brazos exactamente iguales es M (metacéntrico en sentido estricto) y uno sin brazo corto es T (telocéntrico en sentido estricto), como en la tabla original de Levan et al. Con medidas reales casi nunca ocurre.</td></tr>
+      <tr><td><span class="ui">Marcar los pares con satélite en la fórmula («-sat»)</span></td><td>Encendida por omisión: los pares con satélite se cuentan aparte en la fórmula (2m-sat). Apagada, se suman a su clase.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión · las clases de cromosoma</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>Levan, por la razón</b> <i>r</i> = <i>q</i>/<i>p</i></td><td>m hasta 1.70; sm de más de 1.70 a 3.00; st de más de 3.00 a 7.00; t por encima de 7.00. El valor justo en el límite va a la clase más mediana: <i>r</i> = 1.70 es m y <i>r</i> = 3.00 es sm.</td></tr>
+      <tr><td><b>Levan, por el índice centromérico</b> IC = 100 <i>p</i>/(<i>p</i> + <i>q</i>)</td><td>m desde 37.5; sm de 25 a menos de 37.5; st de 12.5 a menos de 25; t por debajo de 12.5. Es el mismo criterio dicho con el IC, y casi siempre da las mismas clases.</td></tr>
+      <tr><td><b>Guerra (1986)</b></td><td>m de 1.00 a 1.49; sm de 1.50 a 2.99; a (acrocéntrico) desde 3.00. Aquí el límite va a la clase superior, como Guerra escribe sus intervalos: <i>r</i> = 1.50 es sm.</td></tr>
+      <tr><td><b>Un brazo corto nulo</b></td><td>t; o T si está encendida la casilla de M y T.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">La clase de un par se decide con la razón de las medias de sus brazos, no con la media de las razones de cada célula.</p>
+  </div>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · Levan o Guerra en el maíz de ejemplo</div>
+    <p>Con la clasificación de Levan, el maíz de ejemplo da 2n = 2x = 20 = 8m + 10sm + 2sm-sat. El par 5 tiene <i>r</i> = 1.59: es m para Levan (hasta 1.70) y sm para Guerra (desde 1.50). Con <span class="ui">Guerra 1986 · m, sm, a</span> la fórmula pasa a 6m + 12sm + 2sm-sat. Con <span class="ui">Levan et al. 1964 · índice centromérico</span> no cambia nada. Antes de comparar tu fórmula con una publicada, mira con qué sistema se escribió.</p>
+  </div>
+
+  <!-- 3.2 -->
+  <h2 id="s3-2"><span class="num">3.2</span>Emparejamiento de homólogos</h2>
+  <p class="lead">Antes de promediar, la app decide qué cromosomas de cada célula son homólogos y cuál es el mismo par en todas las células. Esta tarjeta enseña el resultado célula por célula para que lo revises y lo corrijas.</p>
+  <p>Arriba van las células de la accesión como botones, con su número de cromosomas («Célula 2 · 20»). Una célula cuyos pares corregiste a mano lleva además el signo ✎. Debajo, un recuadro por par: su número, su clase y la longitud media de ese par <i>en esa célula</i>, y sus homólogos con el número que tienen en el Bloque 2. Si el cromosoma se trazó sobre una imagen, se ve recortado y enderezado de la propia imagen; si se midió de otra forma, se dibuja a escala, con sus dos brazos y un punto donde está el satélite. Un par que falta en una célula incompleta dice <span class="ui">no está en esta célula</span>.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b3-emparejar.png" alt="El tablero de homólogos de la célula 1 del maíz de ejemplo, con los cromosomas enderezados de la imagen agrupados en diez pares"></div>
+    <figcaption><b>Figura 3.2.</b> La célula 1 del maíz de ejemplo, la que tiene imagen: cada homólogo es un recorte enderezado de la metafase, con sus nudos heterocromáticos. El par 1 de esta célula mide en promedio 8.05 µm. El orden sigue la numeración de la accesión, no la de esta célula: aquí el par 4 (6.43 µm) es más largo que el 3 (6.23 µm).</figcaption>
+  </figure>
+
+  <h3>Cómo empareja la app</h3>
+  <p>Dentro de cada célula, ordena los cromosomas de mayor a menor y los corta en grupos consecutivos del tamaño de <span class="ui">Homólogos por grupo</span>. Después prueba intercambios entre grupos mientras baje la diferencia total dentro de los grupos, medida con la longitud (en porcentaje de la longitud media de la célula), el índice centromérico (en puntos) y un castigo cuando un cromosoma con satélite queda junto a uno sin él. Es un óptimo local: casi siempre acierta, pero no es una demostración.</p>
+  <p>Luego empata las células entre sí. Numerar los pares de cada célula sólo por su longitud mezclaría dos pares casi iguales de longitud pero con el centrómero en sitios distintos, porque una célula un poco más condensada los cambia de orden. Por eso cada célula se asigna a los pares de una referencia (la célula con más pares) con la asignación óptima, el método húngaro, sobre la longitud relativa, el índice centromérico (cinco puntos de IC pesan como un punto de longitud relativa) y el satélite; la referencia se reemplaza por las medias y se repite. Al final los pares se numeran por su longitud relativa media. Así se explica la figura 3.2: el par 3 de la accesión es submetacéntrico, y en la célula 1 resultó más corto que el 4, metacéntrico.</p>
+
+  <h3>Cómo corregir un emparejamiento</h3>
+  <ol class="pasos">
+    <li>Elige la célula en los botones de arriba.</li>
+    <li>Arrastra el homólogo mal puesto sobre el cromosoma con el que debe intercambiarse. O, sin arrastrar, haz clic en uno (queda marcado, figura 3.3) y luego en el otro. Un segundo clic sobre el mismo cromosoma lo desmarca.</li>
+    <li>Si lo sueltas sobre el recuadro de un par y no sobre un cromosoma, el cromosoma se mueve a ese par sin intercambio, y su par de origen queda con uno menos.</li>
+    <li>Revisa la tabla de la sección 3.3: la longitud y el índice centromérico del par deben quedar más parejos entre células.</li>
+  </ol>
+  <p>Un par corregido a mano se queda así aunque cambies los ajustes, y la célula se marca con ✎. Para deshacer las correcciones están <span class="ui">Emparejar de nuevo esta célula</span> y <span class="ui">Emparejar de nuevo todas</span>, que devuelven el emparejamiento automático a la célula elegida o a todas las de la accesión.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b3-emparejar-medidas.png" alt="El tablero de la célula 2 del maíz de ejemplo, con los cromosomas dibujados a escala y el cromosoma 9 del par 3 marcado"></div>
+    <figcaption><b>Figura 3.3.</b> La célula 2 del maíz de ejemplo se midió sin imagen, así que sus cromosomas se dibujan a escala. El cromosoma 9 del par 3 está marcado: el siguiente clic en otro cromosoma los intercambia. Los dos homólogos del par 6 llevan el punto del satélite en su brazo corto.</figcaption>
+  </figure>
+
+  <h3>Los avisos de la tarjeta de ajustes</h3>
+  <p>Debajo de las casillas de la sección 3.1 aparecen, cuando hace falta, estos avisos (con los ejemplos no sale ninguno):</p>
+  <ul>
+    <li><span class="ui">Esta accesión mezcla células calibradas (µm) y sin calibrar (píxeles).</span> Las longitudes relativas siguen valiendo, pero las absolutas no: calibra todas en el Bloque 2. Si ninguna célula está calibrada, todo sale en píxeles y la tabla lo dice en sus encabezados.</li>
+    <li><span class="ui">Las células no tienen el mismo número de cromosomas</span>, con los números que hay. Los pares de las células incompletas se promedian con los que tengan: revisa el emparejamiento.</li>
+    <li>Un grupo incompleto, cuando el número de cromosomas no es múltiplo de <span class="ui">Homólogos por grupo</span>.</li>
+    <li>Los pares que varían más de 20 % entre células. Puede ser condensación distinta —mira entonces la longitud relativa, que no depende de ella— o un homólogo mal emparejado.</li>
+  </ul>
+
+  <!-- 3.3 -->
+  <h2 id="s3-3"><span class="num">3.3</span>Cariotipo de la accesión</h2>
+  <p class="lead">Esta tarjeta reúne el resultado: seis cifras arriba (la sección 3.4 las explica) y la tabla de los pares, con la media ± la desviación estándar entre células de cada medida.</p>
+
+
+  <table class="compacta">
+    <caption><b>Tabla 3.2.</b> Las columnas de la tabla de pares</caption>
+    <thead><tr><th style="width:1.4in">Columna</th><th>Qué es</th></tr></thead>
+    <tbody>
+      <tr><td><b>Par</b></td><td>El número del par, del más largo al más corto (longitud relativa media).</td></tr>
+      <tr><td><b>Células</b></td><td>En cuántas células está ese par.</td></tr>
+      <tr><td><b>p, q</b></td><td>El brazo corto y el largo, en µm (o en píxeles si no hay calibración). Si un cromosoma se midió al revés, la app intercambia los brazos: siempre <i>p</i> ≤ <i>q</i>.</td></tr>
+      <tr><td><b>Longitud</b></td><td><i>p</i> + <i>q</i>, con el satélite si está sumado.</td></tr>
+      <tr><td><b>LR (%)</b></td><td>Longitud relativa: 100 × longitud del par / longitud de un juego (la suma de un cromosoma de cada par), calculada en cada célula y luego promediada. Al no depender de cuánto se condensó la célula, es la medida que se compara entre células y entre accesiones.</td></tr>
+      <tr><td><b>IC</b></td><td>Índice centromérico, 100 <i>p</i>/(<i>p</i> + <i>q</i>): 50 en un metacéntrico perfecto, 0 en un telocéntrico.</td></tr>
+      <tr><td><b>r</b></td><td>Razón de brazos <i>q</i>/<i>p</i> de las medias del par (∞ si <i>p</i> = 0). Es la que decide la clase con Levan por la razón y con Guerra.</td></tr>
+      <tr><td><b>Clase</b></td><td>m, sm, st, t (o a con Guerra, o tus nombres propios), con «-sat» si el par lleva satélite en al menos la mitad de las células.</td></tr>
+    </tbody>
+  </table>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b3-cariotipo.png" alt="La tarjeta Cariotipo de la accesión del chayote de Huatusco con sus seis cifras y la tabla de catorce pares"></div>
+    <figcaption><b>Figura 3.4.</b> El cariotipo del chayote de Huatusco: tres células de 28 cromosomas, 2n = 2x = 28 = 18m + 2m-sat + 8sm. El par 1 lleva el satélite (m-sat); el 12, con <i>r</i> = 1.73, ya pasa el límite de 1.70 y es sm.</figcaption>
+  </figure>
+
+  <p>El pie de la tabla recuerda qué desviación se usó, (<i>n</i> − 1) o (<i>n</i>), y la clasificación. Tres botones guardan la tabla: <span class="ui">Tabla (CSV)</span> y <span class="ui">Tabla (TSV)</span> la de la accesión elegida, y <span class="ui">Todas las accesiones (CSV)</span> las de todas en un solo archivo. Los archivos llevan cada media y su desviación en columnas separadas, con más decimales que la pantalla, la clase, el satélite y la unidad.</p>
+
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Una desviación de cero</div>
+    <p>En el par 12 del chayote de Huatusco la longitud relativa sale 5.64 ± 0.00: en las tres células simuladas ese par ocupa casi exactamente la misma fracción del juego, aunque su longitud absoluta varíe (1.64 ± 0.11 µm). Es lo que se espera cuando las células sólo difieren en condensación.</p>
+  </div>
+
+  <!-- 3.4 -->
+  <h2 id="s3-4"><span class="num">3.4</span>Fórmula, longitud y número fundamental</h2>
+  <p class="lead">Las seis cifras de arriba de la tabla resumen el cariotipo en una línea, que es lo que suele publicarse.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b3-cifras-zea.png" alt="Las seis cifras del cariotipo del maíz de ejemplo: fórmula, cinco células, longitud de un juego de 57.20 µm, complemento de 114.39 ± 4.34 µm, número fundamental 40 y mayor entre menor 2.49"></div>
+    <figcaption><b>Figura 3.5.</b> Las cifras del maíz de ejemplo: 2n = 2x = 20 = 8m + 10sm + 2sm-sat, cinco células de 20 cromosomas, un juego de 57.20 µm, un complemento de 114.39 ± 4.34 µm, NF = 40 y un par más largo 2.49 veces el más corto.</figcaption>
+  </figure>
+
+  <ul>
+    <li><b>Fórmula.</b> «2n =», el nivel de ploidía si hay número básico («2x =»), el número de cromosomas y la suma de las clases, cada una con su número de cromosomas (no de pares), en el orden de la clasificación (M, m, sm, st, t, T) y cada clase con satélite justo después de la suya. Si 2n no es múltiplo de x, la fórmula escribe el nivel euploide más cercano y la diferencia, por ejemplo 2n = 2x + 1 = 21. El 2n de la fórmula es la mediana de las células.</li>
+    <li><b>Células.</b> Cuántas células entran y cuántos cromosomas tiene cada una.</li>
+    <li><b>Longitud de un juego.</b> La suma de las longitudes medias de los pares: un cromosoma de cada par, el juego haploide de un diploide. Es la base de la longitud relativa.</li>
+    <li><b>Longitud del complemento.</b> La suma de todos los cromosomas de cada célula, como media ± desviación entre células. En un diploide es más o menos el doble de la anterior; su desviación refleja sobre todo cuánto difieren las células en condensación.</li>
+    <li><b>Número fundamental.</b> Los brazos del complemento: dos por cada m o sm, uno por cada st, a o t (dos por cada st si así lo eliges).</li>
+    <li><b>Mayor / menor.</b> El cociente entre el par más largo y el más corto. Es la fila de la cuadrícula de Stebbins (capítulo 4).</li>
+  </ul>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · el satélite del par 6 del maíz de ejemplo</div>
+    <p>El par 6 lleva la región organizadora del nucléolo en el brazo corto, con su satélite. Sumado al brazo, como por omisión, el par tiene <i>r</i> = 2.35 y es sm-sat: la fórmula es 8m + 10sm + 2sm-sat y el NF, 40. Si apagas <span class="ui">Sumar el satélite a la longitud de su brazo</span>, el brazo corto pierde el satélite, la razón sube por encima de 3 y el par pasa a ser subtelocéntrico, más corto que el par 7: la fórmula queda 8m + 10sm + 2st-sat y el NF baja a 38. Y si apagas <span class="ui">Marcar los pares con satélite en la fórmula («-sat»)</span>, el par se suma a los sm: 8m + 12sm. Dos laboratorios que miden el mismo cariotipo pueden publicar fórmulas distintas sólo por esta decisión; escríbela en los métodos (el Bloque 10 lo hace).</p>
+  </div>
+
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · el número fundamental y los grupos de homólogos</div>
+    <p>El número fundamental (NF) cuenta los brazos visibles del complemento. Se usa para comparar cariotipos con distinto número de cromosomas: una fusión de dos acrocéntricos en un metacéntrico baja 2n pero conserva el NF. Contar un subtelocéntrico como uno o dos brazos es una convención que cambia de autor en autor; el campo <span class="ui">Brazos de un st en el NF</span> la deja a tu elección. En un autopoliploide los homólogos no van de dos en dos sino en grupos del tamaño del nivel de ploidía: pon ese número en <span class="ui">Homólogos por grupo</span> y la tabla dará un renglón por grupo. Con un alopoliploide, cuyos genomas se aparean por separado, deja los pares.</p>
+  </div>
+
+  <!-- 3.5 -->
+  <h2 id="s3-5"><span class="num">3.5</span>Idiograma</h2>
+  <p class="lead">El idiograma dibuja el cariotipo de la accesión: los pares en el orden elegido, con el centrómero alineado en una línea discontinua, los brazos cortos arriba y los largos abajo, a la escala de un eje vertical.</p>
+  <p>Debajo de cada cromosoma van el número del par y su clase; un asterisco junto a la clase señala el par con satélite, que se dibuja unido a su brazo por un trazo fino. Los controles de arriba cambian sólo el dibujo:</p>
+  <ul>
+    <li><span class="ui">Vista</span>: <span class="ui">Un cromosoma por par</span> (el idiograma clásico, con las medias) o <span class="ui">Los homólogos</span>, que dibuja los homólogos de cada par lado a lado: el más largo de cada célula promediado con los más largos de las demás, y lo mismo con el otro.</li>
+    <li><span class="ui">Escala</span>: <span class="ui">Micras</span> o <span class="ui">Longitud relativa (%)</span>, en porcentaje del juego, para comparar accesiones de distinto tamaño.</li>
+    <li><span class="ui">Color por clase</span>: pinta cada cromosoma con el color de su clase y añade su nombre a la leyenda.</li>
+    <li><span class="ui">Desviación entre células</span>: una barra fina junto a cada brazo con ± una desviación estándar. Sólo se dibuja con <span class="ui">Un cromosoma por par</span>.</li>
+    <li><span class="ui">Bandas y señales (Bloque 7)</span>: encendida por omisión, pone sobre el idiograma las bandas y las señales de FISH registradas en el Bloque 7, con su leyenda.</li>
+    <li><span class="ui">Título</span>: el título de la figura. Vacío, el campo propone el taxón y el nombre de la accesión, pero el dibujo sale sin título.</li>
+  </ul>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b3-idiograma.png" alt="El idiograma del chayote de Huatusco con catorce pares, el satélite del par 1 con ADNr 45S y CMA, y el ADNr 5S en el brazo largo del par 4"></div>
+    <figcaption><b>Figura 3.6.</b> El idiograma del chayote de Huatusco con los ajustes por omisión. Las señales vienen del Bloque 7: el ADNr 45S y la banda CMA⁺ en el satélite del par 1 (m*), y el ADNr 5S en el brazo largo del par 4.</figcaption>
+  </figure>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b3-idiograma-zea.png" alt="El idiograma del maíz de ejemplo coloreado por clase, con las barras de desviación entre células, los nudos heterocromáticos y la NOR del par 6"></div>
+    <figcaption><b>Figura 3.7.</b> El maíz de ejemplo con <span class="ui">Color por clase</span> y <span class="ui">Desviación entre células</span>: los cuatro pares m en ciruela y los seis sm en azul, cada brazo con su barra de ± una desviación. Las bandas oscuras son los nudos heterocromáticos y la naranja, la NOR del par 6.</figcaption>
+  </figure>
+
+  <p>La figura se guarda con <span class="ui">SVG</span> o <span class="ui">PNG</span>, o se abre con el editor ✎ o en el estudio de figuras para cambiar textos, colores y tamaños antes de exportarla (capítulo 10). El Bloque 10 la recoge también en el informe.</p>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión · antes de dar por bueno un cariotipo</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>Si</b> un par varía más de 20 % entre células</td><td><b>entonces</b> compara su longitud relativa: si ella es estable, es condensación; si no, busca un homólogo mal emparejado en el tablero.</td></tr>
+      <tr><td><b>Si</b> la <i>r</i> de un par cae cerca de un límite (1.70, 3.00, 7.00)</td><td><b>entonces</b> su clase depende de unas centésimas: mira su desviación entre células y dilo en el texto, como el par 12 del chayote de Huatusco (<i>r</i> = 1.73).</td></tr>
+      <tr><td><b>Si</b> comparas con una fórmula publicada</td><td><b>entonces</b> usa la misma clasificación y el mismo trato del satélite, y compara longitudes relativas, no absolutas.</td></tr>
+      <tr><td><b>Si</b> la especie es autopoliploide</td><td><b>entonces</b> agrupa los homólogos por el nivel de ploidía; si es alopoliploide, deja los pares.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Guías para interpretar, no leyes: el cariotipo es tan bueno como las medidas de las que sale.</p>
+  </div>
+
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Cuando algo sale mal</div>
+    <p><b>El bloque dice «Todavía no hay mediciones».</b> Ninguna célula tiene cromosomas con brazos medidos; vuelve al Bloque 2 y marca al menos el centrómero de cada trazo. <b>Las longitudes salen en píxeles.</b> Falta la calibración en el Bloque 2. <b>Un par cambia de número de una célula a otra.</b> Es normal en el tablero: los pares se numeran por la accesión, no por cada célula. <b>Los límites propios no se aplican.</b> Escribe un nombre más que límites. <b>La fórmula no dice el nivel de ploidía.</b> Falta el <span class="ui">Número básico x</span>. <b>Corregí un par y al cambiar un ajuste no se movió.</b> Es lo esperado: las correcciones a mano se respetan hasta que pulses uno de los botones de emparejar de nuevo.</p>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · Manual de usuario · Capítulo 5</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-5" data-pestana="5" data-orden="5" style="--acento: var(--b5)">
+  <div class="cap-apertura">
+    <div class="cap-num">5</div>
+    <div class="cap-etiqueta">Capítulo cinco · Bloque 5</div>
+    <h1 data-corto="Meiosis">Meiosis</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">La meiosis dice cómo se aparean los cromosomas y qué tan regular es la formación de los gametos. El Bloque 5 recoge lo que cuentas al microscopio —las configuraciones en diacinesis o metafase I, las anormalidades de cada fase, las tétradas y el polen teñido— y lo convierte en quiasmas por célula, índice de recombinación, una prueba de autopoliploidía frente a alopoliploidía, el índice meiótico de Love y la viabilidad del polen con sus intervalos de confianza.</p>
+    <div class="cap-franja"><span class="k5"></span><span class="k5"></span><span class="k6"></span><span class="k10"></span></div>
+    <ul class="cap-contenido">
+      <li><b>5.1</b>La accesión y sus tablas</li>
+      <li><b>5.2</b>Configuraciones en diacinesis o metafase I</li>
+      <li><b>5.3</b>¿Autopoliploide o alopoliploide?</li>
+      <li><b>5.4</b>Anormalidades por fase</li>
+      <li><b>5.5</b>Tétradas e índice meiótico</li>
+      <li><b>5.6</b>Viabilidad del polen</li>
+    </ul>
+  </div>
+
+  <!-- 5.1 -->
+  <h2 id="s5-1"><span class="num">5.1</span>La accesión y sus tablas</h2>
+  <p class="lead">A diferencia de los Bloques 3 y 4, este bloque no usa las imágenes ni las medidas: sus datos son conteos que escribes, pegas o importas en cuatro tablas, y cada tabla guarda los de la accesión elegida.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b5-accesion.png" alt="La tarjeta Accesión con la población tetraploide elegida, los botones + Accesión y Abrir la serie poliploide de ejemplo y el número básico 7"></div>
+    <figcaption><b>Figura 5.1.</b> La tarjeta <span class="ui">Accesión</span> con la población tetraploide de la serie poliploide de ejemplo, de número básico x = 7.</figcaption>
+  </figure>
+
+  <p>En la tarjeta <span class="ui">Accesión</span> eliges la accesión, creas otra con <span class="ui">+ Accesión</span> o abres el ejemplo con <span class="ui">Abrir la serie poliploide de ejemplo</span>: una especie inventada con tres poblaciones, diploide, tetraploide y hexaploide, de x = 7, con dos plantas y 25 células por planta, sus fases, tétradas y polen, todo simulado con el modelo de la app. <span class="ui">Número básico x</span> es el mismo número de los Bloques 3 y 6; aquí hace falta para plantear las hipótesis de la sección 5.3. Este capítulo usa sobre todo la población tetraploide.</p>
+
+  <h3>Cómo se llenan las tablas</h3>
+  <p>Las cuatro tablas del bloque funcionan igual. Cada renglón es una célula (o una planta, según la tabla) y cada casilla se escribe a mano; los números se redondean a enteros. Debajo de cada tabla están <span class="ui">+ Fila</span>, que añade un renglón (copiando la planta del anterior en la de configuraciones), <span class="ui">Exportar (CSV)</span>, <span class="ui">Importar CSV</span> y <span class="ui">Vaciar</span>, que borra todos los renglones de la accesión tras confirmarlo. La × al final de un renglón lo borra.</p>
+  <ul>
+    <li><b>Pegar.</b> Si copias un bloque de una hoja de cálculo (columnas separadas por tabuladores) y lo pegas en una casilla, se llena desde esa casilla hacia la derecha y hacia abajo, añadiendo los renglones que falten. Un aviso dice cuántas filas se pegaron.</li>
+    <li><b>Importar.</b> El CSV debe tener encabezados. Cada encabezado se compara, sin acentos ni mayúsculas, con el nombre de la columna en español o en inglés y con algunos sinónimos («quiasmas», «individuo»…); las columnas que no reconoce se ignoran. Es el mismo formato que escribe <span class="ui">Exportar (CSV)</span>.</li>
+  </ul>
+
+  <!-- 5.2 -->
+  <h2 id="s5-2"><span class="num">5.2</span>Configuraciones en diacinesis o metafase I</h2>
+  <p class="lead">Una fila por célula, con cuántas configuraciones de cada tipo viste: univalentes, bivalentes en varilla y en anillo, trivalentes, cuadrivalentes en cadena y en anillo, pentavalentes y hexavalentes en cadena y en anillo.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b5-configuraciones.png" alt="La tabla de configuraciones del tetraploide de ejemplo con sus primeras ocho células"></div>
+    <figcaption><b>Figura 5.2.</b> Las primeras células de la planta 1 del tetraploide. La primera tiene 1 I, 1 II en varilla, 3 II en anillo, 1 III y 4 IV en cadena: 28 cromosomas y 21 quiasmas estimados. A este ancho de ventana las tres últimas columnas (<span class="ui">Quiasmas contados</span>, <span class="ui">Cromosomas</span> y <span class="ui">Quiasmas</span>) quedan a la derecha: la tabla se recorre de lado.</figcaption>
+  </figure>
+
+  <p>Las columnas son <span class="ui">Planta</span>, <span class="ui">Célula</span>, una por configuración (<span class="ui">I</span>, <span class="ui">II varilla</span>, <span class="ui">II anillo</span>, <span class="ui">III</span>, <span class="ui">IV cadena</span>, <span class="ui">IV anillo</span>, <span class="ui">V</span>, <span class="ui">VI cadena</span>, <span class="ui">VI anillo</span>) y <span class="ui">Quiasmas contados</span>. Las dos últimas, que no se editan, las calcula la app: <span class="ui">Cromosomas</span> suma los cromosomas de todas las configuraciones (un II tiene dos, un IV cuatro) y <span class="ui">Quiasmas</span> los estima: una cadena de <i>k</i> cromosomas tiene <i>k</i> − 1 quiasmas y un anillo <i>k</i>; así, varilla 1, anillo 2, III 2, IV en cadena 3, IV en anillo 4. Es el mínimo compatible con la configuración. Si contaste los quiasmas, escríbelos en <span class="ui">Quiasmas contados</span> y mandan sobre la estimación.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b5-config-resumen.png" alt="Las seis cifras de la meiosis del tetraploide, el resumen por planta y la gráfica de barras de configuraciones por célula"></div>
+    <figcaption><b>Figura 5.3.</b> El resumen del tetraploide: 50 células de 28 cromosomas, 21.78 ± 2.34 quiasmas por célula, 1.55 por bivalente, índice de recombinación 35.78 y multivalentes en todas las células. La gráfica da la media ± desviación de cada configuración por planta.</figcaption>
+  </figure>
+
+  <p>Debajo de la tabla, seis cifras resumen la accesión:</p>
+  <ul>
+    <li><b>Células</b> y <b>Cromosomas por célula</b>, el número más frecuente; si no todas suman lo mismo, la cifra dice <span class="ui">no en todas</span> y un aviso pide revisar las filas.</li>
+    <li><b>Quiasmas por célula</b>, media ± desviación, con la nota <span class="ui">estimados de las configuraciones</span> o <span class="ui">contados</span>.</li>
+    <li><b>Quiasmas por bivalente</b>: los quiasmas de los bivalentes entre el número de bivalentes. Cerca de 2 si casi todos son anillos, cerca de 1 si casi todos son varillas.</li>
+    <li><b>Índice de recombinación</b>: el número haploide más los quiasmas medios por célula (<span class="ui">n + quiasmas</span>), el número de unidades que se recombinan de manera independiente.</li>
+    <li><b>Células con multivalentes</b>: el porcentaje de células con al menos un III, IV, V o VI.</li>
+  </ul>
+  <p>La tabla de resumen repite esas cuentas por planta y para toda la accesión: las configuraciones medias por célula (V y VI juntos en <span class="ui">≥ V</span>), los quiasmas por célula y por bivalente, el índice de recombinación y el porcentaje de células con multivalentes. La gráfica <span class="ui">Configuraciones por célula</span> pone una serie por planta, con barras de error de una desviación.</p>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · el diploide y el tetraploide de ejemplo</div>
+    <p>En el diploide (2n = 14) no hay multivalentes: 5.42 bivalentes en anillo y 1.52 en varilla por célula, 12.36 ± 1.10 quiasmas por célula, 1.78 por bivalente, índice de recombinación 7 + 12.36 = 19.36. En el tetraploide (2n = 28) todas las células tienen multivalentes, 2.24 IV en cadena y 1.58 en anillo por célula, y los quiasmas por bivalente bajan a 1.55: hay más varillas. Su índice de recombinación es 14 + 21.78 = 35.78.</p>
+  </div>
+
+  <!-- 5.3 -->
+  <h2 id="s5-3"><span class="num">5.3</span>¿Autopoliploide o alopoliploide?</h2>
+  <p class="lead">Un autopoliploide tiene varios juegos del mismo genoma, que pueden aparearse de a tres o de a cuatro; un alopoliploide junta genomas distintos que se aparean cada uno consigo mismo, en bivalentes. El bloque compara las configuraciones observadas con las esperadas bajo cada hipótesis.</p>
+  <p>Cada hipótesis se escribe como una fórmula genómica, una letra por juego: AAAA es un autotetraploide, AABB un alotetraploide, AAAABB un segmental intermedio. Con el número básico y las células ya escritas, la app propone sola la <span class="ui">Hipótesis 1</span>, la autopoliploide (AAAA en el tetraploide), y la <span class="ui">Hipótesis 2</span>, la alopoliploide de pares (AABB); la <span class="ui">Hipótesis 3 (opcional)</span> queda para la que quieras probar. Puedes escribir hasta ocho genomas; la fórmula, multiplicada por x, tiene que dar el 2n de las células, o un aviso lo dice. <span class="ui">Quiasma por brazo, c</span> puede ser <span class="ui">Estimada de los datos</span> o <span class="ui">Fija</span>, y entonces aparece <span class="ui">Valor de c</span> (0.8 por omisión).</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b5-hipotesis.png" alt="La tarjeta Autopoliploide o alopoliploide del tetraploide de ejemplo con la tabla de observadas y esperadas bajo AAAA y AABB, la gráfica por célula y dos avisos"></div>
+    <figcaption><b>Figura 5.4.</b> El tetraploide de ejemplo: con <i>c</i> = 0.778, AAAA da χ² = 4.82 con 4 g. l. y <i>p</i> = 0.307; AABB no permite los 221 multivalentes observados (30 III, 112 IV en cadena y 79 en anillo) y queda rechazada. El aviso verde lo resume: los datos se ajustan a AAAA.</figcaption>
+  </figure>
+
+  <p>La tabla da, para cada configuración, las observadas en todas las células y las esperadas bajo cada hipótesis, y al pie <i>c</i>, χ², los grados de libertad y el valor <i>p</i>. La gráfica <span class="ui">Observado y esperado por célula</span> lo dibuja por célula. Debajo, un aviso dice la conclusión:</p>
+  <ul>
+    <li>si se ajusta una sola hipótesis (<i>p</i> ≥ 0.05): «Los datos se ajustan a…» y a cuáles no;</li>
+    <li>si se ajusta más de una: hacen falta más células para decidir;</li>
+    <li>si no se ajusta ninguna: cuál es la mejor y la sugerencia de probar una fórmula intermedia, porque rechazar la autopoliploidía puede indicar control genético del apareamiento o algún tipo de alopoliploidía (Jackson y Casey 1982);</li>
+    <li>y, aparte, cada hipótesis que no permite alguna configuración observada —un multivalente donde sólo caben bivalentes— queda <span class="ui">rechazada</span> sin más, aunque su χ² en las demás clases sea pequeño.</li>
+  </ul>
+
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · el modelo de lo esperado</div>
+    <p>Cada cromosoma tiene dos brazos. En el extremo de cada brazo, los homólogos de un grupo se aparean de dos en dos al azar (con un número impar, uno queda libre), de manera independiente en los dos extremos, y cada brazo apareado forma un quiasma con probabilidad <i>c</i>. Una configuración es un conjunto de cromosomas unidos por quiasmas: cadena si está abierta, anillo si está cerrada. Con cuatro homólogos, los dos extremos eligen la misma pareja con probabilidad 1/3, así que el apareamiento en cuadrivalente ocurre con probabilidad 2/3 (Sybenga 1975); las frecuencias siguen el mismo conteo que los modelos de Jackson y Casey (1982). La app las calcula exactamente, enumerando todos los apareamientos y todos los patrones de quiasmas, sin simular. Estimada, <i>c</i> es los quiasmas medios entre los brazos apareables: en el tetraploide, 21.78 / (7 × 4) = 0.778.</p>
+  </div>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión · la prueba χ²</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>Clases</b></td><td>I, II varilla, II anillo, III, IV cadena, IV anillo y ≥ V. Las que tienen menos de 5 esperadas se juntan con su vecina más pequeña antes de la prueba.</td></tr>
+      <tr><td><b>Grados de libertad</b></td><td>Las clases que quedan menos 1, y menos 1 más si <i>c</i> se estimó de los datos.</td></tr>
+      <tr><td><b>Si</b> <i>p</i> ≥ 0.05</td><td><b>entonces</b> la hipótesis se ajusta a los datos (no quiere decir que sea cierta).</td></tr>
+      <tr><td><b>Si</b> la hipótesis no permite una configuración observada</td><td><b>entonces</b> queda rechazada, sea cual sea su χ².</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Con <i>c</i> fija en 0.80, AAAA sigue ajustándose en el tetraploide, pero menos holgadamente (χ² = 9.31, 5 g. l., <i>p</i> = 0.097).</p>
+  </div>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · el hexaploide de ejemplo no se ajusta a nada</div>
+    <p>En el hexaploide la app propone AAAAAA y AABBCC, con <i>c</i> = 0.850. La autohexaploidía queda muy lejos (χ² = 2777.05, 5 g. l., <i>p</i> &lt; 0.001): espera 158.1 configuraciones de cinco o seis cromosomas y no se vio ninguna. AABBCC explica bien los univalentes y los bivalentes (χ² = 2.39 con 1 g. l.), pero no permite los 22 multivalentes observados (1 III, 3 IV en cadena y 18 en anillo) y queda rechazada. Si escribes AAAABB como tercera hipótesis, tampoco se ajusta (χ² = 447.33, 4 g. l.). La lectura es la de un alohexaploide con apareamientos ocasionales fuera de su propio genoma, que es justo como se simuló: un 16 % de sus células salieron del modelo AAAABB.</p>
+  </div>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b5-hexaploide.png" alt="La tabla de hipótesis del hexaploide de ejemplo con AAAAAA, AABBCC y AAAABB y los avisos de rechazo"></div>
+    <figcaption><b>Figura 5.5.</b> El hexaploide con tres hipótesis. AABBCC queda rechazada por sus 22 multivalentes y ninguna se ajusta; la «mejor», AAAABB, también tiene <i>p</i> &lt; 0.001.</figcaption>
+  </figure>
+
+  <!-- 5.4 -->
+  <h2 id="s5-4"><span class="num">5.4</span>Anormalidades por fase</h2>
+  <p class="lead">Una fila por planta y fase, con cuántas células normales viste y cuántas con cada anormalidad.</p>
+  <p>Las columnas son <span class="ui">Planta</span>, <span class="ui">Fase</span> (de <span class="ui">Metafase I</span> a <span class="ui">Telofase II</span>), <span class="ui">Normales</span> y siete anormalidades: <span class="ui">Puentes</span>, <span class="ui">Fragmentos</span>, <span class="ui">Rezagados</span>, <span class="ui">Migración precoz</span>, <span class="ui">Husos múltiples o anormales</span>, <span class="ui">Micronúcleos</span> y <span class="ui">Otras</span>. Cuenta cada célula anormal una sola vez, en su anormalidad principal: la app suma las anormales y las normales para obtener el total de células de la fase.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b5-fases.png" alt="La tabla de anormalidades por fase del tetraploide de ejemplo, el resumen por fase y la gráfica del porcentaje de células anormales"></div>
+    <figcaption><b>Figura 5.6.</b> El tetraploide de ejemplo: entre 10.2 y 12.7 % de células anormales en casi todas las fases y 21.0 % en anafase II (162 células, 19 con rezagados, 8 con puentes y 7 con fragmentos). En la gráfica, la barra de anafase II pasa el tope del eje y no lleva su cifra.</figcaption>
+  </figure>
+
+  <p>El resumen junta las plantas por fase: células, normales, cada anormalidad y el <span class="ui">% anormales</span>. La gráfica <span class="ui">Células anormales por fase (%)</span> lo dibuja con las fases abreviadas (MI, AI…). Como referencia, en el diploide de ejemplo ninguna fase pasa de 3.7 %.</p>
+
+  <!-- 5.5 -->
+  <h2 id="s5-5"><span class="num">5.5</span>Tétradas e índice meiótico</h2>
+  <p class="lead">El índice meiótico de Love (1951) es el porcentaje de tétradas normales; Love consideraba citológicamente estable una planta con 90 o más.</p>
+  <p>Una fila por planta, con <span class="ui">Tétradas normales</span>, <span class="ui">Con micronúcleos</span>, <span class="ui">Díadas</span>, <span class="ui">Tríadas</span> y <span class="ui">Políadas</span>. La tabla de resultados da por planta las tétradas contadas, las normales, el <span class="ui">Índice meiótico (%)</span>, su <span class="ui">Intervalo 95 % (Wilson)</span> y si es <span class="ui">Estable (≥ 90)</span>; con más de una planta, añade la fila de la accesión y, al pie, la prueba χ² de homogeneidad entre plantas.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b5-tetradas.png" alt="La tarjeta Tétradas e índice meiótico del tetraploide de ejemplo con dos plantas no estables"></div>
+    <figcaption><b>Figura 5.7.</b> El tetraploide: índice meiótico de 84.3 y 86.3 % en sus dos plantas y de 85.3 % (82.3 a 87.9) en la accesión, por debajo de 90; las plantas no difieren entre sí (χ² = 0.48, 1 g. l., <i>p</i> = 0.489).</figcaption>
+  </figure>
+
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>El intervalo importa</div>
+    <p>Decide con el intervalo, no sólo con la cifra. En el tetraploide, hasta el extremo superior (87.9) queda por debajo de 90: la inestabilidad es clara. En el hexaploide de ejemplo, la planta 1 tiene 93.0 % pero su intervalo baja hasta 89.5; el diploide, con 96.8 % en la accesión, es estable sin duda.</p>
+  </div>
+
+  <!-- 5.6 -->
+  <h2 id="s5-6"><span class="num">5.6</span>Viabilidad del polen</h2>
+  <p class="lead">Una fila por planta con los granos viables (teñidos) y los inviables; la app da la viabilidad con dos intervalos de confianza y prueba si las plantas difieren.</p>
+  <p>Arriba, <span class="ui">Tinción</span> registra cómo se tiñó el polen: <span class="ui">Tinción diferencial de Alexander</span> (por omisión), <span class="ui">Carmín acético</span>, <span class="ui">Cloruro de tetrazolio (TTC)</span> u <span class="ui">Otra</span>. No cambia las cuentas; la usan los métodos del Bloque 10. <span class="ui">Confianza</span> elige 95 %, 99 % o 90 % para los intervalos de esta tarjeta.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b5-polen.png" alt="La tarjeta Viabilidad del polen del tetraploide de ejemplo con tres plantas, sus cifras, la tabla de intervalos, la gráfica y la comparación entre accesiones"></div>
+    <figcaption><b>Figura 5.8.</b> El polen del tetraploide: 1245 granos en tres plantas, 76.4 % viables (73.9 a 78.7 % con 95 % de confianza), sin diferencias entre plantas (<i>p</i> = 0.196). El aviso de abajo compara las tres poblaciones: difieren (χ² = 161.84, 2 g. l., <i>p</i> &lt; 0.001).</figcaption>
+  </figure>
+
+  <p>La tabla de la planta tiene la columna calculada <span class="ui">% viables</span>. Debajo, tres cifras: <b>Granos contados</b> con el número de plantas, <b>Viabilidad</b> de todos los granos juntos con su intervalo de Wilson, y <b>Homogeneidad entre plantas</b>, con el valor <i>p</i> y los estadísticos χ² y G de la tabla de plantas × viables/inviables. La tabla de resultados da cada planta con sus granos, viables, porcentaje y los intervalos de Wilson y de Clopper–Pearson, y la gráfica, cada planta con su intervalo de Wilson. Si las plantas difieren (<i>p</i> &lt; 0.05), un aviso aconseja informarlas por separado; si hay polen en más de una accesión, otro aviso compara las accesiones con χ².</p>
+  <p>Dos botones más enlazan con la app de palinología de la suite: <span class="ui">Leer el CSV de fertilidad de PolenApp</span> lee su archivo de fertilidad (las columnas <code>landrace_code</code>, <code>n_granos_completos</code> y <code>pct_atipico</code>) y convierte el porcentaje de granos de forma atípica en inviables; un aviso recuerda que ese porcentaje viene de la forma del grano en microscopía electrónica, no de una tinción, y es sólo una aproximación. <span class="ui">CSV con columnas de PolenApp</span> escribe los datos de esta tabla en ese mismo formato.</p>
+
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · Wilson y Clopper–Pearson</div>
+    <p>El intervalo de <b>Wilson</b> (1927) es el que se recomienda para una proporción: tiene una cobertura cercana a la nominal incluso con proporciones altas como las del polen. El de <b>Clopper–Pearson</b> (1934) es exacto, con cobertura de al menos la nominal, y por eso un poco más ancho: en la planta 1 del tetraploide, 70.5 a 78.7 % contra 70.4 a 78.9 %. Con 99 % de confianza, la viabilidad del tetraploide va de 73.2 a 79.3 %. La homogeneidad se prueba con χ² y con G (razón de verosimilitudes); con conteos grandes dan casi lo mismo (3.25 y 3.31).</p>
+  </div>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión · leer la meiosis de una accesión</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>Si</b> hay multivalentes en muchas células</td><td><b>entonces</b> prueba la autopoliploidía; si ninguna fórmula se ajusta, prueba una intermedia.</td></tr>
+      <tr><td><b>Si</b> el índice meiótico es menor que 90</td><td><b>entonces</b> la planta es citológicamente inestable para Love (1951); míralo con su intervalo.</td></tr>
+      <tr><td><b>Si</b> las plantas difieren (homogeneidad <i>p</i> &lt; 0.05)</td><td><b>entonces</b> informa cada planta por separado, no la accesión junta.</td></tr>
+      <tr><td><b>Si</b> la viabilidad del polen baja junto con el índice meiótico</td><td><b>entonces</b> las anormalidades meióticas son una explicación probable, como en el tetraploide de ejemplo (85.3 % de tétradas normales, 76.4 % de polen viable).</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Los datos del ejemplo son simulados: las cifras sirven para aprender a leer la app, no para describir una especie.</p>
+  </div>
+
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Cuando algo sale mal</div>
+    <p><b>La tarjeta de hipótesis pide el número básico.</b> Escríbelo en <span class="ui">Número básico x</span>. <b>Un aviso dice que la fórmula no da el 2n de las células.</b> La fórmula tiene una letra por juego: con x = 7 y 2n = 28 hacen falta cuatro letras. <b>La cifra de cromosomas dice «no en todas».</b> Alguna fila no suma el 2n: revisa la columna <span class="ui">Cromosomas</span>. <b>Importé un CSV y no entró nada.</b> El archivo necesita encabezados que la app reconozca; exporta una tabla para ver el formato. <b>Cambié de accesión y las hipótesis se borraron.</b> Es lo esperado: se vuelven a proponer con el número básico de la nueva accesión.</p>
+  </div>
+</section>
+
+</body>
+</html>
