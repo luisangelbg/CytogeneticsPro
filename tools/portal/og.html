@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- CytogeneticsPro — Copyright (C) 2026 Luis Ángel Barrera-Guzmán. GPL-3.0-or-later; see LICENSE.
+     The card for social networks (1200 × 630), in the style of the other cards of the portal.
+     Open it in a browser at 1200 × 630 and capture it as CytogeneticsPro.jpg. -->
+<html lang="es"><head><meta charset="utf-8"><title>CytogeneticsPro · tarjeta</title>
+<style>
+html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#fbf8f2;font-family:system-ui,sans-serif}
+.card{position:relative;width:1200px;height:630px;overflow:hidden;
+  background:radial-gradient(circle at 12% 40%,rgba(201,162,74,.10),transparent 45%),radial-gradient(circle at 70% 60%,rgba(138,42,107,.06),transparent 55%),#fbf8f2}
+.rings{position:absolute;left:-330px;top:-60px;width:900px;height:760px;opacity:.5}
+.left{position:absolute;left:70px;top:64px;width:560px}
+.brand{display:flex;align-items:center;gap:22px;font-size:22px;letter-spacing:.32em;color:#5c4a22;font-weight:500}
+.brand svg{width:56px;height:56px}
+h1{margin:62px 0 0;font-family:serif;font-weight:500;font-size:64px;line-height:1;color:#1d1a16;letter-spacing:-1px}
+h1 b{font-weight:500;color:#6c1f54}
+p{margin:30px 0 0;font-size:31px;line-height:1.38;color:#4a4339;max-width:520px}
+.rule{position:absolute;left:70px;top:528px;width:56px;height:4px;border-radius:2px;background:#c9a24a}
+.url{position:absolute;left:70px;top:546px;font-size:26px;color:#2d2924}
+.frame{position:absolute;left:654px;top:102px;width:620px;height:452px;border-radius:14px;background:#efe6d6;border:1px solid #e2d6bf;box-shadow:0 26px 60px rgba(60,40,10,.16);padding:12px;box-sizing:border-box}
+.frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:left top;border-radius:6px}
+</style></head><body>
+<div class="card">
+  <svg class="rings" viewBox="0 0 900 760" aria-hidden="true"><g fill="none" stroke="#d9c79e" stroke-width="1.4">
+    <ellipse cx="450" cy="380" rx="430" ry="330" stroke-dasharray="2 7"/><ellipse cx="450" cy="380" rx="350" ry="265"/><ellipse cx="450" cy="380" rx="270" ry="200"/><ellipse cx="450" cy="380" rx="190" ry="140"/></g></svg>
+  <div class="left">
+    <div class="brand"><span id="iso"></span>LABG SUITE</div>
+    <h1>Cytogenetics<b>Pro</b></h1>
+    <p>Del conteo cromosómico al cariotipo publicable</p>
+  </div>
+  <div class="rule"></div>
+  <div class="url">luisangelbg.github.io</div>
+  <div class="frame"><img src="CytogeneticsPro.webp" alt=""></div>
+</div>
+<script src="../../js/labg-core.js"></script>
+<script>if (window.LABG && LABG.isotipo) document.getElementById('iso').innerHTML = LABG.isotipo('og-iso');</script>
+</body></html>

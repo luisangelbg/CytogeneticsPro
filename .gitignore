@@ -1,0 +1,27 @@
+# Operating system
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+desktop.ini
+.DS_Store
+
+# Editors and tooling
+.vscode/
+.idea/
+.claude/
+*.swp
+*~
+
+# Local development tools
+tools/local/
+
+# Archives (including the reproducible packages that Block 10 downloads)
+*.zip
+
+# Verification material, which is not part of the work (see PROCEDENCIA.md, section 6):
+# validation/ holds the R scripts and the comparison reports.
+validation/
+
+# Working files of the manual
+manual/es/_*
+manual/en/_*

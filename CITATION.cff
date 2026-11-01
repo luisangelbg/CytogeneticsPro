@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "CytogeneticsPro: citogenética vegetal en el navegador"
+abstract: >-
+  CytogeneticsPro (from chromosome count to karyotype) is a self-contained web application for
+  plant cytogenetics that runs entirely in the browser, with no installation and no server-side
+  computation. It measures chromosomes on calibrated micrographs (counting markers, polylines that
+  follow the curvature of each chromosome, centromeres, secondary constrictions and satellites) or
+  from typed measurements; builds the karyotype by pairing homologues by length and centromeric
+  index, averages over cells, classifies each pair by the nomenclature of Levan et al. (1964) or
+  Guerra (1986) with configurable limits, writes the karyotype formula, the total length of the
+  complement and the fundamental number, and draws the idiogram to scale with satellites, bands and
+  in-situ hybridization signals. It computes the karyotype asymmetry indices TF%, AsK%, Syi, Rec,
+  A1, A2, A, CVCL, CVCI, MCA, AI and DI and the Stebbins categories; analyses meiosis
+  (configurations, chiasmata, recombination index, abnormalities, meiotic index, pollen viability
+  with confidence intervals and homogeneity tests) and compares the observed configurations with
+  those expected for autopolyploids and allopolyploids, computed exactly from a model of random
+  pairing of chromosome ends; estimates ploidy level and genome size by flow cytometry (2C, 1Cx,
+  pg and Mbp); evaluates the Allium test (mitotic index, phase indices, aberrations, micronuclei);
+  records C, N and fluorochrome bands and FISH signals; compares taxa by multivariate karyological
+  parameters, distances, UPGMA, Ward and principal components, and reconstructs chromosome number
+  evolution on a tree by parsimony with costs per event; offers teaching simulators and exercises;
+  and writes figures, tables, a methods section in Spanish or English and a reproducible package.
+  Bilingual interface (Spanish and English).
+type: software
+authors:
+  - given-names: "Luis Ángel"
+    family-names: "Barrera-Guzmán"
+    email: lbarrerag@chapingo.mx
+    orcid: "https://orcid.org/0000-0001-8057-2583"
+version: "1.0.0"
+url: "https://luisangelbg.github.io/"
+license: GPL-3.0-or-later
+keywords:
+  - plant cytogenetics
+  - karyotype
+  - idiogram
+  - karyotype asymmetry
+  - chromosome measurement
+  - meiosis
+  - chiasma frequency
+  - polyploidy
+  - genome size
+  - flow cytometry
+  - fluorescence in situ hybridization
+  - chromosome number evolution
+  - Allium test

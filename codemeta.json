@@ -1,0 +1,48 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "CytogeneticsPro",
+  "alternateName": "CytogeneticsPro · del conteo cromosómico al cariotipo",
+  "description": "A self-contained, browser-based platform for plant cytogenetics, from the chromosome count to the publishable karyotype. It measures chromosomes on calibrated micrographs or from typed measurements; builds the karyotype (homologue pairing, means over cells, Levan or Guerra classification with configurable limits, karyotype formula, total length and fundamental number) and the idiogram to scale with satellites, bands and FISH signals; computes the asymmetry indices TF%, AsK%, Syi, Rec, A1, A2, A, CVCL, CVCI, MCA, AI and DI and the Stebbins categories; analyses meiosis (configurations, chiasmata, recombination index, abnormalities, meiotic index, pollen viability) with the configurations expected for autopolyploids and allopolyploids; estimates ploidy and genome size by flow cytometry; evaluates the Allium test; compares taxa by multivariate karyological parameters and reconstructs chromosome number evolution by parsimony; offers teaching simulators; and writes figures, tables, methods in Spanish or English and a reproducible package.",
+  "version": "1.0.0",
+  "dateCreated": "2026-10-06",
+  "dateModified": "2026-10-06",
+  "license": "https://spdx.org/licenses/GPL-3.0-or-later",
+  "url": "https://luisangelbg.github.io/",
+  "programmingLanguage": [
+    "JavaScript",
+    "HTML",
+    "CSS"
+  ],
+  "runtimePlatform": "Any modern web browser",
+  "operatingSystem": "Any",
+  "applicationCategory": "Cytogenetics",
+  "keywords": [
+    "plant cytogenetics",
+    "karyotype",
+    "idiogram",
+    "karyotype asymmetry",
+    "chromosome measurement",
+    "meiosis",
+    "chiasma frequency",
+    "polyploidy",
+    "genome size",
+    "flow cytometry",
+    "fluorescence in situ hybridization",
+    "chromosome number evolution",
+    "Allium test"
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Luis Ángel",
+      "familyName": "Barrera-Guzmán",
+      "email": "lbarrerag@chapingo.mx",
+      "@id": "https://orcid.org/0000-0001-8057-2583"
+    }
+  ],
+  "softwareRequirements": [
+    "A modern web browser; no installation"
+  ],
+  "isAccessibleForFree": true
+}

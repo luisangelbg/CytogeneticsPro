@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<!--
+  CytogeneticsPro — plant cytogenetics in the browser, from the chromosome
+  count to the publishable karyotype.  Copyright (C) 2026  Luis Ángel Barrera-Guzmán
+
+  This program is free software: you can redistribute it and/or modify it under
+  the terms of the GNU General Public License as published by the Free Software
+  Foundation, either version 3 of the License, or (at your option) any later
+  version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along with
+  this program, in the file LICENSE.  If not, see <https://www.gnu.org/licenses/>.
+
+  This notice covers the whole program: index.html, css/ and the files in js/.
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-es="CytogeneticsPro · del conteo cromosómico al cariotipo" data-en="CytogeneticsPro · from chromosome count to karyotype">CytogeneticsPro · del conteo cromosómico al cariotipo</title>
+<meta name="description" content="Plant cytogenetics in the browser: chromosome measurement on micrographs, karyotype and idiogram, asymmetry indices, meiosis, ploidy and genome size, banding and in-situ hybridization, comparison among taxa, teaching and publishable figures.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M9 3c3 0 4 4 6 9c-2 5-3 8-6 9c-2 0-2-2-1-4c1-2 3-4 4-5c-1-1-3-3-4-5c-1-2-1-4 1-4zM23 3c-3 0-4 4-6 9c2 5 3 8 6 9c2 0 2-2 1-4c-1-2-3-4-4-5c1-1 3-3 4-5c1-2 1-4-1-4z' fill='%238a2a6b'/%3E%3Ccircle cx='16' cy='12' r='2.2' fill='%232f5f9e'/%3E%3Cpath d='M10 24h12M10 28h12' stroke='%232f5f9e' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>try { var t = localStorage.getItem('cytogeneticspro.theme'); if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+<link rel="stylesheet" href="css/labg-base.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/i18n.js"></script>
+</head>
+<body class="on-home">
+
+<a class="skip-link" href="#main"><span data-l="es">Saltar al contenido</span><span data-l="en">Skip to content</span></a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-row">
+      <div class="brand" id="brand" data-es-title="Inicio" data-en-title="Home"><span id="brandLogo"></span><span>Cytogenetics<span class="brand-pro">Pro</span></span>
+        <span class="brand-sub">· <span data-l="es">del conteo cromosómico al cariotipo</span><span data-l="en">from chromosome count to karyotype</span></span></div>
+      <div class="top-tools">
+        <a class="suite-link" href="https://luisangelbg.github.io/" data-es-title="Volver al portal de la LABG Suite" data-en-title="Back to the LABG Suite portal" title="Volver al portal de la LABG Suite" aria-label="Volver al portal de la LABG Suite">
+          <span id="suiteIso"></span>
+          <span class="suite-text">LABG Suite</span>
+        </a>
+        <div class="seg lang-seg" role="group" aria-label="Idioma / Language">
+          <button type="button" data-lang="es" title="Español">ES</button><button type="button" data-lang="en" title="English">EN</button>
+        </div>
+        <button type="button" class="icon-btn theme-btn" id="themeBtn" title="Cambiar entre tema claro y oscuro" aria-label="Cambiar entre tema claro y oscuro">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>
+        </button>
+        <button type="button" class="icon-btn" id="helpBtn" data-es-title="Atajos de teclado (?)" data-en-title="Keyboard shortcuts (?)" title="Atajos de teclado (?)" aria-label="Atajos de teclado (?)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.6"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="stepper" id="stepper" aria-label="Bloques"></nav>
+  </div>
+</header>
+<input type="file" id="projectFile" accept=".json,application/json" hidden data-es-title="Abrir un proyecto" data-en-title="Open a project" aria-label="Abrir un proyecto">
+
+<main id="main" tabindex="-1">
+
+<!-- ==================== BLOCK 1 · HOME ==================== -->
+<section class="step-panel active" id="panel-1">
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow"><span data-l="es">Citogenética vegetal</span><span data-l="en">Plant cytogenetics</span></div>
+        <h1><span data-l="es">Del <span class="accent">conteo cromosómico</span> al <span class="gold">cariotipo publicable</span></span><span data-l="en">From the <span class="accent">chromosome count</span> to the <span class="gold">publishable karyotype</span></span></h1>
+        <p class="lead"><span data-l="es">Mide los cromosomas sobre tus fotomicrografías, arma el <b>cariotipo</b> y el <b>idiograma</b>, calcula los
+          <b>índices de asimetría</b>, analiza la <b>meiosis</b>, estima la <b>ploidía</b> y el <b>tamaño del genoma</b>, registra
+          bandas y señales de <b>FISH</b>, compara taxones y obtén figuras y métodos redactados. Todo dentro de tu navegador:
+          sin instalar nada, sin servidor y sin que tus datos salgan de tu computadora.</span><span data-l="en">Measure the chromosomes on your micrographs, build the <b>karyotype</b> and the <b>idiogram</b>, compute the
+          <b>asymmetry indices</b>, analyse <b>meiosis</b>, estimate <b>ploidy</b> and <b>genome size</b>, record bands and
+          <b>FISH</b> signals, compare taxa and get figures and written methods. All inside your browser: nothing to install,
+          no server, and your data never leave your computer.</span></p>
+        <div class="hero-cta">
+          <button type="button" class="btn btn-primary btn-lg" id="startBtn"><span data-l="es">Empezar con mis imágenes →</span><span data-l="en">Start with my images →</span></button>
+          <button type="button" class="btn btn-secondary btn-lg" id="labsBtn"><span data-l="es">Probar los laboratorios</span><span data-l="en">Try the labs</span></button>
+          <button type="button" class="btn btn-ghost btn-lg" id="theoryBtn"><span data-l="es">Leer la teoría</span><span data-l="en">Read the theory</span></button>
+          <button type="button" class="btn btn-ghost btn-lg" id="openProjBtn"><span data-l="es">Abrir un proyecto</span><span data-l="en">Open a project</span></button>
+        </div>
+        <div class="badge-row">
+          <span class="badge ok"><span data-l="es">Funciona completo en tu navegador</span><span data-l="en">Runs entirely in your browser</span></span>
+          <span class="badge ok"><span data-l="es">Tus datos no salen de tu computadora</span><span data-l="en">Your data never leave your computer</span></span>
+          <span class="badge ok"><span data-l="es">Índices comprobados contra R</span><span data-l="en">Indices checked against R</span></span>
+          <span class="badge ok"><span data-l="es">Español e inglés</span><span data-l="en">Spanish and English</span></span>
+        </div>
+      </div>
+      <div class="hero-art" id="heroArt" role="img" data-es-title="El idiograma de un cariotipo de maíz simulado, calculado por la app" data-en-title="The idiogram of a simulated maize karyotype, computed by the app" aria-label="El idiograma de un cariotipo de maíz simulado, calculado por la app"></div>
+    </div>
+  </div>
+
+  <div class="messages" id="homeMessages"></div>
+
+  <h2 class="section-title"><span data-l="es">Cómo funciona</span><span data-l="en">How it works</span></h2>
+  <p class="section-sub"><span data-l="es">La ruta es la de un estudio citogenético real, en el orden en que se hace. Cada bloque explica la idea,
+    revisa si tus datos la sostienen y dice qué conviene hacer después.</span><span data-l="en">The route is that of a real cytogenetic study, in the order it is actually done. Each block explains
+    the idea, checks whether your data can support it and says what to do next.</span></p>
+  <div class="workflow" id="workflow"></div>
+
+  <!-- ---------- Interactive labs ---------- -->
+  <h2 class="section-title" id="labs"><span data-l="es">Pruébalo: dos laboratorios que calculan de verdad</span><span data-l="en">Try it: two labs that really compute</span></h2>
+  <p class="section-sub"><span data-l="es">Nada de esto es una animación. Cada cambio recalcula, con los mismos motores que la app usará con tus
+    datos, el idiograma, la clase de cada cromosoma, los índices de asimetría y las configuraciones meióticas esperadas.</span><span data-l="en">None of this is an animation. Every change recomputes, with the same engines the app will use on your
+    data, the idiogram, the class of each chromosome, the asymmetry indices and the expected meiotic configurations.</span></p>
+
+  <div class="playground">
+    <div class="lab-tabs" role="tablist" data-es-title="Laboratorios" data-en-title="Labs" aria-label="Laboratorios">
+      <button type="button" class="lab-tab on" data-lab="lab1" role="tab" aria-selected="true" aria-controls="lab1" id="tabLab1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 3v7M6 13v8M12 5v5M12 13v6M18 2v8M18 13v9M4 11.5h16"/></svg>
+        <span data-l="es">Dibuja un idiograma</span><span data-l="en">Draw an idiogram</span></button>
+      <button type="button" class="lab-tab" data-lab="lab2" role="tab" aria-selected="false" aria-controls="lab2" id="tabLab2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8c2 2 6 2 8 0M8 16c2-2 6-2 8 0M8 8v8M16 8v8"/></svg>
+        <span data-l="es">Ploidía y meiosis</span><span data-l="en">Ploidy and meiosis</span></button>
+    </div>
+
+    <!-- LAB 1 -->
+    <div class="lab on" id="lab1" role="tabpanel" aria-labelledby="tabLab1">
+      <p class="hint" style="margin-top:0"><span data-l="es">Arrastra los extremos de cada cromosoma (los círculos) o escribe la longitud de sus brazos (p, el corto; q, el largo). La clase de
+        cada cromosoma (Levan et al. 1964) y los índices de asimetría se recalculan al instante; la cuadrícula de Stebbins (1971)
+        muestra dónde cae el cariotipo.</span><span data-l="en">Drag the ends of each chromosome (the circles) or type the length of its arms (p, the short one; q, the long one). The class of each
+        chromosome (Levan et al. 1964) and the asymmetry indices are recomputed at once; the Stebbins (1971) grid shows where the
+        karyotype falls.</span></p>
+      <div class="pg-controls">
+        <button type="button" class="btn btn-secondary btn-sm" id="lab1Reset"><span data-l="es">Restablecer</span><span data-l="en">Reset</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="lab1Sym"><span data-l="es">Todo simétrico</span><span data-l="en">All symmetric</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="lab1Asym"><span data-l="es">Muy asimétrico</span><span data-l="en">Very asymmetric</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="lab1Add"><span data-l="es">+ Cromosoma</span><span data-l="en">+ Chromosome</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="lab1Del"><span data-l="es">− Cromosoma</span><span data-l="en">− Chromosome</span></button>
+      </div>
+      <div class="lab-grid">
+        <div class="pg-pane">
+          <div class="pg-title"><span data-l="es">El idiograma (arrastra los círculos)</span><span data-l="en">The idiogram (drag the circles)</span></div>
+          <div class="lab-idio" id="lab1Idio"></div>
+          <div class="table-scroll" style="padding:0 10px 10px"><table class="lab-arms" id="lab1Arms"></table></div>
+        </div>
+        <div>
+          <div class="pg-pane">
+            <div class="pg-title"><span data-l="es">Índices de asimetría</span><span data-l="en">Asymmetry indices</span></div>
+            <div class="idx-grid" id="lab1Idx"></div>
+          </div>
+          <div class="pg-pane steb" style="margin-top:12px">
+            <div class="pg-title"><span data-l="es">Categorías de Stebbins</span><span data-l="en">Stebbins categories</span></div>
+            <div id="lab1Steb" style="padding:6px 10px 10px"></div>
+          </div>
+        </div>
+      </div>
+      <div class="pg-status" id="lab1Status" aria-live="polite"></div>
+    </div>
+
+    <!-- LAB 2 -->
+    <div class="lab" id="lab2" role="tabpanel" aria-labelledby="tabLab2">
+      <p class="hint" style="margin-top:0"><span data-l="es">Elige el nivel de ploidía y su origen. Con un <b>autopoliploide</b> los homólogos se emparejan al azar
+        y pueden formar multivalentes; con un <b>alopoliploide</b> cada cromosoma sólo se empareja con el de su propio genoma y
+        se esperan bivalentes. La frecuencia de quiasma por brazo (c) decide cuántas configuraciones se abren.</span><span data-l="en">Choose the ploidy level and its origin. In an <b>autopolyploid</b> the homologues pair at random and
+        may form multivalents; in an <b>allopolyploid</b> each chromosome pairs only with the one of its own genome and bivalents
+        are expected. The chiasma frequency per arm (c) decides how many configurations open up.</span></p>
+      <div class="pg-controls">
+        <label class="inline-label" for="lab2Level"><span data-l="es">Nivel de ploidía</span><span data-l="en">Ploidy level</span>
+          <select id="lab2Level">
+            <option value="2">2x</option><option value="3">3x</option><option value="4" selected>4x</option><option value="5">5x</option><option value="6">6x</option><option value="8">8x</option>
+          </select></label>
+        <label class="inline-label" for="lab2Mode"><span data-l="es">Origen</span><span data-l="en">Origin</span>
+          <select id="lab2Mode">
+            <option value="auto" data-es="Autopoliploide" data-en="Autopolyploid">Autopoliploide</option>
+            <option value="allo" data-es="Alopoliploide" data-en="Allopolyploid">Alopoliploide</option>
+            <option value="custom" data-es="Fórmula propia" data-en="Own formula">Fórmula propia</option>
+          </select></label>
+        <label class="inline-label" for="lab2Formula" id="lab2FormulaWrap" hidden><span data-l="es">Fórmula genómica</span><span data-l="en">Genome formula</span>
+          <input type="text" id="lab2Formula" value="AAAABB" size="9" spellcheck="false"></label>
+        <label class="range-label" for="lab2X"><span data-l="es">Número básico x</span><span data-l="en">Base number x</span>
+          <input type="range" id="lab2X" min="3" max="20" step="1" value="7"><output id="lab2XOut" for="lab2X">7</output></label>
+        <label class="range-label" for="lab2C"><span data-l="es">Quiasma por brazo, c</span><span data-l="en">Chiasma per arm, c</span>
+          <input type="range" id="lab2C" min="0" max="1" step="0.01" value="0.85"><output id="lab2COut" for="lab2C">0.85</output></label>
+        <button type="button" class="btn btn-ghost btn-sm" id="lab2Sim"><span data-l="es">Otra célula al azar</span><span data-l="en">Another random cell</span></button>
+      </div>
+      <div class="lab-grid">
+        <div class="pg-pane">
+          <div class="pg-title"><span data-l="es">Configuraciones esperadas por célula</span><span data-l="en">Expected configurations per cell</span></div>
+          <div class="lab-bars" id="lab2Bars" style="padding:6px 10px 10px"></div>
+          <div class="table-scroll" style="padding:0 10px 10px" id="lab2Table"></div>
+        </div>
+        <div class="pg-pane">
+          <div class="pg-title"><span data-l="es">Una célula en diacinesis, sacada del mismo modelo</span><span data-l="en">One cell at diakinesis, drawn from the same model</span></div>
+          <div class="lab-cell" id="lab2Cell" style="padding:6px 10px 10px"></div>
+        </div>
+      </div>
+      <div class="pg-status" id="lab2Status" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- ---------- The ten blocks ---------- -->
+  <h2 class="section-title"><span data-l="es">Los diez bloques</span><span data-l="en">The ten blocks</span></h2>
+  <p class="section-sub"><span data-l="es">Un bloque es un paso del estudio. Cada uno se abre con su botón en la barra de arriba o desde aquí.</span><span data-l="en">A block is a step of the study. Each one opens with its button in the bar above or from here.</span></p>
+  <div class="feature-grid" id="blockGrid" data-lnav-skip></div>
+
+  <!-- ---------- Examples ---------- -->
+  <h2 class="section-title" id="examples"><span data-l="es">Ejemplos incluidos</span><span data-l="en">Included examples</span></h2>
+  <p class="section-sub"><span data-l="es">Cuatro conjuntos de datos <b>simulados</b> para recorrer la app sin datos propios. Los nombres de las especies son
+    reales, pero las medidas no son mediciones: se generaron con un guion que está en la carpeta <code>data/</code>.</span><span data-l="en">Four <b>simulated</b> data sets to go through the app without data of your own. The species names are
+    real, but the values are not measurements: they were generated by a script kept in the <code>data/</code> folder.</span></p>
+  <div class="material-strip" id="exampleStrip"></div>
+
+  <!-- ---------- Methods ---------- -->
+  <h2 class="section-title"><span data-l="es">Los métodos y de dónde vienen</span><span data-l="en">The methods and where they come from</span></h2>
+  <p class="section-sub"><span data-l="es">Cada método cita el trabajo que lo define; la lista completa está al pie de esta página y el informe del
+    Bloque 10 cita sólo los que hayas usado.</span><span data-l="en">Each method cites the work that defines it; the full list is at the foot of this page and the report of
+    Block 10 cites only those you used.</span></p>
+  <div class="method-filter" id="methodFilter"></div>
+  <div class="method-gallery" id="methodGallery"></div>
+
+  <!-- ---------- Theory ---------- -->
+  <h2 class="section-title" id="theory"><span data-l="es">La teoría, en lenguaje llano</span><span data-l="en">The theory, in plain words</span></h2>
+  <p class="section-sub"><span data-l="es">Las ideas que sostienen todo lo demás. Cada una dice en qué bloque se usa.</span><span data-l="en">The ideas that hold up everything else. Each one says in which block it is used.</span></p>
+  <div class="card theory-card" id="theoryHost"></div>
+
+  <!-- ---------- Limits ---------- -->
+  <h2 class="section-title"><span data-l="es">Lo que este programa no hace</span><span data-l="en">What this program does not do</span></h2>
+  <div class="notdo">
+    <div><b><span data-l="es">Reconocer cromosomas solo</span><span data-l="en">Recognising chromosomes by itself</span></b><span data-l="es">Tú trazas cada cromosoma; la app mide con exactitud lo que trazas, sin segmentación automática.</span><span data-l="en">You trace each chromosome; the app measures exactly what you trace, without automatic segmentation.</span></div>
+    <div><b><span data-l="es">Controlar el microscopio o el citómetro</span><span data-l="en">Driving the microscope or the cytometer</span></b><span data-l="es">Lee las imágenes y los archivos de texto que exportan, nunca los equipos.</span><span data-l="en">It reads the images and text files they export, never the instruments.</span></div>
+    <div><b><span data-l="es">Modelos de verosimilitud</span><span data-l="en">Likelihood models</span></b><span data-l="es">La evolución del número cromosómico se reconstruye por parsimonia con costos por evento, no por máxima verosimilitud.</span><span data-l="en">Chromosome number evolution is reconstructed by parsimony with costs per event, not by maximum likelihood.</span></div>
+    <div><b><span data-l="es">Mapas con capas ajenas</span><span data-l="en">Maps with third-party layers</span></b><span data-l="es">El mapa de citotipos se dibuja sobre una retícula de coordenadas; puedes cargar tu propio contorno.</span><span data-l="en">The map of cytotypes is drawn on a grid of coordinates; you can load your own outline.</span></div>
+  </div>
+
+  <!-- ---------- References ---------- -->
+  <h2 class="section-title" id="refs"><span data-l="es">Referencias</span><span data-l="en">References</span></h2>
+  <div class="ref-tools" id="refTools"></div>
+  <ol class="ref-list" id="refList"></ol>
+
+  <!-- ---------- Cite ---------- -->
+  <h2 class="section-title" id="cite"><span data-l="es">Cómo citar</span><span data-l="en">How to cite</span></h2>
+  <div class="cite-box">
+    <p style="margin:0 0 8px"><span data-l="es">Si este programa te sirvió para un trabajo publicado, cítalo así:</span><span data-l="en">If this program helped with a published work, cite it as:</span></p>
+    <div class="cite-ref" id="citeApa"></div>
+    <button type="button" class="btn btn-secondary btn-sm" id="copyApa"><span data-l="es">Copiar la cita</span><span data-l="en">Copy the citation</span></button>
+    <details style="margin-top:12px"><summary><span data-l="es">BibTeX</span><span data-l="en">BibTeX</span></summary>
+      <pre class="cite-ref" id="citeBib"></pre>
+      <button type="button" class="btn btn-ghost btn-sm" id="copyBib"><span data-l="es">Copiar BibTeX</span><span data-l="en">Copy BibTeX</span></button>
+    </details>
+  </div>
+
+  <p class="footer-note"><span data-l="es">CytogeneticsPro · © 2026 Luis Ángel Barrera-Guzmán · Software libre bajo la licencia GPL-3.0 o posterior · Parte de la LABG Suite</span><span data-l="en">CytogeneticsPro · © 2026 Luis Ángel Barrera-Guzmán · Free software under the GPL-3.0-or-later licence · Part of the LABG Suite</span></p>
+</section>
+
+<!-- ==================== BLOCK 2 · IMAGES AND MEASUREMENT ==================== -->
+<section class="step-panel" id="panel-2">
+  <div class="panel-title"><div class="pt-num">2</div><div><h2><span data-l="es">Imágenes y medición</span><span data-l="en">Images and measurement</span></h2>
+    <p><span data-l="es">Calibrar, contar, trazar cada cromosoma y medir sus brazos</span><span data-l="en">Calibrate, count, trace every chromosome and measure its arms</span></p></div></div>
+
+  <div class="card" id="b2Start">
+    <h2><span data-l="es">Abrir imágenes, medidas o un proyecto</span><span data-l="en">Open images, measurements or a project</span></h2>
+    <p class="hint"><span data-l="es">Cada imagen abre una célula de la accesión elegida abajo. También puedes capturar las medidas a mano o pegarlas de una hoja de cálculo. Todo se queda en tu computadora; guarda el proyecto completo (con sus imágenes) con Ctrl + S.</span><span data-l="en">Each image opens a cell of the accession chosen below. You can also type the measurements by hand or paste them from a spreadsheet. Everything stays on your computer; save the whole project (with its images) with Ctrl + S.</span></p>
+    <div class="src-grid">
+      <button type="button" class="src-tile src-drop" id="b2Drop"><b><span data-l="es">Abrir imágenes o un proyecto</span><span data-l="en">Open images or a project</span></b>
+        <small><span data-l="es">Haz clic o suelta aquí fotomicrografías PNG o JPG, o un proyecto .json</span><span data-l="en">Click or drop here PNG or JPG micrographs, or a .json project</span></small></button>
+      <button type="button" class="src-tile" id="b2NewCell"><b><span data-l="es">Célula sin imagen</span><span data-l="en">Cell without an image</span></b>
+        <small><span data-l="es">Escribe la longitud de los brazos de cada cromosoma</span><span data-l="en">Type the length of the arms of each chromosome</span></small></button>
+      <button type="button" class="src-tile" id="b2PasteBtn"><b><span data-l="es">Pegar medidas</span><span data-l="en">Paste measurements</span></b>
+        <small><span data-l="es">Columnas copiadas de una hoja de cálculo o de un artículo</span><span data-l="en">Columns copied from a spreadsheet or a paper</span></small></button>
+      <button type="button" class="src-tile" id="b2Example"><b><span data-l="es">Ejemplo: maíz simulado</span><span data-l="en">Example: simulated maize</span></b>
+        <small><span data-l="es">Cinco células; la primera con su metafase lista para trazar</span><span data-l="en">Five cells; the first with its metaphase ready to trace</span></small></button>
+    </div>
+    <input type="file" id="b2File" accept="image/png,image/jpeg,.png,.jpg,.jpeg,.json,application/json" multiple hidden data-es-title="Imágenes o proyecto" data-en-title="Images or project" aria-label="Imágenes o proyecto">
+    <div id="b2PasteBox" hidden>
+      <div class="field"><label for="b2PasteText"><span data-l="es">Medidas</span><span data-l="en">Measurements</span></label>
+        <textarea id="b2PasteText" rows="7" spellcheck="false" data-es-ph="accesión, célula, cromosoma, p, q, satélite, brazo del satélite" data-en-ph="accession, cell, chromosome, p, q, satellite, satellite arm"></textarea></div>
+      <p class="hint"><span data-l="es">Una fila por cromosoma, en micras. Con encabezados, la app reconoce las columnas por su nombre; sin ellos: <b>p q</b> (una célula nueva), <b>cromosoma p q</b>, <b>célula cromosoma p q</b> o <b>accesión célula cromosoma p q [satélite] [brazo]</b>. El separador puede ser tabulador, punto y coma o coma.</span><span data-l="en">One row per chromosome, in microns. With headers, the app recognises the columns by name; without them: <b>p q</b> (a new cell), <b>chromosome p q</b>, <b>cell chromosome p q</b> or <b>accession cell chromosome p q [satellite] [arm]</b>. The separator can be tab, semicolon or comma.</span></p>
+      <button type="button" class="btn btn-primary" id="b2PasteRead"><span data-l="es">Leer las medidas</span><span data-l="en">Read the measurements</span></button>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary btn-sm" id="b2Save"><span data-l="es">Guardar el proyecto (.json)</span><span data-l="en">Save the project (.json)</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b2NewProj"><span data-l="es">Proyecto nuevo</span><span data-l="en">New project</span></button>
+    </div>
+    <div class="messages" id="b2Msg"></div>
+  </div>
+
+  <div class="card" id="b2AccCard">
+    <h2><span data-l="es">Accesiones y células</span><span data-l="en">Accessions and cells</span></h2>
+    <p class="hint"><span data-l="es">Una accesión es una muestra (población, colecta, variedad); sus células se promedian en el cariotipo. El número básico x sirve para la fórmula y la ploidía.</span><span data-l="en">An accession is a sample (population, collection, variety); its cells are averaged in the karyotype. The base number x is used for the formula and the ploidy.</span></p>
+    <div class="b2-accbar">
+      <label class="inline-label" for="b2AccSel"><span data-l="es">Accesión</span><span data-l="en">Accession</span> <select id="b2AccSel"></select></label>
+      <button type="button" class="btn btn-ghost btn-sm" id="b2AccNew"><span data-l="es">+ Accesión</span><span data-l="en">+ Accession</span></button>
+      <button type="button" class="btn btn-ghost btn-sm danger" id="b2AccDel"><span data-l="es">Borrar la accesión</span><span data-l="en">Delete the accession</span></button>
+    </div>
+    <div class="form-grid" id="b2AccForm">
+      <div class="field"><label for="b2AccName"><span data-l="es">Nombre</span><span data-l="en">Name</span></label><input type="text" id="b2AccName" data-f="name"></div>
+      <div class="field"><label for="b2AccTaxon"><span data-l="es">Taxón</span><span data-l="en">Taxon</span></label><input type="text" id="b2AccTaxon" data-f="taxon"></div>
+      <div class="field"><label for="b2AccLoc"><span data-l="es">Localidad</span><span data-l="en">Locality</span></label><input type="text" id="b2AccLoc" data-f="locality"></div>
+      <div class="field"><label for="b2AccLat"><span data-l="es">Latitud</span><span data-l="en">Latitude</span></label><input type="number" step="0.0001" min="-90" max="90" id="b2AccLat" data-f="lat"></div>
+      <div class="field"><label for="b2AccLon"><span data-l="es">Longitud</span><span data-l="en">Longitude</span></label><input type="number" step="0.0001" min="-180" max="180" id="b2AccLon" data-f="lon"></div>
+      <div class="field"><label for="b2AccX"><span data-l="es">Número básico x</span><span data-l="en">Base number x</span></label><input type="number" step="1" min="1" max="200" id="b2AccX" data-f="x"></div>
+    </div>
+    <h3><span data-l="es">Células de esta accesión</span><span data-l="en">Cells of this accession</span></h3>
+    <div class="cell-strip" id="b2Cells"></div>
+    <div class="b2-cellbar" id="b2CellBar" hidden>
+      <label class="inline-label" for="b2CellLabel"><span data-l="es">Nombre de la célula</span><span data-l="en">Name of the cell</span> <input type="text" id="b2CellLabel" size="18"></label>
+      <button type="button" class="btn btn-ghost btn-sm" id="b2CellImg"><span data-l="es">Poner o cambiar su imagen</span><span data-l="en">Set or change its image</span></button>
+      <button type="button" class="btn btn-ghost btn-sm danger" id="b2CellDel"><span data-l="es">Borrar la célula</span><span data-l="en">Delete the cell</span></button>
+      <input type="file" id="b2CellFile" accept="image/png,image/jpeg,.png,.jpg,.jpeg" hidden data-es-title="Imagen de la célula" data-en-title="Image of the cell" aria-label="Imagen de la célula">
+    </div>
+  </div>
+
+  <div class="card soon-box" id="b2Empty">
+    <div class="soon-art" data-art="2"></div>
+    <h3><span data-l="es">Todavía no hay células</span><span data-l="en">There are no cells yet</span></h3>
+    <p><span data-l="es">Abre una fotomicrografía, crea una célula sin imagen, pega tus medidas o abre el ejemplo del maíz.</span><span data-l="en">Open a micrograph, create a cell without an image, paste your measurements or open the maize example.</span></p>
+  </div>
+
+  <div class="card" id="b2EditorCard" hidden>
+    <h2><span data-l="es">Medición sobre la imagen</span><span data-l="en">Measuring on the image</span></h2>
+    <div class="img-tools" role="toolbar" id="b2Tools" data-es-title="Herramientas de medición" data-en-title="Measuring tools" aria-label="Herramientas de medición">
+      <button type="button" class="tool" data-tool="pan" data-key="V"><span data-l="es">Mover</span><span data-l="en">Pan</span></button>
+      <button type="button" class="tool" data-tool="calib" data-key="C"><span data-l="es">Calibrar</span><span data-l="en">Calibrate</span></button>
+      <button type="button" class="tool" data-tool="count" data-key="N"><span data-l="es">Contar</span><span data-l="en">Count</span></button>
+      <button type="button" class="tool" data-tool="trace" data-key="T"><span data-l="es">Trazar</span><span data-l="en">Trace</span></button>
+      <button type="button" class="tool" data-tool="cen" data-key="M"><span data-l="es">Centrómero</span><span data-l="en">Centromere</span></button>
+      <button type="button" class="tool" data-tool="sat" data-key="S"><span data-l="es">Satélite</span><span data-l="en">Satellite</span></button>
+      <button type="button" class="tool" data-tool="edit" data-key="E"><span data-l="es">Editar</span><span data-l="en">Edit</span></button>
+      <button type="button" class="tool" data-tool="erase" data-key="B"><span data-l="es">Borrar</span><span data-l="en">Erase</span></button>
+      <span class="b2-sep" aria-hidden="true"></span>
+      <button type="button" class="btn btn-ghost btn-sm" id="b2ZoomOut" data-es-title="Alejar (−)" data-en-title="Zoom out (−)" aria-label="Alejar (−)">−</button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b2ZoomIn" data-es-title="Acercar (+)" data-en-title="Zoom in (+)" aria-label="Acercar (+)">+</button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b2Fit"><span data-l="es">Ajustar (0)</span><span data-l="en">Fit (0)</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b2Undo"><span data-l="es">↶ Deshacer</span><span data-l="en">↶ Undo</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b2Redo"><span data-l="es">↷ Rehacer</span><span data-l="en">↷ Redo</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" id="b2ExportImg"><span data-l="es">Imagen anotada (PNG)</span><span data-l="en">Annotated image (PNG)</span></button>
+    </div>
+    <div class="img-layout">
+      <div class="img-host" id="b2Canvas"></div>
+      <aside class="img-side">
+        <div class="img-help" id="b2Help"></div>
+        <div class="img-sec">
+          <h3><span data-l="es">Calibración</span><span data-l="en">Calibration</span></h3>
+          <div class="field"><label for="b2Um"><span data-l="es">Longitud de la barra de escala</span><span data-l="en">Length of the scale bar</span> <span class="nocase">(µm)</span></label>
+            <input type="number" id="b2Um" min="0.01" step="0.01" value="10"></div>
+          <p class="hint" id="b2CalibInfo"></p>
+        </div>
+        <div class="img-sec">
+          <h3><span data-l="es">Imagen</span><span data-l="en">Image</span></h3>
+          <label class="range-label" for="b2Bright"><span data-l="es">Brillo</span><span data-l="en">Brightness</span> <input type="range" id="b2Bright" min="40" max="200" value="100"><output id="b2BrightOut" for="b2Bright">100</output></label>
+          <label class="range-label" for="b2Contrast"><span data-l="es">Contraste</span><span data-l="en">Contrast</span> <input type="range" id="b2Contrast" min="40" max="300" value="100"><output id="b2ContrastOut" for="b2Contrast">100</output></label>
+        </div>
+        <div class="img-sec">
+          <h3><span data-l="es">Conteo</span><span data-l="en">Count</span></h3>
+          <p class="img-count" id="b2CountInfo"></p>
+          <button type="button" class="btn btn-ghost btn-sm" id="b2CountSend"><span data-l="es">Llevar el conteo a la ploidía (Bloque 6)</span><span data-l="en">Take the count to ploidy (Block 6)</span></button>
+        </div>
+        <div class="img-sec" id="b2SelInfo"></div>
+      </aside>
+    </div>
+    <div class="sr-only" aria-live="polite" id="b2Live"></div>
+  </div>
+
+  <div class="card" id="b2TableCard" hidden>
+    <h2><span data-l="es">Mediciones de la célula</span><span data-l="en">Measurements of the cell</span></h2>
+    <p class="hint"><span data-l="es">Los cromosomas trazados se miden solos a lo largo de su curvatura. Los capturados a mano se editan aquí; también puedes pegar un bloque de celdas copiado de una hoja de cálculo sobre la primera celda. p es el brazo corto y q el largo, sin el satélite, que va en su propia columna.</span><span data-l="en">Traced chromosomes are measured by themselves along their curvature. Hand-typed ones are edited here; you can also paste a block of cells copied from a spreadsheet onto the first cell. p is the short arm and q the long one, without the satellite, which goes in its own column.</span></p>
+    <div class="table-scroll tall" id="b2Table"></div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary btn-sm" id="b2AddRow"><span data-l="es">+ Cromosoma</span><span data-l="en">+ Chromosome</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b2CsvCell"><span data-l="es">Esta célula (CSV)</span><span data-l="en">This cell (CSV)</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b2CsvAll"><span data-l="es">Todas las mediciones (CSV)</span><span data-l="en">All measurements (CSV)</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b2TsvAll"><span data-l="es">Todas (TSV)</span><span data-l="en">All (TSV)</span></button>
+    </div>
+  </div>
+
+  <div class="card" id="b2Summary" hidden>
+    <h2><span data-l="es">Resumen de las mediciones</span><span data-l="en">Summary of the measurements</span></h2>
+    <div id="b2Tiles"></div>
+    <div class="table-scroll" id="b2SumTable"></div>
+    <div class="messages" id="b2SumMsg"></div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 3 · KARYOTYPE ==================== -->
+<section class="step-panel" id="panel-3">
+  <div class="panel-title"><div class="pt-num">3</div><div><h2><span data-l="es">Cariotipo</span><span data-l="en">Karyotype</span></h2>
+    <p><span data-l="es">Homólogos, promedios, clasificación, fórmula e idiograma</span><span data-l="en">Homologues, means, classification, formula and idiogram</span></p></div></div>
+
+  <div class="card soon-box" id="b3Empty">
+    <div class="soon-art" data-art="3"></div>
+    <h3><span data-l="es">Todavía no hay mediciones</span><span data-l="en">There are no measurements yet</span></h3>
+    <p><span data-l="es">Mide al menos una célula en el Bloque 2, o abre el ejemplo del chayote, con cuatro accesiones.</span><span data-l="en">Measure at least one cell in Block 2, or open the chayote example, with four accessions.</span></p>
+    <div class="btn-row" style="justify-content:center">
+      <button type="button" class="btn btn-secondary btn-sm" data-goto="2"><span data-l="es">Ir al Bloque 2</span><span data-l="en">Go to Block 2</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" data-example="sechium"><span data-l="es">Abrir el ejemplo del chayote</span><span data-l="en">Open the chayote example</span></button>
+    </div>
+  </div>
+
+  <div id="b3Work" hidden>
+    <div class="card" id="b3Settings">
+      <h2><span data-l="es">Ajustes del cariotipo</span><span data-l="en">Karyotype settings</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b3Acc"><span data-l="es">Accesión</span><span data-l="en">Accession</span></label><select id="b3Acc"></select></div>
+        <div class="field"><label for="b3Scheme"><span data-l="es">Clasificación</span><span data-l="en">Classification</span></label>
+          <select id="b3Scheme">
+            <option value="levan" data-es="Levan et al. 1964 · razón de brazos" data-en="Levan et al. 1964 · arm ratio">Levan et al. 1964 · razón de brazos</option>
+            <option value="levanci" data-es="Levan et al. 1964 · índice centromérico" data-en="Levan et al. 1964 · centromeric index">Levan et al. 1964 · índice centromérico</option>
+            <option value="guerra" data-es="Guerra 1986 · m, sm, a" data-en="Guerra 1986 · m, sm, a">Guerra 1986 · m, sm, a</option>
+            <option value="custom" data-es="Límites propios" data-en="Own limits">Límites propios</option>
+          </select></div>
+        <div class="field" id="b3CustomWrap" hidden><label for="b3Limits"><span data-l="es">Límites de r (separados por comas)</span><span data-l="en">Limits of r (comma separated)</span></label><input type="text" id="b3Limits" value="1.7, 3, 7"></div>
+        <div class="field" id="b3CustomWrap2" hidden><label for="b3Labels"><span data-l="es">Nombres de las clases</span><span data-l="en">Names of the classes</span></label><input type="text" id="b3Labels" value="m, sm, st, t"></div>
+        <div class="field"><label for="b3X"><span data-l="es">Número básico x</span><span data-l="en">Base number x</span></label><input type="number" id="b3X" min="1" step="1"></div>
+        <div class="field"><label for="b3K"><span data-l="es">Homólogos por grupo</span><span data-l="en">Homologues per group</span></label>
+          <select id="b3K"><option value="2" data-es="2 (pares)" data-en="2 (pairs)">2 (pares)</option><option value="3">3</option><option value="4">4</option><option value="6">6</option><option value="8">8</option></select></div>
+        <div class="field"><label for="b3Order"><span data-l="es">Orden de los pares</span><span data-l="en">Order of the pairs</span></label>
+          <select id="b3Order"><option value="length" data-es="Por longitud" data-en="By length">Por longitud</option><option value="type" data-es="Por tipo y longitud" data-en="By type and length">Por tipo y longitud</option></select></div>
+        <div class="field"><label for="b3StArms"><span data-l="es">Brazos de un st en el NF</span><span data-l="en">Arms of an st in the NF</span></label>
+          <select id="b3StArms"><option value="1">1</option><option value="2">2</option></select></div>
+        <div class="field"><label for="b3Pop"><span data-l="es">Desviación estándar</span><span data-l="en">Standard deviation</span></label>
+          <select id="b3Pop"><option value="0" data-es="Muestral (n − 1)" data-en="Sample (n − 1)">Muestral (n − 1)</option><option value="1" data-es="Poblacional (n)" data-en="Population (n)">Poblacional (n)</option></select></div>
+      </div>
+      <label class="checkbox-label"><input type="checkbox" id="b3Sat" checked> <span data-l="es">Sumar el satélite a la longitud de su brazo</span><span data-l="en">Add the satellite to the length of its arm</span></label>
+      <label class="checkbox-label"><input type="checkbox" id="b3Strict"> <span data-l="es">Distinguir M (r = 1) y T (sin brazo corto)</span><span data-l="en">Distinguish M (r = 1) and T (no short arm)</span></label>
+      <label class="checkbox-label"><input type="checkbox" id="b3SatF" checked> <span data-l="es">Marcar los pares con satélite en la fórmula («-sat»)</span><span data-l="en">Mark the pairs with a satellite in the formula («-sat»)</span></label>
+      <div class="messages" id="b3Msg"></div>
+    </div>
+
+    <div class="card" id="b3PairCard">
+      <h2><span data-l="es">Emparejamiento de homólogos</span><span data-l="en">Pairing of homologues</span></h2>
+      <p class="hint"><span data-l="es">La app agrupa los cromosomas de cada célula por longitud e índice centromérico. Si un homólogo quedó en otro par, arrástralo sobre el cromosoma con el que debe intercambiarse, o selecciónalo y luego elige el otro. Un par corregido a mano queda así aunque cambies los ajustes.</span><span data-l="en">The app groups the chromosomes of each cell by length and centromeric index. If a homologue ended up in another pair, drag it onto the chromosome it should swap with, or select it and then choose the other. A pair corrected by hand stays so even if you change the settings.</span></p>
+      <div class="chips" id="b3CellChips" role="group" data-es-title="Células" data-en-title="Cells" aria-label="Células"></div>
+      <div class="btn-row" style="margin:0 0 10px">
+        <button type="button" class="btn btn-ghost btn-sm" id="b3AutoCell"><span data-l="es">Emparejar de nuevo esta célula</span><span data-l="en">Pair this cell again</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b3AutoAll"><span data-l="es">Emparejar de nuevo todas</span><span data-l="en">Pair all again</span></button>
+      </div>
+      <div class="karyo-board" id="b3Board"></div>
+      <div class="sr-only" aria-live="polite" id="b3Live"></div>
+    </div>
+
+    <div class="card" id="b3ResCard">
+      <h2><span data-l="es">Cariotipo de la accesión</span><span data-l="en">Karyotype of the accession</span></h2>
+      <div id="b3Tiles"></div>
+      <div class="table-scroll tall" id="b3Table"></div>
+      <div class="btn-row">
+        <button type="button" class="btn btn-secondary btn-sm" id="b3Csv"><span data-l="es">Tabla (CSV)</span><span data-l="en">Table (CSV)</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b3Tsv"><span data-l="es">Tabla (TSV)</span><span data-l="en">Table (TSV)</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b3CsvAll"><span data-l="es">Todas las accesiones (CSV)</span><span data-l="en">All accessions (CSV)</span></button>
+      </div>
+    </div>
+
+    <div class="card" id="b3IdioCard">
+      <h2><span data-l="es">Idiograma</span><span data-l="en">Idiogram</span></h2>
+      <div class="b3-opts">
+        <label class="inline-label" for="b3View"><span data-l="es">Vista</span><span data-l="en">View</span>
+          <select id="b3View"><option value="haploid" data-es="Un cromosoma por par" data-en="One chromosome per pair">Un cromosoma por par</option><option value="diploid" data-es="Los homólogos" data-en="The homologues">Los homólogos</option></select></label>
+        <label class="inline-label" for="b3Unit"><span data-l="es">Escala</span><span data-l="en">Scale</span>
+          <select id="b3Unit"><option value="um" data-es="Micras" data-en="Microns">Micras</option><option value="rel" data-es="Longitud relativa (%)" data-en="Relative length (%)">Longitud relativa (%)</option></select></label>
+        <label class="checkbox-label"><input type="checkbox" id="b3ColorType"> <span data-l="es">Color por clase</span><span data-l="en">Colour by class</span></label>
+        <label class="checkbox-label"><input type="checkbox" id="b3Sd"> <span data-l="es">Desviación entre células</span><span data-l="en">Deviation among cells</span></label>
+        <label class="checkbox-label"><input type="checkbox" id="b3Marks" checked> <span data-l="es">Bandas y señales (Bloque 7)</span><span data-l="en">Bands and signals (Block 7)</span></label>
+        <label class="inline-label" for="b3Title"><span data-l="es">Título</span><span data-l="en">Title</span> <input type="text" id="b3Title" size="22"></label>
+      </div>
+      <div class="fig-block" data-fig="idiogram">
+        <div class="fig-head"><h4><span data-l="es">Idiograma</span><span data-l="en">Idiogram</span></h4>
+          <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+        <div class="fig-canvas" id="b3Idio"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 4 · ASYMMETRY ==================== -->
+<section class="step-panel" id="panel-4">
+  <div class="panel-title"><div class="pt-num">4</div><div><h2><span data-l="es">Asimetría y parámetros cariológicos</span><span data-l="en">Asymmetry and karyological parameters</span></h2>
+    <p><span data-l="es">Los índices, qué mide cada uno y cuáles se recomiendan</span><span data-l="en">The indices, what each one measures and which are recommended</span></p></div></div>
+
+  <div class="card soon-box" id="b4Empty">
+    <div class="soon-art" data-art="4"></div>
+    <h3><span data-l="es">Todavía no hay un cariotipo</span><span data-l="en">There is no karyotype yet</span></h3>
+    <p><span data-l="es">Los índices se calculan con los cariotipos del Bloque 3. Mide células en el Bloque 2 o abre el ejemplo del chayote.</span><span data-l="en">The indices are computed from the karyotypes of Block 3. Measure cells in Block 2 or open the chayote example.</span></p>
+    <div class="btn-row" style="justify-content:center">
+      <button type="button" class="btn btn-secondary btn-sm" data-goto="2"><span data-l="es">Ir al Bloque 2</span><span data-l="en">Go to Block 2</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" data-example="sechium"><span data-l="es">Abrir el ejemplo del chayote</span><span data-l="en">Open the chayote example</span></button>
+    </div>
+  </div>
+
+  <div id="b4Work" hidden>
+    <div class="card" id="b4Settings">
+      <h2><span data-l="es">Cómo se calculan</span><span data-l="en">How they are computed</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b4Mode"><span data-l="es">Sobre qué cromosomas</span><span data-l="en">On which chromosomes</span></label>
+          <select id="b4Mode">
+            <option value="pairs" data-es="Las medias de los pares (un juego)" data-en="The means of the pairs (one set)">Las medias de los pares (un juego)</option>
+            <option value="cells" data-es="Cada célula con todos sus cromosomas; media ± de" data-en="Each cell with all its chromosomes; mean ± sd">Cada célula con todos sus cromosomas; media ± de</option>
+          </select></div>
+        <div class="field"><label for="b4Pop"><span data-l="es">Desviación estándar</span><span data-l="en">Standard deviation</span></label>
+          <select id="b4Pop"><option value="0" data-es="Muestral (n − 1)" data-en="Sample (n − 1)">Muestral (n − 1)</option><option value="1" data-es="Poblacional (n)" data-en="Population (n)">Poblacional (n)</option></select></div>
+        <div class="field"><label for="b4Set"><span data-l="es">Índices en la tabla</span><span data-l="en">Indices in the table</span></label>
+          <select id="b4Set"><option value="all" data-es="Todos" data-en="All">Todos</option><option value="rec" data-es="Los recomendados (MCA, CVCL, CVCI)" data-en="The recommended ones (MCA, CVCL, CVCI)">Los recomendados (MCA, CVCL, CVCI)</option></select></div>
+      </div>
+      <p class="hint"><span data-l="es">A1 (Romero Zarco 1986) y A (Watanabe et al. 1999) se definieron sobre los pares de homólogos; MCA, CVCL y CVCI pueden calcularse con todos los cromosomas de cada célula. TF%, AsK% y Syi dan lo mismo de las dos maneras.</span><span data-l="en">A1 (Romero Zarco 1986) and A (Watanabe et al. 1999) were defined on homologous pairs; MCA, CVCL and CVCI can be computed with all the chromosomes of each cell. TF%, AsK% and Syi give the same either way.</span></p>
+    </div>
+
+    <div class="card" id="b4TableCard">
+      <h2><span data-l="es">Índices por accesión</span><span data-l="en">Indices by accession</span></h2>
+      <div id="b4Tiles"></div>
+      <div class="table-scroll" id="b4Table"></div>
+      <div class="btn-row">
+        <button type="button" class="btn btn-secondary btn-sm" id="b4Csv"><span data-l="es">Tabla (CSV)</span><span data-l="en">Table (CSV)</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b4Tsv"><span data-l="es">Tabla (TSV)</span><span data-l="en">Table (TSV)</span></button>
+      </div>
+      <div class="messages" id="b4Msg"></div>
+    </div>
+
+    <div class="card" id="b4FigCard">
+      <h2><span data-l="es">Categorías de Stebbins y dispersión</span><span data-l="en">Stebbins categories and scatter</span></h2>
+      <div class="fig-stack">
+        <div class="fig-block" data-name="stebbins">
+          <div class="fig-head"><h4><span data-l="es">Cuadrícula de Stebbins (1971)</span><span data-l="en">Stebbins (1971) grid</span></h4>
+            <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+          <div class="fig-canvas" id="b4Steb"></div>
+        </div>
+        <div class="fig-block" data-name="dispersion_asimetria">
+          <div class="fig-head"><h4><span data-l="es">Dispersión de dos índices</span><span data-l="en">Scatter of two indices</span></h4>
+            <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+          <div class="b3-opts">
+            <label class="inline-label" for="b4X"><span data-l="es">Eje x</span><span data-l="en">x axis</span> <select id="b4X"></select></label>
+            <label class="inline-label" for="b4Y"><span data-l="es">Eje y</span><span data-l="en">y axis</span> <select id="b4Y"></select></label>
+          </div>
+          <div class="fig-canvas" id="b4Scatter"></div>
+        </div>
+      </div>
+      <p class="hint"><span data-l="es">Peruzzi y Eroğlu (2013) proponen la dispersión MCA × CVCL: a la derecha, centrómeros más alejados del centro; arriba, longitudes más desiguales.</span><span data-l="en">Peruzzi and Eroğlu (2013) propose the MCA × CVCL scatter: to the right, centromeres farther from the middle; upwards, more unequal lengths.</span></p>
+    </div>
+
+    <div class="card" id="b4DisCard">
+      <h2><span data-l="es">Disimilitud entre cariotipos</span><span data-l="en">Dissimilarity among karyotypes</span></h2>
+      <p class="hint"><span data-l="es">La disimilitud de Gower (1971) entre dos accesiones: el promedio de sus diferencias en cada índice, cada una dividida entre el rango de ese índice en todas las accesiones (0 = iguales, 1 = lo más distintas posible). Es la medida con la que Peruzzi y Altınordu (2014) comparan cariotipos; el Bloque 8 la usa con más parámetros.</span><span data-l="en">Gower's (1971) dissimilarity between two accessions: the mean of their differences in each index, each divided by the range of that index over all accessions (0 = equal, 1 = as different as possible). It is the measure with which Peruzzi and Altınordu (2014) compare karyotypes; Block 8 uses it with more parameters.</span></p>
+      <div class="chips" id="b4DisVars" role="group" data-es-title="Índices de la disimilitud" data-en-title="Indices of the dissimilarity" aria-label="Índices de la disimilitud"></div>
+      <div class="table-scroll" id="b4Dis"></div>
+    </div>
+
+    <div class="card" id="b4InfoCard">
+      <h2><span data-l="es">Qué mide cada índice</span><span data-l="en">What each index measures</span></h2>
+      <p class="hint"><span data-l="es">Dos asimetrías distintas: <b>intracromosómica</b> (dónde está el centrómero) e <b>intercromosómica</b> (cuánto varían las longitudes). AsK% es 100 − TF%, Syi es función de TF%, CVCL es 100 · A2 y MCA es 100 · A: entre ellos, no añaden información. Hoy se recomienda describir un cariotipo con MCA y CVCL, más CVCI para la heterogeneidad de los centrómeros (Peruzzi y Eroğlu 2013; Zuo y Yuan 2011).</span><span data-l="en">Two different asymmetries: <b>intrachromosomal</b> (where the centromere is) and <b>interchromosomal</b> (how much the lengths vary). AsK% is 100 − TF%, Syi is a function of TF%, CVCL is 100 · A2 and MCA is 100 · A: among themselves they add no information. Today a karyotype is best described with MCA and CVCL, plus CVCI for the heterogeneity of the centromeres (Peruzzi and Eroğlu 2013; Zuo and Yuan 2011).</span></p>
+      <div id="b4Info"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 5 · MEIOSIS ==================== -->
+<section class="step-panel" id="panel-5">
+  <div class="panel-title"><div class="pt-num">5</div><div><h2><span data-l="es">Meiosis</span><span data-l="en">Meiosis</span></h2>
+    <p><span data-l="es">Configuraciones, quiasmas, anormalidades, índice meiótico y polen</span><span data-l="en">Configurations, chiasmata, abnormalities, meiotic index and pollen</span></p></div></div>
+
+  <div class="card" id="b5Acc">
+    <h2><span data-l="es">Accesión</span><span data-l="en">Accession</span></h2>
+    <p class="hint"><span data-l="es">Cada tabla de este bloque guarda los datos de la accesión elegida. Escribe o pega una fila por célula (o por planta), o abre la serie poliploide de ejemplo.</span><span data-l="en">Each table of this block keeps the data of the chosen accession. Type or paste one row per cell (or per plant), or open the example polyploid series.</span></p>
+    <div class="b2-accbar">
+      <label class="inline-label" for="b5AccSel"><span data-l="es">Accesión</span><span data-l="en">Accession</span> <select id="b5AccSel"></select></label>
+      <button type="button" class="btn btn-ghost btn-sm" id="b5AccNew"><span data-l="es">+ Accesión</span><span data-l="en">+ Accession</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" data-example="poly"><span data-l="es">Abrir la serie poliploide de ejemplo</span><span data-l="en">Open the example polyploid series</span></button>
+      <label class="inline-label" for="b5X"><span data-l="es">Número básico x</span><span data-l="en">Base number x</span> <input type="number" id="b5X" min="1" step="1" style="width:5em"></label>
+    </div>
+  </div>
+
+  <div class="card" id="b5ConfCard">
+    <h2><span data-l="es">Configuraciones en diacinesis o metafase I</span><span data-l="en">Configurations at diakinesis or metaphase I</span></h2>
+    <p class="hint"><span data-l="es">Una fila por célula. Los quiasmas se estiman de las configuraciones (anillo 2, varilla 1, III 2, IV en cadena 3, IV en anillo 4…); si los contaste, escríbelos en la última columna y mandan.</span><span data-l="en">One row per cell. Chiasmata are estimated from the configurations (ring 2, rod 1, III 2, chain IV 3, ring IV 4…); if you counted them, type them in the last column and they prevail.</span></p>
+    <div id="b5Conf"></div>
+    <div id="b5ConfTiles"></div>
+    <div class="table-scroll" id="b5ConfSum"></div>
+    <div class="fig-block" data-name="configuraciones">
+      <div class="fig-head"><h4><span data-l="es">Configuraciones por célula</span><span data-l="en">Configurations per cell</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b5ConfFig"></div>
+    </div>
+    <div class="messages" id="b5ConfMsg"></div>
+  </div>
+
+  <div class="card" id="b5HypCard">
+    <h2><span data-l="es">¿Autopoliploide o alopoliploide?</span><span data-l="en">Autopolyploid or allopolyploid?</span></h2>
+    <p class="hint"><span data-l="es">Lo observado se compara con lo esperado bajo cada hipótesis, escrita como fórmula genómica: AAAA es un autotetraploide (los cuatro homólogos se aparean al azar), AABB un alotetraploide (cada cromosoma sólo con el de su genoma). Lo esperado sale del apareamiento al azar de los extremos de los brazos y de un quiasma por brazo apareado con probabilidad c, estimada de los quiasmas observados.</span><span data-l="en">The observed is compared with the expected under each hypothesis, written as a genome formula: AAAA is an autotetraploid (the four homologues pair at random), AABB an allotetraploid (each chromosome only with the one of its genome). The expectation comes from random pairing of the arm ends and one chiasma per paired arm with probability c, estimated from the observed chiasmata.</span></p>
+    <div class="form-grid">
+      <div class="field"><label for="b5H1"><span data-l="es">Hipótesis 1</span><span data-l="en">Hypothesis 1</span></label><input type="text" id="b5H1" spellcheck="false"></div>
+      <div class="field"><label for="b5H2"><span data-l="es">Hipótesis 2</span><span data-l="en">Hypothesis 2</span></label><input type="text" id="b5H2" spellcheck="false"></div>
+      <div class="field"><label for="b5H3"><span data-l="es">Hipótesis 3 (opcional)</span><span data-l="en">Hypothesis 3 (optional)</span></label><input type="text" id="b5H3" spellcheck="false" data-es-ph="p. ej. AAAABB" data-en-ph="e.g. AAAABB"></div>
+      <div class="field"><label for="b5CMode"><span data-l="es">Quiasma por brazo, c</span><span data-l="en">Chiasma per arm, c</span></label>
+        <select id="b5CMode"><option value="est" data-es="Estimada de los datos" data-en="Estimated from the data">Estimada de los datos</option><option value="fix" data-es="Fija" data-en="Fixed">Fija</option></select></div>
+      <div class="field" id="b5CFixWrap" hidden><label for="b5CFix"><span data-l="es">Valor de c</span><span data-l="en">Value of c</span></label><input type="number" id="b5CFix" min="0" max="1" step="0.01" value="0.8"></div>
+    </div>
+    <div class="table-scroll" id="b5Hyp"></div>
+    <div class="fig-block" data-name="observado_esperado">
+      <div class="fig-head"><h4><span data-l="es">Observado y esperado por célula</span><span data-l="en">Observed and expected per cell</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b5HypFig"></div>
+    </div>
+    <div class="messages" id="b5HypMsg"></div>
+  </div>
+
+  <div class="card" id="b5PhaseCard">
+    <h2><span data-l="es">Anormalidades por fase</span><span data-l="en">Abnormalities by phase</span></h2>
+    <div id="b5Phase"></div>
+    <div class="table-scroll" id="b5PhaseSum"></div>
+    <div class="fig-block" data-name="anormalidades">
+      <div class="fig-head"><h4><span data-l="es">Células anormales por fase (%)</span><span data-l="en">Abnormal cells by phase (%)</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b5PhaseFig"></div>
+    </div>
+  </div>
+
+  <div class="card" id="b5TetCard">
+    <h2><span data-l="es">Tétradas e índice meiótico</span><span data-l="en">Tetrads and meiotic index</span></h2>
+    <p class="hint"><span data-l="es">Índice meiótico de Love (1951): el porcentaje de tétradas normales. Love consideraba citológicamente estable una planta con 90 o más.</span><span data-l="en">Love's (1951) meiotic index: the percentage of normal tetrads. Love considered a plant cytologically stable at 90 or more.</span></p>
+    <div id="b5Tet"></div>
+    <div class="table-scroll" id="b5TetSum"></div>
+  </div>
+
+  <div class="card" id="b5PolCard">
+    <h2><span data-l="es">Viabilidad del polen</span><span data-l="en">Pollen viability</span></h2>
+    <div class="b3-opts">
+      <label class="inline-label" for="b5Stain"><span data-l="es">Tinción</span><span data-l="en">Stain</span>
+        <select id="b5Stain">
+          <option value="alexander" data-es="Tinción diferencial de Alexander" data-en="Alexander's differential stain">Tinción diferencial de Alexander</option>
+          <option value="carmine" data-es="Carmín acético" data-en="Acetocarmine">Carmín acético</option>
+          <option value="ttc" data-es="Cloruro de tetrazolio (TTC)" data-en="Tetrazolium chloride (TTC)">Cloruro de tetrazolio (TTC)</option>
+          <option value="other" data-es="Otra" data-en="Other">Otra</option>
+        </select></label>
+      <label class="inline-label" for="b5Conf2"><span data-l="es">Confianza</span><span data-l="en">Confidence</span>
+        <select id="b5Conf2"><option value="0.95">95 %</option><option value="0.99">99 %</option><option value="0.9">90 %</option></select></label>
+    </div>
+    <div id="b5Pol"></div>
+    <input type="file" id="b5PolFile" accept=".csv,text/csv" hidden data-es-title="CSV de fertilidad" data-en-title="Fertility CSV" aria-label="CSV de fertilidad">
+    <div id="b5PolTiles"></div>
+    <div class="table-scroll" id="b5PolSum"></div>
+    <div class="fig-block" data-name="viabilidad_polen">
+      <div class="fig-head"><h4><span data-l="es">Viabilidad del polen con su intervalo</span><span data-l="en">Pollen viability with its interval</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b5PolFig"></div>
+    </div>
+    <div class="messages" id="b5PolMsg"></div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 6 · PLOIDY AND GENOME SIZE ==================== -->
+<section class="step-panel" id="panel-6">
+  <div class="panel-title"><div class="pt-num">6</div><div><h2><span data-l="es">Ploidía y tamaño de genoma</span><span data-l="en">Ploidy and genome size</span></h2>
+    <p><span data-l="es">Conteos, nivel de ploidía, citometría de flujo y prueba de Allium</span><span data-l="en">Counts, ploidy level, flow cytometry and the Allium test</span></p></div></div>
+
+  <div class="card" id="b6Acc">
+    <h2><span data-l="es">Accesión</span><span data-l="en">Accession</span></h2>
+    <div class="b2-accbar">
+      <label class="inline-label" for="b6AccSel"><span data-l="es">Accesión</span><span data-l="en">Accession</span> <select id="b6AccSel"></select></label>
+      <button type="button" class="btn btn-ghost btn-sm" id="b6AccNew"><span data-l="es">+ Accesión</span><span data-l="en">+ Accession</span></button>
+      <label class="inline-label" for="b6X"><span data-l="es">Número básico x</span><span data-l="en">Base number x</span> <input type="number" id="b6X" min="1" step="1" style="width:5em"></label>
+      <button type="button" class="btn btn-ghost btn-sm" data-example="poly"><span data-l="es">Ejemplo: serie poliploide</span><span data-l="en">Example: polyploid series</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" data-example="allium"><span data-l="es">Ejemplo: prueba de Allium</span><span data-l="en">Example: Allium test</span></button>
+    </div>
+  </div>
+
+  <div class="card" id="b6CountCard">
+    <h2><span data-l="es">Conteos cromosómicos</span><span data-l="en">Chromosome counts</span></h2>
+    <p class="hint"><span data-l="es">Una fila por célula contada. La moda es el número de la planta; las células con otro número suelen ser cromosomas perdidos o encimados al aplastar. Los conteos hechos con marcas en el Bloque 2 llegan aquí con su botón.</span><span data-l="en">One row per counted cell. The mode is the number of the plant; cells with another number are usually chromosomes lost or overlapping in the squash. Counts made with marks in Block 2 arrive here with its button.</span></p>
+    <div id="b6Counts"></div>
+    <div id="b6CountTiles"></div>
+    <div class="fig-block" data-name="conteos">
+      <div class="fig-head"><h4><span data-l="es">Frecuencia de los números contados</span><span data-l="en">Frequency of the numbers counted</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b6CountFig"></div>
+    </div>
+    <h3><span data-l="es">Todas las accesiones</span><span data-l="en">All accessions</span></h3>
+    <div class="table-scroll" id="b6CountAll"></div>
+    <div class="messages" id="b6CountMsg"></div>
+  </div>
+
+  <div class="card" id="b6XCard">
+    <h2><span data-l="es">Número básico, series euploides y disploidía</span><span data-l="en">Base number, euploid series and dysploidy</span></h2>
+    <p class="hint"><span data-l="es">Números básicos de uso frecuente, editables; verifícalos en las bases de conteos cromosómicos (Rice et al. 2015) para tu grupo. Elige uno para ponerlo en la accesión.</span><span data-l="en">Base numbers in frequent use, editable; check them in the chromosome counts databases (Rice et al. 2015) for your group. Pick one to set it in the accession.</span></p>
+    <div class="b3-opts">
+      <label class="inline-label" for="b6XSearch"><span data-l="es">Buscar género o familia</span><span data-l="en">Search genus or family</span> <input type="search" id="b6XSearch" size="18"></label>
+    </div>
+    <div id="b6XTable"></div>
+    <div id="b6Series"></div>
+  </div>
+
+  <div class="card" id="b6FcmCard">
+    <h2><span data-l="es">Citometría de flujo: tamaño del genoma</span><span data-l="en">Flow cytometry: genome size</span></h2>
+    <p class="hint"><span data-l="es">2C de la muestra = (pico G0/G1 de la muestra ÷ pico G0/G1 del patrón interno) × 2C del patrón. 1Cx = 2C ÷ nivel de ploidía (Greilhuber et al. 2005); 1 pg = 978 Mpb (Doležel et al. 2003). Un pico confiable tiene un CV menor de 3–5 %.</span><span data-l="en">Sample 2C = (G0/G1 peak of the sample ÷ G0/G1 peak of the internal standard) × 2C of the standard. 1Cx = 2C ÷ ploidy level (Greilhuber et al. 2005); 1 pg = 978 Mbp (Doležel et al. 2003). A reliable peak has a CV below 3–5%.</span></p>
+    <div id="b6Fcm"></div>
+    <div class="table-scroll" id="b6FcmSum"></div>
+    <div class="b3-opts">
+      <label class="inline-label" for="b6Ref"><span data-l="es">Accesión de referencia para la ploidía relativa</span><span data-l="en">Reference accession for the relative ploidy</span> <select id="b6Ref"></select></label>
+    </div>
+    <div class="table-scroll" id="b6FcmRel"></div>
+    <div class="messages" id="b6FcmMsg"></div>
+  </div>
+
+  <div class="card" id="b6HistCard">
+    <h2><span data-l="es">Histograma del citómetro</span><span data-l="en">Histogram of the cytometer</span></h2>
+    <p class="hint"><span data-l="es">Abre un CSV exportado del citómetro: dos columnas (canal y número de núcleos) o una columna con la intensidad de cada evento. La app busca los picos y pone una compuerta en cada uno; corrígelas a mano si hace falta.</span><span data-l="en">Open a CSV exported from the cytometer: two columns (channel and number of nuclei) or one column with the intensity of each event. The app finds the peaks and sets a gate on each; correct them by hand if needed.</span></p>
+    <div class="b3-opts">
+      <label class="inline-label" for="b6HistSel"><span data-l="es">Histograma</span><span data-l="en">Histogram</span> <select id="b6HistSel"></select></label>
+      <button type="button" class="btn btn-secondary btn-sm" id="b6HistOpen"><span data-l="es">Abrir un CSV del citómetro</span><span data-l="en">Open a cytometer CSV</span></button>
+      <input type="file" id="b6HistFile" accept=".csv,.txt,.tsv,text/csv" hidden data-es-title="CSV del citómetro" data-en-title="Cytometer CSV" aria-label="CSV del citómetro">
+      <label class="checkbox-label"><input type="checkbox" id="b6HistLog"> <span data-l="es">Escala logarítmica</span><span data-l="en">Log scale</span></label>
+    </div>
+    <div class="fig-block" data-name="histograma_citometria">
+      <div class="fig-head"><h4><span data-l="es">Histograma de fluorescencia</span><span data-l="en">Fluorescence histogram</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b6HistFig"></div>
+    </div>
+    <div class="table-scroll" id="b6Gates"></div>
+    <div class="form-grid" id="b6GateUse" hidden>
+      <div class="field"><label for="b6GSample"><span data-l="es">Pico G0/G1 de la muestra</span><span data-l="en">G0/G1 peak of the sample</span></label><select id="b6GSample"></select></div>
+      <div class="field"><label for="b6GStd"><span data-l="es">Pico G0/G1 del patrón</span><span data-l="en">G0/G1 peak of the standard</span></label><select id="b6GStd"></select></div>
+      <div class="field"><label for="b6GStdName"><span data-l="es">Patrón</span><span data-l="en">Standard</span></label><select id="b6GStdName"></select></div>
+      <div class="field"><span class="field-label" aria-hidden="true">&nbsp;</span><button type="button" class="btn btn-primary btn-sm" id="b6GAdd"><span data-l="es">Agregar a la citometría</span><span data-l="en">Add to cytometry</span></button></div>
+    </div>
+    <p class="hint" id="b6GateInfo"></p>
+  </div>
+
+  <div class="card" id="b6ConvCard">
+    <h2><span data-l="es">Conversión de unidades</span><span data-l="en">Unit conversion</span></h2>
+    <div class="b3-opts">
+      <label class="inline-label" for="b6ConvV"><span data-l="es">Valor</span><span data-l="en">Value</span> <input type="number" id="b6ConvV" value="1" step="any" style="width:8em"></label>
+      <label class="inline-label" for="b6ConvU"><span data-l="es">Unidad</span><span data-l="en">Unit</span>
+        <select id="b6ConvU"><option value="pg">pg</option><option value="Mbp" data-es="Mpb" data-en="Mbp">Mpb</option><option value="Gbp" data-es="Gpb" data-en="Gbp">Gpb</option><option value="bp" data-es="pb" data-en="bp">pb</option></select></label>
+    </div>
+    <div id="b6ConvOut"></div>
+  </div>
+
+  <div class="card" id="b6MitCard">
+    <h2><span data-l="es">Mitosis y citotoxicidad (prueba de Allium)</span><span data-l="en">Mitosis and cytotoxicity (Allium test)</span></h2>
+    <p class="hint"><span data-l="es">Una fila por bulbo (o raíz): células en interfase, en cada fase y con cada aberración (contadas dentro de las que se dividen), y micronúcleos en interfase. Índice mitótico = células en división ÷ células observadas; índice de aberraciones = células aberrantes ÷ células en división (Fiskesjö 1985; Leme y Marin-Morales 2009).</span><span data-l="en">One row per bulb (or root): cells in interphase, in each phase and with each aberration (counted among the dividing ones), and micronuclei in interphase. Mitotic index = dividing cells ÷ cells observed; aberration index = aberrant cells ÷ dividing cells (Fiskesjö 1985; Leme and Marin-Morales 2009).</span></p>
+    <div id="b6Mit"></div>
+    <div class="b3-opts"><label class="inline-label" for="b6Ctrl"><span data-l="es">Testigo</span><span data-l="en">Control</span> <select id="b6Ctrl"></select></label></div>
+    <div class="table-scroll" id="b6MitSum"></div>
+    <div class="table-scroll" id="b6MitTests"></div>
+    <div class="fig-block" data-name="allium">
+      <div class="fig-head"><h4><span data-l="es">Índices mitótico y de aberraciones</span><span data-l="en">Mitotic and aberration indices</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b6MitFig"></div>
+    </div>
+    <div class="messages" id="b6MitMsg"></div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 7 · BANDING AND FISH ==================== -->
+<section class="step-panel" id="panel-7">
+  <div class="panel-title"><div class="pt-num">7</div><div><h2><span data-l="es">Bandeo y FISH</span><span data-l="en">Banding and FISH</span></h2>
+    <p><span data-l="es">Bandas, fluorocromos y sondas sobre el idiograma</span><span data-l="en">Bands, fluorochromes and probes on the idiogram</span></p></div></div>
+
+  <div class="card" id="b7Acc">
+    <h2><span data-l="es">Accesión y sondas</span><span data-l="en">Accession and probes</span></h2>
+    <p class="hint"><span data-l="es">Cada señal se registra por su par (con la numeración del cariotipo del Bloque 3), su brazo y su posición relativa: la fracción del brazo desde el centrómero (0) hasta el telómero (1). Una señal en un solo homólogo es un heteromorfismo. Las señales con una célula anotada sirven para medir la concordancia entre células.</span><span data-l="en">Each signal is recorded by its pair (numbered as in the karyotype of Block 3), its arm and its relative position: the fraction of the arm from the centromere (0) to the telomere (1). A signal on one homologue only is a heteromorphism. Signals with a cell noted serve to measure the concordance among cells.</span></p>
+    <div class="b2-accbar">
+      <label class="inline-label" for="b7AccSel"><span data-l="es">Accesión</span><span data-l="en">Accession</span> <select id="b7AccSel"></select></label>
+      <button type="button" class="btn btn-ghost btn-sm" data-example="sechium"><span data-l="es">Abrir el ejemplo del chayote (ADNr)</span><span data-l="en">Open the chayote example (rDNA)</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" data-example="zea"><span data-l="es">Abrir el ejemplo del maíz (nudos)</span><span data-l="en">Open the maize example (knobs)</span></button>
+    </div>
+    <h3><span data-l="es">Sondas y bandas</span><span data-l="en">Probes and bands</span></h3>
+    <div id="b7Probes"></div>
+  </div>
+
+  <div class="card" id="b7SigCard">
+    <h2><span data-l="es">Señales</span><span data-l="en">Signals</span></h2>
+    <div class="b3-opts">
+      <label class="inline-label" for="b7ClickProbe"><span data-l="es">Al hacer clic en el idiograma, agregar</span><span data-l="en">On clicking the idiogram, add</span> <select id="b7ClickProbe"></select></label>
+      <label class="inline-label" for="b7ClickHom"><span data-l="es">en</span><span data-l="en">on</span> <select id="b7ClickHom"><option value="" data-es="los dos homólogos" data-en="both homologues">los dos homólogos</option><option value="1" data-es="el homólogo 1" data-en="homologue 1">el homólogo 1</option><option value="2" data-es="el homólogo 2" data-en="homologue 2">el homólogo 2</option></select></label>
+    </div>
+    <div class="fig-block" data-name="idiograma_senales">
+      <div class="fig-head"><h4><span data-l="es">Idiograma con bandas y señales</span><span data-l="en">Idiogram with bands and signals</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="b3-opts">
+        <label class="inline-label" for="b7View"><span data-l="es">Vista</span><span data-l="en">View</span>
+          <select id="b7View"><option value="haploid" data-es="Un cromosoma por par" data-en="One chromosome per pair">Un cromosoma por par</option><option value="diploid" data-es="Los homólogos" data-en="The homologues">Los homólogos</option></select></label>
+      </div>
+      <div class="fig-canvas b7-idio" id="b7Idio"></div>
+      <p class="hint" id="b7NoKar" hidden><span data-l="es">Esta accesión no tiene cariotipo: el idiograma necesita las mediciones del Bloque 2.</span><span data-l="en">This accession has no karyotype: the idiogram needs the measurements of Block 2.</span></p>
+    </div>
+    <div id="b7Signals"></div>
+    <div class="messages" id="b7Msg"></div>
+  </div>
+
+  <div class="card" id="b7MapCard">
+    <h2><span data-l="es">Mapa físico de un cromosoma</span><span data-l="en">Physical map of one chromosome</span></h2>
+    <div class="b3-opts"><label class="inline-label" for="b7Pair"><span data-l="es">Par</span><span data-l="en">Pair</span> <select id="b7Pair"></select></label></div>
+    <div class="fig-block" data-name="mapa_fisico">
+      <div class="fig-head"><h4><span data-l="es">Mapa físico</span><span data-l="en">Physical map</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b7Map"></div>
+    </div>
+  </div>
+
+  <div class="card" id="b7SumCard">
+    <h2><span data-l="es">Patrón de la accesión</span><span data-l="en">Pattern of the accession</span></h2>
+    <div class="table-scroll" id="b7Sum"></div>
+    <h3><span data-l="es">Concordancia entre células</span><span data-l="en">Concordance among cells</span></h3>
+    <div class="table-scroll" id="b7Conc"></div>
+    <h3><span data-l="es">Todas las accesiones</span><span data-l="en">All accessions</span></h3>
+    <div class="table-scroll" id="b7All"></div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 8 · COMPARISON AMONG TAXA ==================== -->
+<section class="step-panel" id="panel-8">
+  <div class="panel-title"><div class="pt-num">8</div><div><h2><span data-l="es">Comparación entre taxones</span><span data-l="en">Comparison among taxa</span></h2>
+    <p><span data-l="es">Distancias, agrupamiento, ACP, evolución del número y citotipos</span><span data-l="en">Distances, clustering, PCA, number evolution and cytotypes</span></p></div></div>
+
+  <div class="card" id="b8MatCard">
+    <h2><span data-l="es">Matriz de parámetros cariológicos</span><span data-l="en">Matrix of karyological parameters</span></h2>
+    <p class="hint"><span data-l="es">Cada accesión aporta lo que tenga calculado en los bloques anteriores (2n, x, longitud de un juego, índices de asimetría, 2C, sitios de cada sonda). Puedes sumar taxones publicados o de otros estudios en la tabla de abajo. Elige las variables que entran al análisis; Peruzzi y Altınordu (2014) proponen 2n, x, la longitud haploide, MCA, CVCL y CVCI.</span><span data-l="en">Each accession brings whatever was computed in the previous blocks (2n, x, length of one set, asymmetry indices, 2C, sites of each probe). You can add published taxa or taxa of other studies in the table below. Choose the variables that enter the analysis; Peruzzi and Altınordu (2014) propose 2n, x, the haploid length, MCA, CVCL and CVCI.</span></p>
+    <div class="chips" id="b8Vars" role="group" data-es-title="Variables del análisis" data-en-title="Variables of the analysis" aria-label="Variables del análisis"></div>
+    <div class="table-scroll" id="b8Matrix"></div>
+    <h3><span data-l="es">Otros taxones</span><span data-l="en">Other taxa</span></h3>
+    <div id="b8Extra"></div>
+    <div class="messages" id="b8Msg"></div>
+  </div>
+
+  <div class="card" id="b8CluCard">
+    <h2><span data-l="es">Distancias y agrupamiento</span><span data-l="en">Distances and clustering</span></h2>
+    <div class="b3-opts">
+      <label class="inline-label" for="b8Dist"><span data-l="es">Distancia</span><span data-l="en">Distance</span>
+        <select id="b8Dist"><option value="gower" data-es="Gower" data-en="Gower">Gower</option><option value="euclid" data-es="Euclidiana (valores estandarizados)" data-en="Euclidean (standardized values)">Euclidiana (valores estandarizados)</option></select></label>
+      <label class="inline-label" for="b8Method"><span data-l="es">Método</span><span data-l="en">Method</span>
+        <select id="b8Method"><option value="upgma">UPGMA</option><option value="ward" data-es="Ward" data-en="Ward">Ward</option></select></label>
+    </div>
+    <div class="fig-block" data-name="dendrograma">
+      <div class="fig-head"><h4><span data-l="es">Dendrograma</span><span data-l="en">Dendrogram</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button><button type="button" class="btn btn-ghost btn-sm" id="b8Nwk">Newick</button></div></div>
+      <div class="fig-canvas" id="b8Dendro"></div>
+    </div>
+    <div id="b8CluTiles"></div>
+    <div class="table-scroll" id="b8DistTable"></div>
+  </div>
+
+  <div class="card" id="b8PcaCard">
+    <h2><span data-l="es">Componentes principales</span><span data-l="en">Principal components</span></h2>
+    <div class="b3-opts">
+      <label class="inline-label" for="b8PcX"><span data-l="es">Eje x</span><span data-l="en">x axis</span> <select id="b8PcX"></select></label>
+      <label class="inline-label" for="b8PcY"><span data-l="es">Eje y</span><span data-l="en">y axis</span> <select id="b8PcY"></select></label>
+    </div>
+    <div class="fig-block" data-name="biplot">
+      <div class="fig-head"><h4><span data-l="es">Biplot</span><span data-l="en">Biplot</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b8Biplot"></div>
+    </div>
+    <div class="table-scroll" id="b8PcaTable"></div>
+  </div>
+
+  <div class="card" id="b8ParCard">
+    <h2><span data-l="es">Idiogramas en paralelo</span><span data-l="en">Parallel idiograms</span></h2>
+    <div class="b3-opts">
+      <label class="inline-label" for="b8ParScale"><span data-l="es">Escala</span><span data-l="en">Scale</span>
+        <select id="b8ParScale"><option value="um" data-es="La misma, en micras" data-en="The same, in microns">La misma, en micras</option><option value="rel" data-es="Longitud relativa (%)" data-en="Relative length (%)">Longitud relativa (%)</option></select></label>
+      <label class="checkbox-label"><input type="checkbox" id="b8ParMarks" checked> <span data-l="es">Bandas y señales</span><span data-l="en">Bands and signals</span></label>
+    </div>
+    <div class="fig-block" data-name="idiogramas_paralelo">
+      <div class="fig-head"><h4><span data-l="es">Idiogramas</span><span data-l="en">Idiograms</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b8Par"></div>
+    </div>
+  </div>
+
+  <div class="card" id="b8EvoCard">
+    <h2><span data-l="es">Evolución del número cromosómico</span><span data-l="en">Chromosome number evolution</span></h2>
+    <p class="hint"><span data-l="es">Pega o abre un árbol en Newick (por ejemplo, el que exportan PhylogenyPro o CladisticsPro de esta suite). La parsimonia reconstruye los números de los antepasados con el menor costo de eventos: +1 y −1 (disploidía), ×2 (poliploidía) y ×1.5 (demiploidía). Cambia los costos para ver qué tan firme es la reconstrucción.</span><span data-l="en">Paste or open a tree in Newick (for example, the one PhylogenyPro or CladisticsPro of this suite export). Parsimony reconstructs the numbers of the ancestors with the lowest cost of events: +1 and −1 (dysploidy), ×2 (polyploidy) and ×1.5 (demiploidy). Change the costs to see how firm the reconstruction is.</span></p>
+    <div class="field"><label for="b8Newick">Newick</label><textarea id="b8Newick" rows="3" spellcheck="false"></textarea></div>
+    <div class="btn-row" style="margin-bottom:10px">
+      <button type="button" class="btn btn-ghost btn-sm" id="b8NwkOpen"><span data-l="es">Abrir un archivo de árbol</span><span data-l="en">Open a tree file</span></button>
+      <input type="file" id="b8NwkFile" accept=".nwk,.newick,.tre,.tree,.txt" hidden data-es-title="Archivo Newick" data-en-title="Newick file" aria-label="Archivo Newick">
+      <button type="button" class="btn btn-ghost btn-sm" id="b8NwkFromClu"><span data-l="es">Usar el dendrograma de arriba</span><span data-l="en">Use the dendrogram above</span></button>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label for="b8CGain"><span data-l="es">Costo de +1</span><span data-l="en">Cost of +1</span></label><input type="number" id="b8CGain" min="0" step="0.1" value="1"></div>
+      <div class="field"><label for="b8CLoss"><span data-l="es">Costo de −1</span><span data-l="en">Cost of −1</span></label><input type="number" id="b8CLoss" min="0" step="0.1" value="1"></div>
+      <div class="field"><label for="b8CDup"><span data-l="es">Costo de ×2</span><span data-l="en">Cost of ×2</span></label><input type="number" id="b8CDup" min="0" step="0.1" value="1"></div>
+      <div class="field"><label for="b8CDemi"><span data-l="es">Costo de ×1.5</span><span data-l="en">Cost of ×1.5</span></label><input type="number" id="b8CDemi" min="0" step="0.1" value="1.5"></div>
+      <div class="field"><label for="b8Show"><span data-l="es">Mostrar</span><span data-l="en">Show</span></label>
+        <select id="b8Show"><option value="n" data-es="Número haploide n" data-en="Haploid number n">Número haploide n</option><option value="2n" data-es="Número somático 2n" data-en="Somatic number 2n">Número somático 2n</option></select></div>
+    </div>
+    <h3><span data-l="es">Números de las puntas</span><span data-l="en">Numbers of the tips</span></h3>
+    <div class="table-scroll" id="b8Tips"></div>
+    <div id="b8EvoTiles"></div>
+    <div class="fig-block" data-name="evolucion_numero">
+      <div class="fig-head"><h4><span data-l="es">Árbol con los números reconstruidos</span><span data-l="en">Tree with the reconstructed numbers</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b8Tree"></div>
+    </div>
+    <div class="messages" id="b8EvoMsg"></div>
+  </div>
+
+  <div class="card" id="b8MapCard">
+    <h2><span data-l="es">Mapa de citotipos</span><span data-l="en">Map of cytotypes</span></h2>
+    <p class="hint"><span data-l="es">Las accesiones y los taxones con coordenadas, coloreados por su número 2n, sobre una retícula de latitud y longitud. Puedes cargar un contorno propio en GeoJSON (un estado, una cuenca); la app no trae mapas de otros.</span><span data-l="en">The accessions and taxa with coordinates, coloured by their 2n, on a grid of latitude and longitude. You can load an outline of your own in GeoJSON (a state, a basin); the app brings no maps of others.</span></p>
+    <div class="btn-row" style="margin-bottom:8px">
+      <button type="button" class="btn btn-ghost btn-sm" id="b8GeoOpen"><span data-l="es">Cargar un contorno (GeoJSON)</span><span data-l="en">Load an outline (GeoJSON)</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b8GeoClear" hidden><span data-l="es">Quitar el contorno</span><span data-l="en">Remove the outline</span></button>
+      <input type="file" id="b8GeoFile" accept=".geojson,.json" hidden data-es-title="Contorno GeoJSON" data-en-title="GeoJSON outline" aria-label="Contorno GeoJSON">
+    </div>
+    <div class="fig-block" data-name="mapa_citotipos">
+      <div class="fig-head"><h4><span data-l="es">Citotipos</span><span data-l="en">Cytotypes</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b8Map"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCKS 9–10 ==================== -->
+<section class="step-panel" id="panel-9">
+  <div class="panel-title"><div class="pt-num">9</div><div><h2><span data-l="es">Docencia</span><span data-l="en">Teaching</span></h2>
+    <p><span data-l="es">Simuladores, ejercicios, autoevaluación, glosario y prácticas</span><span data-l="en">Simulators, exercises, self-assessment, glossary and practicals</span></p></div></div>
+
+  <div class="card" id="b9SimCard">
+    <h2><span data-l="es">Mitosis y meiosis paso a paso</span><span data-l="en">Mitosis and meiosis step by step</span></h2>
+    <p class="hint"><span data-l="es">Elige la división y el número de pares. Azul: cromosomas del padre; bermellón: de la madre. En cada paso, cuenta las células, los cromosomas y las cromátidas antes de mirar la respuesta.</span><span data-l="en">Choose the division and the number of pairs. Blue: chromosomes from the father; vermilion: from the mother. In each step, count the cells, chromosomes and chromatids before looking at the answer.</span></p>
+    <div class="b3-opts">
+      <label class="inline-label" for="b9Kind"><span data-l="es">División</span><span data-l="en">Division</span>
+        <select id="b9Kind"><option value="mitosis" data-es="Mitosis" data-en="Mitosis">Mitosis</option><option value="meiosis" data-es="Meiosis" data-en="Meiosis">Meiosis</option></select></label>
+      <label class="inline-label" for="b9N"><span data-l="es">Pares (n)</span><span data-l="en">Pairs (n)</span> <input type="number" id="b9N" min="1" max="6" step="1" value="3" style="width:4.5em"></label>
+      <label class="checkbox-label" id="b9CrossLab"><input type="checkbox" id="b9Cross" checked> <span data-l="es">Entrecruzamiento</span><span data-l="en">Crossing-over</span></label>
+      <button type="button" class="btn btn-ghost btn-sm" id="b9Seed"><span data-l="es">Otra orientación al azar</span><span data-l="en">Another random orientation</span></button>
+    </div>
+    <div class="sim-bar">
+      <button type="button" class="btn btn-secondary btn-sm" id="b9Prev"><span data-l="es">← Anterior</span><span data-l="en">← Previous</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" id="b9Play" aria-pressed="false"><span data-l="es">Reproducir</span><span data-l="en">Play</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" id="b9Next"><span data-l="es">Siguiente →</span><span data-l="en">Next →</span></button>
+      <input type="range" id="b9Step" min="0" max="6" step="1" value="0" data-es-title="Paso" data-en-title="Step" aria-label="Paso">
+      <strong id="b9StepName" aria-live="polite"></strong>
+    </div>
+    <div class="fig-block" data-name="division_celular">
+      <div class="fig-head"><h4><span data-l="es">Célula</span><span data-l="en">Cell</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b9Sim"></div>
+      <p class="sim-legend"><span class="sw" style="background:var(--pr3)"></span><span data-l="es">del padre</span><span data-l="en">from the father</span>
+        <span class="sw" style="background:var(--pr1);margin-left:14px"></span><span data-l="es">de la madre</span><span data-l="en">from the mother</span></p>
+    </div>
+    <p id="b9StepText"></p>
+    <details class="sim-answer" id="b9Answer"><summary><span data-l="es">Ver lo que hay que contar</span><span data-l="en">See what to count</span></summary><div id="b9Counts"></div><div id="b9Products"></div></details>
+  </div>
+
+  <div class="card" id="b9ExCard">
+    <h2><span data-l="es">Ejercicio: arma el cariotipo</span><span data-l="en">Exercise: build the karyotype</span></h2>
+    <p class="hint"><span data-l="es">Una metafase simulada de un cariotipo inventado al azar. Los recortes de abajo están enderezados y a la misma escala que la imagen. Junta los homólogos dándoles el mismo número, numera los pares del más largo (1) al más corto y clasifica cada cromosoma según Levan et al. (1964). Después, revisa.</span><span data-l="en">A simulated metaphase of a karyotype made up at random. The cut-outs below are straightened and at the same scale as the image. Join the homologues by giving them the same number, number the pairs from the longest (1) to the shortest and classify each chromosome after Levan et al. (1964). Then check.</span></p>
+    <div class="b3-opts">
+      <label class="inline-label" for="b9ExPairs"><span data-l="es">Pares</span><span data-l="en">Pairs</span>
+        <select id="b9ExPairs"><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option></select></label>
+      <button type="button" class="btn btn-secondary btn-sm" id="b9ExNew"><span data-l="es">Otra metafase</span><span data-l="en">Another metaphase</span></button>
+    </div>
+    <div class="fig-block" data-name="ejercicio_metafase">
+      <div class="fig-head"><h4><span data-l="es">Metafase</span><span data-l="en">Metaphase</span></h4>
+        <div class="fig-tools"><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="svg">SVG</button><button type="button" class="btn btn-ghost btn-sm fig-dl" data-fmt="png">PNG</button></div></div>
+      <div class="fig-canvas" id="b9ExFig"></div>
+    </div>
+    <h3><span data-l="es">Recortes</span><span data-l="en">Cut-outs</span></h3>
+    <div class="ex-cuts" id="b9ExCuts"></div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-primary" id="b9ExCheck"><span data-l="es">Revisar</span><span data-l="en">Check</span></button>
+      <button type="button" class="btn btn-ghost" id="b9ExShow"><span data-l="es">Ver la solución</span><span data-l="en">See the solution</span></button>
+    </div>
+    <div id="b9ExTiles"></div>
+    <div class="messages" id="b9ExMsg"></div>
+    <div class="fig-canvas" id="b9ExSol"></div>
+  </div>
+
+  <div class="card" id="b9QuizCard">
+    <h2><span data-l="es">Autoevaluación</span><span data-l="en">Self-assessment</span></h2>
+    <p class="hint"><span data-l="es">Preguntas de opción múltiple con su explicación; algunas tienen números nuevos cada vez.</span><span data-l="en">Multiple-choice questions with their explanation; some have new numbers each time.</span></p>
+    <div class="chips" id="b9QTopics" role="group" data-es-title="Temas" data-en-title="Topics" aria-label="Temas"></div>
+    <div class="b3-opts">
+      <label class="inline-label" for="b9QN"><span data-l="es">Preguntas</span><span data-l="en">Questions</span>
+        <select id="b9QN"><option value="5">5</option><option value="10" selected>10</option><option value="15">15</option></select></label>
+      <button type="button" class="btn btn-secondary btn-sm" id="b9QNew"><span data-l="es">Nuevas preguntas</span><span data-l="en">New questions</span></button>
+    </div>
+    <form id="b9Quiz" class="quiz" novalidate></form>
+    <div class="btn-row"><button type="button" class="btn btn-primary" id="b9QCheck"><span data-l="es">Calificar</span><span data-l="en">Grade</span></button></div>
+    <div id="b9QResult" aria-live="polite"></div>
+  </div>
+
+  <div class="card" id="b9GlossCard">
+    <h2><span data-l="es">Glosario ilustrado</span><span data-l="en">Illustrated glossary</span></h2>
+    <div class="field" style="max-width:360px"><label for="b9GSearch"><span data-l="es">Buscar un término</span><span data-l="en">Search a term</span></label><input type="search" id="b9GSearch" autocomplete="off"></div>
+    <dl class="gloss" id="b9Gloss"></dl>
+  </div>
+
+  <div class="card" id="b9PracCard">
+    <h2><span data-l="es">Hoja de práctica: cromosomas en puntas de raíz</span><span data-l="en">Practical sheet: chromosomes in root tips</span></h2>
+    <p class="hint"><span data-l="es">Elige el pretratamiento, la hidrólisis y la tinción; la hoja se arma con los tiempos y temperaturas de los protocolos citados, las medidas de seguridad y una tabla para anotar. Ningún reactivo lleva marca.</span><span data-l="en">Choose the pretreatment, the hydrolysis and the stain; the sheet is assembled with the times and temperatures of the cited protocols, the safety measures and a table to take notes. No reagent carries a brand.</span></p>
+    <div class="form-grid">
+      <div class="field"><label for="b9PPre"><span data-l="es">Pretratamiento</span><span data-l="en">Pretreatment</span></label><select id="b9PPre"></select></div>
+      <div class="field"><label for="b9PHyd"><span data-l="es">Hidrólisis</span><span data-l="en">Hydrolysis</span></label><select id="b9PHyd"></select></div>
+      <div class="field"><label for="b9PStain"><span data-l="es">Tinción</span><span data-l="en">Staining</span></label><select id="b9PStain"></select></div>
+      <div class="field"><label for="b9PSpecies"><span data-l="es">Material (especie)</span><span data-l="en">Material (species)</span></label><input type="text" id="b9PSpecies" autocomplete="off"></div>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-primary" id="b9PPrint"><span data-l="es">Imprimir la hoja</span><span data-l="en">Print the sheet</span></button>
+      <button type="button" class="btn btn-ghost" id="b9PSave"><span data-l="es">Descargar (HTML)</span><span data-l="en">Download (HTML)</span></button>
+    </div>
+    <div class="prac-preview" id="b9PPreview"></div>
+  </div>
+</section>
+<section class="step-panel" id="panel-10">
+  <div class="panel-title"><div class="pt-num">10</div><div><h2><span data-l="es">Figuras e informe</span><span data-l="en">Figures and report</span></h2>
+    <p><span data-l="es">Figuras, tablas, métodos redactados, informe y paquete reproducible</span><span data-l="en">Figures, tables, written methods, report and reproducible package</span></p></div></div>
+
+  <div class="card" id="b10RepCard">
+    <h2><span data-l="es">Informe del proyecto</span><span data-l="en">Project report</span></h2>
+    <p class="hint"><span data-l="es">El informe reúne el resumen de cada accesión, los métodos redactados con sus referencias, las tablas de resultados y las figuras marcadas abajo. Se imprime (o se guarda como PDF desde el diálogo de impresión) o se descarga como una página HTML que se abre sin conexión. El paquete .zip añade el proyecto, todas las tablas en CSV y todas las figuras en SVG y PNG, para que otra persona repita el análisis.</span><span data-l="en">The report gathers the summary of each accession, the written methods with their references, the result tables and the figures ticked below. It is printed (or saved as PDF from the print dialogue) or downloaded as an HTML page that opens offline. The .zip package adds the project, every table in CSV and every figure in SVG and PNG, so that someone else can repeat the analysis.</span></p>
+    <div class="form-grid">
+      <div class="field"><label for="b10Title"><span data-l="es">Título</span><span data-l="en">Title</span></label><input type="text" id="b10Title" autocomplete="off"></div>
+      <div class="field"><label for="b10Author"><span data-l="es">Autoría</span><span data-l="en">Authorship</span></label><input type="text" id="b10Author" autocomplete="off"></div>
+    </div>
+    <div id="b10Tiles"></div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-primary" id="b10Print"><span data-l="es">Ver e imprimir el informe</span><span data-l="en">View and print the report</span></button>
+      <button type="button" class="btn btn-secondary" id="b10Html"><span data-l="es">Descargar el informe (HTML)</span><span data-l="en">Download the report (HTML)</span></button>
+      <button type="button" class="btn btn-secondary" id="b10Zip"><span data-l="es">Descargar el paquete reproducible (.zip)</span><span data-l="en">Download the reproducible package (.zip)</span></button>
+    </div>
+    <div class="messages" id="b10Msg"></div>
+  </div>
+
+  <div class="card" id="b10FigCard">
+    <h2><span data-l="es">Figuras</span><span data-l="en">Figures</span></h2>
+    <p class="hint"><span data-l="es">Todas las figuras del proyecto con los ajustes de sus bloques. Cada una se descarga en SVG o PNG y se edita con el estudio de figuras (⤢) o el editor ✎. Las marcadas entran al informe.</span><span data-l="en">Every figure of the project with the settings of its blocks. Each one downloads as SVG or PNG and is edited with the figure studio (⤢) or the editor ✎. The ticked ones go into the report.</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b10FigAll"><span data-l="es">Marcar todas</span><span data-l="en">Tick all</span></button><button type="button" class="btn btn-ghost btn-sm" id="b10FigNone"><span data-l="es">Desmarcar todas</span><span data-l="en">Untick all</span></button></div>
+    <div id="b10Figs"></div>
+  </div>
+
+  <div class="card" id="b10TabCard">
+    <h2><span data-l="es">Tablas</span><span data-l="en">Tables</span></h2>
+    <p class="hint"><span data-l="es">Los datos y los resultados, listos para una hoja de cálculo o para R (separador coma en CSV, tabulador en TSV; punto decimal).</span><span data-l="en">The data and the results, ready for a spreadsheet or for R (comma separator in CSV, tab in TSV; decimal point).</span></p>
+    <div class="table-scroll" id="b10Tables"></div>
+  </div>
+
+  <div class="card" id="b10MetCard">
+    <h2><span data-l="es">Métodos redactados</span><span data-l="en">Written methods</span></h2>
+    <p class="hint"><span data-l="es">Un borrador de la sección de métodos con lo que tiene el proyecto, con las fuentes citadas por autor y año. Revísalo y complétalo con lo que la app no sabe (material de campo, microscopio, número de plantas).</span><span data-l="en">A draft of the methods section with what the project has, citing the sources by author and year. Check it and complete it with what the app does not know (field material, microscope, number of plants).</span></p>
+    <div class="b3-opts">
+      <label class="inline-label" for="b10MLang"><span data-l="es">Idioma</span><span data-l="en">Language</span>
+        <select id="b10MLang"><option value="es">Español</option><option value="en">English</option></select></label>
+      <button type="button" class="btn btn-ghost btn-sm" id="b10MCopy"><span data-l="es">Copiar</span><span data-l="en">Copy</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b10MSave"><span data-l="es">Descargar (.txt)</span><span data-l="en">Download (.txt)</span></button>
+    </div>
+    <div class="methods-text" id="b10Methods"></div>
+  </div>
+</section>
+
+</main>
+
+<script src="js/labg-core.js"></script>
+<script src="js/labg-figure-studio.js" defer></script>
+<script src="js/labg-navigator.js" defer></script>
+<script src="js/labg-fx.js" data-app="cytogeneticspro" defer></script>
+<script src="js/core.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/karyotype.js"></script>
+<script src="js/asymmetry.js"></script>
+<script src="js/meiosis.js"></script>
+<script src="js/ploidy.js"></script>
+<script src="js/bands.js"></script>
+<script src="js/compare.js"></script>
+<script src="js/idiogram.js"></script>
+<script src="js/figure.js"></script>
+<script src="js/grid.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/image.js"></script>
+<script src="js/examples.js"></script>
+<script src="js/labg-figedit.js" data-key="cytogeneticspro:figedit"></script>
+<script src="js/art.js"></script>
+<script src="js/home.js"></script>
+<script src="js/labs.js"></script>
+<script src="js/block2.js"></script>
+<script src="js/block3.js"></script>
+<script src="js/block4.js"></script>
+<script src="js/block5.js"></script>
+<script src="js/block6.js"></script>
+<script src="js/block7.js"></script>
+<script src="js/block8.js"></script>
+<script src="js/teach.js"></script>
+<script src="js/block9.js"></script>
+<script src="js/zip.js"></script>
+<script src="js/report.js"></script>
+<script src="js/block10.js"></script>
+</body>
+</html>
