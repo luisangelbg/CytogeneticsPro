@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · Manual de usuario · Introducción</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+<style>
+  figure.reducida { width: 80%; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<!-- ====================================================================== CRÉDITOS -->
+<section class="preliminares creditos" id="creditos">
+  <div class="cred-titulo">CytogeneticsPro</div>
+  <div class="cred-sub">Manual de usuario · Del conteo cromosómico al cariotipo publicable</div>
+
+  <dl>
+    <dt>Autor</dt><dd><b>Luis Ángel Barrera-Guzmán</b><br><span class="small">ORCID 0000-0001-8057-2583</span></dd>
+    <dt>Programa</dt><dd>CytogeneticsPro, versión 1.0.0 (octubre de 2026)</dd>
+    <dt>Manual</dt><dd>Primera edición en español, 2026. Describe la versión 1.0 del programa.</dd>
+    <dt>Licencia del programa</dt><dd>Licencia Pública General de GNU, versión 3 o posterior (GPL-3.0-or-later).</dd>
+    <dt>Derechos del manual</dt><dd>© 2026 Luis Ángel Barrera-Guzmán. Todos los derechos reservados.</dd>
+    <dt>Idioma de la interfaz</dt><dd>Español o inglés, con el selector <span class="ui">ES</span> · <span class="ui">EN</span> de la barra superior. En este manual los nombres de botones, campos y menús se escriben como aparecen en pantalla en español, por ejemplo <span class="ui">Empezar con mis imágenes →</span>.</dd>
+  </dl>
+
+  <h4>Cómo citar el programa</h4>
+  <div class="cita">Barrera-Guzmán, L. Á. (2026). <i>CytogeneticsPro: citogenética vegetal en el navegador</i> (versión 1.0.0) [Programa de cómputo]. LABG Suite.</div>
+  <h4>Cómo citar este manual</h4>
+  <div class="cita">Barrera-Guzmán, L. Á. (2026). <i>CytogeneticsPro. Manual de usuario</i> (1.ª ed.). Distribuido con CytogeneticsPro, versión 1.0.0. LABG Suite.</div>
+  <p class="small">La cita del programa aparece también, lista para copiarse como texto o en BibTeX, en la sección <span class="ui">Cómo citar</span> de la portada de la app. El programa todavía no tiene un identificador digital (DOI): se añadirá a las dos citas cuando se publique.</p>
+
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Privacidad</div>
+    <p>CytogeneticsPro funciona por completo dentro de tu navegador. Las fotomicrografías, las medidas y los proyectos que abres se leen en tu computadora y <b>nunca se envían a ningún servidor</b>: puedes trabajar con las imágenes de una tesis en curso o con datos sin publicar sin que nada de eso salga de tu equipo. El programa no usa cuentas, no carga nada de internet y no necesita conexión para calcular.</p>
+  </div>
+
+  <p class="small" style="margin-top:0.35in;color:var(--gris)">Las ilustraciones, los diagramas y las capturas de pantalla de este manual son originales: se generaron con el propio programa o con código escrito para el manual. Los cuatro ejemplos que se usan en las capturas son <b>simulados</b>: los nombres de las especies y de los lugares son reales, pero las medidas no son mediciones de ninguna preparación ni de ninguna publicación.</p>
+</section>
+
+<!-- ====================================================================== ÍNDICE -->
+<!-- Índice general: un renglón por capítulo (su h1) y, debajo, sus secciones (los h2).
+     Los títulos y los id (cap-N, sN-M, ap-x) son la propuesta para los capítulos; quien escriba un capítulo
+     ajusta aquí sus renglones si cambia un título o el número de secciones. Los números de página los pone
+     paginar.js al unir el manual. -->
+<section class="preliminares indice" id="indice" data-nueva-hoja>
+  <h1>Índice</h1>
+  <div class="indice-sub">Contenido general del manual</div>
+
+  <ol class="toc">
+    <li><div class="toc-cap"><span class="chip k0">P</span><a href="#como-leer">Cómo leer este manual</a><a class="pag" href="#como-leer"></a></div></li>
+    <li>
+      <div class="toc-cap"><span class="chip k0">In</span><a href="#cap-intro">Introducción a CytogeneticsPro</a><a class="pag" href="#cap-intro"></a></div>
+      <ul>
+        <li><span class="n">I.1</span><a href="#si-1"><span class="t">¿Qué es CytogeneticsPro?</span></a></li>
+        <li><span class="n">I.2</span><a href="#si-2"><span class="t">Preguntas que responde</span></a></li>
+        <li><span class="n">I.3</span><a href="#si-3"><span class="t">Seis ideas que sostienen el manual</span></a></li>
+        <li><span class="n">I.4</span><a href="#si-4"><span class="t">Datos que acepta y qué entrega</span></a></li>
+        <li><span class="n">I.5</span><a href="#si-5"><span class="t">Qué necesitas y cómo abrirlo</span></a></li>
+        <li><span class="n">I.6</span><a href="#si-6"><span class="t">Recorrido por la interfaz</span></a></li>
+        <li><span class="n">I.7</span><a href="#si-7"><span class="t">Los cuatro ejemplos incluidos</span></a></li>
+        <li><span class="n">I.8</span><a href="#si-8"><span class="t">Cómo se recorre un estudio</span></a></li>
+        <li><span class="n">I.9</span><a href="#si-9"><span class="t">Cómo se comprobó</span></a></li>
+        <li><span class="n">I.10</span><a href="#si-10"><span class="t">Lo que el programa no hace</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="toc-cap"><span class="chip k1">1</span><a href="#cap-1">Inicio: la teoría, los laboratorios y los ejemplos</a><a class="pag" href="#cap-1"></a></div>
+      <ul>
+        <li><span class="n">1.1</span><a href="#s1-1"><span class="t">La portada y su idiograma</span></a></li>
+        <li><span class="n">1.2</span><a href="#s1-2"><span class="t">Cómo funciona: la ruta de un estudio</span></a></li>
+        <li><span class="n">1.3</span><a href="#s1-3"><span class="t">Dos laboratorios que calculan de verdad</span></a></li>
+        <li><span class="n">1.4</span><a href="#s1-4"><span class="t">Los diez bloques y los ejemplos</span></a></li>
+        <li><span class="n">1.5</span><a href="#s1-5"><span class="t">Los métodos y de dónde vienen</span></a></li>
+        <li><span class="n">1.6</span><a href="#s1-6"><span class="t">La teoría, en lenguaje llano</span></a></li>
+        <li><span class="n">1.7</span><a href="#s1-7"><span class="t">Límites, referencias y cómo citar</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="toc-cap"><span class="chip k2">2</span><a href="#cap-2">Imágenes y medición</a><a class="pag" href="#cap-2"></a></div>
+      <ul>
+        <li><span class="n">2.1</span><a href="#s2-1"><span class="t">Abrir imágenes, medidas o un proyecto</span></a></li>
+        <li><span class="n">2.2</span><a href="#s2-2"><span class="t">Accesiones y células</span></a></li>
+        <li><span class="n">2.3</span><a href="#s2-3"><span class="t">Calibrar y contar</span></a></li>
+        <li><span class="n">2.4</span><a href="#s2-4"><span class="t">Trazar, centrómero y satélite</span></a></li>
+        <li><span class="n">2.5</span><a href="#s2-5"><span class="t">Editar, borrar, deshacer y la imagen anotada</span></a></li>
+        <li><span class="n">2.6</span><a href="#s2-6"><span class="t">Mediciones de la célula y medidas pegadas</span></a></li>
+        <li><span class="n">2.7</span><a href="#s2-7"><span class="t">Resumen de las mediciones</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="toc-cap"><span class="chip k3">3</span><a href="#cap-3">El cariotipo y el idiograma</a><a class="pag" href="#cap-3"></a></div>
+      <ul>
+        <li><span class="n">3.1</span><a href="#s3-1"><span class="t">Ajustes del cariotipo</span></a></li>
+        <li><span class="n">3.2</span><a href="#s3-2"><span class="t">Emparejamiento de homólogos</span></a></li>
+        <li><span class="n">3.3</span><a href="#s3-3"><span class="t">Cariotipo de la accesión</span></a></li>
+        <li><span class="n">3.4</span><a href="#s3-4"><span class="t">Fórmula, longitud y número fundamental</span></a></li>
+        <li><span class="n">3.5</span><a href="#s3-5"><span class="t">Idiograma</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="toc-cap"><span class="chip k4">4</span><a href="#cap-4">Asimetría y parámetros cariológicos</a><a class="pag" href="#cap-4"></a></div>
+      <ul>
+        <li><span class="n">4.1</span><a href="#s4-1"><span class="t">Cómo se calculan</span></a></li>
+        <li><span class="n">4.2</span><a href="#s4-2"><span class="t">Índices por accesión</span></a></li>
+        <li><span class="n">4.3</span><a href="#s4-3"><span class="t">Categorías de Stebbins y dispersión</span></a></li>
+        <li><span class="n">4.4</span><a href="#s4-4"><span class="t">Disimilitud entre cariotipos</span></a></li>
+        <li><span class="n">4.5</span><a href="#s4-5"><span class="t">Qué mide cada índice</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="toc-cap"><span class="chip k5">5</span><a href="#cap-5">Meiosis</a><a class="pag" href="#cap-5"></a></div>
+      <ul>
+        <li><span class="n">5.1</span><a href="#s5-1"><span class="t">La accesión y sus tablas</span></a></li>
+        <li><span class="n">5.2</span><a href="#s5-2"><span class="t">Configuraciones en diacinesis o metafase I</span></a></li>
+        <li><span class="n">5.3</span><a href="#s5-3"><span class="t">¿Autopoliploide o alopoliploide?</span></a></li>
+        <li><span class="n">5.4</span><a href="#s5-4"><span class="t">Anormalidades por fase</span></a></li>
+        <li><span class="n">5.5</span><a href="#s5-5"><span class="t">Tétradas e índice meiótico</span></a></li>
+        <li><span class="n">5.6</span><a href="#s5-6"><span class="t">Viabilidad del polen</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="toc-cap"><span class="chip k6">6</span><a href="#cap-6">Ploidía y tamaño de genoma</a><a class="pag" href="#cap-6"></a></div>
+      <ul>
+        <li><span class="n">6.1</span><a href="#s6-1"><span class="t">Conteos cromosómicos</span></a></li>
+        <li><span class="n">6.2</span><a href="#s6-2"><span class="t">Número básico, series euploides y disploidía</span></a></li>
+        <li><span class="n">6.3</span><a href="#s6-3"><span class="t">Citometría de flujo: tamaño del genoma</span></a></li>
+        <li><span class="n">6.4</span><a href="#s6-4"><span class="t">Histograma del citómetro</span></a></li>
+        <li><span class="n">6.5</span><a href="#s6-5"><span class="t">Conversión de unidades</span></a></li>
+        <li><span class="n">6.6</span><a href="#s6-6"><span class="t">Mitosis y citotoxicidad: la prueba de <i>Allium</i></span></a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="toc-cap"><span class="chip k7">7</span><a href="#cap-7">Bandeo y FISH</a><a class="pag" href="#cap-7"></a></div>
+      <ul>
+        <li><span class="n">7.1</span><a href="#s7-1"><span class="t">Accesión, sondas y bandas</span></a></li>
+        <li><span class="n">7.2</span><a href="#s7-2"><span class="t">Señales</span></a></li>
+        <li><span class="n">7.3</span><a href="#s7-3"><span class="t">Mapa físico de un cromosoma</span></a></li>
+        <li><span class="n">7.4</span><a href="#s7-4"><span class="t">Patrón de la accesión</span></a></li>
+        <li><span class="n">7.5</span><a href="#s7-5"><span class="t">Concordancia entre células y todas las accesiones</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="toc-cap"><span class="chip k8">8</span><a href="#cap-8">Comparación entre taxones</a><a class="pag" href="#cap-8"></a></div>
+      <ul>
+        <li><span class="n">8.1</span><a href="#s8-1"><span class="t">Matriz de parámetros cariológicos</span></a></li>
+        <li><span class="n">8.2</span><a href="#s8-2"><span class="t">Distancias y agrupamiento</span></a></li>
+        <li><span class="n">8.3</span><a href="#s8-3"><span class="t">Componentes principales</span></a></li>
+        <li><span class="n">8.4</span><a href="#s8-4"><span class="t">Idiogramas en paralelo</span></a></li>
+        <li><span class="n">8.5</span><a href="#s8-5"><span class="t">Evolución del número cromosómico</span></a></li>
+        <li><span class="n">8.6</span><a href="#s8-6"><span class="t">Mapa de citotipos</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="toc-cap"><span class="chip k9">9</span><a href="#cap-9">Docencia</a><a class="pag" href="#cap-9"></a></div>
+      <ul>
+        <li><span class="n">9.1</span><a href="#s9-1"><span class="t">Mitosis y meiosis paso a paso</span></a></li>
+        <li><span class="n">9.2</span><a href="#s9-2"><span class="t">Ejercicio: arma el cariotipo</span></a></li>
+        <li><span class="n">9.3</span><a href="#s9-3"><span class="t">Autoevaluación</span></a></li>
+        <li><span class="n">9.4</span><a href="#s9-4"><span class="t">Glosario ilustrado</span></a></li>
+        <li><span class="n">9.5</span><a href="#s9-5"><span class="t">Hoja de práctica: cromosomas en puntas de raíz</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="toc-cap"><span class="chip k10">10</span><a href="#cap-10">Figuras e informe</a><a class="pag" href="#cap-10"></a></div>
+      <ul>
+        <li><span class="n">10.1</span><a href="#s10-1"><span class="t">Informe del proyecto</span></a></li>
+        <li><span class="n">10.2</span><a href="#s10-2"><span class="t">El paquete reproducible</span></a></li>
+        <li><span class="n">10.3</span><a href="#s10-3"><span class="t">Figuras, el estudio y el editor</span></a></li>
+        <li><span class="n">10.4</span><a href="#s10-4"><span class="t">Tablas</span></a></li>
+        <li><span class="n">10.5</span><a href="#s10-5"><span class="t">Métodos redactados</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="toc-cap"><span class="chip kx">A</span><a href="#apendices">Apéndices</a><a class="pag" href="#apendices"></a></div>
+      <ul>
+        <li><span class="n">A</span><a href="#ap-a"><span class="t">Los archivos que la app lee y escribe</span></a></li>
+        <li><span class="n">B</span><a href="#ap-b"><span class="t">Las reglas, reunidas</span></a></li>
+        <li><span class="n">C</span><a href="#ap-c"><span class="t">Glosario</span></a></li>
+        <li><span class="n">D</span><a href="#ap-d"><span class="t">Cuando algo no sale</span></a></li>
+        <li><span class="n">E</span><a href="#ap-e"><span class="t">La herramienta: licencia y cómo citarla</span></a></li>
+        <li><span class="n">F</span><a href="#ap-f"><span class="t">Referencias</span></a></li>
+      </ul>
+    </li>
+  </ol>
+</section>
+
+<!-- ====================================================================== CÓMO LEER ESTE MANUAL -->
+<section class="preliminares" id="como-leer" data-nueva-hoja style="--acento: var(--b0)">
+  <h2 style="margin-top:0.2in">Cómo leer este manual</h2>
+  <p class="lead">El manual sigue el mismo orden que la app: diez bloques numerados que se recorren de arriba abajo en la barra de la izquierda. Cada capítulo explica un bloque y lleva su mismo número —el capítulo 5 es el Bloque 5, y sus secciones y figuras se numeran 5.1, 5.2…—. La introducción no lleva número: sus secciones son I.1, I.2…</p>
+  <p>Cada capítulo empieza con lo que el bloque resuelve en un estudio citogenético, sigue con lo que hay en pantalla en el orden en que aparece y cierra con las reglas para leer el resultado y los errores más comunes. No hace falta leerlo de corrido: si sólo necesitas un cariotipo con su idiograma, bastan los capítulos 2 y 3; si ya mediste y quieres los índices, el 4. El apéndice B reúne las reglas de todos los bloques.</p>
+
+  <h3>Un color para cada bloque</h3>
+  <p>El color del bloque aparece en la apertura de su capítulo, en el número de cada sección, en la pestaña del borde de la hoja y en el índice, y es el mismo de la franja de la portada.</p>
+  <table class="compacta">
+    <thead><tr><th style="width:0.55in">Bloque</th><th style="width:1.55in">Nombre en la app</th><th>Qué hace</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip k1">1</span></td><td><span class="ui">Inicio</span></td><td>La lógica de la citogenética en lenguaje llano, dos laboratorios que calculan de verdad, los métodos con su fuente, los ejemplos, las referencias y cómo citar</td></tr>
+      <tr><td><span class="chip k2">2</span></td><td><span class="ui">Imágenes y medición</span></td><td>Calibrar, contar, trazar cada cromosoma y medir sus brazos sobre la fotomicrografía, o capturar y pegar las medidas</td></tr>
+      <tr><td><span class="chip k3">3</span></td><td><span class="ui">Cariotipo</span></td><td>Homólogos, promedios, clasificación, fórmula e idiograma</td></tr>
+      <tr><td><span class="chip k4">4</span></td><td><span class="ui">Asimetría</span></td><td>Los índices, qué mide cada uno y cuáles se recomiendan, con las categorías de Stebbins</td></tr>
+      <tr><td><span class="chip k5">5</span></td><td><span class="ui">Meiosis</span></td><td>Configuraciones, quiasmas, anormalidades, índice meiótico y polen</td></tr>
+      <tr><td><span class="chip k6">6</span></td><td><span class="ui">Ploidía y genoma</span></td><td>Conteos, nivel de ploidía, citometría de flujo y prueba de <i>Allium</i></td></tr>
+      <tr><td><span class="chip k7">7</span></td><td><span class="ui">Bandeo y FISH</span></td><td>Bandas, fluorocromos y sondas sobre el idiograma</td></tr>
+      <tr><td><span class="chip k8">8</span></td><td><span class="ui">Comparación</span></td><td>Distancias, agrupamiento, componentes principales, evolución del número y citotipos</td></tr>
+      <tr><td><span class="chip k9">9</span></td><td><span class="ui">Docencia</span></td><td>Simuladores, ejercicios, autoevaluación, glosario y prácticas</td></tr>
+      <tr><td><span class="chip k10">10</span></td><td><span class="ui">Figuras e informe</span></td><td>Figuras, tablas, métodos redactados, informe y paquete reproducible</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Tipos de recuadros</h3>
+  <div class="dos">
+    <div class="caja nota" style="margin:0"><div class="caja-t"><span class="ico">i</span>Nota</div><p>Aclaraciones y consejos prácticos que ahorran tiempo.</p></div>
+    <div class="caja importante" style="margin:0"><div class="caja-t"><span class="ico">!</span>Importante</div><p>Lo que puede cambiar tus conclusiones si se pasa por alto.</p></div>
+    <div class="caja teoria" style="margin:0"><div class="caja-t"><span class="ico">θ</span>Teoría en breve</div><p>La idea detrás de un cálculo, sin fórmulas innecesarias.</p></div>
+    <div class="caja ejemplo" style="margin:0"><div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto</div><p>Un caso con los ejemplos incluidos en el programa, con los números que da la app.</p></div>
+  </div>
+  <div class="caja regla" style="margin-top:0.18in">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:40%"><b>Si</b> el resultado cae en este caso…</td><td><b>entonces</b> esta es la lectura recomendada.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para interpretar, no leyes: lo que sabes de la planta, de la preparación y de cómo se midió siempre manda.</p>
+  </div>
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Cuando algo sale mal</div>
+    <p>Lo que suele fallar al usar el bloque —una célula sin calibrar, un homólogo en el par equivocado, un pico mal elegido— y cómo se arregla.</p>
+  </div>
+  <div class="caja dato">
+    <div class="dato-cifra">12</div>
+    <div class="dato-txt"><div class="caja-t">Dato clave</div>Una cifra o un hecho que conviene recordar; por ejemplo, el número de índices de asimetría que calcula el Bloque 4.</div>
+  </div>
+
+  <h3>Convenciones de escritura</h3>
+  <table class="compacta">
+    <thead><tr><th style="width:38%">Así se escribe</th><th>Significa</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Emparejar de nuevo todas</span></td><td>Un botón, campo o menú de la app, con su texto tal como aparece en pantalla en español.</td></tr>
+      <tr><td><span class="ruta">Bloque 6<span class="sep">›</span>Histograma del citómetro</span></td><td>Una ruta: abre lo primero y dentro busca lo segundo.</td></tr>
+      <tr><td><code>Ctrl + S</code>, <code>.json</code></td><td>Una tecla, un nombre de archivo o un valor que se escribe tal cual.</td></tr>
+      <tr><td>2n, x, p, q, r, IC</td><td>El número cromosómico somático y el número básico; el brazo corto y el largo; la razón de brazos r = q/p y el índice centromérico IC = 100·p/(p + q).</td></tr>
+      <tr><td>m, sm, st, t</td><td>Metacéntrico, submetacéntrico, subtelocéntrico y telocéntrico, según Levan et al. (1964).</td></tr>
+      <tr><td>2.54 µm · 3.18 pg</td><td>Los números se escriben con punto decimal, como los escribe la app, y con la unidad separada por un espacio.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ====================================================================== INTRODUCCIÓN -->
+<section class="capitulo" id="cap-intro" data-pestana="In" data-orden="0" style="--acento: var(--b0)">
+  <div class="cap-apertura">
+    <div class="cap-num">I</div>
+    <div class="cap-etiqueta">Introducción</div>
+    <h1 data-corto="Introducción">Introducción a CytogeneticsPro</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Un estudio citogenético empieza en el microscopio y termina en una figura y unos números que alguien más tiene que poder revisar: el conteo de 2n, el cariotipo con su idiograma, los índices de asimetría, la meiosis, el nivel de ploidía, el tamaño del genoma. CytogeneticsPro reúne ese trabajo en una sola página, en el orden en que se hace, y dice en cada paso de dónde sale cada número.</p>
+    <div class="cap-franja"><span class="k1"></span><span class="k2"></span><span class="k3"></span><span class="k4"></span><span class="k5"></span><span class="k6"></span><span class="k7"></span><span class="k8"></span><span class="k9"></span><span class="k10"></span></div>
+    <ul class="cap-contenido">
+      <li><b>I.1</b>¿Qué es CytogeneticsPro?</li>
+      <li><b>I.2</b>Preguntas que responde</li>
+      <li><b>I.3</b>Seis ideas que sostienen el manual</li>
+      <li><b>I.4</b>Datos que acepta y qué entrega</li>
+      <li><b>I.5</b>Qué necesitas y cómo abrirlo</li>
+      <li><b>I.6</b>Recorrido por la interfaz</li>
+      <li><b>I.7</b>Los cuatro ejemplos incluidos</li>
+      <li><b>I.8</b>Cómo se recorre un estudio</li>
+      <li><b>I.9</b>Cómo se comprobó</li>
+      <li><b>I.10</b>Lo que el programa no hace</li>
+    </ul>
+  </div>
+
+  <!-- I.1 -->
+  <h2 id="si-1"><span class="num">I.1</span>¿Qué es CytogeneticsPro?</h2>
+  <p class="lead">Es un programa de citogenética vegetal que corre en el navegador, sin instalar nada. Lleva un estudio del conteo cromosómico al cariotipo publicable: medir los cromosomas sobre las fotomicrografías, ordenarlos, describirlos, compararlos y escribir las figuras y los métodos.</p>
+  <p>Está pensado para cultivos y sus parientes silvestres —maíz, chayote, frutales, forestales— y para la docencia de la genética. Mide cada cromosoma con una línea que sigue su curvatura sobre una imagen calibrada; empareja los homólogos y promedia las células; clasifica cada par por la posición del centrómero y escribe la fórmula cariotípica; calcula doce índices de asimetría con las categorías de Stebbins; analiza las configuraciones meióticas y las compara con lo esperado para un autopoliploide o un alopoliploide; estima el nivel de ploidía y el tamaño del genoma por citometría de flujo; registra bandas y señales de hibridación in situ sobre el idiograma; y compara cariotipos entre taxones, con la evolución del número cromosómico sobre un árbol.</p>
+  <p>Todo se calcula con un motor escrito desde cero para este programa, sin bibliotecas de otros, y cada método cita el trabajo que lo define: en la portada de la app, en las notas de cada bloque y en los métodos que redacta el Bloque 10.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/i-inicio.png" alt="La portada de la app: el lema, los cuatro botones para empezar y el idiograma del maíz simulado"></div>
+    <figcaption><b>Figura I.1.</b> La portada de CytogeneticsPro al abrirla. A la izquierda, la barra de los diez bloques; al centro, el lema, los botones para empezar y una metafase con el idiograma del maíz de ejemplo, calculado por la app: <i>2n</i> = 2x = 20 = 8m + 10sm + 2sm-sat, categoría 3B de Stebbins; a la derecha, la lista de las secciones del bloque abierto.</figcaption>
+  </figure>
+
+  <!-- I.2 -->
+  <h2 id="si-2"><span class="num">I.2</span>Preguntas que responde</h2>
+  <p>Una buena manera de saber si el programa te sirve es ver qué preguntas contesta, y en qué bloque.</p>
+  <table class="compacta">
+    <thead><tr><th>Pregunta</th><th style="width:0.75in" class="c">Bloque</th></tr></thead>
+    <tbody>
+      <tr><td>¿Cuánto mide cada brazo de cada cromosoma en mis fotomicrografías?</td><td class="c"><span class="chip k2">2</span></td></tr>
+      <tr><td>¿Cuántos cromosomas tiene esta célula, y cuál es la moda de 2n en la accesión?</td><td class="c"><span class="chip k2">2</span> <span class="chip k6">6</span></td></tr>
+      <tr><td>¿Cuáles son los homólogos, de qué tipo es cada par y cuál es la fórmula cariotípica?</td><td class="c"><span class="chip k3">3</span></td></tr>
+      <tr><td>¿Qué tan asimétrico es el cariotipo, y en qué categoría de Stebbins cae?</td><td class="c"><span class="chip k4">4</span></td></tr>
+      <tr><td>¿Cuántos quiasmas hay por célula? ¿Es regular la meiosis? ¿Qué tan viable es el polen?</td><td class="c"><span class="chip k5">5</span></td></tr>
+      <tr><td>¿Las configuraciones meióticas son las de un autopoliploide o las de un alopoliploide?</td><td class="c"><span class="chip k5">5</span></td></tr>
+      <tr><td>¿Qué nivel de ploidía tiene la planta, y cuánto ADN hay en su núcleo?</td><td class="c"><span class="chip k6">6</span></td></tr>
+      <tr><td>¿Es citotóxico un extracto? ¿Baja el índice mitótico, aumentan las aberraciones?</td><td class="c"><span class="chip k6">6</span></td></tr>
+      <tr><td>¿Dónde caen las bandas y las señales de FISH, y se repiten de una célula a otra?</td><td class="c"><span class="chip k7">7</span></td></tr>
+      <tr><td>¿Qué tan parecidos son los cariotipos de varios taxones? ¿Cómo cambió el número cromosómico en el árbol?</td><td class="c"><span class="chip k8">8</span></td></tr>
+      <tr><td>¿Cómo enseño la mitosis, la meiosis y el cariotipo con ejercicios que se califican solos?</td><td class="c"><span class="chip k9">9</span></td></tr>
+      <tr><td>¿Cómo publico el idiograma, el cariograma, las tablas y los métodos?</td><td class="c"><span class="chip k10">10</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- I.3 -->
+  <h2 id="si-3"><span class="num">I.3</span>Seis ideas que sostienen el manual</h2>
+  <p>Todo lo que sigue descansa en seis ideas. Si te quedas con ellas, buena parte de los errores que se cometen al describir un cariotipo ya no son posibles.</p>
+  <ol class="pasos">
+    <li><b>Una medida sin escala no es una medida.</b> Una longitud en píxeles depende del aumento y de la cámara; sólo la barra de micras de la misma fotografía la vuelve comparable. Por eso el Bloque 2 pide calibrar cada célula y avisa de las que no lo están.</li>
+    <li><b>Los cromosomas se curvan, y el brazo se mide a lo largo.</b> Una recta entre los extremos acorta el cromosoma doblado. La app mide sobre una línea que sigue su eje, punto por punto.</li>
+    <li><b>Una célula no es un cariotipo.</b> La condensación cambia de una célula a otra, y un homólogo puede quedar en el par equivocado. El cariotipo sale de varias células, con sus pares alineados entre ellas y su desviación a la vista.</li>
+    <li><b>Los nombres dependen de un esquema, y el esquema se dice.</b> Un cromosoma con r = 1.70 es m con Levan et al. (1964) y sm con Guerra (1986). La app escribe qué esquema y qué límites usó.</li>
+    <li><b>La asimetría son dos cosas.</b> Una es la posición de los centrómeros; la otra, la diferencia de tamaño entre cromosomas. Hoy se recomienda medirlas por separado —MCA y CVCL (Peruzzi y Eroğlu, 2013)— en lugar de con un solo número.</li>
+    <li><b>Lo que no se reporta no se puede revisar.</b> El número de células, la calibración, el esquema de clasificación, el patrón de la citometría y la versión del programa van en los métodos. El Bloque 10 los redacta con lo que tiene el proyecto.</li>
+  </ol>
+
+  <!-- I.4 -->
+  <h2 id="si-4"><span class="num">I.4</span>Datos que acepta y qué entrega</h2>
+  <p>El punto de partida son las fotomicrografías de metafases, o las medidas de los brazos si ya las tienes. Los demás bloques reciben sus propias tablas —configuraciones meióticas, conteos, citometría, señales—, que se escriben, se pegan desde una hoja de cálculo o se abren en CSV.</p>
+  <table class="compacta">
+    <thead><tr><th style="width:1.6in">Entra</th><th>Formato y dónde</th></tr></thead>
+    <tbody>
+      <tr><td>Fotomicrografías</td><td>Imágenes <code>.png</code> y <code>.jpg</code>; cada una abre una célula (Bloque 2)</td></tr>
+      <tr><td>Medidas de los brazos</td><td>Capturadas a mano o pegadas de una hoja de cálculo o de un artículo: columnas reconocidas por su nombre o por su orden, con tabulador, punto y coma o coma (Bloque 2)</td></tr>
+      <tr><td>Tablas de los bloques</td><td>Configuraciones, fases, tétradas y polen (Bloque 5); conteos, citometría y la prueba de <i>Allium</i> (Bloque 6); señales (Bloque 7): escritas, pegadas o en <code>.csv</code></td></tr>
+      <tr><td>Histograma del citómetro</td><td>Un <code>.csv</code> o <code>.txt</code> de canales o de eventos (Bloque 6)</td></tr>
+      <tr><td>Árbol y contorno</td><td>Un árbol en Newick o NEXUS y, si se quiere, un contorno <code>.geojson</code> para el mapa de citotipos (Bloque 8)</td></tr>
+      <tr><td>Proyectos</td><td>Un <code>.json</code> guardado antes por la propia app, con sus imágenes (<code>Ctrl + S</code> para guardar, <code>Ctrl + O</code> para abrir)</td></tr>
+    </tbody>
+  </table>
+  <table class="compacta">
+    <thead><tr><th style="width:1.6in">Sale</th><th>Formato</th></tr></thead>
+    <tbody>
+      <tr><td>Figuras</td><td>Idiogramas, cariograma recortado de la imagen, categorías de Stebbins, MCA × CVCL, histogramas, dendrograma, biplot, árbol con los números y mapa, en SVG o PNG; también por el estudio de figuras de la suite</td></tr>
+      <tr><td>Tablas</td><td>Todas las del proyecto en CSV o TSV, listas para una hoja de cálculo</td></tr>
+      <tr><td>Texto</td><td>Los métodos redactados en español o en inglés con sus referencias, y un informe imprimible o en HTML</td></tr>
+      <tr><td>La imagen anotada</td><td>La fotomicrografía con los trazos, el centrómero y los números, en PNG a su resolución original</td></tr>
+      <tr><td>Paquete</td><td>Un <code>.zip</code> reproducible con el proyecto, el informe, los métodos, las tablas y las figuras</td></tr>
+    </tbody>
+  </table>
+
+  <!-- I.5 -->
+  <h2 id="si-5"><span class="num">I.5</span>Qué necesitas y cómo abrirlo</h2>
+  <p>Sólo un navegador moderno, en una versión de los últimos años. No hace falta instalar nada ni tener internet; el programa entero cabe en una carpeta.</p>
+  <ol class="pasos">
+    <li><b>Doble clic en <code>index.html</code>.</b> Es lo más sencillo y funciona igual que todo lo demás: los cálculos y los ejemplos están dentro del programa.</li>
+    <li><b>O doble clic en <code>Open CytogeneticsPro.bat</code>.</b> Abre un servidor local mínimo en el puerto 9900 y la app en <code>http://localhost:9900</code>. Sólo hace falta para abrirla desde otro equipo o una tableta de la misma red; el archivo <code>server.ps1</code> explica cómo.</li>
+  </ol>
+  <p>Las preferencias —el idioma y el tema claro u oscuro— se guardan en el propio navegador y se recuerdan la siguiente vez. Los datos no: cada vez que abres la app empieza vacía, y para retomar un estudio está el proyecto <code>.json</code>, que guarda también las imágenes. Si intentas cerrar la pestaña con datos sin guardar, la app te lo advierte.</p>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Las imágenes pesan</div>
+    <p>El proyecto guarda las fotomicrografías dentro del <code>.json</code>, así que su tamaño crece con ellas. Conviene recortar cada imagen a la metafase y guardarla en PNG o en JPG de buena calidad antes de abrirla: la medición no gana nada con los bordes vacíos de la fotografía.</p>
+  </div>
+
+  <!-- I.6 -->
+  <h2 id="si-6"><span class="num">I.6</span>Recorrido por la interfaz</h2>
+  <p>Todas las aplicaciones de la suite comparten la misma barra, la misma navegación y las mismas herramientas de figuras, así que lo que aprendas aquí te sirve en las demás.</p>
+
+  <h3>Navegar sin perderse</h3>
+  <p>A la izquierda está la barra de los diez bloques; a la derecha, la lista <span class="ui">En este bloque</span>, con las secciones del bloque abierto. Al pie de cada bloque dos botones llevan al anterior y al siguiente. Cuando cambias un control y los resultados se recalculan más abajo, aparece un botón flotante, <span class="ui">Último cambio</span>, que te regresa al control que tocaste, y otro para <span class="ui">Volver arriba</span>. Casi todo se puede hacer también desde el teclado:</p>
+  <table class="compacta">
+    <thead><tr><th style="width:1.55in">Tecla</th><th>Qué hace</th></tr></thead>
+    <tbody>
+      <tr><td><code>Alt + ←</code> · <code>Alt + →</code></td><td>El bloque anterior o el siguiente; en el modo enfocado, la sección anterior o la siguiente</td></tr>
+      <tr><td><code>Ctrl + K</code></td><td>Buscar un bloque, una sección, un control o una figura</td></tr>
+      <tr><td><code>Ctrl + S</code> · <code>Ctrl + O</code></td><td>Guardar el proyecto en un <code>.json</code> · abrir uno guardado</td></tr>
+      <tr><td><code>[</code> · <code>?</code></td><td>Contraer la barra de bloques · ver la lista de atajos</td></tr>
+      <tr><td><code>V C N T M S E B</code></td><td>En el editor del Bloque 2: <span class="ui">Mover</span>, <span class="ui">Calibrar</span>, <span class="ui">Contar</span>, <span class="ui">Trazar</span>, <span class="ui">Centrómero</span>, <span class="ui">Satélite</span>, <span class="ui">Editar</span> y <span class="ui">Borrar</span></td></tr>
+      <tr><td><code>Ctrl + Z</code> · <code>Ctrl + Y</code></td><td>En el editor del Bloque 2: deshacer y rehacer</td></tr>
+    </tbody>
+  </table>
+
+  <figure>
+    <div class="marco"><img src="../img/i-interfaz.png" alt="La pantalla del Bloque 3 con el ejemplo del chayote y sus partes numeradas">
+      <span class="marca" style="left:31.1%;top:3.1%">1</span>
+      <span class="marca" style="left:71.7%;top:3.1%">2</span>
+      <span class="marca" style="left:80.8%;top:5.3%">3</span>
+      <span class="marca" style="left:91.4%;top:5.3%">4</span>
+      <span class="marca" style="left:13%;top:45.3%">5</span>
+      <span class="marca" style="left:18.6%;top:8.4%">6</span>
+      <span class="marca" style="left:56.6%;top:8.4%">7</span>
+      <span class="marca" style="left:74.2%;top:8.4%">8</span>
+      <span class="marca" style="left:82.3%;top:11%">9</span>
+      <span class="marca" style="left:18.3%;top:16.4%">10</span>
+      <span class="marca" style="left:18.3%;top:34.2%">11</span>
+      <span class="marca" style="left:17%;top:88.7%">12</span>
+    </div>
+    <figcaption><b>Figura I.2.</b> La pantalla del Bloque 3 con el ejemplo del chayote abierto. Los números corresponden a la lista de abajo.</figcaption>
+  </figure>
+  <ul class="leyenda-marcas">
+    <li><span class="n">1</span><b>Nombre de la app y su lema.</b> El nombre lleva a la portada (Bloque 1).</li>
+    <li><span class="n">2</span><b>LABG Suite.</b> Vuelve al portal con las demás aplicaciones.</li>
+    <li><span class="n">3</span><b>ES · EN.</b> Cambia el idioma de toda la interfaz, también el de las figuras.</li>
+    <li><span class="n">4</span><b>Tema, animaciones, reporte y atajos.</b> Claro u oscuro; las esperas animadas sí o no; reportar un problema en la página pública del proyecto; la lista de atajos de teclado (tecla <code>?</code>).</li>
+    <li><span class="n">5</span><b>La barra de los diez bloques.</b> El número se vuelve una palomita cuando el bloque ya tiene un resultado, y arriba se cuenta cuántos van (4/10 en la figura); <code>[</code> la contrae.</li>
+    <li><span class="n">6</span><b>La ruta.</b> La app, el bloque y la sección en la que estás.</li>
+    <li><span class="n">7</span><b>Documento · Enfocado.</b> Todas las secciones del bloque una tras otra, o una sola a la vez; el botón de al lado contrae o expande todas las secciones.</li>
+    <li><span class="n">8</span><b>Buscar</b> (<code>Ctrl + K</code>). Un bloque, una sección, un control o una figura, por su nombre.</li>
+    <li><span class="n">9</span><b>En este bloque.</b> Las secciones del bloque abierto; la actual va resaltada.</li>
+    <li><span class="n">10</span><b>El título del bloque,</b> con su número y lo que hace en una línea.</li>
+    <li><span class="n">11</span><b>Una tarjeta.</b> Cada sección es una tarjeta con sus controles arriba y sus resultados abajo.</li>
+    <li><span class="n">12</span><b>Buscar, Modo enfocado y Ayuda,</b> también al pie de la barra de bloques.</li>
+  </ul>
+
+  <figure class="reducida">
+    <div class="marco"><img src="../img/i-buscar.png" alt="La ventana de búsqueda con Stebbins escrito y dos resultados"></div>
+    <figcaption><b>Figura I.3.</b> La búsqueda (<code>Ctrl + K</code>) con «Stebbins» escrito: encuentra la sección <span class="ui">Categorías de Stebbins y dispersión</span> del Bloque 4 y la figura del mismo nombre, que se abre en el estudio de figuras. <code>Enter</code> lleva al resultado elegido.</figcaption>
+  </figure>
+
+  <h3>La medición sobre la imagen</h3>
+  <p>El Bloque 2 es el único que trabaja sobre una fotografía. Su editor tiene una herramienta por tarea —<span class="ui">Mover</span>, <span class="ui">Calibrar</span>, <span class="ui">Contar</span>, <span class="ui">Trazar</span>, <span class="ui">Centrómero</span>, <span class="ui">Satélite</span>, <span class="ui">Editar</span> y <span class="ui">Borrar</span>—, cada una con su tecla de una letra, y al lado un panel que explica la herramienta activa, la calibración, el brillo y el contraste y el conteo. El capítulo 2 lo recorre paso a paso.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/i-medicion.png" alt="El editor del Bloque 2 con la metafase simulada del maíz y sus veinte trazos"></div>
+    <figcaption><b>Figura I.4.</b> <span class="ui">Medición sobre la imagen</span> con la metafase simulada del maíz: los veinte cromosomas trazados, cada uno con su número y su centrómero (círculo blanco), los satélites del par 6 (rombos naranjas) y la barra de 10 µm, que calibra la célula a 135 px = 10 µm, es decir, 0.0741 µm por píxel.</figcaption>
+  </figure>
+
+  <h3>Las figuras</h3>
+  <p>Todas las figuras de la app se pueden abrir en el <b>estudio de figuras</b>, una ventana común a la suite donde se cambian los textos, el tamaño de la letra, la leyenda y los colores sin tocar los datos, y se exporta a los anchos y resoluciones de las revistas. Junto a cada figura, el botón <span class="ui">✎</span> abre el editor de la figura, para cambiar sus textos, sus colores y su leyenda. Los botones SVG y PNG de los bloques escriben siempre los colores del tema claro, aunque estés trabajando en el oscuro. El capítulo 10 lo explica a fondo.</p>
+
+  <!-- I.7 -->
+  <h2 id="si-7"><span class="num">I.7</span>Los cuatro ejemplos incluidos</h2>
+  <p>Para aprender sin datos propios, la app trae cuatro conjuntos <b>simulados</b>. Los nombres de las especies y de los lugares son reales, pero las medidas se generaron con un guion propio a partir de cariotipos base escritos a mano con valores redondos: sirven para recorrer la app y para las pruebas, no para describir a esas especies. Se abren con <span class="ui">Abrir el ejemplo</span> en <span class="ruta">Bloque 1<span class="sep">›</span>Ejemplos incluidos</span>, o desde los bloques que los usan, y cada uno lleva al bloque donde empieza.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/i-ejemplos.png" alt="Las cuatro tarjetas de los ejemplos incluidos en la portada de la app"></div>
+    <figcaption><b>Figura I.5.</b> <span class="ui">Ejemplos incluidos</span>, en la portada de la app. Cada tarjeta dice qué bloques usa el ejemplo. Abrir uno reemplaza el proyecto actual; si ya hay datos, la app lo pregunta antes.</figcaption>
+  </figure>
+  <table class="compacta">
+    <thead><tr><th style="width:1.55in">Ejemplo</th><th style="width:0.7in" class="c">Abre en</th><th>Qué tiene y para qué sirve</th></tr></thead>
+    <tbody>
+      <tr><td><b><i>Zea mays</i></b>, 2n = 20</td><td class="c"><span class="chip k2">2</span></td><td>Un maíz criollo de Texcoco con cinco células: la primera es una metafase dibujada por la app, con sus trazos, el satélite del par 6 y los nudos heterocromáticos; las otras cuatro, medidas directas. Medición, cariotipo, asimetría y bandas.</td></tr>
+      <tr><td><b><i>Sechium edule</i></b>, 2n = 28 y 24</td><td class="c"><span class="chip k3">3</span></td><td>Tres accesiones cultivadas de chayote (Huatusco, Chilchotla y Uruapan) y una silvestre con 2n = 24, tres células cada una, señales de ADNr 45S, 5S y CMA⁺, coordenadas y un árbol ilustrativo de cucurbitáceas. Cariotipo, FISH, comparación y evolución del número.</td></tr>
+      <tr><td><b>Serie poliploide ficticia</b>, 2x, 4x y 6x</td><td class="c"><span class="chip k5">5</span></td><td>Una especie inventada con x = 7 y tres poblaciones: configuraciones meióticas célula por célula, fases, tétradas, polen, conteos y citometría con el histograma del tetraploide.</td></tr>
+      <tr><td><b><i>Allium cepa</i></b>, prueba de citotoxicidad</td><td class="c"><span class="chip k6">6</span></td><td>Un testigo y dos concentraciones de un extracto ficticio, tres bulbos por tratamiento y 1000 células por bulbo: índice mitótico, fases, aberraciones y micronúcleos.</td></tr>
+    </tbody>
+  </table>
+  <p class="small">Cómo se simuló cada ejemplo —los cariotipos base, el modelo de error de medición, la semilla— está escrito en <code>data/LEEME.md</code>, junto al guion que los genera. El ejercicio de cariotipo del Bloque 9 no usa estos ejemplos: inventa una metafase nueva cada vez.</p>
+
+  <!-- I.8 -->
+  <h2 id="si-8"><span class="num">I.8</span>Cómo se recorre un estudio</h2>
+  <p>Los bloques están en el orden de un estudio citogenético real. No hace falta pasar por todos: los que no apliquen se saltan, y cada bloque dice si conviene volver a uno anterior. La sección <span class="ui">Cómo funciona</span> de la portada lo resume en siete pasos.</p>
+  <figure>
+    <div class="marco"><img src="../img/i-flujo.png" alt="Los siete pasos de Cómo funciona: preparar, contar, medir, ordenar, describir, comparar y publicar"></div>
+    <figcaption><b>Figura I.6.</b> <span class="ui">Cómo funciona</span>: los siete pasos de un estudio, del portaobjetos a la publicación.</figcaption>
+  </figure>
+  <ol class="pasos">
+    <li><b>Medir</b> (Bloque 2). Abre las fotomicrografías, calibra cada célula con su barra de escala, cuenta los cromosomas y traza cada uno con su centrómero y sus satélites; o captura las medidas.</li>
+    <li><b>Ordenar</b> (Bloque 3). Revisa que cada homólogo quedó en su par, elige el esquema de clasificación y obtén la fórmula, el número fundamental y el idiograma.</li>
+    <li><b>Describir</b> (Bloques 4 y 7). Los índices de asimetría y la categoría de Stebbins; las bandas y las señales de FISH sobre el idiograma.</li>
+    <li><b>Contar y pesar</b> (Bloques 5 y 6). La meiosis y el polen; los conteos de 2n, el nivel de ploidía, la citometría de flujo y, si es el caso, la prueba de <i>Allium</i>.</li>
+    <li><b>Comparar</b> (Bloque 8). Las accesiones y otros taxones en una sola matriz, sus distancias, sus componentes principales y la evolución del número sobre un árbol.</li>
+    <li><b>Publicar</b> (Bloque 10). Las figuras, las tablas, los métodos redactados, el informe y el paquete reproducible.</li>
+  </ol>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Los datos se comparten entre bloques</div>
+    <p>Lo que mides en el Bloque 2 lo usan el 3 y, a través del cariotipo, el 4, el 7, el 8 y el 10; el conteo de una célula se lleva al Bloque 6 con un botón. Si cambias una medida o abres otro proyecto, cada bloque recalcula lo suyo la siguiente vez que lo visitas, y su palomita en la barra se apaga si deja de tener resultado.</p>
+  </div>
+
+  <!-- I.9 -->
+  <h2 id="si-9"><span class="num">I.9</span>Cómo se comprobó</h2>
+  <p>Un programa de cálculo vale lo que valen sus números. Los índices de asimetría se compararon con los ejemplos publicados por Peruzzi y Eroğlu (2013) y con los cariotipos ideales de Zuo y Yuan (2011); los motores de la app se recalcularon, aparte, con fórmulas escritas de nuevo en un lenguaje de cálculo estadístico independiente, sobre 81 cariotipos —incluidos casos difíciles, con telocéntricos y brazos iguales—.</p>
+  <div class="caja dato">
+    <div class="dato-cifra">9&nbsp;310</div>
+    <div class="dato-txt"><div class="caja-t">Comparaciones sin desacuerdos</div>Dieciséis índices de asimetría y la categoría de Stebbins de 81 cariotipos, la clase de 1&nbsp;289 cromosomas con tres esquemas, los intervalos de Wilson y de Clopper–Pearson, las pruebas χ² y G, la de dos proporciones con Holm y el tamaño del genoma, con tolerancia de una millonésima. Además, 623 pruebas automáticas corren en el navegador y vigilan los motores, la medición y las figuras.</div>
+  </div>
+  <p>Las pruebas sirvieron también para encontrar errores y decisiones mal tomadas, y quedaron documentados: por ejemplo, que en la tabla de Stebbins (1971) la columna se define por la proporción de cromosomas con razón de brazos <i>menor</i> que 2, o que el índice DI usa medianas y no medias (Lavania y Srivastava, 1992). Los capítulos dicen, donde importa, qué convenio sigue la app y por qué.</p>
+
+  <!-- I.10 -->
+  <h2 id="si-10"><span class="num">I.10</span>Lo que el programa no hace</h2>
+  <p>Saber dónde termina una herramienta es tan útil como saber qué hace. La portada de la app lo dice en <span class="ui">Lo que este programa no hace</span>:</p>
+  <table class="compacta">
+    <thead><tr><th style="width:1.9in">No hace</th><th>Por qué, y qué hacer</th></tr></thead>
+    <tbody>
+      <tr><td><b>Reconocer cromosomas solo</b></td><td>Tú trazas cada cromosoma; la app mide con exactitud lo que trazas, sin segmentación automática. Así sabes siempre qué se midió.</td></tr>
+      <tr><td><b>Controlar el microscopio o el citómetro</b></td><td>Lee las imágenes y los archivos de texto que exportan, nunca los equipos.</td></tr>
+      <tr><td><b>Modelos de verosimilitud</b></td><td>La evolución del número cromosómico se reconstruye por parsimonia con costos por evento, no por máxima verosimilitud.</td></tr>
+      <tr><td><b>Mapas con capas ajenas</b></td><td>El mapa de citotipos se dibuja sobre una retícula de coordenadas; puedes cargar tu propio contorno.</td></tr>
+      <tr><td><b>Saber lo que no está en el proyecto</b></td><td>Los métodos redactados son un borrador: la app no conoce el material de campo, el microscopio ni el número de plantas, y así lo dice el Bloque 10.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>
