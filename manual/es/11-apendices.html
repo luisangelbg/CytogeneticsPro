@@ -44,9 +44,9 @@
     <tbody>
       <tr><td><b>Proyecto</b></td><td><span class="ui">Abrir un proyecto</span> (portada, Bloque 2, <code>Ctrl + O</code>) · <code>.json</code></td><td>Un archivo escrito por la app, con <code>"app": "CytogeneticsPro"</code>; cualquier otro JSON se rechaza. Reemplaza el proyecto abierto y recalcula todo.</td></tr>
       <tr><td><b>Imágenes</b></td><td>Bloque 2 · <code>.png</code>, <code>.jpg</code>, <code>.jpeg</code></td><td>Varias a la vez; cada imagen es una célula nueva de la accesión elegida (o de una nueva). Avisa si una pesa más de 25 MB. Se guardan dentro del proyecto.</td></tr>
-      <tr><td><b>Medidas</b></td><td>Bloque 2, <span class="ui">Pegar medidas</span> · texto pegado</td><td>Una fila por cromosoma, en micras; columnas por nombre o por número (abajo).</td></tr>
+      <tr><td><b>Medidas</b></td><td>Bloque 2, <span class="ui">Pegar medidas</span> · texto pegado</td><td>Una fila por cromosoma, en micras; columnas por nombre o por número (abajo). El CSV de mediciones que escribe el propio bloque vuelve a entrar completo, con su taxón y su unidad.</td></tr>
       <tr><td><b>Tablas de registro</b></td><td>Bloques 5 a 8, <span class="ui">Importar CSV</span> o pegar sobre la tabla</td><td>Un CSV con encabezados: cada encabezado se busca entre las claves, los nombres en español y en inglés y los alias de las columnas, sin distinguir acentos, mayúsculas ni signos. Un bloque copiado de una hoja de cálculo se pega sobre la celda activa y añade las filas que falten.</td></tr>
-      <tr><td><b>Fertilidad del polen</b></td><td>Bloque 5 · <code>.csv</code></td><td>El CSV de la app de palinología de la suite, con las columnas <code>landrace_code</code>, <code>n_granos_completos</code> y <code>pct_atipico</code>; los inviables se calculan como n × % / 100, redondeado.</td></tr>
+      <tr><td><b>Fertilidad del polen</b></td><td>Bloque 5 · <code>.csv</code></td><td>El CSV de PalynoPro, la app de palinología de la suite, con las columnas <code>landrace_code</code>, <code>n_granos_completos</code> y <code>pct_atipico</code>; los inviables se calculan como n × % / 100, redondeado.</td></tr>
       <tr><td><b>Histograma del citómetro</b></td><td>Bloque 6 · <code>.csv</code>, <code>.tsv</code>, <code>.txt</code></td><td>Dos columnas (canal, número de núcleos) o una columna de valores de cada evento, que la app agrupa en 512 clases; con encabezado o sin él.</td></tr>
       <tr><td><b>Árbol</b></td><td>Bloque 8 · <code>.nwk</code>, <code>.newick</code>, <code>.tre</code>, <code>.tree</code>, <code>.txt</code>, o pegado</td><td>Newick, con nombres entre apóstrofos y longitudes de rama (que se ignoran en la parsimonia); los comentarios entre corchetes se quitan. De un archivo NEXUS toma el primer árbol del bloque <code>TREES</code>. Las puntas se emparejan por nombre con las accesiones y los taxones.</td></tr>
       <tr><td><b>Contorno del mapa</b></td><td>Bloque 8 · <code>.geojson</code>, <code>.json</code></td><td>Un GeoJSON de tipo <code>FeatureCollection</code>, <code>Feature</code>, <code>Polygon</code>, <code>MultiPolygon</code>, <code>LineString</code>, <code>MultiLineString</code> o <code>GeometryCollection</code>, en longitud y latitud.</td></tr>
@@ -65,16 +65,19 @@
   <table class="compacta">
     <thead><tr><th style="width:1.4in">Columna</th><th>Encabezados que la nombran</th></tr></thead>
     <tbody>
-      <tr><td>Accesión</td><td>acc, accesión, accession, muestra, sample, población, population, taxón, taxon</td></tr>
+      <tr><td>Accesión</td><td>acc, accesión, accession, muestra, sample, población, population</td></tr>
+      <tr><td>Taxón</td><td>taxón, taxon, especie, species</td></tr>
       <tr><td>Célula</td><td>cél…, cell, placa, plate, metafase, metaphase</td></tr>
       <tr><td>Cromosoma</td><td>crom…, chrom…, núm…, no., #, id</td></tr>
       <tr><td>Brazo corto (p)</td><td>p, s, corto, short, brazo corto, short arm</td></tr>
       <tr><td>Brazo largo (q)</td><td>q, l, largo, long, brazo largo, long arm</td></tr>
       <tr><td>Satélite</td><td>satélite, satellite, sat</td></tr>
       <tr><td>Brazo del satélite</td><td>brazo…sat, sat…brazo o sat…arm, arm, brazo</td></tr>
+      <tr><td>Unidad</td><td>unidad, unit</td></tr>
     </tbody>
   </table>
-  <p>Sin encabezado, las columnas se leen por su número: 2 columnas, <b>p q</b> (una célula nueva); 3, <b>cromosoma p q</b>; 4, <b>célula cromosoma p q</b>; 5 a 7, <b>accesión célula cromosoma p q [satélite] [brazo]</b>. Una fila sin un número válido para p (≥ 0) y para q (&gt; 0) se salta, y el mensaje dice cuáles. Un satélite va en el brazo q si la columna del brazo dice q, l, largo o long; si no, en el p. Las accesiones que no existen se crean con el nombre que trae la columna.</p>
+  <p>Sin encabezado, las columnas se leen por su número: 2 columnas, <b>p q</b> (una célula nueva); 3, <b>cromosoma p q</b>; 4, <b>célula cromosoma p q</b>; 5 a 7, <b>accesión célula cromosoma p q [satélite] [brazo]</b>. Una fila sin un número válido para p (≥ 0) y para q (&gt; 0) se salta, y el mensaje dice cuáles. Un satélite va en el brazo q si la columna del brazo dice q, l, largo o long; si no, en el p. Las accesiones que no existen se crean con el nombre que trae la columna; si la tabla tiene taxón pero no accesión, se crea una accesión por taxón, y el taxón se anota en la accesión. Las filas sin accesión ni taxón van a la accesión elegida, y sólo si hace falta se crea una nueva: pegar una tabla que nombra sus accesiones no deja una «Accesión 1» vacía. Una célula cuya columna de unidad dice <i>px</i> (una célula sin calibrar exportada antes) se queda en píxeles, y el mensaje lo avisa: «Una célula viene en píxeles (sin calibrar).».</p>
+  <p>Así, el archivo <code>mediciones.csv</code> que escribe el Bloque 2 (accesión, taxón, célula, cromosoma, p, q, satélite, brazo del satélite, unidad, origen) se puede pegar de vuelta sin perder nada; la columna <i>origen</i> se ignora.</p>
   <pre class="archivo">accesión;célula;cromosoma;p;q;satélite;brazo
 Huatusco;C1;1;1,42;1,66;0,38;p
 Huatusco;C1;2;1,35;1,52;;
@@ -89,7 +92,7 @@ Huatusco;C1;3;0,98;1,95;;</pre>
       <tr><td><span class="chip k2">2</span></td><td><code>&lt;accesión&gt;_&lt;célula&gt;_anotada.png</code></td><td>La imagen con las marcas de conteo y los trazos.</td></tr>
       <tr><td><span class="chip k3">3</span></td><td><code>cariotipo_&lt;accesión&gt;.csv</code> · <code>.tsv</code> · <code>cariotipos.csv</code></td><td>El cariotipo de una accesión o de todas, un renglón por par.</td></tr>
       <tr><td><span class="chip k4">4</span></td><td><code>indices_asimetria.csv</code> · <code>.tsv</code></td><td>Los índices de todas las accesiones, con sus desviaciones si se calcularon célula por célula.</td></tr>
-      <tr><td><span class="chip k5">5</span></td><td><code>configuraciones_</code>, <code>fases_</code>, <code>tetradas_</code>, <code>polen_&lt;accesión&gt;.csv</code> · <code>polen_&lt;accesión&gt;_polenapp.csv</code></td><td>Las tablas de registro de la meiosis; la última, el polen con las columnas que lee la app de palinología.</td></tr>
+      <tr><td><span class="chip k5">5</span></td><td><code>configuraciones_</code>, <code>fases_</code>, <code>tetradas_</code>, <code>polen_&lt;accesión&gt;.csv</code> · <code>polen_&lt;accesión&gt;_palynopro.csv</code></td><td>Las tablas de registro de la meiosis; la última, el polen con las columnas de PalynoPro.</td></tr>
       <tr><td><span class="chip k6">6</span></td><td><code>conteos_</code>, <code>citometria_&lt;accesión&gt;.csv</code> · <code>prueba_allium.csv</code></td><td>Los conteos, las corridas del citómetro y la prueba de <i>Allium</i>.</td></tr>
       <tr><td><span class="chip k7">7</span></td><td><code>sondas.csv</code> · <code>senales_&lt;accesión&gt;.csv</code></td><td>Las sondas y bandas, y las señales de una accesión.</td></tr>
       <tr><td><span class="chip k8">8</span></td><td><code>otros_taxones.csv</code> · <code>dendrograma_upgma.nwk</code> o <code>_ward.nwk</code></td><td>Los taxones añadidos a mano y el dendrograma en Newick.</td></tr>
@@ -150,7 +153,7 @@ Huatusco;C1;3;0,98;1,95;;</pre>
     <tbody>
       <tr><td style="width:2.1in"><b>Número cromosómico</b></td><td>La moda de las células contadas; con más de una moda, la app pide contar más células. Si la moda no es múltiplo de x, avisa: aneuploidía, cromosomas B o disploidía.</td></tr>
       <tr><td><b>Citometría de flujo</b></td><td>2C = (canal G1 de la muestra / canal G1 del estándar) × 2C del estándar; 1C = 2C / 2; 1Cx = 2C / nivel de ploidía; 1 pg = 978 Mpb.</td></tr>
-      <tr><td><b>Calidad de los picos</b></td><td>Avisa si algún pico tiene un CV mayor de 5&nbsp;% o si la razón muestra / estándar está entre 0.85 y 1.18 (los picos se enciman).</td></tr>
+      <tr><td><b>Calidad de los picos</b></td><td>Avisa si algún pico tiene un CV mayor de 5&nbsp;%, si la razón muestra / estándar está entre 0.85 y 1.18 (los picos se enciman) o si es mayor de 3 o menor de 1/3 (la respuesta del citómetro puede dejar de ser lineal).</td></tr>
       <tr><td><b>Prueba de <i>Allium</i></b></td><td>Cada tratamiento se compara con el testigo, con la corrección de Holm; un índice mitótico menor que la mitad del testigo es una señal fuerte de citotoxicidad.</td></tr>
     </tbody>
   </table>
@@ -158,13 +161,13 @@ Huatusco;C1;3;0,98;1,95;;</pre>
   <h3>B.5 · Bandeo y FISH (Bloque 7)</h3>
   <ul>
     <li><b>Posición en el brazo</b>, del centrómero (0) al telómero (1): proximal &lt; 1/3; intersticial de 1/3 a 0.8; terminal &gt; 0.8.</li>
-    <li><b>Sitios por juego.</b> Un sitio en los dos homólogos cuenta uno; en uno solo, medio (y se cuenta como heteromorfismo).</li>
+    <li><b>Sitios por juego.</b> Un sitio en los dos homólogos cuenta uno; en uno solo, medio (y se cuenta como heteromorfismo), con el mismo criterio en el patrón de la accesión y sus regiones, en la tabla de todas las accesiones y en la matriz de la comparación.</li>
   </ul>
 
   <h3>B.6 · Comparación entre taxones (Bloque 8)</h3>
   <ul>
     <li><b>Mínimos.</b> Al menos una variable y tres accesiones o taxones con datos; el análisis de componentes necesita al menos dos variables que varíen.</li>
-    <li><b>Datos faltantes.</b> La distancia de Gower y la euclidiana usan, en cada pareja, las variables que ambas tienen (la euclidiana se reescala al total); si una pareja no comparte ninguna, el análisis se detiene. Los componentes ponen las celdas vacías en la media.</li>
+    <li><b>Filas incompletas.</b> Por omisión, <span class="ui">Fuera (sólo filas con todas las variables)</span>: al agrupamiento y a los componentes sólo entran las filas con todas las variables elegidas; las demás siguen en la matriz, en el árbol de los números y en el mapa, y la app dice cuáles quedan fuera y qué les falta. <span class="ui">Todas, con las variables que tienen todas</span> usa sólo las variables comunes. <span class="ui">Todas; cada pareja con las variables que comparte</span> calcula la distancia de Gower o la euclidiana (reescalada al total) con lo que comparte cada pareja; avisa si alguna comparte la mitad de las variables o menos, y se detiene si una no comparte ninguna. Los componentes ponen las celdas vacías en la media.</li>
     <li><b>Ward</b> trabaja con las distancias al cuadrado y da las alturas en la escala de la distancia.</li>
     <li><b>Evolución del número.</b> Parsimonia de Sankoff con los costos de +1, −1, ×2 y ×1.5 que elijas (1, 1, 1 y 1.5 al abrir); un 2n impar no entra al análisis; hacen falta al menos dos puntas con número, y las demás se tratan como desconocidas.</li>
   </ul>
@@ -243,7 +246,8 @@ Huatusco;C1;3;0,98;1,95;;</pre>
       <tr><td>«Ninguna fila tenía dos números válidos para p y q.»</td><td>Las columnas no se reconocieron o tienen texto; revisa el encabezado o el separador (apéndice A.1).</td></tr>
       <tr><td>«El archivo no tenía columnas reconocibles.»</td><td>Ningún encabezado del CSV coincide con una columna de la tabla; usa los nombres que trae la tabla al exportarla.</td></tr>
       <tr><td colspan="2"><b>Medición y cariotipo (Bloques 2 y 3)</b></td></tr>
-      <tr><td>«… tiene … célula(s) con imagen sin calibrar: sus medidas están en píxeles.»</td><td>Calibra con la barra de escala para mezclarlas con las demás.</td></tr>
+      <tr><td>«… tiene una célula sin calibrar: sus medidas están en píxeles.» (o «… células sin calibrar…»)</td><td>Calibra con la barra de escala (o captura las medidas en micras) para mezclarlas con las demás.</td></tr>
+      <tr><td>«Una célula viene en píxeles (sin calibrar).» (al pegar medidas)</td><td>La columna de unidad decía px; la célula se queda en píxeles hasta que la calibres o captures sus medidas en micras.</td></tr>
       <tr><td>«En … no todas las células tienen el mismo número de cromosomas medidos (moda …).»</td><td>Falta o sobra algún cromosoma en alguna célula; el Bloque 3 agrupa lo que haya.</td></tr>
       <tr><td>«Esta accesión mezcla células calibradas (µm) y sin calibrar (píxeles).»</td><td>Las longitudes relativas valen; las absolutas no. Calibra todas en el Bloque 2.</td></tr>
       <tr><td>«Las células no tienen el mismo número de cromosomas (…).»</td><td>Revisa el emparejamiento de las células incompletas.</td></tr>
@@ -254,16 +258,20 @@ Huatusco;C1;3;0,98;1,95;;</pre>
       <tr><td>«Escribe el número básico x de la accesión para plantear las hipótesis.»</td><td>Sin x no hay fórmulas genómicas que probar.</td></tr>
       <tr><td>«La fórmula … con x = … da 2n = …, pero las células tienen ….»</td><td>La fórmula no corresponde al número de las células; corrígela.</td></tr>
       <tr><td>«Ninguna hipótesis se ajusta (la mejor: …).» · «Más de una hipótesis se ajusta (…): hacen falta más células para decidir.»</td><td>Prueba otra fórmula o registra más células.</td></tr>
-      <tr><td>«El archivo no tiene las columnas de PolenApp (landrace_code, n_granos_completos, pct_atipico).»</td><td>El CSV no viene de la app de palinología; captura los granos en la tabla.</td></tr>
+      <tr><td>«El archivo no tiene las columnas de PalynoPro (landrace_code, n_granos_completos, pct_atipico).»</td><td>El CSV no viene de PalynoPro; captura los granos en la tabla.</td></tr>
       <tr><td>«Hay más de una moda: cuenta más células antes de decidir el número.»</td><td>Dos o más números empatan; cuenta más.</td></tr>
       <tr><td>«El número modal no es múltiplo de x = …»</td><td>Aneuploidía, cromosomas B o un número básico distinto.</td></tr>
       <tr><td>«…: algún pico tiene un CV mayor de 5 %.»</td><td>Repite la preparación: núcleos dañados o restos.</td></tr>
       <tr><td>«…: la muestra y el patrón casi coinciden (razón cercana a 1).»</td><td>Elige un patrón con un contenido más distinto.</td></tr>
+      <tr><td>«…: la muestra y el patrón difieren más de tres veces en su contenido de ADN.»</td><td>Tan lejos, la respuesta del citómetro puede dejar de ser lineal: elige un patrón de tamaño más cercano al de la muestra, sin que los picos se encimen.</td></tr>
       <tr><td>«No se encontraron números en el archivo.»</td><td>El CSV del citómetro no tiene columnas numéricas que la app reconozca (apéndice A.1).</td></tr>
       <tr><td>«Las compuertas elegidas están vacías.»</td><td>Ajusta los límites de las compuertas del histograma.</td></tr>
       <tr><td colspan="2"><b>Comparación (Bloque 8)</b></td></tr>
-      <tr><td>«Hacen falta al menos tres accesiones o taxones con datos para comparar.»</td><td>Añade taxones en <span class="ui">Otros taxones</span> o elige variables que tengan más filas.</td></tr>
-      <tr><td>«Estas parejas no comparten ninguna variable: …»</td><td>Quita variables o completa los datos.</td></tr>
+      <tr><td>«Sólo entran al agrupamiento y al ACP las filas con todas las variables elegidas. Quedan fuera … filas (…), a las que les falta …»</td><td>Es el ajuste de inicio de <span class="ui">Filas incompletas</span>. Para incluirlas, elige sólo las variables que tienen o cambia ese menú.</td></tr>
+      <tr><td>«Sólo se usan las variables que tienen todas las filas (…); quedan fuera ….» · «Ninguna de las variables elegidas está en todas las filas.»</td><td>Con <span class="ui">Todas, con las variables que tienen todas</span>; en el segundo caso, elige otras variables u otra opción.</td></tr>
+      <tr><td>«Algunas parejas comparten pocas variables: «…» y «…» sólo tienen en común … (… de …), y su distancia, …, sale sólo de esas.»</td><td>Con <span class="ui">Todas; cada pareja con las variables que comparte</span>: dos cariotipos distintos pueden quedar a distancia 0; lee el dendrograma con cuidado o cambia <span class="ui">Filas incompletas</span>.</td></tr>
+      <tr><td>«Hacen falta al menos tres accesiones o taxones con datos para comparar.»</td><td>Añade taxones en <span class="ui">Otros taxones</span>, elige variables que tengan más filas o cambia <span class="ui">Filas incompletas</span>.</td></tr>
+      <tr><td>«Estas parejas no comparten ninguna variable: …»</td><td>Con la comparación por parejas: quita variables o completa los datos.</td></tr>
       <tr><td>«Falta un paréntesis de cierre en el Newick.» · «Sobra texto al final del Newick.» · «El Newick está vacío.»</td><td>El árbol está mal escrito; revisa paréntesis y el punto y coma final.</td></tr>
       <tr><td>«Hacen falta al menos dos puntas con número.»</td><td>Los nombres de las puntas no coinciden con las accesiones o taxones, o les falta 2n; escríbelo en <span class="ui">Números de las puntas</span>.</td></tr>
       <tr><td>«…: 2n = … es impar; no tiene un número haploide entero y no entra al análisis.»</td><td>Esa punta se trata como desconocida.</td></tr>

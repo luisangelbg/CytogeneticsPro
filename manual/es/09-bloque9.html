@@ -89,7 +89,7 @@
   <h2 id="s9-2"><span class="num">9.2</span>Ejercicio: arma el cariotipo</h2>
   <p class="lead">Una metafase simulada de un cariotipo inventado, con los cromosomas numerados, para emparejar, ordenar y clasificar a mano antes de pedir la calificación.</p>
   <p>El ejercicio dibuja la metafase con el mismo motor que hace las imágenes de los ejemplos: cromosomas teñidos con su centrómero, un núcleo en reposo en una esquina y una barra de 5 µm. Cada cromosoma lleva un número junto a él, y debajo, en <span class="ui">Recortes</span>, aparecen los mismos cromosomas <b>enderezados</b> a lo largo de su eje y a la misma escala que la imagen, cada uno con dos menús: <span class="ui">par</span> y <span class="ui">tipo</span> (m, sm, st o t). El menú <span class="ui">Pares</span> elige cuántos pares tiene el cariotipo —4, 5 (al abrir) o 6— y <span class="ui">Otra metafase</span> inventa uno nuevo.</p>
-  <figure class="w60">
+  <figure class="w50">
     <div class="marco"><img src="../img/b9-ejercicio.png" alt="La metafase simulada con diez cromosomas numerados y, debajo, sus diez recortes con los menús par y tipo"></div>
     <figcaption><b>Figura 9.3.</b> La metafase con la que abre el bloque: cinco pares, diez cromosomas en el orden en que se ven en la imagen. Los recortes conservan el tamaño relativo, y el centrómero se ve como la constricción de cada uno.</figcaption>
   </figure>
@@ -99,15 +99,15 @@
     <p>Al abrir el bloque, la app dibuja siempre la misma metafase (la de la semilla 20261007), para que un grupo entero pueda trabajar sobre la misma imagen y comparar respuestas. <span class="ui">Otra metafase</span> y el cambio del número de pares sortean una nueva cada vez. Las cifras de esta sección son las de la metafase de inicio.</p>
   </div>
   <h3>Cómo se califica</h3>
-  <p><span class="ui">Revisar</span> pone tres recuadros y una lista de observaciones, y marca cada recorte: con borde <b>verde</b> si el cromosoma quedó en su par, con el número de par correcto y con el tipo correcto; con borde <b>naranja</b> si el tipo está mal o si el cromosoma no quedó con su homólogo; sin color, si el par y el tipo están bien pero el número del par no.</p>
+  <p><span class="ui">Revisar</span> pone tres recuadros y una lista de observaciones, y marca cada recorte: con borde <b>verde</b> si el cromosoma quedó en su par, con el número de par correcto y con el tipo correcto; con borde <b>ámbar</b> si el tipo está mal o si el cromosoma no quedó con su homólogo, y con borde <b>ámbar punteado</b> si el par y el tipo están bien pero al par le toca otro número. Una línea bajo los botones lo recuerda: «Al revisar, el borde verde marca un recorte bien resuelto; el ámbar, un par o un tipo equivocado, y el ámbar punteado, un par bien formado al que le toca otro número.»</p>
   <ul>
     <li><span class="ui">Pares bien formados</span>: cuántos pares tienen a sus dos miembros, y sólo a ellos, con el mismo número.</li>
     <li><span class="ui">Pares bien numerados</span>: de los bien formados, cuántos llevan además el número que les toca por longitud («1 = el más largo»).</li>
     <li><span class="ui">Tipos correctos</span>: cuántos cromosomas, de todos, están bien clasificados.</li>
   </ul>
   <figure class="w50">
-    <div class="marco"><img src="../img/b9-revision.png" alt="Los recortes contestados, con bordes verdes y naranjas, los tres recuadros de la calificación y cuatro observaciones"></div>
-    <figcaption><b>Figura 9.4.</b> El ejercicio contestado con dos errores a propósito: los cromosomas 5 y 10 se dieron como sm y los pares 4 y 5 se numeraron al revés. Resultado: 5 / 5 pares bien formados, 3 / 5 bien numerados y 8 / 10 tipos correctos.</figcaption>
+    <div class="marco"><img src="../img/b9-revision.png" alt="Los recortes contestados, con bordes verdes, ámbar y ámbar punteados, los tres recuadros de la calificación y cuatro observaciones"></div>
+    <figcaption><b>Figura 9.4.</b> El ejercicio contestado con dos errores a propósito: los cromosomas 5 y 10 se dieron como sm y los pares 4 y 5 se numeraron al revés. Resultado: 5 / 5 pares bien formados, 3 / 5 bien numerados y 8 / 10 tipos correctos. El 5 y el 10 llevan borde ámbar (tipo equivocado); el 6 y el 9, que forman bien el par 5 pero se numeraron 4, ámbar punteado.</figcaption>
   </figure>
   <p>Las observaciones dicen por qué. Un tipo equivocado da un aviso con la razón de brazos verdadera: «El 5 es subtelocéntrico (st): su razón de brazos es r = 4.07, no sm.» Dos homólogos separados dan «Los cromosomas … son homólogos (el par …, de … µm).»; un par bien formado con el número equivocado, «Los cromosomas 5 y 10 forman bien un par, pero por su longitud es el par 4.» Con todo correcto, la app escribe «¡Cariotipo correcto! Puedes ver la solución con las medidas.».</p>
   <p><span class="ui">Ver la solución</span> ordena los recortes por pares y escribe, bajo cada uno, su número, su tipo, su longitud media y su razón de brazos, y al final la fórmula cariotípica.</p>
@@ -127,7 +127,7 @@
   <p>El banco tiene 33 preguntas: 28 fijas —4 de cariotipo, 3 de asimetría, 6 de meiosis, 6 de ploidía y genoma, 4 de bandeo y FISH, 3 de técnicas y 2 de comparación— y 5 que se generan con números nuevos cada vez: el índice centromérico de un cromosoma con brazos dados, la clase de Levan de una razón de brazos, el 2C de una muestra a partir de los canales del citómetro y de un estándar, el nivel de ploidía de un 2n con un número básico dado, y las combinaciones de cromosomas paternos y maternos que puede recibir un gameto. Las opciones se barajan en cada tanda.</p>
   <figure class="w70">
     <div class="marco"><img src="../img/b9-autoevaluacion.png" alt="Los temas, el menú de preguntas y las tres primeras preguntas calificadas, con la opción correcta resaltada en verde y su explicación"></div>
-    <figcaption><b>Figura 9.6.</b> Las tres primeras de una tanda de cinco preguntas de todos los temas, contestada siempre con la primera opción y calificada. La 1 está bien y se enmarca en verde; la 2 y la 3, mal, en naranja, con la opción correcta resaltada. En las cinco hubo 3 aciertos: el recuadro <span class="ui">Aciertos</span> dice 3 / 5, 60 %.</figcaption>
+    <figcaption><b>Figura 9.6.</b> Las tres primeras de una tanda de cinco preguntas de todos los temas, contestada siempre con la primera opción y calificada. La 1 está bien y se enmarca en verde; la 2 y la 3, mal, en ámbar, con la opción correcta resaltada. En las cinco hubo 3 aciertos: el recuadro <span class="ui">Aciertos</span> dice 3 / 5, 60 %.</figcaption>
   </figure>
   <p><span class="ui">Calificar</span> marca cada pregunta, resalta la opción correcta y añade su explicación, que empieza con «Correcto.», «No.» o «Sin respuesta.». El recuadro <span class="ui">Aciertos</span> da el total y el porcentaje, y se pinta de advertencia por debajo del 70&nbsp;%. Puedes cambiar respuestas y calificar de nuevo; las preguntas no cambian hasta que pidas otras.</p>
 
