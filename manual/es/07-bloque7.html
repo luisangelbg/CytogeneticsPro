@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · Manual de usuario · Capítulo 7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-7" data-pestana="7" data-orden="7" style="--acento: var(--b7)">
+  <div class="cap-apertura">
+    <div class="cap-num">7</div>
+    <div class="cap-etiqueta">Capítulo siete · Bloque 7</div>
+    <h1 data-corto="Bandeo y FISH">Bandeo y FISH</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Dos cariotipos con la misma fórmula pueden ser distintos: las bandas de heterocromatina, los fluorocromos y las sondas de ADN marcan sitios que la morfología no ve. Este bloque registra cada señal por su par, su brazo y su posición, la dibuja sobre el idiograma del Bloque 3, arma el mapa físico de un cromosoma y resume el patrón de cada accesión, su concordancia entre células y los sitios de cada sonda en todas las accesiones.</p>
+    <div class="cap-franja"><span class="k7"></span><span class="k7"></span><span class="k3"></span><span class="k8"></span><span class="k10"></span></div>
+    <ul class="cap-contenido">
+      <li><b>7.1</b>Accesión, sondas y bandas</li>
+      <li><b>7.2</b>Señales</li>
+      <li><b>7.3</b>Mapa físico de un cromosoma</li>
+      <li><b>7.4</b>Patrón de la accesión</li>
+      <li><b>7.5</b>Concordancia entre células y todas las accesiones</li>
+    </ul>
+  </div>
+
+  <p>El capítulo usa dos ejemplos, los dos simulados. El del <b>chayote</b> (<i>Sechium edule</i>) tiene cuatro accesiones con ADNr 45S y CMA⁺ en el satélite del par 1, ADNr 5S en el brazo largo del par 4, un sitio de 45S de más en un solo homólogo del par 9 en Uruapan, y la señal 5S registrada además célula por célula. El del <b>maíz</b> trae los nudos heterocromáticos y la región organizadora del nucléolo (NOR) como bandas.</p>
+
+  <!-- 7.1 -->
+  <h2 id="s7-1"><span class="num">7.1</span>Accesión, sondas y bandas</h2>
+  <p class="lead">Una señal sólo tiene sentido sobre un cariotipo: por eso el bloque trabaja con la numeración de pares del Bloque 3, y una accesión sin cariotipo no puede dibujar su idiograma (aunque sí guardar sus señales).</p>
+  <p>La tarjeta <span class="ui">Accesión y sondas</span> tiene el selector <span class="ui">Accesión</span> y dos botones que abren los ejemplos: <span class="ui">Abrir el ejemplo del chayote (ADNr)</span> y <span class="ui">Abrir el ejemplo del maíz (nudos)</span>. Al entrar, el bloque elige la primera accesión que tenga señales. Su texto resume la convención de la app: cada señal se registra por su par, su brazo y su <b>posición relativa</b>, la fracción del brazo desde el centrómero (0) hasta el telómero (1).</p>
+  <p>Debajo, la tabla <span class="ui">Sondas y bandas</span> define qué se puede marcar en todo el proyecto, con cuatro columnas:</p>
+  <ul>
+    <li><span class="ui">Nombre</span>, el que aparece en las tablas, en la leyenda y en el mapa físico.</li>
+    <li><span class="ui">Tipo</span>: <span class="ui">Banda C</span>, <span class="ui">Banda N</span>, <span class="ui">Fluorocromo (CMA, DAPI)</span>, <span class="ui">FISH (sonda de ADN)</span>, <span class="ui">GISH (genoma)</span> u <span class="ui">Otra</span>.</li>
+    <li><span class="ui">Color</span>, entre <span class="ui">Heterocromatina (oscura)</span> y ocho colores que se distinguen con daltonismo (bermellón, verde azulado, azul, naranja, púrpura rojizo, celeste, amarillo y gris).</li>
+    <li><span class="ui">Dibujo</span>: <span class="ui">Banda</span>, una franja a lo ancho del cromosoma, o <span class="ui">Puntos en las cromátidas</span>, un punto en cada cromátida, como se ven las señales de FISH.</li>
+  </ul>
+  <p>Un proyecto nuevo empieza con seis: Banda C, CMA⁺, DAPI⁺, ADNr 45S, ADNr 5S y Telómero (este último dibujado como puntos). Puedes renombrarlas, borrarlas o agregar las tuyas con <span class="ui">+ Fila</span>; una sonda nueva se llama «Sonda nueva», es de tipo FISH y sale en celeste.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b7-sondas.png" alt="Tarjeta Accesión y sondas con las tres sondas del ejemplo del chayote"></div>
+    <figcaption><b>Figura 7.1.</b> El ejemplo del chayote define tres: ADNr 45S (bermellón) y ADNr 5S (verde azulado), de FISH, y CMA⁺ (naranja), un fluorocromo. Las tres se dibujan como bandas.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · qué marca cada técnica</div>
+    <p>La <b>banda C</b> tiñe la heterocromatina constitutiva; los <b>fluorocromos</b> la distinguen por su composición: la cromomicina A₃ (CMA⁺) brilla en la rica en GC, como la de muchas NOR, y el DAPI (DAPI⁺) en la rica en AT (Guerra 2000). La <b>FISH</b> localiza una secuencia concreta con una sonda marcada: los genes ribosomales 45S y 5S son las sondas más usadas en plantas porque dan pocos sitios, grandes y fáciles de comparar (Jiang y Gill 2006; Schwarzacher y Heslop-Harrison 2000). La <b>GISH</b> usa todo el genoma de un progenitor como sonda para reconocer sus cromosomas en un híbrido.</p>
+  </div>
+
+  <!-- 7.2 -->
+  <h2 id="s7-2"><span class="num">7.2</span>Señales</h2>
+  <p class="lead">Las señales se escriben en una tabla o se ponen con un clic sobre el idiograma. Las dos vías llenan la misma tabla.</p>
+  <p>La tabla de señales muestra las de la accesión elegida, con estas columnas:</p>
+  <table class="compacta">
+    <caption><b>Tabla 7.1.</b> Las columnas de la tabla de señales</caption>
+    <thead><tr><th style="width:1.6in">Columna</th><th>Qué lleva</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Par</span></td><td>El número del par en el cariotipo del Bloque 3.</td></tr>
+      <tr><td><span class="ui">Homólogo</span></td><td><span class="ui">los dos</span>, o 1 a 4 si la señal está en un solo homólogo (un <b>heteromorfismo</b>).</td></tr>
+      <tr><td><span class="ui">Brazo</span></td><td><span class="ui">p (corto)</span> o <span class="ui">q (largo)</span>.</td></tr>
+      <tr><td><span class="ui">Posición (0–1)</span></td><td>El centro de la señal como fracción del brazo, del centrómero (0) al telómero (1).</td></tr>
+      <tr><td><span class="ui">Tamaño (0–1)</span></td><td>Su extensión, también como fracción del brazo (0.08 si no se dice).</td></tr>
+      <tr><td><span class="ui">Sonda</span></td><td>Una de la tabla <span class="ui">Sondas y bandas</span>.</td></tr>
+      <tr><td><span class="ui">Célula (opcional)</span></td><td>Vacía, la señal es del patrón de la accesión; con el nombre de una célula, es una observación de esa célula.</td></tr>
+      <tr><td><span class="ui">Región</span></td><td>La calcula la app: proximal, intersticial o terminal.</td></tr>
+    </tbody>
+  </table>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión · la región de una señal</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:40%"><b>Si</b> posición &lt; 1/3 del brazo</td><td><b>entonces</b> proximal, cerca del centrómero.</td></tr>
+      <tr><td><b>Si</b> 1/3 ≤ posición ≤ 0.8</td><td><b>entonces</b> intersticial.</td></tr>
+      <tr><td><b>Si</b> posición &gt; 0.8</td><td><b>entonces</b> terminal, cerca del telómero.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Una señal justo en 0.8 cuenta como intersticial, como el 45S del par 9 de Uruapan.</p>
+  </div>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b7-senales.png" alt="Tarjeta Señales con el idiograma de Uruapan en la vista de los homólogos y la tabla de siete señales">
+      <span class="marca" style="left:28.6%;top:8.2%">1</span>
+      <span class="marca" style="left:44.9%;top:8.2%">2</span>
+      <span class="marca" style="left:8%;top:19%">3</span>
+      <span class="marca" style="left:5.5%;top:36.5%">4</span>
+      <span class="marca" style="left:2.3%;top:72%">5</span>
+    </div>
+    <figcaption><b>Figura 7.2.</b> La accesión de Uruapan en la vista <span class="ui">Los homólogos</span>: el sitio de ADNr 45S del par 9 está en un solo homólogo, el 1. Las tres últimas filas son la señal 5S registrada en tres células (<code>uru-c1</code> a <code>uru-c3</code>).</figcaption>
+  </figure>
+  <ul class="leyenda-marcas">
+    <li><span class="n">1</span><b>Sonda del clic.</b> Qué sonda agrega un clic en el idiograma.</li>
+    <li><span class="n">2</span><b>Homólogo del clic.</b> En los dos homólogos o en uno.</li>
+    <li><span class="n">3</span><b>Vista.</b> Un cromosoma por par o los homólogos.</li>
+    <li><span class="n">4</span><b>Idiograma.</b> El del Bloque 3, con las bandas y señales encima.</li>
+    <li><span class="n">5</span><b>Tabla de señales.</b> Una fila por señal, editable.</li>
+  </ul>
+  <h3>Un clic sobre el idiograma</h3>
+  <p>Elige la sonda en <span class="ui">Al hacer clic en el idiograma, agregar</span> y, en <span class="ui">en</span>, si va en <span class="ui">los dos homólogos</span>, <span class="ui">el homólogo 1</span> o <span class="ui">el homólogo 2</span>. Un clic sobre un cromosoma del idiograma agrega una fila: el brazo es el del lado del centrómero donde hiciste clic y la posición la distancia al centrómero como fracción de ese brazo, redondeada a centésimas. Un aviso confirma el par, el brazo y la posición. En la vista <span class="ui">Los homólogos</span> el clic cae sobre un homólogo concreto y la señal queda en ése, sin importar lo que diga <span class="ui">en</span>. Después puedes afinar la posición o el tamaño en la tabla.</p>
+  <p>El selector <span class="ui">Vista</span> del idiograma cambia entre <span class="ui">Un cromosoma por par</span>, con las medias de los pares, y <span class="ui">Los homólogos</span>, cada homólogo con sus propias medidas. La figura <span class="ui">Idiograma con bandas y señales</span> se descarga en <span class="ui">SVG</span> o <span class="ui">PNG</span> y se edita como las demás. Si la accesión no tiene cariotipo, la tarjeta lo dice: el idiograma necesita las mediciones del Bloque 2.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b7-nudos.png" alt="Idiograma del maíz de ejemplo con siete nudos heterocromáticos y la NOR del par 6"></div>
+    <figcaption><b>Figura 7.3.</b> El maíz de ejemplo, un cromosoma por par: siete nudos (banda C) en los brazos largos de los pares 2, 4, 5, 6, 7 y 8 y cerca del telómero del brazo corto del par 9, y el ADNr 45S en el satélite del par 6, la NOR.</figcaption>
+  </figure>
+
+  <!-- 7.3 -->
+  <h2 id="s7-3"><span class="num">7.3</span>Mapa físico de un cromosoma</h2>
+  <p class="lead">El mapa físico dibuja un solo par en grande, con una regla en micras desde el centrómero y cada señal rotulada: su sonda, su brazo, su posición en porcentaje del brazo, su distancia al centrómero en micras y, si es un heteromorfismo, el homólogo.</p>
+  <p>Elige el par en <span class="ui">Par</span>; cada opción dice su número, su clase y, si lo tiene, «-sat». El título del dibujo repite el par, la clase y la longitud total. Es la figura que se pone en un artículo cuando un cromosoma tiene varias señales juntas, porque los rótulos se apartan unos de otros para no encimarse.</p>
+  <div class="dos">
+    <figure>
+      <div class="marco"><img src="../img/b7-mapa1.png" alt="Mapa físico del par 1 de Huatusco con ADNr 45S y CMA en el satélite"></div>
+      <figcaption><b>Figura 7.4.</b> El par 1 de Huatusco (m-sat, 2.96 µm): ADNr 45S y CMA⁺ en el satélite, al 90&nbsp;% del brazo corto, a 1.26 µm del centrómero.</figcaption>
+    </figure>
+    <figure>
+      <div class="marco"><img src="../img/b7-mapa.png" alt="Tarjeta del mapa físico con el par 9 de Uruapan y su sitio de ADNr 45S en el homólogo 1"></div>
+      <figcaption><b>Figura 7.5.</b> El par 9 de Uruapan (m, 1.96 µm): el sitio de ADNr 45S al 80&nbsp;% del brazo largo, a 0.91 µm, en el homólogo 1.</figcaption>
+    </figure>
+  </div>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Posición relativa y micras</div>
+    <p>La posición relativa no cambia con la condensación: el 45S del par 1 está al 90&nbsp;% del brazo corto en las tres accesiones cultivadas aunque el brazo mida distinto en cada una. Por eso es la que se compara. Las micras dependen del brazo medido y sirven para ubicar la señal en la figura de esa accesión.</p>
+  </div>
+
+  <!-- 7.4 -->
+  <h2 id="s7-4"><span class="num">7.4</span>Patrón de la accesión</h2>
+  <p class="lead">El patrón de una accesión son sus señales sin célula. Si una combinación de par, sonda, brazo y homólogo sólo se registró célula por célula, la app la completa con la posición media de esas células; así el idiograma y las tablas no se quedan sin la señal.</p>
+  <p>La tabla <span class="ui">Patrón de la accesión</span>, en la tarjeta del mismo nombre, tiene una fila por sonda con al menos un sitio:</p>
+  <ul>
+    <li><span class="ui">Sonda o banda</span>, con su color, y su <span class="ui">Tipo</span>.</li>
+    <li><span class="ui">Sitios por juego</span>, cuántos sitios hay en un juego cromosómico.</li>
+    <li><span class="ui">Pares</span>, en orden, y <span class="ui">Dónde</span>: cada sitio como par, brazo y posición en porcentaje, con el homólogo entre paréntesis si es un heteromorfismo («9q(1) 80&nbsp;%»).</li>
+    <li><span class="ui">Regiones</span>, cuántos sitios son proximales, intersticiales o terminales.</li>
+    <li><span class="ui">En un solo homólogo</span>, cuántos son heteromorfismos.</li>
+  </ul>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b7-patron.png" alt="Patrón de la accesión de Uruapan, concordancia entre células y sitios de las cuatro accesiones"></div>
+    <figcaption><b>Figura 7.6.</b> La tarjeta <span class="ui">Patrón de la accesión</span> con Uruapan: dos sitios de ADNr 45S (1p 90&nbsp;%, terminal, y 9q(1) 80&nbsp;%, intersticial, en un solo homólogo), uno de ADNr 5S (4q 45&nbsp;%) y uno de CMA⁺ (1p 90&nbsp;%). Abajo, la concordancia de la señal 5S y los sitios de las cuatro accesiones.</figcaption>
+  </figure>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Dos maneras de contar un heteromorfismo</div>
+    <p>En esta tabla, el sitio del par 9 de Uruapan cuenta como uno: <span class="ui">Sitios por juego</span> da 2 para el 45S. En la tabla <span class="ui">Todas las accesiones</span> (sección 7.5) y en la matriz del Bloque 8, en cambio, un sitio en un solo homólogo cuenta medio, y el 45S de Uruapan da 1.5. Si citas el número de sitios, di cuál de las dos cuentas usas; la columna <span class="ui">En un solo homólogo</span> dice cuántos son heteromorfismos.</p>
+  </div>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · la accesión silvestre</div>
+    <p>En Coscomatepec, el ADNr 45S tiene dos sitios terminales, en los pares 2 y 3 (3p 90&nbsp;% y 2p 85&nbsp;%), y el CMA⁺ uno en el par 3. El par que lleva el satélite con 45S y CMA⁺ es aquí el 3 y no el 1: la fusión de dos pares de la base dejó dos cromosomas más largos que pasan al principio del cariotipo, y la numeración del Bloque 3 va por longitud. Al comparar accesiones, conviene comparar los sitios por su marca y su posición, no por el número del par.</p>
+  </div>
+
+  <!-- 7.5 -->
+  <h2 id="s7-5"><span class="num">7.5</span>Concordancia entre células y todas las accesiones</h2>
+  <p class="lead">Una señal que aparece en todas las células es un rasgo de la accesión; una que aparece en una sola puede ser un artefacto de la hibridación. La tabla <span class="ui">Concordancia entre células</span> mide eso con las señales que tienen una célula anotada.</p>
+  <p>Agrupa esas señales por par, sonda y brazo y da, para cada grupo, las <span class="ui">Células con la señal</span> sobre el total de células con alguna señal registrada, la <span class="ui">Concordancia</span> en porcentaje y la <span class="ui">Posición (media ± de)</span> entre células. Si la accesión no tiene señales célula por célula, la tabla lo dice. En el ejemplo, la señal 5S del par 4 está en las tres células de cada accesión (100&nbsp;%), con posición 0.47 ± 0.03 en Huatusco, 0.42 ± 0.03 en Chilchotla, 0.46 ± 0.03 en Uruapan y 0.47 ± 0.03 en la silvestre.</p>
+  <p>La tabla <span class="ui">Todas las accesiones</span> cruza las accesiones con señales y las sondas usadas: cada celda es el número de sitios por juego cromosómico, con un sitio en un solo homólogo contado como medio, como dice su pie. En el chayote, el ADNr 45S da 1 en Huatusco y Chilchotla, 1.5 en Uruapan y 2 en la silvestre; el 5S y el CMA⁺ dan 1 en las cuatro. Estas cifras pasan a la matriz del Bloque 8 como variables «Sitios …» (sección 8.1).</p>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión · leer el patrón</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>Si</b> la concordancia de una señal es baja</td><td><b>entonces</b> revisa las preparaciones antes de darla como rasgo de la accesión.</td></tr>
+      <tr><td><b>Si</b> la desviación de la posición entre células es grande</td><td><b>entonces</b> la señal se midió en cromosomas con distinta condensación o se confundieron pares.</td></tr>
+      <tr><td><b>Si</b> un sitio está en un solo homólogo</td><td><b>entonces</b> es un heteromorfismo: confírmalo en varias células antes de interpretarlo como polimorfismo de la población.</td></tr>
+      <tr><td><b>Si</b> dos accesiones con la misma fórmula difieren en sus sitios</td><td><b>entonces</b> las señales distinguen lo que la morfología no; llévalas a la comparación del Bloque 8.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Guías para interpretar, no leyes.</p>
+  </div>
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Cuando algo sale mal</div>
+    <p><b>«Esta accesión no tiene cariotipo».</b> El idiograma y el mapa físico necesitan las mediciones del Bloque 2 y el cariotipo del Bloque 3. Las señales se guardan igual.</p>
+    <p><b>Una señal no aparece en el idiograma.</b> Su par es mayor que el número de pares del cariotipo, falta el brazo o la posición no es un número; corrígelo en la tabla.</p>
+    <p><b>Las señales quedaron en el par equivocado después de cambiar el cariotipo.</b> Las señales guardan el número del par, no el cromosoma: si cambias el orden de los pares en el Bloque 3, revisa la tabla.</p>
+    <p><b>El clic agregó la señal en el brazo que no era.</b> El brazo depende del lado del centrómero donde cae el clic; corrige <span class="ui">Brazo</span> y <span class="ui">Posición (0–1)</span> en la tabla.</p>
+    <p><b>La concordancia no aparece.</b> Ninguna señal de la accesión tiene escrita la <span class="ui">Célula (opcional)</span>.</p>
+  </div>
+</section>
+
+</body>
+</html>

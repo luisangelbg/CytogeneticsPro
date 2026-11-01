@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · Manual de usuario · Capítulo 8</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-8" data-pestana="8" data-orden="8" style="--acento: var(--b8)">
+  <div class="cap-apertura">
+    <div class="cap-num">8</div>
+    <div class="cap-etiqueta">Capítulo ocho · Bloque 8</div>
+    <h1 data-corto="Comparación">Comparación entre taxones</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Lo que los bloques anteriores calcularon para cada accesión, puesto en una sola matriz junto con los taxones publicados que quieras sumar: sus distancias cariológicas y el dendrograma, los componentes principales, los idiogramas a la misma escala, la evolución del número cromosómico sobre un árbol y un mapa de los citotipos.</p>
+    <div class="cap-franja"><span class="k8"></span><span class="k8"></span><span class="k3"></span><span class="k4"></span><span class="k6"></span><span class="k7"></span></div>
+    <ul class="cap-contenido">
+      <li><b>8.1</b>Matriz de parámetros cariológicos</li>
+      <li><b>8.2</b>Distancias y agrupamiento</li>
+      <li><b>8.3</b>Componentes principales</li>
+      <li><b>8.4</b>Idiogramas en paralelo</li>
+      <li><b>8.5</b>Evolución del número cromosómico</li>
+      <li><b>8.6</b>Mapa de citotipos</li>
+    </ul>
+  </div>
+
+  <p>El bloque no tiene selector de accesión: trabaja con todas a la vez. Todo el capítulo usa el ejemplo del chayote, que trae las cuatro accesiones de <i>Sechium edule</i> con su cariotipo, sus índices y sus señales, siete cucurbitáceas más escritas a mano con su 2n y su x, las coordenadas de las localidades y un árbol ilustrativo en Newick. Los datos son simulados y el árbol no es una filogenia publicada.</p>
+
+  <!-- 8.1 -->
+  <h2 id="s8-1"><span class="num">8.1</span>Matriz de parámetros cariológicos</h2>
+  <p class="lead">Cada accesión aporta lo que tenga calculado: el 2n (la moda de sus conteos del Bloque 6 o, si no tiene, el de su cariotipo), el x, la longitud de un juego (THL) y los índices de asimetría del Bloque 4, el 2C medio de su citometría y el número de sitios de cada sonda del Bloque 7.</p>
+  <p>Entra a la matriz toda accesión que tenga al menos 2n, THL, 2C o alguna señal. Los <b>chips</b> de arriba eligen las variables del análisis: <span class="ui">2n</span>, <span class="ui">x</span>, <span class="ui">Longitud de un juego (THL)</span>, <span class="ui">MCA</span>, <span class="ui">CVCL</span>, <span class="ui">CVCI</span>, <span class="ui">A1</span>, <span class="ui">A2</span>, <span class="ui">TF%</span>, <span class="ui">Syi</span>, <span class="ui">2C (pg)</span> y una variable «Sitios …» por cada sonda con señales. Por omisión están encendidas las seis que proponen Peruzzi y Altınordu (2014): 2n, x, la longitud haploide, MCA, CVCL y CVCI. Un clic enciende o apaga una.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b8-matriz.png" alt="Chips de variables y matriz de parámetros cariológicos del ejemplo del chayote"></div>
+    <figcaption><b>Figura 8.1.</b> La matriz del chayote: cuatro accesiones con todos sus parámetros y siete taxones (¹) con sólo 2n y x. Las variables del análisis llevan ✓. Huatusco tiene THL = 29.13 µm, MCA = 18.90, CVCL = 21.23 y CVCI = 14.67; la silvestre, 2n = 24, x = 12 y CVCL = 22.15. La tabla sigue a la derecha con Syi y los sitios de cada sonda.</figcaption>
+  </figure>
+  <p>La tabla muestra todas las variables que alguna fila tiene, elegidas o no, para que veas qué hay disponible. Los taxones escritos a mano llevan ¹.</p>
+  <h3>Otros taxones</h3>
+  <p>La tabla <span class="ui">Otros taxones</span>, debajo de la matriz, suma taxones publicados o de otros estudios: <span class="ui">Taxón</span>, <span class="ui">2n</span>, <span class="ui">x</span>, <span class="ui">THL</span>, <span class="ui">MCA</span>, <span class="ui">CVCL</span>, <span class="ui">CVCI</span>, <span class="ui">A1</span>, <span class="ui">2C (pg)</span>, <span class="ui">Latitud</span> y <span class="ui">Longitud</span>. Se escribe a mano, se pega o se importa en CSV; al importar, la columna del nombre puede llamarse también «especie» o «species».</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b8-otros.png" alt="Tabla de otros taxones con siete cucurbitáceas y el aviso de celdas vacías"></div>
+    <figcaption><b>Figura 8.2.</b> Las siete cucurbitáceas del ejemplo, de <i>Cucumis sativus</i> (2n = 14) a <i>Cucurbita pepo</i> (2n = 40), con sólo 2n y x, y el aviso que eso provoca.</figcaption>
+  </figure>
+
+  <!-- 8.2 -->
+  <h2 id="s8-2"><span class="num">8.2</span>Distancias y agrupamiento</h2>
+  <p class="lead">Con las variables elegidas, la app calcula una distancia cariológica entre cada par de filas y las agrupa en un dendrograma. Hacen falta al menos tres accesiones o taxones con datos.</p>
+  <p><span class="ui">Distancia</span> ofrece dos:</p>
+  <ul>
+    <li><span class="ui">Gower</span> (la de omisión; Gower 1971): cada variable se divide entre su intervalo, de modo que todas pesan lo mismo, y la distancia es el promedio de las diferencias. Va de 0 a 1.</li>
+    <li><span class="ui">Euclidiana (valores estandarizados)</span>: cada variable se estandariza (media 0, desviación 1) y se toma la distancia euclidiana.</li>
+  </ul>
+  <p><span class="ui">Método</span> elige el agrupamiento: <span class="ui">UPGMA</span>, el promedio de las distancias entre grupos (Sneath y Sokal 1973), o <span class="ui">Ward</span>, que une los grupos que menos aumentan la varianza dentro de ellos (Ward 1963); la app lo aplica sobre las distancias al cuadrado y da las alturas en la escala de la distancia. El dendrograma se descarga en <span class="ui">SVG</span> o <span class="ui">PNG</span> o, con <span class="ui">Newick</span>, como texto de árbol (<code>dendrograma_upgma.nwk</code> o <code>dendrograma_ward.nwk</code>) para abrirlo en otros programas.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b8-dendro.png" alt="Dendrograma UPGMA con distancia de Gower de once taxones y la correlación cofenética"></div>
+    <figcaption><b>Figura 8.3.</b> El dendrograma por omisión (Gower, UPGMA) de once filas con seis variables. La correlación cofenética es 0.867. Las accesiones de chayote no forman un grupo: la explicación está en el recuadro «Importante» de esta sección.</figcaption>
+  </figure>
+  <p>Debajo del dendrograma, tres cifras: <span class="ui">Taxones</span>, <span class="ui">Variables</span> y la <span class="ui">Correlación cofenética</span>, la correlación entre las distancias originales y las que se leen en el árbol (Sokal y Rohlf 1962). Si es de 0.8 o más, la app dice «el árbol resume bien las distancias»; si es menor, advierte que el árbol las deforma. Al final, la <span class="ui">Matriz de distancias</span> completa.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b8-distancias.png" alt="Matriz de distancias de Gower entre las once filas"></div>
+    <figcaption><b>Figura 8.4.</b> La matriz de distancias de Gower. Huatusco está a 0.212 de Chilchotla y a 0.482 de Uruapan, pero a sólo 0.077 de <i>Luffa aegyptiaca</i>; la silvestre y <i>Cucumis melo</i> están a 0.000.</figcaption>
+  </figure>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Importante · las celdas vacías</div>
+    <p>Cuando faltan datos, la distancia usa en cada pareja <b>sólo las variables que ambas filas tienen</b>, y un aviso lo recuerda («Hay celdas vacías…»). En el ejemplo, los siete taxones escritos a mano sólo tienen 2n y x; entre ellos y las accesiones, la distancia se calcula únicamente con esos dos números, que además dicen lo mismo (x = 2n / 2 en todos). Por eso la silvestre (2n = 24) queda a distancia cero de <i>Cucumis melo</i> y de <i>Sicyos angulatus</i>, y Huatusco (2n = 28) a 0.077 de <i>Luffa</i> (2n = 26), mientras que entre dos chayotes, comparados con las seis variables, las pequeñas diferencias de THL, MCA, CVCL y CVCI suman más. El árbol no está mal calculado: responde a una pregunta mal planteada. Compara filas con las mismas variables, o reduce las variables a las que todas tienen.</p>
+  </div>
+  <p>Con el mismo ejemplo, la distancia euclidiana con UPGMA da una correlación cofenética de 0.911, y Gower con Ward 0.851; las tres dibujan los mismos grupos, porque el problema de arriba no depende del método.</p>
+
+  <!-- 8.3 -->
+  <h2 id="s8-3"><span class="num">8.3</span>Componentes principales</h2>
+  <p class="lead">El análisis de componentes principales resume las variables en unos pocos ejes que no se correlacionan entre sí (Jolliffe 2002). La app lo calcula sobre la matriz de correlaciones, con las variables que varían, y lo dibuja como un biplot (Gabriel 1971): los puntos son las filas y las flechas las variables.</p>
+  <p><span class="ui">Eje x</span> y <span class="ui">Eje y</span> eligen qué componentes se dibujan; cada opción dice cuánta varianza explica. En el biplot, las accesiones del proyecto van en círculos con su color y los otros taxones en cuadrados grises. Una flecha larga en la dirección de un eje dice que esa variable pesa en ese componente; dos flechas juntas, que las variables van de la mano. La tabla de abajo da, por componente, el <span class="ui">Valor propio</span>, la <span class="ui">Varianza</span>, la <span class="ui">Acumulada</span> y las cargas de cada variable, que son sus correlaciones con el componente.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b8-biplot.png" alt="Biplot de los dos primeros componentes y tabla de valores propios y cargas"></div>
+    <figcaption><b>Figura 8.5.</b> El CP1 explica 63.2&nbsp;% de la varianza y el CP2 23.8&nbsp;% (87.0&nbsp;% juntos). En el CP1 cargan 2n y x (0.997 cada una), que separan a <i>Cucurbita pepo</i> de <i>Cucumis sativus</i>; en el CP2 cargan THL, MCA y CVCI (0.453, 0.483 y 0.507), que separan Uruapan de la silvestre.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Nota</div>
+    <p>El análisis pone las celdas vacías en la media de su variable, y la tabla lo dice con «(Hay celdas vacías.)». En el ejemplo, los siete taxones escritos a mano quedan en la media de THL, MCA, CVCL y CVCI, y sólo se separan por el CP1. Como 2n y x son redundantes, los dos últimos componentes tienen valor propio 0.0000: la información de seis variables cabe en cuatro.</p>
+  </div>
+  <p>Si menos de dos variables varían, no hay análisis de componentes, y la app lo avisa.</p>
+
+  <!-- 8.4 -->
+  <h2 id="s8-4"><span class="num">8.4</span>Idiogramas en paralelo</h2>
+  <p class="lead">Los idiogramas de todas las accesiones con cariotipo, uno debajo de otro, a la misma escala y con su fórmula en el título: la figura que muestra de un vistazo en qué se parecen y en qué no.</p>
+  <p><span class="ui">Escala</span> elige entre <span class="ui">La misma, en micras</span>, que respeta los tamaños reales, y <span class="ui">Longitud relativa (%)</span>, que pone cada cromosoma como porcentaje de su juego y compara sólo las proporciones. La casilla <span class="ui">Bandas y señales</span> pone o quita las marcas del Bloque 7.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/b8-paralelo.png" alt="Idiogramas de las cuatro accesiones del chayote a la misma escala con sus señales"></div>
+    <figcaption><b>Figura 8.6.</b> Las tres accesiones cultivadas, 2n = 2x = 28 = 18m + 2m-sat + 8sm, y la silvestre, 2n = 2x = 24 = 16m + 2m-sat + 6sm, con sus dos pares más largos al principio, el satélite con 45S y CMA⁺ en el par 3 y un segundo sitio de 45S en el par 2. En Uruapan se ve el sitio de 45S del par 9.</figcaption>
+  </figure>
+
+  <!-- 8.5 -->
+  <h2 id="s8-5"><span class="num">8.5</span>Evolución del número cromosómico</h2>
+  <p class="lead">Sobre un árbol de los taxones, la parsimonia reconstruye los números cromosómicos de los antepasados: busca la historia con el menor costo total de eventos (Sankoff 1975). Los eventos son los de los modelos de evolución del número (Mayrose et al. 2010): +1 y −1, la disploidía ascendente y descendente; ×2, la poliploidía, y ×1.5, la demiploidía.</p>
+  <p>Escribe o pega el árbol en <span class="ui">Newick</span>, ábrelo con <span class="ui">Abrir un archivo de árbol</span> (Newick o NEXUS; de un NEXUS se toma el primer árbol) o usa <span class="ui">Usar el dendrograma de arriba</span>, que copia el dendrograma de la sección 8.2. Los cuatro costos se cambian en <span class="ui">Costo de +1</span>, <span class="ui">Costo de −1</span>, <span class="ui">Costo de ×2</span> y <span class="ui">Costo de ×1.5</span> (1, 1, 1 y 1.5 por omisión), y <span class="ui">Mostrar</span> elige si el árbol escribe el <span class="ui">Número haploide n</span> o el <span class="ui">Número somático 2n</span>. La app trabaja siempre con números haploides.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/b8-puntas.png" alt="Árbol en Newick, costos de los eventos y tabla de los números de las puntas"></div>
+    <figcaption><b>Figura 8.7.</b> El árbol ilustrativo del ejemplo, con once puntas, y la tabla <span class="ui">Números de las puntas</span>: los siete taxones toman su 2n de «Otros taxones» y las cuatro puntas de <i>Sechium</i>, de las accesiones.</figcaption>
+  </figure>
+  <p>La tabla <span class="ui">Números de las puntas</span> dice de dónde sale el número de cada punta: de una accesión (por el nombre, el taxón o la correspondencia que trae el ejemplo), de <span class="ui">otro taxón</span>, <span class="ui">escrito aquí</span> o <span class="ui">sin número</span>. En la columna <span class="ui">2n (varios: 24/26)</span> puedes escribir el número a mano, o varios separados por diagonal cuando la especie tiene más de un citotipo; lo escrito manda sobre lo que viene de las accesiones, y borrarlo devuelve el automático. La última columna da el <span class="ui">n usado</span>. Un 2n impar no tiene número haploide entero y queda fuera, con un aviso; una punta sin número se trata como desconocida.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b8-arbol.png" alt="Cifras de la parsimonia y árbol con los números haploides reconstruidos"></div>
+    <figcaption><b>Figura 8.8.</b> Con los costos por omisión, la historia más parsimoniosa cuesta 11: cinco eventos +1, cinco −1 y una duplicación, en la rama de <i>Cucurbita pepo</i> (−1 y ×2: de n = 11 a 10 y a 20). La raíz es n = 11; el antepasado de <i>Sechium</i> y <i>Sicyos</i>, n = 12, y las cultivadas suben a n = 14 con dos eventos +1.</figcaption>
+  </figure>
+  <p>Las cifras de arriba del árbol son el <span class="ui">Costo mínimo</span>, el <span class="ui">Número de la raíz</span>, cuántos eventos de cada clase hay en la historia mostrada y los <span class="ui">Nodos ambiguos</span>, los que tienen más de un número igual de parsimonioso. En el árbol, cada nodo lleva su número en un círculo, las ramas con eventos van resaltadas y rotuladas con ellos, y los nodos ambiguos llevan borde punteado y sus otros números óptimos debajo: el árbol muestra una de las historias óptimas, no la única.</p>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · qué tan firme es la reconstrucción</div>
+    <p>Sube el <span class="ui">Costo de ×2</span> de 1 a 3. El costo mínimo pasa a 11.5: la duplicación desaparece y la historia usa una demiploidía y diez eventos de uno en uno (seis +1 y cuatro −1), y aparecen cuatro nodos ambiguos. La raíz sigue en n = 11. Lo que no cambia al mover los costos es lo firme de la reconstrucción; lo que cambia, depende de supuestos y conviene decirlo así.</p>
+  </div>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · parsimonia de Sankoff</div>
+    <p>El costo de pasar de un número a otro es la secuencia más barata de eventos que lo logra: de 7 a 12, cinco +1 o una duplicación y dos −1, lo que cueste menos con los costos elegidos. El algoritmo recorre el árbol de las puntas a la raíz calculando, para cada nodo y cada número posible, el costo mínimo de lo que cuelga de él; la raíz se queda con el número de menor costo, y de ahí se desciende eligiendo en cada nodo un número óptimo. La parsimonia no usa las longitudes de las ramas ni da probabilidades: para eso están los modelos de Mayrose et al. (2010).</p>
+  </div>
+
+  <!-- 8.6 -->
+  <h2 id="s8-6"><span class="num">8.6</span>Mapa de citotipos</h2>
+  <p class="lead">Las accesiones y los taxones con coordenadas, como puntos coloreados por su 2n sobre una retícula de latitud y longitud.</p>
+  <p>Las coordenadas de una accesión se escriben en su ficha, en el Bloque 2; las de los otros taxones, en las columnas <span class="ui">Latitud</span> y <span class="ui">Longitud</span> de su tabla. La app no trae mapas de otros: con <span class="ui">Cargar un contorno (GeoJSON)</span> puedes poner uno propio (un estado, una cuenca), y <span class="ui">Quitar el contorno</span> lo retira. La leyenda da un color por cada 2n, y gris para las filas sin número.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b8-mapa.png" alt="Mapa de citotipos con las cuatro localidades del chayote"></div>
+    <figcaption><b>Figura 8.9.</b> Las cuatro localidades del ejemplo, entre 97 y 102° O y cerca de 19° N: tres con 2n = 28 (Huatusco, Chilchotla y Uruapan) y la silvestre de Coscomatepec con 2n = 24. Los otros taxones no tienen coordenadas y no aparecen.</figcaption>
+  </figure>
+
+  <h3>Reglas de lectura del bloque</h3>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>Si</b> la correlación cofenética es ≥ 0.8</td><td><b>entonces</b> el dendrograma resume bien las distancias; si es menor, léelo con cuidado o usa el biplot.</td></tr>
+      <tr><td><b>Si</b> hay celdas vacías</td><td><b>entonces</b> cada pareja se compara con las variables que comparte: compara filas con las mismas variables.</td></tr>
+      <tr><td><b>Si</b> dos variables dicen lo mismo (2n y x en diploides)</td><td><b>entonces</b> pesan doble en la distancia: quita una.</td></tr>
+      <tr><td><b>Si</b> un componente tiene valor propio 0</td><td><b>entonces</b> hay variables redundantes; no lo interpretes.</td></tr>
+      <tr><td><b>Si</b> la raíz o un evento cambian al mover los costos</td><td><b>entonces</b> esa parte de la reconstrucción depende de supuestos.</td></tr>
+      <tr><td><b>Si</b> hay nodos ambiguos</td><td><b>entonces</b> el árbol muestra una de varias historias igual de buenas.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Guías para interpretar, no leyes.</p>
+  </div>
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Cuando algo sale mal</div>
+    <p><b>«Hacen falta al menos tres accesiones o taxones con datos».</b> Suma accesiones con cariotipo o conteos, o taxones en «Otros taxones».</p>
+    <p><b>«Estas parejas no comparten ninguna variable».</b> Dos filas no tienen ninguna variable elegida en común; quita variables o completa los datos.</p>
+    <p><b>«Elige al menos una variable».</b> Todos los chips están apagados.</p>
+    <p><b>Una punta del árbol queda «sin número».</b> Su nombre no coincide con ninguna accesión ni taxón: escribe su 2n en la tabla de las puntas o corrige el nombre (los guiones bajos del Newick cuentan como espacios).</p>
+    <p><b>Error al leer el Newick.</b> El mensaje dice qué falta («Falta un paréntesis de cierre…») o qué sobra al final.</p>
+    <p><b>El mapa sale vacío.</b> Ninguna fila tiene latitud y longitud.</p>
+    <p><b>«El archivo no es un GeoJSON válido».</b> El contorno debe ser un objeto GeoJSON (una colección, un elemento, un polígono o una línea).</p>
+  </div>
+</section>
+
+</body>
+</html>

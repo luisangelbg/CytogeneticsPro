@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · Manual de usuario · Capítulo 6</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-6" data-pestana="6" data-orden="6" style="--acento: var(--b6)">
+  <div class="cap-apertura">
+    <div class="cap-num">6</div>
+    <div class="cap-etiqueta">Capítulo seis · Bloque 6</div>
+    <h1 data-corto="Ploidía y genoma">Ploidía y tamaño de genoma</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Cuántos cromosomas tiene la planta y cuántos juegos son: los conteos célula por célula con su moda, el nivel de ploidía a partir del número básico, la serie euploide y los indicios de disploidía; el tamaño del genoma por citometría de flujo, leído de la tabla de corridas o del histograma del citómetro; la conversión entre picogramos y pares de bases, y la prueba de <i>Allium</i>, que mide con la mitosis si una sustancia es citotóxica.</p>
+    <div class="cap-franja"><span class="k6"></span><span class="k6"></span><span class="k2"></span><span class="k5"></span><span class="k8"></span></div>
+    <ul class="cap-contenido">
+      <li><b>6.1</b>Conteos cromosómicos</li>
+      <li><b>6.2</b>Número básico, series euploides y disploidía</li>
+      <li><b>6.3</b>Citometría de flujo: tamaño del genoma</li>
+      <li><b>6.4</b>Histograma del citómetro</li>
+      <li><b>6.5</b>Conversión de unidades</li>
+      <li><b>6.6</b>Mitosis y citotoxicidad: la prueba de <i>Allium</i></li>
+    </ul>
+  </div>
+
+  <p>El bloque se abre con la tarjeta <span class="ui">Accesión</span>, que decide de qué accesión hablan los conteos y la citometría. En ella están el selector <span class="ui">Accesión</span>, el botón <span class="ui">+ Accesión</span>, el campo <span class="ui">Número básico x</span> de la accesión elegida y dos botones que abren los ejemplos del bloque: <span class="ui">Ejemplo: serie poliploide</span> y <span class="ui">Ejemplo: prueba de Allium</span>. Abrir un ejemplo reemplaza el proyecto, y la app lo pregunta antes. Al entrar, el bloque elige la primera accesión que ya tenga conteos o corridas de citometría.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b6-accesion.png" alt="Tarjeta Accesión del Bloque 6 con la población tetraploide elegida y el número básico 7"></div>
+    <figcaption><b>Figura 6.1.</b> La tarjeta <span class="ui">Accesión</span> con la serie poliploide de ejemplo abierta y la población tetraploide elegida. Su número básico, x&nbsp;=&nbsp;7, es el que usan los conteos y la citometría de esa accesión.</figcaption>
+  </figure>
+  <p>En este capítulo se usan los dos ejemplos del bloque. La <b>serie poliploide</b> es una especie inventada («Especie ficticia A») con tres poblaciones, diploide, tetraploide y hexaploide, de número básico x = 7: trae quince conteos por población, nueve corridas de citometría y el histograma de un tetraploide. La <b>prueba de <i>Allium</i></b> trae un testigo y dos concentraciones de un extracto ficticio. Los dos son simulados.</p>
+
+  <!-- 6.1 -->
+  <h2 id="s6-1"><span class="num">6.1</span>Conteos cromosómicos</h2>
+  <p class="lead">El número cromosómico de una planta no se lee en una sola célula: se cuenta en varias metafases y se toma la <b>moda</b>. Las células con otro número casi siempre son preparaciones imperfectas —un cromosoma que se salió de la célula al aplastar, dos que quedaron encimados—, no plantas distintas.</p>
+  <p>La tarjeta <span class="ui">Conteos cromosómicos</span> tiene una tabla con una fila por célula contada y dos columnas: <span class="ui">Célula</span> y <span class="ui">2n contado</span>. Como todas las tablas de captura de la app, debajo lleva <span class="ui">+ Fila</span>, <span class="ui">Exportar (CSV)</span>, <span class="ui">Importar CSV</span> y <span class="ui">Vaciar</span>; al importar, la columna del número puede llamarse <code>2n</code> o <code>n2</code>. La tabla muestra sólo las filas de la accesión elegida. Si contaste con marcas sobre la imagen en el Bloque 2, el botón <span class="ui">Llevar el conteo a la ploidía (Bloque 6)</span> de aquel bloque escribe aquí la fila de esa célula.</p>
+  <p>Debajo de la tabla, cuatro cifras resumen los conteos:</p>
+  <ul>
+    <li><span class="ui">Células contadas</span>, las filas con un número entero positivo.</li>
+    <li><span class="ui">Número modal</span>, el 2n más frecuente, con la proporción de células que lo tienen. Si esa proporción es menor de 60&nbsp;%, la cifra se marca como dudosa.</li>
+    <li><span class="ui">Intervalo</span>, del menor al mayor número contado.</li>
+    <li><span class="ui">Nivel de ploidía</span>, la fórmula 2n = <i>k</i>x = 2n con su nombre (diploide, tetraploide…), si la accesión tiene número básico; si no, dice «falta x».</li>
+  </ul>
+  <p>La figura <span class="ui">Frecuencia de los números contados</span> dibuja cuántas células tuvieron cada número, del menor al mayor, y se descarga en <span class="ui">SVG</span> o <span class="ui">PNG</span> o se abre en el estudio de figuras. La tabla <span class="ui">Todas las accesiones</span> reúne, para cada accesión con conteos, su x, el número de células, la moda, el <span class="ui">% modal</span>, la fórmula y el nivel.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b6-conteos.png" alt="Cifras de los conteos de la población tetraploide, su gráfica de frecuencias y la tabla de las tres poblaciones"></div>
+    <figcaption><b>Figura 6.2.</b> La población tetraploide de ejemplo: de quince células, once tienen 2n = 28 (73&nbsp;%), dos tienen 27 y dos tienen 29. Con x = 7, el nivel es 2n = 4x = 28. Abajo, las tres poblaciones: la diploide da 2n = 14 en las quince células, y la hexaploide 2n = 42 en once (tres con 41 y una con 43).</figcaption>
+  </figure>
+  <p>Dos avisos acompañan a los conteos. Si hay <b>más de una moda</b>, la cifra muestra las dos («28 / 30») y la app pide contar más células antes de decidir. Si la moda <b>no es múltiplo de x</b>, la fórmula sale con el sobrante (por ejemplo, 2n = 2x + 1 = 15, con el nombre «trisómico (2n + 1)» cuando el nivel es 2x) y un aviso recuerda las tres explicaciones posibles: aneuploidía, cromosomas B o un número básico distinto.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · cómo se calcula el nivel</div>
+    <p>El nivel es el múltiplo de x más cercano a la moda: <i>k</i> = redondeo(2n / x), y el sobrante es 2n − <i>k</i>x. Si el sobrante es cero, la planta es <b>euploide</b> (2x, 3x, 4x…); si no, es <b>aneuploide</b> y la fórmula lo escribe, 2n = 4x − 1, por ejemplo. Los nombres especiales de la aneuploidía (monosómico, trisómico, nulisómico, tetrasómico) se ponen cuando el nivel es 2x y sobran o faltan uno o dos cromosomas.</p>
+  </div>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · el maíz de ejemplo</div>
+    <p>El ejemplo del maíz trae doce conteos. Once dan 2n = 20 y uno 19, un cromosoma perdido al aplastar: la moda es 2n = 20 con 92&nbsp;% de las células, el intervalo 19 – 20 y, con x = 10, el nivel 2n = 2x = 20, diploide. La célula con 19 no cambia la conclusión.</p>
+  </div>
+
+  <!-- 6.2 -->
+  <h2 id="s6-2"><span class="num">6.2</span>Número básico, series euploides y disploidía</h2>
+  <p class="lead">El número básico x es el número de cromosomas de un juego monoploide. Sin él no hay nivel de ploidía, ni 1Cx en la citometría: por eso cada accesión lleva el suyo.</p>
+  <p>Lo puedes escribir en <span class="ui">Número básico x</span> de la tarjeta <span class="ui">Accesión</span> o tomarlo de la tarjeta <span class="ui">Número básico, series euploides y disploidía</span>, que trae una tabla editable con 55 géneros de uso frecuente (<span class="ui">Familia</span>, <span class="ui">Género</span> y <span class="ui">x</span>). Son valores comunes, no la última palabra: la propia tarjeta pide verificarlos en las bases de conteos cromosómicos para tu grupo (Rice et al. 2015). <span class="ui">Buscar género o familia</span> filtra la tabla, que puedes editar, alargar con <span class="ui">+ Fila</span> o devolver a su estado con <span class="ui">Volver a la tabla original</span>.</p>
+  <p>Debajo, <span class="ui">Poner en la accesión el x de</span> ofrece todos los géneros de la tabla; si el taxón de la accesión empieza con uno de ellos, ya viene elegido. <span class="ui">Poner</span> escribe ese x en la accesión y recalcula los conteos y la citometría.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b6-serie.png" alt="Tarjeta de números básicos filtrada por Rosaceae, con la serie euploide de x igual a 7"></div>
+    <figcaption><b>Figura 6.3.</b> La tabla filtrada por «Rosaceae» y la serie euploide de la población tetraploide (x = 7), de 2x = 14 a 8x = 56, con su nivel, 4x = 28, resaltado. La especie ficticia no está en la tabla, así que el selector propone el primer género de la lista.</figcaption>
+  </figure>
+  <p>La <b>serie euploide</b> lista los niveles de 2x a 8x con su 2n y su nombre, y resalta el de la accesión. Sirve para ver de un vistazo qué números serían esperables en otras poblaciones del mismo taxón.</p>
+  <p>La <b>disploidía</b> es el cambio del número básico de uno en uno, por fusión o fisión de cromosomas. La app la busca entre las accesiones: si dos o más accesiones de un mismo género (la primera palabra del taxón) tienen números básicos distintos, aparece un aviso con esos valores, y si los pasos son de un cromosoma lo añade.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b6-disploidia.png" alt="Serie euploide de x igual a 14 y el aviso de disploidía en Sechium"></div>
+    <figcaption><b>Figura 6.4.</b> Con el ejemplo del chayote, el género <i>Sechium</i> reúne accesiones con x = 14 (las cultivadas) y x = 12 (la silvestre de Coscomatepec): la app sugiere una serie disploide y remite al Bloque 8, que la reconstruye sobre un árbol (sección 8.5).</figcaption>
+  </figure>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Importante</div>
+    <p>El aviso sólo compara números; no sabe si x = 12 viene de x = 14 o al revés. En el ejemplo, la accesión silvestre tiene 2n = 24 porque dos pares de la base se fusionaron (disploidía descendente), pero eso lo dicen los datos simulados, no el aviso. La dirección del cambio se infiere con un árbol, en el Bloque 8.</p>
+  </div>
+
+  <!-- 6.3 -->
+  <h2 id="s6-3"><span class="num">6.3</span>Citometría de flujo: tamaño del genoma</h2>
+  <p class="lead">En la citometría de flujo los núcleos teñidos con un fluorocromo que se une al ADN pasan uno a uno frente a un láser; la fluorescencia de cada uno es proporcional a su contenido de ADN. Junto con la muestra se procesa un <b>patrón interno</b> de contenido conocido, y el tamaño del genoma sale de comparar los dos picos.</p>
+  <div class="formula">2C (pg) = (pico G0/G1 de la muestra ÷ pico G0/G1 del patrón) × 2C del patrón</div>
+  <p>A partir del 2C, la app calcula el <b>1C</b> (2C ÷ 2, el contenido del núcleo no replicado de un gameto) y el <b>1Cx</b> (2C ÷ nivel de ploidía, el contenido de un solo juego monoploide), con los términos de Greilhuber et al. (2005), y los pasa a millones de pares de bases con 1 pg = 978 Mpb (Doležel et al. 2003). El procedimiento de laboratorio está en Doležel et al. (2007).</p>
+  <p>La tabla de la tarjeta <span class="ui">Citometría de flujo: tamaño del genoma</span> lleva una fila por corrida de la accesión elegida:</p>
+  <table class="compacta">
+    <caption><b>Tabla 6.1.</b> Las columnas de la tabla de citometría</caption>
+    <thead><tr><th style="width:1.7in">Columna</th><th>Qué lleva</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Muestra</span></td><td>El nombre de la corrida (una planta, una repetición).</td></tr>
+      <tr><td><span class="ui">Patrón interno</span></td><td>Ocho patrones de ADN vegetal con su 2C, de <i>Raphanus sativus</i> «Saxa» (1.11 pg) a <i>Allium cepa</i> «Alice» (34.89 pg), o <span class="ui">Otro (escribe su 2C)</span>.</td></tr>
+      <tr><td><span class="ui">2C del patrón (pg)</span></td><td>Vacía, usa el 2C del patrón elegido; con un número, ese número manda (y es obligatorio con <span class="ui">Otro</span>).</td></tr>
+      <tr><td><span class="ui">Pico del patrón</span> · <span class="ui">Pico de la muestra</span></td><td>La posición (canal o intensidad media) del pico G0/G1 de cada uno.</td></tr>
+      <tr><td><span class="ui">CV patrón (%)</span> · <span class="ui">CV muestra (%)</span></td><td>El coeficiente de variación de cada pico, que mide su calidad.</td></tr>
+      <tr><td><span class="ui">Razón</span> · <span class="ui">2C (pg)</span> · <span class="ui">2C (Mpb)</span></td><td>Calculadas por la app; la tabla se desplaza a lo ancho para verlas.</td></tr>
+    </tbody>
+  </table>
+  <p>Debajo, una tabla resume las corridas por accesión: <span class="ui">Corridas</span>, el 2C medio con su desviación estándar en pg y en Mpb, el 1C, el <span class="ui">Nivel</span> y el 1Cx en pg y en Mpb. El nivel sale de la moda de los conteos con el x de la accesión; si la accesión no tiene conteos pero sí una fórmula genómica del Bloque 5 (AA, AAAA, AABBCC…), el nivel es el número de letras.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b6-citometria.png" alt="Tabla de corridas de la población diploide, resumen de las tres poblaciones y ploidía relativa"></div>
+    <figcaption><b>Figura 6.5.</b> La serie poliploide con patrón de tomate (2C = 1.96 pg). La primera corrida diploide tiene el patrón en 191.87 y la muestra en 160.29: razón 0.835, 2C = 1.637 pg. El resumen da 1.620 ± 0.016, 3.176 ± 0.046 y 4.728 ± 0.050 pg para 2x, 4x y 6x, y un 1Cx que baja de 0.810 a 0.794 y 0.788 pg.</figcaption>
+  </figure>
+  <p>La última parte es la <b>ploidía relativa</b>. Elige en <span class="ui">Accesión de referencia para la ploidía relativa</span> una accesión de nivel conocido; la tabla divide el 2C de cada una entre el de la referencia y multiplica por el nivel de ésta (el de sus conteos, o 2x si no tiene), y pone al lado el <span class="ui">Nivel por conteo</span> para compararlos. Es la manera de estimar el nivel de plantas que no se han contado, sólo medido. Hace falta al menos dos accesiones con corridas.</p>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · la reducción del genoma</div>
+    <p>Con la población diploide como referencia, la tetraploide tiene 1.961 veces su 2C y la hexaploide 2.919 veces: niveles estimados de 3.92x y 5.84x, frente a 4x y 6x por conteo. El cociente queda algo por debajo del entero, y por eso el 1Cx baja con el nivel (792, 777 y 771 Mpb). La nota de la tabla lo explica: un poliploide reciente suele tener algo menos del doble, porque pierde ADN después de duplicarse. Una diferencia así no cambia el nivel; una de media unidad (3.5x) sí pediría contar.</p>
+  </div>
+  <p>La app revisa cada corrida y avisa en dos casos: si algún pico tiene un <b>CV mayor de 5&nbsp;%</b> (núcleos dañados o restos: hay que repetir la preparación) y si la <b>razón está entre 0.85 y 1.18</b>, cuando la muestra y el patrón casi coinciden y sus picos se enciman (hay que elegir un patrón más distinto).</p>
+
+  <!-- 6.4 -->
+  <h2 id="s6-4"><span class="num">6.4</span>Histograma del citómetro</h2>
+  <p class="lead">En lugar de escribir los picos a mano puedes abrir el histograma que exporta el citómetro: la app encuentra los picos, pone una compuerta en cada uno, mide su media y su CV, y con dos clics lleva la corrida a la tabla de la sección anterior.</p>
+  <p><span class="ui">Abrir un CSV del citómetro</span> acepta dos formas de archivo (<code>.csv</code>, <code>.tsv</code> o <code>.txt</code>): <b>dos columnas</b>, canal y número de núcleos, que es el histograma ya hecho; o <b>una columna</b> con la intensidad de cada evento, que la app reparte en 512 canales. La primera fila puede ser de títulos. El histograma queda guardado en el proyecto con el nombre del archivo y asociado a la accesión elegida; si abres varios, el selector <span class="ui">Histograma</span> cambia entre ellos. <span class="ui">Escala logarítmica</span> dibuja el número de núcleos en escala logarítmica, útil para ver los picos pequeños.</p>
+  <h3>Cómo encuentra los picos</h3>
+  <p>La app suaviza el histograma con una media móvil de cinco canales, ignora el 4&nbsp;% más bajo de la escala (donde se amontonan los restos) y busca máximos locales que cumplan tres condiciones: llegar al menos al 4&nbsp;% del pico más alto, sobresalir lo suficiente de los valles que los separan de terreno más alto (para no confundir con un pico el ruido de la pendiente de restos) y quedar a no menos del 6&nbsp;% de la escala de otro pico más alto. Cada compuerta va de la mitad de la distancia a su vecino a la mitad de la distancia al siguiente, sin pasar de ±15&nbsp;% de la posición del pico.</p>
+  <p>La tabla de compuertas da, para cada una, <span class="ui">Desde</span> y <span class="ui">Hasta</span> (que puedes corregir escribiendo), los <span class="ui">Núcleos</span> que caen dentro, la <span class="ui">Media</span> y el <span class="ui">CV (%)</span>, ponderados por el número de núcleos de cada canal. El botón × borra una; <span class="ui">+ Compuerta</span> agrega otra entre el 40 y el 50&nbsp;% de la escala, para que la muevas a donde haga falta, y <span class="ui">Buscar los picos de nuevo</span> descarta las compuertas y las vuelve a calcular.</p>
+  <p>Debajo se eligen <span class="ui">Pico G0/G1 de la muestra</span>, <span class="ui">Pico G0/G1 del patrón</span> y <span class="ui">Patrón</span>. Por omisión, el patrón es la primera compuerta (la de menor fluorescencia), la muestra la segunda y el patrón interno el tomate. La línea de abajo da la razón y el 2C al momento; <span class="ui">Agregar a la citometría</span> escribe una fila nueva en la tabla de la sección 6.3, con los dos picos y sus CV, en la accesión del histograma.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b6-histograma.png" alt="Histograma del tetraploide con dos compuertas, su tabla y la elección de picos">
+      <span class="marca" style="left:11%;top:15.9%">1</span>
+      <span class="marca" style="left:41.7%;top:15.9%">2</span>
+      <span class="marca" style="left:18%;top:38.8%">3</span>
+      <span class="marca" style="left:2.3%;top:71.6%">4</span>
+      <span class="marca" style="left:2.2%;top:88.7%">5</span>
+      <span class="marca" style="left:72.7%;top:89.3%">6</span>
+      <span class="marca" style="left:2.2%;top:93.6%">7</span>
+    </div>
+    <figcaption><b>Figura 6.6.</b> El histograma de ejemplo, de 1024 canales y 9010 núcleos: un tetraploide con patrón de tomate. Los restos celulares ocupan los canales bajos; P1 es el pico G0/G1 del patrón y P2 el de la muestra.</figcaption>
+  </figure>
+  <ul class="leyenda-marcas">
+    <li><span class="n">1</span><b>Histograma.</b> Cuál de los histogramas del proyecto se ve.</li>
+    <li><span class="n">2</span><b>Abrir.</b> Lee un CSV del citómetro; junto, <span class="ui">Escala logarítmica</span>.</li>
+    <li><span class="n">3</span><b>La figura.</b> Las compuertas sombreadas y una línea punteada en la media de cada una.</li>
+    <li><span class="n">4</span><b>Compuertas.</b> Sus límites, editables, con núcleos, media y CV.</li>
+    <li><span class="n">5</span><b>Picos.</b> Cuál compuerta es la muestra, cuál el patrón y qué patrón es.</li>
+    <li><span class="n">6</span><b>Agregar a la citometría.</b> Escribe la corrida en la tabla de la sección 6.3.</li>
+    <li><span class="n">7</span><b>Resultado.</b> La razón y el 2C, en pg y en Mpb.</li>
+  </ul>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · el tetraploide de ejemplo</div>
+    <p>La app encuentra dos picos. P1, de 170 a 230, tiene 2485 núcleos con media 199.92 y CV 2.93&nbsp;%; P2, de 275.4 a 372.6, tiene 3614 núcleos con media 324.52 y CV 3.15&nbsp;%. La razón es 1.6233 y, con el tomate, 2C = 3.182 pg (3112 Mpb), muy cerca del 3.176 pg del resumen de las corridas. Los picos G2 (el doble de cada G0/G1, hacia los canales 400 y 650) se ven apenas: no llegan al 4&nbsp;% del pico más alto y no reciben compuerta, que es lo que se quiere.</p>
+  </div>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Nota</div>
+    <p>En el ejemplo, la compuerta del patrón da un CV de 2.93&nbsp;%, algo mayor que el de su pico solo, porque su borde izquierdo recoge la cola de los restos. Si en tus datos pasa lo mismo, angosta la compuerta a mano: el CV que conviene informar es el del pico, no el de los restos que lo acompañan.</p>
+  </div>
+
+  <!-- 6.5 -->
+  <h2 id="s6-5"><span class="num">6.5</span>Conversión de unidades</h2>
+  <p class="lead">El tamaño del genoma se publica en picogramos (pg) o en pares de bases; la tarjeta <span class="ui">Conversión de unidades</span> pasa un valor de una unidad a las otras tres.</p>
+  <p>Escribe el número en <span class="ui">Valor</span> y elige su <span class="ui">Unidad</span>: pg, Mpb, Gpb o pb. Las cuatro cifras de abajo se actualizan al escribir, con la equivalencia 1 pg = 978 Mpb (Doležel et al. 2003). Por omisión, 1 pg son 978 Mpb, 0.978 Gpb y 978,000,000 pb.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/b6-conversion.png" alt="Conversión de 1 pg a megapares, gigapares y pares de bases"></div>
+    <figcaption><b>Figura 6.7.</b> La conversión con su valor por omisión, 1 pg.</figcaption>
+  </figure>
+
+  <!-- 6.6 -->
+  <h2 id="s6-6"><span class="num">6.6</span>Mitosis y citotoxicidad: la prueba de <i>Allium</i></h2>
+  <p class="lead">La prueba de <i>Allium</i> mide si una sustancia daña la división celular: se ponen a enraizar bulbos de cebolla en el agua del testigo y en la sustancia, y en las puntas de raíz se cuentan las células que se dividen y las que lo hacen mal (Fiskesjö 1985; Leme y Marin-Morales 2009). Esta tarjeta no depende de la accesión elegida: tiene su propia tabla, por tratamiento.</p>
+  <p>La tabla de la tarjeta <span class="ui">Mitosis y citotoxicidad (prueba de Allium)</span> lleva una fila por bulbo o raíz, con <span class="ui">Tratamiento</span> y <span class="ui">Repetición</span>, las células en <span class="ui">Interfase</span>, <span class="ui">Profase</span>, <span class="ui">Metafase</span>, <span class="ui">Anafase</span> y <span class="ui">Telofase</span>, las seis aberraciones (<span class="ui">c-metafase</span>, <span class="ui">adherencias</span>, <span class="ui">puentes</span>, <span class="ui">rezagados</span>, <span class="ui">fragmentos</span> y <span class="ui">husos multipolares</span>, contadas dentro de las células que se dividen), los <span class="ui">Micronúcleos</span> en interfase y, al final, el <span class="ui">IM (%)</span> de cada fila.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b6-allium-datos.png" alt="Tabla de captura de la prueba de Allium con nueve bulbos"></div>
+    <figcaption><b>Figura 6.8.</b> La tabla del ejemplo: tres tratamientos con tres bulbos cada uno y 1000 células por bulbo. El primer bulbo del testigo tiene 892 células en interfase y 45, 27, 11 y 25 en profase, metafase, anafase y telofase. La tabla sigue a la derecha con las demás aberraciones, los micronúcleos y el índice mitótico.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · los índices</div>
+    <p><b>Índice mitótico</b> (IM) = células en división ÷ células observadas × 100: si baja, la sustancia frena la división (citotoxicidad). <b>Índice de fases</b> = células en cada fase ÷ células en división × 100. <b>Índice de aberraciones</b> = células aberrantes ÷ células en división × 100: si sube, la sustancia daña el huso o los cromosomas (genotoxicidad). <b>Micronúcleos</b>, por cada mil células en interfase (‰): restos de cromosomas o fragmentos que quedaron fuera del núcleo.</p>
+  </div>
+  <p>El selector <span class="ui">Testigo</span> dice con qué tratamiento se compara; la app propone el que se llame «testigo», «control» o «agua». La primera tabla de resultados da, por tratamiento, las repeticiones, las células, el índice mitótico, el porcentaje de cada fase, las aberraciones (%) y los micronúcleos (‰). Los índices se calculan con los conteos sumados de las repeticiones y, entre paréntesis, la media ± desviación estándar de las repeticiones; el testigo lleva ★.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b6-allium-tabla.png" alt="Resumen por tratamiento y pruebas contra el testigo de la prueba de Allium"></div>
+    <figcaption><b>Figura 6.9.</b> El índice mitótico baja de 9.07&nbsp;% en el testigo a 6.70 y 4.03&nbsp;% con el extracto al 1 y al 5&nbsp;%, y las aberraciones suben de 1.10 a 5.47 y 14.05&nbsp;%. Todas las diferencias con el testigo son significativas después de la corrección de Holm.</figcaption>
+  </figure>
+  <p>La segunda tabla compara cada tratamiento con el testigo en los tres índices: la <span class="ui">Diferencia (puntos %)</span>, el estadístico <span class="ui">z</span> y su <span class="ui">p</span> de una prueba de dos proporciones con los conteos sumados, y la <span class="ui">p (Holm)</span>, corregida por el número de comparaciones de cada índice (Holm 1979), en negritas si es menor de 0.05. Su pie añade una prueba χ² de homogeneidad del índice mitótico entre todos los tratamientos.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/b6-allium-fig.png" alt="Gráfica de barras de los índices mitótico y de aberraciones por tratamiento, con el aviso de citotoxicidad"></div>
+    <figcaption><b>Figura 6.10.</b> La figura <span class="ui">Índices mitótico y de aberraciones</span>, con la media ± desviación estándar de las repeticiones, y el aviso que la acompaña: el extracto al 5&nbsp;% baja el índice mitótico a menos de la mitad del testigo.</figcaption>
+  </figure>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · el extracto al 1&nbsp;%</div>
+    <p>Contra el testigo, el índice mitótico baja 2.37 puntos (z = −3.40, p &lt; 0.001), las aberraciones suben 4.37 puntos (z = 2.77, p = 0.006) y los micronúcleos 0.21 puntos, de 0.00 a 2.14‰ (z = 2.42, p = 0.016). Con dos tratamientos por índice, Holm deja esas p iguales porque son las mayores de su índice. Entre los tres tratamientos, el índice mitótico da χ² = 61.72 con 2 grados de libertad, p &lt; 0.001. Es una sustancia citotóxica y genotóxica, más a mayor concentración; sólo la del 5&nbsp;% pasa del umbral de la mitad del testigo (4.03 frente a 9.07&nbsp;%).</p>
+  </div>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Los conteos sumados</div>
+    <p>Las pruebas suman las células de las repeticiones, como si fueran una sola muestra grande. Es lo habitual en la prueba de <i>Allium</i>, pero ignora la variación entre bulbos. Por eso la tabla muestra también la media ± desviación estándar de las repeticiones: si un tratamiento tiene un bulbo muy distinto de los otros, se nota ahí antes que en la <i>p</i>.</p>
+  </div>
+
+  <h3>Reglas de lectura del bloque</h3>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>Si</b> el número modal tiene menos de 60&nbsp;% de las células</td><td><b>entonces</b> cuenta más células antes de dar el número: la cifra se marca como dudosa.</td></tr>
+      <tr><td><b>Si</b> hay dos modas</td><td><b>entonces</b> no hay número todavía: cuenta más células.</td></tr>
+      <tr><td><b>Si</b> la moda no es múltiplo de x</td><td><b>entonces</b> piensa en aneuploidía, cromosomas B o un x distinto (disploidía); revisa también el x.</td></tr>
+      <tr><td><b>Si</b> un pico tiene CV &gt; 5&nbsp;%</td><td><b>entonces</b> repite la preparación; un pico confiable tiene CV menor de 3–5&nbsp;%.</td></tr>
+      <tr><td><b>Si</b> la razón muestra/patrón está entre 0.85 y 1.18</td><td><b>entonces</b> cambia de patrón: los picos se enciman.</td></tr>
+      <tr><td><b>Si</b> el nivel estimado por citometría difiere del conteo en menos de media unidad</td><td><b>entonces</b> es la reducción del genoma de los poliploides; si difiere más, cuenta cromosomas.</td></tr>
+      <tr><td><b>Si</b> un tratamiento baja el índice mitótico a menos de la mitad del testigo</td><td><b>entonces</b> es una señal fuerte de citotoxicidad, y la app lo avisa.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Guías para interpretar, no leyes.</p>
+  </div>
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Cuando algo sale mal</div>
+    <p><b>El nivel dice «falta x».</b> La accesión no tiene número básico: escríbelo en la tarjeta <span class="ui">Accesión</span> o usa <span class="ui">Poner</span>.</p>
+    <p><b>La tabla de citometría no calcula el 2C.</b> Falta uno de los dos picos, o elegiste <span class="ui">Otro (escribe su 2C)</span> sin escribir el 2C del patrón.</p>
+    <p><b>No aparece la ploidía relativa.</b> Hace falta que al menos dos accesiones tengan corridas.</p>
+    <p><b>«No se encontraron números en el archivo».</b> El CSV no tiene columnas numéricas; revisa el separador o quita las líneas de encabezado largas que exportan algunos equipos.</p>
+    <p><b>La app encuentra un pico de más o de menos.</b> Corrige las compuertas a mano, bórralas con × o agrega una con <span class="ui">+ Compuerta</span>; <span class="ui">Buscar los picos de nuevo</span> vuelve al cálculo automático.</p>
+    <p><b>La prueba de <i>Allium</i> compara contra el tratamiento equivocado.</b> Elige el correcto en <span class="ui">Testigo</span>.</p>
+  </div>
+</section>
+
+</body>
+</html>
