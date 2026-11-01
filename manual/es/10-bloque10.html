@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · Manual de usuario · Capítulo 10</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-10" data-pestana="10" data-orden="10" style="--acento: var(--b10)">
+  <div class="cap-apertura">
+    <div class="cap-num">10</div>
+    <div class="cap-etiqueta">Capítulo diez · Bloque 10</div>
+    <h1 data-corto="Figuras e informe">Figuras e informe</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">El final del recorrido: lo que se lleva a la tesis, al artículo o al expediente. El bloque reúne todas las figuras que dibujaron los demás, entre ellas el cariograma recortado de la imagen; deja descargar cada tabla de datos y de resultados; redacta un borrador de los métodos con sus referencias, en español o en inglés; arma un informe para imprimir, y empaqueta todo en un archivo .zip para que otra persona pueda repetir el análisis.</p>
+    <div class="cap-franja"><span class="k10"></span><span class="k10"></span><span class="k3"></span><span class="k8"></span></div>
+    <ul class="cap-contenido">
+      <li><b>10.1</b>Informe del proyecto</li>
+      <li><b>10.2</b>El paquete reproducible</li>
+      <li><b>10.3</b>Figuras, el estudio y el editor</li>
+      <li><b>10.4</b>Tablas</li>
+      <li><b>10.5</b>Métodos redactados</li>
+    </ul>
+  </div>
+  <p>El Bloque 10 tiene cuatro tarjetas: <span class="ui">Informe del proyecto</span>, <span class="ui">Figuras</span>, <span class="ui">Tablas</span> y <span class="ui">Métodos redactados</span>. Nada se calcula aquí por primera vez: todo sale de lo que el proyecto ya tiene, con los ajustes que dejaste en cada bloque. Si cambias algo en otro bloque y vuelves, el Bloque 10 se rehace con el cambio. Las figuras de este capítulo se hicieron con el ejemplo del chayote (<code>sechium</code>), que tiene cuatro accesiones, señales, coordenadas y un árbol; el cariograma, con el del maíz (<code>zea</code>), el único ejemplo con imágenes.</p>
+
+  <!-- 10.1 -->
+  <h2 id="s10-1"><span class="num">10.1</span>Informe del proyecto</h2>
+  <p class="lead">Un documento con el resumen de cada accesión, los métodos, las tablas de resultados, las figuras marcadas y las referencias, listo para imprimir o para guardar como página.</p>
+  <p>La tarjeta tiene dos campos: <span class="ui">Título</span>, que trae el título del proyecto (con un ejemplo, el del ejemplo), y <span class="ui">Autoría</span>, vacío al abrir. Los dos se guardan en el proyecto. Debajo, cuatro recuadros dicen qué va a entrar: las <span class="ui">Accesiones</span>, las <span class="ui">Figuras</span> (y cuántas están marcadas para el informe), las <span class="ui">Tablas</span> y las <span class="ui">Referencias citadas</span> en los métodos.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b10-informe.png" alt="La tarjeta del informe con el título del chayote, la autoría vacía, los cuatro recuadros y los tres botones"></div>
+    <figcaption><b>Figura 10.1.</b> El informe del chayote de ejemplo: 4 accesiones, 11 figuras (las 11 en el informe), 8 tablas y 21 referencias citadas.</figcaption>
+  </figure>
+  <p>Tres botones lo sacan:</p>
+  <ul>
+    <li><span class="ui">Ver e imprimir el informe</span> abre el diálogo de impresión del navegador con el informe solo, sin la interfaz; desde ahí se imprime o se guarda como PDF. Si el navegador no deja imprimir desde la página, el informe se abre en una pestaña nueva.</li>
+    <li><span class="ui">Descargar el informe (HTML)</span> lo guarda como una página (<code>informe_</code> y el título), que se abre sin conexión en cualquier navegador.</li>
+    <li><span class="ui">Descargar el paquete reproducible (.zip)</span> arma el paquete de la sección 10.2.</li>
+  </ul>
+  <h3>Lo que trae el informe</h3>
+  <p>El informe empieza con el título, la autoría, la fecha y la versión de la app («CytogeneticsPro 1.0.0»). Si el proyecto es un ejemplo, una nota advierte que los datos son simulados. Siguen estas partes, cada una sólo si el proyecto tiene con qué llenarla:</p>
+  <table class="compacta">
+    <caption><b>Tabla 10.1.</b> Las partes del informe</caption>
+    <thead><tr><th style="width:1.35in">Parte</th><th>Qué lleva</th></tr></thead>
+    <tbody>
+      <tr><td><b>Resumen</b></td><td>Una fila por accesión: taxón, 2n (la moda de los conteos, o el del cariotipo), fórmula, longitud haploide, MCA, CVCL, categoría de Stebbins y 2C en pg.</td></tr>
+      <tr><td><b>Métodos</b></td><td>Los párrafos de la sección 10.5, en el idioma de la interfaz.</td></tr>
+      <tr><td><b>Resultados</b></td><td>El cariotipo de cada accesión (par, p, q y longitud con su desviación, longitud relativa, IC, r y tipo); los índices de asimetría; la meiosis (células, quiasmas por célula y por bivalente, índice de recombinación, % con multivalentes); la viabilidad del polen con su intervalo de Wilson; el contenido de ADN (2C, 1Cx y Mpb); la prueba de <i>Allium</i>; los sitios por juego de cada sonda, y la matriz de distancias de la comparación.</td></tr>
+      <tr><td><b>Figuras</b></td><td>Las marcadas en la tarjeta <span class="ui">Figuras</span>, numeradas, con los colores del tema claro.</td></tr>
+      <tr><td><b>Referencias</b></td><td>Las obras citadas en los métodos, en orden alfabético.</td></tr>
+    </tbody>
+  </table>
+  <p>Con el chayote, los resultados traen el cariotipo de las cuatro accesiones, la asimetría, las bandas y señales y la comparación; no hay meiosis, citometría ni prueba de <i>Allium</i> porque el ejemplo no las tiene.</p>
+
+  <!-- 10.2 -->
+  <h2 id="s10-2"><span class="num">10.2</span>El paquete reproducible</h2>
+  <p class="lead">Un archivo .zip con el proyecto y todo lo que la app calculó con él: lo que un revisor, un coautor o tu director de tesis necesita para repetir el análisis.</p>
+  <p>Mientras se arma, la app muestra la espera «Armando el paquete» con su avance, porque cada figura se convierte también a PNG; al terminar descarga el archivo y avisa «Paquete listo: … archivos.». Con el chayote, el paquete se llama <code>cytogeneticspro_Sechium_edule_tres_accesiones.zip</code> y trae 35 archivos:</p>
+  <table class="compacta">
+    <caption><b>Tabla 10.2.</b> El contenido del paquete del chayote de ejemplo</caption>
+    <thead><tr><th style="width:2.5in">Archivo</th><th>Qué es</th></tr></thead>
+    <tbody>
+      <tr><td><code>LEEME.txt</code></td><td>En español y en inglés: qué es el paquete, cómo repetir el análisis, la lista de archivos y la cita de la app.</td></tr>
+      <tr><td><code>proyecto_Sechium_edule_tres_accesiones.json</code></td><td>El proyecto completo, con las imágenes dentro; se abre con <span class="ui">Abrir un proyecto</span> (<code>Ctrl + O</code>).</td></tr>
+      <tr><td><code>informe.html</code></td><td>El informe de la sección 10.1.</td></tr>
+      <tr><td><code>metodos_es.txt</code> · <code>methods_en.txt</code></td><td>Los métodos redactados en los dos idiomas.</td></tr>
+      <tr><td><code>tablas/</code> (8 archivos .csv)</td><td>Todas las tablas de la sección 10.4.</td></tr>
+      <tr><td><code>figuras/</code> (11 .svg y 11 .png)</td><td>Todas las figuras de la galería, marcadas o no, en vector y en imagen al doble de resolución.</td></tr>
+    </tbody>
+  </table>
+  <p>Para repetir el análisis basta el archivo del proyecto: al abrirlo, la app recalcula todos los resultados a partir de los datos y los ajustes guardados. Las tablas, las figuras y el informe van para quien quiera revisar sin abrir la app. Los archivos van dentro del .zip sin comprimir: los textos y los SVG pesan poco, y el paquete se abre con cualquier programa de archivos comprimidos.</p>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>El paquete no sale de tu equipo</div>
+    <p>Todo se arma en el navegador y se descarga en tu carpeta de descargas. Si las fotomicrografías no son tuyas o están sin publicar, recuerda que viajan dentro del archivo del proyecto: compártelo con el mismo cuidado que las imágenes.</p>
+  </div>
+
+  <!-- 10.3 -->
+  <h2 id="s10-3"><span class="num">10.3</span>Figuras, el estudio y el editor</h2>
+  <p class="lead">La galería de todas las figuras del proyecto, cada una con sus descargas, su casilla para el informe y sus dos herramientas de edición.</p>
+  <p>La galería junta, en este orden, el idiograma de cada accesión con cariotipo (haploide, en µm, en color y con sus marcas), el cariograma recortado de cada accesión que tenga imágenes trazadas, las categorías de Stebbins, el diagrama MCA × CVCL (con más de una accesión), los histogramas del citómetro del Bloque 6 y las figuras de la comparación del Bloque 8. Con el chayote son 11: los cuatro idiogramas, Stebbins, MCA × CVCL, el dendrograma, el biplot de componentes principales, los idiogramas en paralelo, el árbol con los números cromosómicos y el mapa de citotipos. Si el proyecto no tiene figuras, la tarjeta dice «El proyecto todavía no tiene figuras: abre un ejemplo o mide células en el Bloque 2.».</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b10-figuras.png" alt="La tarjeta Figuras con sus botones y el idiograma de Chayote Huatusco con sus herramientas">
+      <span class="marca" style="left:31.3%;top:19.9%">1</span>
+      <span class="marca" style="left:35.1%;top:24.6%">2</span>
+      <span class="marca" style="left:67.5%;top:24.6%">3</span>
+      <span class="marca" style="left:84%;top:24.6%">4</span>
+      <span class="marca" style="left:95.6%;top:24.6%">5</span>
+    </div>
+    <figcaption><b>Figura 10.2.</b> La primera figura de la galería del chayote: el idiograma de Chayote · Huatusco, 2n = 2x = 28 = 18m + 2m-sat + 8sm, con el satélite del par 1 y las señales de ADNr 45S, ADNr 5S y CMA⁺.</figcaption>
+  </figure>
+  <ul class="leyenda-marcas">
+    <li><span class="n">1</span><b>Marcar todas · Desmarcar todas.</b> Todas las figuras entran o salen del informe.</li>
+    <li><span class="n">2</span><b>SVG · PNG.</b> Descargan la figura como vector o como imagen.</li>
+    <li><span class="n">3</span><b>En el informe.</b> La casilla de cada figura.</li>
+    <li><span class="n">4</span><b>Editor ✎.</b> El panel de edición fina de esta figura.</li>
+    <li><span class="n">5</span><b>Estudio de figuras.</b> La figura a pantalla completa, para ajustarla y exportarla.</li>
+  </ul>
+  <p>Cada figura se descarga con <span class="ui">SVG</span>, un vector que se agranda sin perder nitidez y se edita en cualquier programa de dibujo, o con <span class="ui">PNG</span>, una imagen al triple de resolución de la pantalla. Los dos salen con los colores del tema claro aunque la app esté en el oscuro. La casilla <span class="ui">En el informe</span> decide si la figura entra al informe; el recuadro <span class="ui">Figuras</span> de la tarjeta del informe se actualiza al instante. Las casillas no se guardan en el proyecto: al abrir otro, todas vuelven a estar marcadas.</p>
+  <h3>El cariograma recortado</h3>
+  <p>El cariograma es la figura clásica de un artículo de citogenética: los cromosomas de una célula recortados de la fotografía, enderezados y ordenados por pares. La app lo arma sola con la <b>primera célula de la accesión que tenga imagen y todos sus cromosomas trazados, con su centrómero, y agrupados</b> en el Bloque 3. Endereza cada cromosoma a lo largo de su trazo, pone los dos homólogos juntos, ordena los pares como el cariotipo, alinea los centrómeros en una línea punteada y escribe debajo el número y el tipo de cada par. Los pares van en renglones de siete (de ocho, si hay más de doce), con una barra de escala al final.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b10-cariograma.png" alt="El cariograma del maíz de ejemplo: diez pares de cromosomas recortados y enderezados en dos renglones, con su número, su tipo y una barra de 5 micras"></div>
+    <figcaption><b>Figura 10.3.</b> El cariograma de la célula 1 del maíz de ejemplo: diez pares en dos renglones, con los nudos de heterocromatina visibles como bandas oscuras, el satélite del par 6 (sm-sat) y una barra de 5 µm. El título, «Maíz criollo · Texcoco · Célula 1 (imagen) · 2n = 2x = 20 = 8m + 10sm + 2sm-sat», queda cortado a la derecha en esta versión de la app.</figcaption>
+  </figure>
+  <p>Si ninguna célula de una accesión cumple las condiciones —no tiene imagen, o le falta el trazo o el centrómero a algún cromosoma—, esa accesión no tiene cariograma; el idiograma, que sólo necesita las medidas, sí aparece.</p>
+  <h3>El estudio de figuras</h3>
+  <p>El botón del lápiz y la regla, en la esquina de cada figura, abre el <b>estudio de figuras</b>, el mismo en todas las aplicaciones de la suite: la figura en el centro, a su tamaño de impresión, y los controles a la derecha. Abajo de la figura se lee su tamaño final; arriba, una línea punteada marca un ancho de revista.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b10-estudio.png" alt="El estudio de figuras a pantalla completa con el idiograma de Huatusco en el centro y los controles a la derecha"></div>
+    <figcaption><b>Figura 10.4.</b> El idiograma de Huatusco en el estudio. Debajo, su tamaño final: 85 × 41.7 mm a 600 puntos por pulgada, 2008 × 986 píxeles; la guía punteada marca el ancho de columna y media (114 mm). A la derecha, los ajustes y la edición fina.</figcaption>
+  </figure>
+  <p>La barra de arriba deshace y rehace, acerca y aleja la figura (<span class="ui">Ajustar</span> la deja del tamaño de la pantalla), aplica <span class="ui">Preajustes</span> de un clic y guarda los propios, y con <span class="ui">Exportar</span> la descarga al ancho de una o dos columnas de revista o a uno libre, con la resolución que pidas, en PNG, SVG, PDF vectorial o TIFF. A la derecha, <span class="ui">Buscar un control…</span> encuentra cualquier ajuste por su nombre; <span class="ui">Ajustes de la figura</span> reúne los controles de la tarjeta donde vive la figura, y <span class="ui">Edición fina de esta figura</span> es el editor ✎ dentro del estudio. En la figura, un clic lleva a los controles de esa parte y un doble clic en un texto deja cambiarlo. <span class="ui">Cerrar estudio</span> vuelve a la app.</p>
+  <h3>El editor ✎</h3>
+  <p>El botón ✎ abre, sin salir de la página, un panel flotante que trabaja sobre esa figura. Sus pestañas son <span class="ui">General</span>, <span class="ui">Ejes y rejilla</span>, <span class="ui">Series</span>, <span class="ui">Leyenda</span>, <span class="ui">Textos</span> y <span class="ui">Anotaciones</span>.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/b10-editor.png" alt="El panel del editor de la figura en su pestaña General"></div>
+    <figcaption><b>Figura 10.5.</b> El editor ✎ sobre el idiograma de Huatusco, en la pestaña <span class="ui">General</span>: título, subtítulo y nota al pie dentro de la figura; letra, tamaño, color y grosores; fondo y marco.</figcaption>
+  </figure>
+  <p>En <span class="ui">General</span> se escriben un <span class="ui">Título (vacío = sin título)</span>, un <span class="ui">Subtítulo</span> y una nota al pie dentro de la figura, y se ajustan el tamaño y la alineación del título, la <span class="ui">Familia tipográfica</span>, el <span class="ui">Tamaño de todos los textos</span>, el <span class="ui">Color de todos los textos</span>, el <span class="ui">Grosor de las líneas</span>, el <span class="ui">Tamaño de los puntos</span>, el <span class="ui">Fondo</span> y un <span class="ui">Marco alrededor de toda la figura</span>. Las demás pestañas cambian los ejes, los colores de cada serie, el lugar de la leyenda, cualquier texto y las anotaciones: notas, letras de panel y flechas que se arrastran sobre la figura, y líneas o bandas en un valor del eje. <span class="ui">Deshacer todo en esta figura</span> la devuelve a como la dibujó la app; <span class="ui">Copiar el estilo a todas las figuras</span> aplica los mismos ajustes a las demás, y <span class="ui">Exportar</span> la descarga. Las ediciones se recuerdan en el navegador y se vuelven a aplicar cuando la figura se redibuja.</p>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Las letras son las del equipo</div>
+    <p>Las figuras usan las letras instaladas en tu computadora; la app no descarga ninguna. Si mandas un SVG a otra persona, puede verse con otra letra parecida en su equipo. Para que se vea igual en todas partes, exporta en PDF vectorial o en PNG desde el estudio.</p>
+  </div>
+
+  <!-- 10.4 -->
+  <h2 id="s10-4"><span class="num">10.4</span>Tablas</h2>
+  <p>Todas las tablas del proyecto, con su número de filas y de columnas, y dos botones: <span class="ui">CSV</span>, separado por comas, y <span class="ui">TSV</span>, separado por tabuladores. Las dos usan el punto decimal y se guardan en UTF-8 con marca de orden de bytes, para que una hoja de cálculo lea bien los acentos y la µ; se abren igual en una hoja de cálculo o en R.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b10-tablas.png" alt="La tarjeta Tablas con las ocho tablas del chayote, sus filas y columnas y los botones CSV y TSV"></div>
+    <figcaption><b>Figura 10.6.</b> Las ocho tablas del chayote de ejemplo. Las mediciones son 324 filas, una por cromosoma medido; el cariotipo, 54, una por par y accesión (14 + 14 + 14 + 12).</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Tabla 10.3.</b> Las tablas que puede tener un proyecto y su archivo</caption>
+    <thead><tr><th style="width:1.65in">Tabla</th><th style="width:1.45in">Archivo</th><th>Columnas</th></tr></thead>
+    <tbody>
+      <tr><td>Accesiones</td><td><code>accesiones</code></td><td>nombre, taxón, localidad, latitud, longitud, x</td></tr>
+      <tr><td>Mediciones por cromosoma</td><td><code>mediciones</code></td><td>accesión, taxón, célula, cromosoma, p, q, satélite, brazo del satélite, unidad (µm o px) y origen (trazo o a mano)</td></tr>
+      <tr><td>Cariotipo (pares)</td><td><code>cariotipo</code></td><td>par, células, p, q, longitud, longitud relativa e índice centromérico con sus desviaciones, razón de brazos, clase, satélite y unidad</td></tr>
+      <tr><td>Índices de asimetría</td><td><code>asimetria</code></td><td>2n, THL y los doce índices, la categoría de Stebbins y el modo de cálculo</td></tr>
+      <tr><td>Conteos de 2n</td><td><code>conteos</code></td><td>accesión, célula y 2n</td></tr>
+      <tr><td>Bandas y señales</td><td><code>senales</code></td><td>par, homólogo, brazo, posición, tamaño, sonda, célula y región</td></tr>
+      <tr><td>Matriz de comparación</td><td><code>matriz_comparacion</code></td><td>las variables del Bloque 8 para cada accesión o taxón, con su origen</td></tr>
+      <tr><td>Matriz de distancias</td><td><code>distancias</code></td><td>la matriz cuadrada de la comparación</td></tr>
+    </tbody>
+  </table>
+  <p>Una tabla aparece sólo si el proyecto tiene sus datos: con el maíz de ejemplo, que no tiene comparación, son siete. Cada bloque tiene también sus propias descargas (el cariotipo en el Bloque 3, los índices en el 4, las tablas de conteo de los Bloques 5 a 8); las de aquí son las mismas, juntas.</p>
+
+  <!-- 10.5 -->
+  <h2 id="s10-5"><span class="num">10.5</span>Métodos redactados</h2>
+  <p class="lead">Un borrador de la sección de métodos con lo que tiene el proyecto, con cada método citado por autor y año y las referencias completas al final.</p>
+  <p>El menú <span class="ui">Idioma</span> elige <span class="ui">Español</span> o <span class="ui">English</span>; al abrir sigue el idioma de la interfaz, y una vez que lo cambias se queda como lo dejaste. <span class="ui">Copiar</span> deja el texto en el portapapeles («Métodos copiados.») y <span class="ui">Descargar (.txt)</span> lo guarda como <code>metodos.txt</code> o <code>methods.txt</code>.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b10-metodos.png" alt="La tarjeta de los métodos redactados con sus controles y los primeros párrafos del chayote"></div>
+    <figcaption><b>Figura 10.7.</b> El comienzo de los métodos del chayote de ejemplo: la nota de datos simulados, la medición, el cariotipo con las fórmulas y longitudes haploides de las cuatro accesiones, y la asimetría con MCA, CVCL, CVCI y la categoría de Stebbins de cada una.</figcaption>
+  </figure>
+  <p>Los párrafos salen de lo que hay en el proyecto, uno por tema, y sólo si hay datos: la medición (cuántos cromosomas, células y accesiones, y cómo se trazaron); el cariotipo (cómo se emparejaron los homólogos, qué se calculó, la clasificación con su convenio de límites, cómo se contó el número fundamental y las fórmulas); la asimetría (los índices recomendados, los demás y el tipo de desviación); el número cromosómico (la moda de las células contadas); la meiosis, la citometría y la prueba de <i>Allium</i>; las bandas y señales; la comparación (variables, distancia, agrupamiento, correlación cofenética, componentes y evolución del número), y un párrafo final con la versión de la app. Con el chayote son ocho párrafos y 21 referencias; por ejemplo, el de la comparación dice que la correlación cofenética fue r = 0.867, que los dos primeros componentes resumen 87.0&nbsp;% de la varianza y que el costo mínimo de la evolución del número fue 11, con n = 11 en la raíz.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Es un borrador: revísalo siempre</div>
+    <p>La app escribe <i>qué</i> se hizo con los datos que tiene, no lo que no sabe: de dónde vino el material, cuántas plantas se usaron, qué microscopio y qué cámara, el pretratamiento y la tinción. Tampoco sabe <i>por qué</i> elegiste una clasificación o un índice. Completa el texto con eso, quita lo que no vayas a informar y ajusta la redacción a la revista. Si el proyecto es un ejemplo, la primera línea lo advierte: bórrala sólo cuando los datos sean tuyos.</p>
+  </div>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Antes de entregar</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> la revista pide un ancho de figura…</td><td>exporta desde el estudio a ese ancho y con la resolución que pida (300 o 600 ppp).</td></tr>
+      <tr><td><b>Si</b> publicas el cariograma…</td><td>elige como primera célula la mejor metafase: la app recorta la primera que tenga todos sus cromosomas trazados y agrupados.</td></tr>
+      <tr><td><b>Si</b> el informe sólo debe llevar algunas figuras…</td><td><span class="ui">Desmarcar todas</span> y marca las que quieras antes de imprimir.</td></tr>
+      <tr><td><b>Si</b> usas los métodos redactados…</td><td>completa el material, el equipo y las razones de tus decisiones.</td></tr>
+      <tr><td><b>Siempre</b>…</td><td>guarda el paquete reproducible junto a la tesis o al artículo: es la prueba de cómo se obtuvo cada número.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para entregar, no leyes: las instrucciones de la revista o de tu programa de posgrado mandan.</p>
+  </div>
+
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Cuando algo sale mal</div>
+    <p><b>«El proyecto todavía no tiene figuras».</b> Abre un ejemplo o mide células en el Bloque 2; sin cariotipo no hay idiogramas. <b>«Todavía no hay tablas.»</b> El proyecto está vacío. <b>No aparece el cariograma.</b> Ninguna célula de la accesión tiene imagen con todos sus cromosomas trazados, con centrómero y agrupados en el Bloque 3. <b>«No se pudo copiar; usa «Descargar».»</b> El navegador no dejó usar el portapapeles: descarga el .txt. <b>«No se pudo armar el paquete: …»</b> Suele ser falta de memoria con imágenes muy grandes; vuelve a intentarlo cerrando otras pestañas, o guarda el proyecto con <code>Ctrl + S</code> y descarga las tablas y figuras por separado. <b>El informe no se imprime.</b> Usa <span class="ui">Descargar el informe (HTML)</span> y ábrelo para imprimirlo desde ahí.</p>
+  </div>
+</section>
+
+</body>
+</html>

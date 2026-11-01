@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · Manual de usuario · Capítulo 9</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-9" data-pestana="9" data-orden="9" style="--acento: var(--b9)">
+  <div class="cap-apertura">
+    <div class="cap-num">9</div>
+    <div class="cap-etiqueta">Capítulo nueve · Bloque 9</div>
+    <h1 data-corto="Docencia">Docencia</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">El bloque para el aula y para quien empieza: un simulador de la mitosis y la meiosis que pide contar antes de dar la respuesta, un ejercicio de cariotipo sobre una metafase inventada que se califica solo, una autoevaluación con explicaciones, un glosario ilustrado y una hoja de práctica lista para imprimir. No necesita datos ni toca el proyecto: funciona igual con un ejemplo abierto que sin nada.</p>
+    <div class="cap-franja"><span class="k9"></span><span class="k9"></span><span class="k3"></span><span class="k5"></span></div>
+    <ul class="cap-contenido">
+      <li><b>9.1</b>Mitosis y meiosis paso a paso</li>
+      <li><b>9.2</b>Ejercicio: arma el cariotipo</li>
+      <li><b>9.3</b>Autoevaluación</li>
+      <li><b>9.4</b>Glosario ilustrado</li>
+      <li><b>9.5</b>Hoja de práctica: cromosomas en puntas de raíz</li>
+    </ul>
+  </div>
+  <p>El Bloque 9 tiene cinco tarjetas, que se recorren de arriba abajo o desde la lista <span class="ui">En este bloque</span> de la derecha. Nada de lo que hagas aquí cambia el proyecto: puedes abrirlo a mitad de un análisis, practicar y volver al bloque donde estabas sin perder nada. Las figuras del simulador y del ejercicio se descargan en SVG o PNG y se editan con el estudio y el editor ✎, como las de cualquier otro bloque (sección 10.3).</p>
+
+  <!-- 9.1 -->
+  <h2 id="s9-1"><span class="num">9.1</span>Mitosis y meiosis paso a paso</h2>
+  <p class="lead">Un dibujo de la célula que avanza fase por fase, con un texto que explica qué pasa y una respuesta escondida que dice qué hay que contar.</p>
+  <p>Arriba se elige la <span class="ui">División</span> —<span class="ui">Mitosis</span> o <span class="ui">Meiosis</span>— y el número de <span class="ui">Pares (n)</span>, de 1 a 6 (3 al abrir). Cada par tiene su propia longitud y su centrómero en otro lugar, para que se distingan, y vienen en dos colores: <b>azul</b> los del padre y <b>bermellón</b> los de la madre. En la meiosis aparecen dos controles más: la casilla <span class="ui">Entrecruzamiento</span>, encendida al abrir, y el botón <span class="ui">Otra orientación al azar</span>, que vuelve a sortear hacia qué polo mira cada bivalente en la metafase I y cada cromosoma en la metafase II.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b9-simulador.png" alt="La tarjeta del simulador en la meiosis, paso 7 de 14, metafase I, con tres bivalentes en la placa y los recuadros de lo que hay que contar">
+      <span class="marca" style="left:1%;top:14.1%">1</span>
+      <span class="marca" style="left:38.8%;top:14.1%">2</span>
+      <span class="marca" style="left:76.8%;top:14.1%">3</span>
+      <span class="marca" style="left:1%;top:18.3%">4</span>
+      <span class="marca" style="left:92.6%;top:18.3%">5</span>
+      <span class="marca" style="left:7.8%;top:38.4%">6</span>
+      <span class="marca" style="left:1.7%;top:85.7%">7</span>
+    </div>
+    <figcaption><b>Figura 9.1.</b> La meiosis con tres pares, en el paso 7 de 14, la metafase I: cada bivalente en la placa con un homólogo hacia cada polo. Abierta la respuesta, la célula tiene 6 cromosomas de 2 cromátidas, 4C, dos juegos (2n) y 3 bivalentes.</figcaption>
+  </figure>
+  <ul class="leyenda-marcas">
+    <li><span class="n">1</span><b>División.</b> Mitosis (7 pasos) o meiosis (14 pasos).</li>
+    <li><span class="n">2</span><b>Pares (n).</b> De 1 a 6; 2n es el doble.</li>
+    <li><span class="n">3</span><b>Otra orientación al azar.</b> Sólo en la meiosis, junto con <span class="ui">Entrecruzamiento</span>.</li>
+    <li><span class="n">4</span><b>Anterior, Reproducir, Siguiente.</b> Recorren los pasos uno a uno o solos.</li>
+    <li><span class="n">5</span><b>Deslizador.</b> Salta a cualquier paso; debajo, su número y su nombre.</li>
+    <li><span class="n">6</span><b>Célula.</b> El dibujo del paso, que se descarga en SVG o PNG.</li>
+    <li><span class="n">7</span><b>Ver lo que hay que contar.</b> La respuesta, cerrada hasta que la abres.</li>
+  </ul>
+  <p><span class="ui">← Anterior</span> y <span class="ui">Siguiente →</span> mueven un paso; <span class="ui">Reproducir</span> avanza solo, un paso cada 1.8 segundos, y se vuelve <span class="ui">Pausa</span> mientras corre; se detiene al llegar al último paso o al tocar <span class="ui">← Anterior</span>, <span class="ui">Siguiente →</span>, el deslizador o la <span class="ui">División</span>. El deslizador lleva directo a un paso, y el renglón de debajo dice dónde estás: «7 / 14 · Metafase I». Bajo el dibujo, un párrafo explica la fase.</p>
+  <h3>Los pasos</h3>
+  <p>La <b>mitosis</b> tiene siete: Interfase (G2), Profase, Prometafase, Metafase, Anafase, Telofase y Citocinesis. La <b>meiosis</b>, catorce: Interfase (G2); la profase I en sus cinco etapas —leptoteno, cigoteno, paquiteno, diploteno y diacinesis—; Metafase I, Anafase I y Telofase I; Profase II, Metafase II, Anafase II y Telofase II, y la Tétrada. La interfase se dibuja en G2, con el ADN ya replicado, para que desde el principio cada cromosoma tenga dos cromátidas.</p>
+  <h3>Lo que hay que contar</h3>
+  <p>La tarjeta pide contar antes de mirar. Al abrir <span class="ui">Ver lo que hay que contar</span> aparecen los recuadros <span class="ui">Células</span>, <span class="ui">Cromosomas por célula</span>, <span class="ui">Cromátidas por cromosoma</span>, <span class="ui">ADN por célula</span> (en valores C) y <span class="ui">Juegos de cromosomas</span> (2n o n), y, del paquiteno a la metafase I, <span class="ui">Bivalentes</span>. En las anafases el recuadro de los cromosomas añade cuántos van a cada polo. Las cifras son las de los libros de texto para el número de pares elegido, no un conteo del dibujo.</p>
+  <table class="compacta">
+    <caption><b>Tabla 9.1.</b> Lo que da la app en los pasos clave, con n pares (2n = 2n cromosomas)</caption>
+    <thead><tr><th style="width:1.6in">Paso</th><th>Células</th><th>Cromosomas por célula</th><th>Cromátidas</th><th>ADN</th><th>Juegos</th></tr></thead>
+    <tbody>
+      <tr><td>Interfase (G2) a metafase</td><td>1</td><td>2n</td><td>2</td><td>4C</td><td>2n</td></tr>
+      <tr><td>Anafase y telofase (mitosis)</td><td>1</td><td>4n (2n a cada polo)</td><td>1</td><td>4C</td><td>2n</td></tr>
+      <tr><td>Citocinesis</td><td>2</td><td>2n</td><td>1</td><td>2C</td><td>2n</td></tr>
+      <tr><td>Profase I a metafase I</td><td>1</td><td>2n (n bivalentes)</td><td>2</td><td>4C</td><td>2n</td></tr>
+      <tr><td>Anafase I</td><td>1</td><td>2n (n a cada polo)</td><td>2</td><td>4C</td><td>2n</td></tr>
+      <tr><td>Telofase I a metafase II</td><td>2</td><td>n</td><td>2</td><td>2C</td><td>n</td></tr>
+      <tr><td>Anafase II</td><td>2</td><td>2n (n a cada polo)</td><td>1</td><td>2C</td><td>n</td></tr>
+      <tr><td>Telofase II y tétrada</td><td>4</td><td>n</td><td>1</td><td>1C</td><td>n</td></tr>
+    </tbody>
+  </table>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · por qué la meiosis reduce y recombina</div>
+    <p>En la anafase I se separan los <b>homólogos</b>, no las cromátidas: cada polo recibe n cromosomas, todavía con dos cromátidas, y ahí se reduce el número a la mitad. Qué homólogo va a cada polo se decide al azar en cada par (segregación independiente), lo que da 2<sup>n</sup> combinaciones posibles; el entrecruzamiento del paquiteno, visible como quiasma en el diploteno, mezcla además los segmentos de las cromátidas no hermanas. La anafase II separa por fin las cromátidas, como una mitosis.</p>
+  </div>
+  <p>El simulador sigue un modelo propio y esquemático: con <span class="ui">Entrecruzamiento</span> encendido hay un quiasma por bivalente, en el brazo largo tres de cada cuatro veces, entre la segunda cromátida de un homólogo y la primera del otro, y las cromátidas recombinantes conservan los dos colores hasta el final. Al apagar la casilla, los cromosomas pasan enteros, de un solo color.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b9-tetrada.png" alt="Las cuatro células de la tétrada, cada una con tres cromosomas, y la lista de lo que recibió cada una"></div>
+    <figcaption><b>Figura 9.2.</b> El último paso de la meiosis con tres pares: cuatro células con 3 cromosomas de una cromátida (1C, n). Debajo, la app dice que con n = 3 hay 8 combinaciones sin entrecruzamiento y qué recibió cada célula: la 3 recibió los tres pares del padre; la 1, el par 1 de la madre y los pares 2 y 3 recombinantes.</figcaption>
+  </figure>
+  <p>En la <b>Tétrada</b>, la respuesta añade una lista con lo que recibió cada una de las cuatro células: para cada par, si el cromosoma vino del padre, de la madre o es recombinante. Es la forma más directa de mostrar en clase que los cuatro productos de una meiosis son distintos entre sí y distintos de la planta madre.</p>
+
+  <!-- 9.2 -->
+  <h2 id="s9-2"><span class="num">9.2</span>Ejercicio: arma el cariotipo</h2>
+  <p class="lead">Una metafase simulada de un cariotipo inventado, con los cromosomas numerados, para emparejar, ordenar y clasificar a mano antes de pedir la calificación.</p>
+  <p>El ejercicio dibuja la metafase con el mismo motor que hace las imágenes de los ejemplos: cromosomas teñidos con su centrómero, un núcleo en reposo en una esquina y una barra de 5 µm. Cada cromosoma lleva un número junto a él, y debajo, en <span class="ui">Recortes</span>, aparecen los mismos cromosomas <b>enderezados</b> a lo largo de su eje y a la misma escala que la imagen, cada uno con dos menús: <span class="ui">par</span> y <span class="ui">tipo</span> (m, sm, st o t). El menú <span class="ui">Pares</span> elige cuántos pares tiene el cariotipo —4, 5 (al abrir) o 6— y <span class="ui">Otra metafase</span> inventa uno nuevo.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/b9-ejercicio.png" alt="La metafase simulada con diez cromosomas numerados y, debajo, sus diez recortes con los menús par y tipo"></div>
+    <figcaption><b>Figura 9.3.</b> La metafase con la que abre el bloque: cinco pares, diez cromosomas en el orden en que se ven en la imagen. Los recortes conservan el tamaño relativo, y el centrómero se ve como la constricción de cada uno.</figcaption>
+  </figure>
+  <p>La tarea tiene tres partes: <b>juntar los homólogos</b> dándoles el mismo número de par; <b>numerar los pares</b> del más largo (1) al más corto, y <b>clasificar</b> cada cromosoma según Levan et al. (1964) por su razón de brazos r = q / p (capítulo 3: m hasta 1.7, sm hasta 3.0, st hasta 7.0, t por encima). Cuando termines, <span class="ui">Revisar</span>.</p>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>El ejercicio de inicio siempre es el mismo</div>
+    <p>Al abrir el bloque, la app dibuja siempre la misma metafase (la de la semilla 20261007), para que un grupo entero pueda trabajar sobre la misma imagen y comparar respuestas. <span class="ui">Otra metafase</span> y el cambio del número de pares sortean una nueva cada vez. Las cifras de esta sección son las de la metafase de inicio.</p>
+  </div>
+  <h3>Cómo se califica</h3>
+  <p><span class="ui">Revisar</span> pone tres recuadros y una lista de observaciones, y marca cada recorte: con borde <b>verde</b> si el cromosoma quedó en su par, con el número de par correcto y con el tipo correcto; con borde <b>naranja</b> si el tipo está mal o si el cromosoma no quedó con su homólogo; sin color, si el par y el tipo están bien pero el número del par no.</p>
+  <ul>
+    <li><span class="ui">Pares bien formados</span>: cuántos pares tienen a sus dos miembros, y sólo a ellos, con el mismo número.</li>
+    <li><span class="ui">Pares bien numerados</span>: de los bien formados, cuántos llevan además el número que les toca por longitud («1 = el más largo»).</li>
+    <li><span class="ui">Tipos correctos</span>: cuántos cromosomas, de todos, están bien clasificados.</li>
+  </ul>
+  <figure class="w50">
+    <div class="marco"><img src="../img/b9-revision.png" alt="Los recortes contestados, con bordes verdes y naranjas, los tres recuadros de la calificación y cuatro observaciones"></div>
+    <figcaption><b>Figura 9.4.</b> El ejercicio contestado con dos errores a propósito: los cromosomas 5 y 10 se dieron como sm y los pares 4 y 5 se numeraron al revés. Resultado: 5 / 5 pares bien formados, 3 / 5 bien numerados y 8 / 10 tipos correctos.</figcaption>
+  </figure>
+  <p>Las observaciones dicen por qué. Un tipo equivocado da un aviso con la razón de brazos verdadera: «El 5 es subtelocéntrico (st): su razón de brazos es r = 4.07, no sm.» Dos homólogos separados dan «Los cromosomas … son homólogos (el par …, de … µm).»; un par bien formado con el número equivocado, «Los cromosomas 5 y 10 forman bien un par, pero por su longitud es el par 4.» Con todo correcto, la app escribe «¡Cariotipo correcto! Puedes ver la solución con las medidas.».</p>
+  <p><span class="ui">Ver la solución</span> ordena los recortes por pares y escribe, bajo cada uno, su número, su tipo, su longitud media y su razón de brazos, y al final la fórmula cariotípica.</p>
+  <figure>
+    <div class="marco"><img src="../img/b9-solucion.png" alt="La solución: los cinco pares ordenados con su tipo, su longitud y su razón de brazos, y la fórmula 2n = 10 = 4m + 2sm + 4st"></div>
+    <figcaption><b>Figura 9.5.</b> La solución de la metafase de inicio: par 1, m, 7.11 µm, r = 1.14; par 2, sm, 5.60 µm, r = 2.52; par 3, st, 4.35 µm, r = 5.05; par 4, st, 3.46 µm, r = 4.08; par 5, m, 2.62 µm, r = 1.30. Fórmula: 2n = 10 = 4m + 2sm + 4st.</figcaption>
+  </figure>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Por qué el ejercicio tiene una sola respuesta</div>
+    <p>El cariotipo se inventa con razones de brazos lejos de los límites de Levan (m entre 1.10 y 1.45, sm entre 2.0 y 2.6, st entre 3.8 y 5.5), y cada par mide entre 20 y 25&nbsp;% menos que el anterior; el par 1 siempre es metacéntrico. Los dos homólogos difieren entre sí, como mucho, un 2&nbsp;% en cada brazo, como en una buena preparación. Así ningún cromosoma queda en la frontera entre dos clases ni dos pares se confunden por longitud: lo que se evalúa es saber medir con los ojos, no la suerte. En una preparación real los límites sí se tocan, y para eso están los Bloques 2 y 3.</p>
+  </div>
+
+  <!-- 9.3 -->
+  <h2 id="s9-3"><span class="num">9.3</span>Autoevaluación</h2>
+  <p class="lead">Preguntas de opción múltiple, con cuatro opciones cada una y una explicación que aparece al calificar.</p>
+  <p>Los botones de arriba son los temas: <span class="ui">Cariotipo</span>, <span class="ui">Asimetría</span>, <span class="ui">Meiosis</span>, <span class="ui">Ploidía y genoma</span>, <span class="ui">Bandeo y FISH</span>, <span class="ui">Técnicas</span> y <span class="ui">Comparación</span>; al abrir están todos encendidos, y un clic apaga o enciende uno. El menú <span class="ui">Preguntas</span> elige cuántas salen —5, 10 (al abrir) o 15— y <span class="ui">Nuevas preguntas</span> saca otra tanda. Cada cambio de tema o de número también arma una tanda nueva.</p>
+  <p>El banco tiene 33 preguntas: 28 fijas —4 de cariotipo, 3 de asimetría, 6 de meiosis, 6 de ploidía y genoma, 4 de bandeo y FISH, 3 de técnicas y 2 de comparación— y 5 que se generan con números nuevos cada vez: el índice centromérico de un cromosoma con brazos dados, la clase de Levan de una razón de brazos, el 2C de una muestra a partir de los canales del citómetro y de un estándar, el nivel de ploidía de un 2n con un número básico dado, y las combinaciones de cromosomas paternos y maternos que puede recibir un gameto. Las opciones se barajan en cada tanda.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b9-autoevaluacion.png" alt="Los temas, el menú de preguntas y las tres primeras preguntas calificadas, con la opción correcta resaltada en verde y su explicación"></div>
+    <figcaption><b>Figura 9.6.</b> Las tres primeras de una tanda de cinco preguntas de todos los temas, contestada siempre con la primera opción y calificada. La 1 está bien y se enmarca en verde; la 2 y la 3, mal, en naranja, con la opción correcta resaltada. En las cinco hubo 3 aciertos: el recuadro <span class="ui">Aciertos</span> dice 3 / 5, 60 %.</figcaption>
+  </figure>
+  <p><span class="ui">Calificar</span> marca cada pregunta, resalta la opción correcta y añade su explicación, que empieza con «Correcto.», «No.» o «Sin respuesta.». El recuadro <span class="ui">Aciertos</span> da el total y el porcentaje, y se pinta de advertencia por debajo del 70&nbsp;%. Puedes cambiar respuestas y calificar de nuevo; las preguntas no cambian hasta que pidas otras.</p>
+
+  <!-- 9.4 -->
+  <h2 id="s9-4"><span class="num">9.4</span>Glosario ilustrado</h2>
+  <p>Treinta y cinco términos de la citogenética, de <i>Alopoliploide</i> a <i>Valor C</i>, en orden alfabético, cada uno con su definición y, los que se prestan, con un dibujo hecho por la app: los cuatro tipos de cromosoma con su centrómero en su lugar, el satélite, el quiasma y las configuraciones meióticas (bivalente en anillo y en varilla, trivalente, cuadrivalente, univalente). <span class="ui">Buscar un término</span> filtra mientras escribes; busca en el término y en la definición, en español y en inglés, y no distingue acentos ni mayúsculas.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b9-glosario.png" alt="El comienzo del glosario: doce términos en tres columnas, algunos con su dibujo"></div>
+    <figcaption><b>Figura 9.7.</b> Los primeros doce términos del glosario, de Alopoliploide a Disploidía. El bivalente, el bivalente en anillo, el bivalente en varilla, el centrómero y el cuadrivalente llevan su dibujo.</figcaption>
+  </figure>
+  <p>El glosario de la app es el de la interfaz; el apéndice C de este manual reúne, además, los términos que usan los demás capítulos.</p>
+
+  <!-- 9.5 -->
+  <h2 id="s9-5"><span class="num">9.5</span>Hoja de práctica: cromosomas en puntas de raíz</h2>
+  <p class="lead">Una hoja de laboratorio para obtener metafases mitóticas por aplastado de meristemos de raíz, armada con los tiempos y temperaturas de protocolos publicados y lista para imprimir.</p>
+  <p>Se eligen tres pasos del protocolo y el material; la vista previa de abajo cambia al instante:</p>
+  <table class="compacta">
+    <caption><b>Tabla 9.2.</b> Las opciones de la hoja de práctica (la primera de cada menú es la que aparece al abrir)</caption>
+    <thead><tr><th style="width:1.15in">Menú</th><th>Opción y condiciones</th><th style="width:1.7in">Fuente</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="4"><span class="ui">Pretratamiento</span></td><td>8-hidroxiquinolina 0.002 M, 3–4 h a 16–18 °C</td><td>Sharma y Sharma 1980</td></tr>
+      <tr><td>Colchicina 0.05–0.1 %, 2–4 h a temperatura ambiente (tóxica: guantes)</td><td>Sharma y Sharma 1980</td></tr>
+      <tr><td>Agua con hielo (0–4 °C), 18–24 h</td><td>Darlington y La Cour 1976</td></tr>
+      <tr><td>Solución saturada de α-bromonaftaleno, 2–4 h (en campana)</td><td>Guerra y Souza 2002</td></tr>
+      <tr><td rowspan="3"><span class="ui">Hidrólisis</span></td><td>HCl 1 N a 60 °C, 8–12 min (con orceína o carmín)</td><td>Sharma y Sharma 1980</td></tr>
+      <tr><td>HCl 5 N a temperatura ambiente, 20–60 min (para Feulgen)</td><td>Guerra y Souza 2002</td></tr>
+      <tr><td>Mezcla de celulasa y pectinasa (2 % y 20 %) a 37 °C, 1–2 h (para bandeo o FISH)</td><td>Schwarzacher y Heslop-Harrison 2000</td></tr>
+      <tr><td rowspan="3"><span class="ui">Tinción</span></td><td>Aceto-orceína al 2 %, 10–30 min</td><td>Darlington y La Cour 1976</td></tr>
+      <tr><td>Acetocarmín o carmín propiónico al 1 %, 10–30 min</td><td>Sharma y Sharma 1980</td></tr>
+      <tr><td>Reactivo de Schiff (Feulgen), 1–2 h en oscuridad; después, una gota de ácido acético al 45 %</td><td>Guerra y Souza 2002</td></tr>
+    </tbody>
+  </table>
+  <p>En el campo <span class="ui">Material (especie)</span> se escribe la especie, que aparece en el encabezado de la hoja. Los menús muestran sólo el nombre del reactivo; las condiciones completas van en la hoja.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b9-practica.png" alt="La tarjeta de la hoja de práctica con sus cuatro campos, los dos botones y el comienzo de la vista previa"></div>
+    <figcaption><b>Figura 9.8.</b> La hoja con las opciones de inicio (8-hidroxiquinolina, HCl 1 N a 60 °C y aceto-orceína) y <i>Zea mays</i> como material: el encabezado para el nombre, la fecha y el grupo, el objetivo y los materiales. La vista previa sigue con el procedimiento.</figcaption>
+  </figure>
+  <p>La hoja trae, en este orden: el encabezado (<i>Nombre</i>, <i>Fecha</i>, <i>Grupo</i>, <i>Material</i>); el <b>objetivo</b>; los <b>materiales</b>; el <b>procedimiento</b> en ocho pasos —raíces, pretratamiento, fijación en Carnoy 3:1, lavado, hidrólisis, tinción, aplastado y observación—, cada uno con su fuente entre paréntesis; las medidas de <b>seguridad</b> (los ácidos son corrosivos; la colchicina y el α-bromonaftaleno, tóxicos; el reactivo de Schiff y los fijadores se guardan cerrados y rotulados); una tabla de <b>registro</b> de ocho renglones (preparación, célula, fase, 2n contado, observaciones); dos recuadros para <b>dibujar</b> una metafase y una anafase; cuatro <b>preguntas</b>, y las <b>referencias</b> de los pasos elegidos. Con las opciones de inicio son cuatro: Darlington y La Cour (1976), Guerra y Souza (2002), Sharma y Sharma (1980) y Singh (2017). Ningún reactivo lleva marca comercial.</p>
+  <p><span class="ui">Imprimir la hoja</span> abre el diálogo de impresión con la hoja sola, sin la interfaz de la app (desde ahí también se guarda como PDF). <span class="ui">Descargar (HTML)</span> la guarda como <code>practica_citogenetica.html</code>, una página que se abre sin conexión y se puede editar antes de repartirla.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>La hoja no sustituye el reglamento del laboratorio</div>
+    <p>Los tiempos y temperaturas son los de los protocolos citados y funcionan con muchas especies, pero cada material tiene su punto: el pretratamiento y la hidrólisis suelen ajustarse con unas preparaciones de prueba. Las medidas de seguridad de la hoja son las mínimas; las del laboratorio donde trabajes, sobre todo en el manejo y desecho de la colchicina y el α-bromonaftaleno, mandan sobre ellas.</p>
+  </div>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Cómo usar el bloque en una clase</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>Si</b> introduces la división celular…</td><td>usa el simulador con 2 o 3 pares y pide contar antes de abrir <span class="ui">Ver lo que hay que contar</span>.</td></tr>
+      <tr><td><b>Si</b> explicas la variación de los gametos…</td><td>llega a la <b>Tétrada</b> con y sin <span class="ui">Entrecruzamiento</span>, y repite con <span class="ui">Otra orientación al azar</span>.</td></tr>
+      <tr><td><b>Si</b> todo el grupo debe trabajar la misma metafase…</td><td>deja la de inicio, que es la misma en todas las computadoras; para tareas individuales, <span class="ui">Otra metafase</span>.</td></tr>
+      <tr><td><b>Si</b> preparas un examen breve…</td><td>elige los temas de la unidad y 5 o 10 preguntas; las generadas cambian de números en cada tanda.</td></tr>
+      <tr><td><b>Si</b> la práctica sigue en el laboratorio…</td><td>imprime la hoja con los reactivos que tengas y, con las fotos, mide en el Bloque 2.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para planear, no recetas: el ritmo y el nivel del grupo mandan.</p>
+  </div>
+
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Cuando algo sale mal</div>
+    <p><b>No aparecen los controles del entrecruzamiento.</b> Sólo existen en la meiosis: cambia la <span class="ui">División</span>. <b>La autoevaluación dice «Elige al menos un tema.».</b> Apagaste todos los temas; enciende alguno. <b>El glosario dice «Ningún término coincide.».</b> Borra o acorta la búsqueda. <b>«Imprimir la hoja» no abre el diálogo.</b> Si el navegador no deja imprimir desde la página, la app abre la hoja en una pestaña nueva para imprimirla desde ahí; si tampoco, usa <span class="ui">Descargar (HTML)</span>. <b>Perdí mis respuestas del ejercicio.</b> <span class="ui">Otra metafase</span> y el menú <span class="ui">Pares</span> inventan un cariotipo nuevo y borran las respuestas.</p>
+  </div>
+</section>
+
+</body>
+</html>
