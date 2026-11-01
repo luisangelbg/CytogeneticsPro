@@ -136,11 +136,11 @@
   <p>Los controles <span class="ui">Brillo</span> (de 40 a 200) y <span class="ui">Contraste</span> (de 40 a 300), en 100 por omisión, ayudan a distinguir los extremos y el centrómero en una preparación pálida u oscura. Se guardan con cada célula, se aplican también a la imagen anotada y no tocan ninguna medida ni la imagen original.</p>
 
   <h3>Contar</h3>
-  <p>Con <span class="ui">Contar</span>, un clic sobre cada cromosoma deja una marca amarilla con su número de orden, y el panel lleva la cuenta: «<b>20</b> cromosomas contados en esta célula». Para quitar una marca se usa <span class="ui">Borrar</span>. Contar no exige trazar: es la manera rápida de registrar el 2n de muchas células, aunque sólo vayas a medir algunas.</p>
+  <p>Con <span class="ui">Contar</span>, un clic sobre cada cromosoma deja una marca amarilla con su número de orden, y el panel lleva la cuenta: «<b>20</b> cromosomas contados en esta célula». Para quitar una marca se usa <span class="ui">Borrar</span>. Se puede contar antes o después de trazar, y contar no exige trazar: es la manera rápida de registrar el 2n de muchas células, aunque sólo vayas a medir algunas.</p>
 
   <figure class="w60">
     <div class="marco"><img src="../img/b2-contar.png" alt="La herramienta Contar con veinte marcas amarillas numeradas sobre los cromosomas de la metafase y el panel con 20 cromosomas contados"></div>
-    <figcaption><b>Figura 2.5.</b> <span class="ui">Contar</span>, como se usa antes de trazar. La célula 1 del ejemplo no trae marcas de conteo: para esta figura se quitaron sus trazos y se puso una marca en cada cromosoma, como lo haría quien cuenta con clics. Con al menos una marca se activa <span class="ui">Llevar el conteo a la ploidía (Bloque 6)</span>.</figcaption>
+    <figcaption><b>Figura 2.5.</b> <span class="ui">Contar</span> sobre la célula 1. El ejemplo no trae marcas de conteo: para esta figura se puso una junto a cada trazo, como lo haría quien cuenta con clics. Las marcas se dibujan encima de los trazos, así que su número siempre se lee. Con al menos una marca se activa <span class="ui">Llevar el conteo a la ploidía (Bloque 6)</span>.</figcaption>
   </figure>
   <p><span class="ui">Llevar el conteo a la ploidía (Bloque 6)</span> escribe el conteo en la tabla de conteos del Bloque 6, con la accesión y el nombre de la célula; si esa célula ya tenía un renglón, lo reemplaza. La app lo confirma, por ejemplo: «Conteo enviado al Bloque 6: 2n = 20 en «Célula 1 (imagen)».» Allí se calcula la moda de cada accesión y su nivel de ploidía (capítulo 6).</p>
 
@@ -229,19 +229,19 @@
   <h3>Pegar medidas</h3>
   <p>Si ya tienes las medidas en una hoja de cálculo o en la tabla de un artículo, <span class="ui">Pegar medidas</span> las lee de una vez. Una fila por cromosoma, en micras, con tabulador, punto y coma o coma como separador:</p>
   <ul class="lista">
-    <li><b>Con encabezados,</b> la app reconoce las columnas por su nombre: accesión (o muestra, población, taxón), célula (o placa, metafase), cromosoma, p (o corto), q (o largo), satélite y brazo del satélite. Basta con que estén p y q.</li>
+    <li><b>Con encabezados,</b> la app reconoce las columnas por su nombre: accesión (o muestra, población), taxón (o especie), célula (o placa, metafase), cromosoma, p (o corto), q (o largo), satélite, brazo del satélite y unidad. Basta con que estén p y q.</li>
     <li><b>Sin encabezados,</b> decide por el número de columnas: <b>p q</b> (todo en una célula nueva), <b>cromosoma p q</b>, <b>célula cromosoma p q</b> o <b>accesión célula cromosoma p q [satélite] [brazo]</b>.</li>
   </ul>
-  <p>Las filas sin un número válido para p (cero o más) y para q (mayor que cero) se saltan, y el mensaje dice cuáles. Las accesiones se buscan por su nombre; las que no existen se crean.</p>
+  <p>Las filas sin un número válido para p (cero o más) y para q (mayor que cero) se saltan, y el mensaje dice cuáles. Las accesiones se buscan por su nombre y las que no existen se crean, con su taxón si la tabla lo trae; una tabla con taxón y sin columna de accesión hace una accesión por taxón. Las filas que no nombran accesión van a la accesión elegida, que sólo se crea si hace falta.</p>
 
-  <figure class="w70">
+  <figure class="w60">
     <div class="marco"><img src="../img/b2-pegar.png" alt="El recuadro Pegar medidas con el archivo CSV de la célula 2 y el mensaje de que se leyeron 20 cromosomas"></div>
-    <figcaption><b>Figura 2.10.</b> <span class="ui">Pegar medidas</span> en un proyecto nuevo, con el CSV que la propia app escribió para la célula 2 del maíz de ejemplo (<span class="ui">Esta célula (CSV)</span>). Después de <span class="ui">Leer las medidas</span>, la app responde: «Se leyeron 20 cromosomas en 1 células y 1 accesiones nuevas.»</figcaption>
+    <figcaption><b>Figura 2.10.</b> <span class="ui">Pegar medidas</span> en un proyecto nuevo, con el CSV que la propia app escribió para la célula 2 del maíz de ejemplo (<span class="ui">Esta célula (CSV)</span>). Después de <span class="ui">Leer las medidas</span>, la app responde: «Se leyeron 20 cromosomas en 1 célula y 1 accesión nueva.» La accesión «Maíz criollo · Texcoco» se crea con su taxón, <i>Zea mays</i>.</figcaption>
   </figure>
 
   <div class="caja nota">
-    <div class="caja-t"><span class="ico">i</span>Lo que hay que revisar después de pegar</div>
-    <p>Si pegas en un proyecto vacío filas que traen el nombre de su accesión, la app deja además una «Accesión 1» vacía, que se quita con <span class="ui">Borrar la accesión</span>. Y de las columnas del CSV que ella misma exporta lee la accesión, la célula, el cromosoma, p, q y el satélite, pero no el taxón ni la unidad: escribe el taxón en su campo de <span class="ui">Accesiones y células</span>, y no pegues medidas en píxeles, porque se tomarán como micras.</p>
+    <div class="caja-t"><span class="ico">i</span>El CSV de la app vuelve a entrar entero</div>
+    <p>Lo que exportan <span class="ui">Esta célula (CSV)</span> y <span class="ui">Todas las mediciones (CSV)</span> se puede pegar de nuevo tal cual, en este proyecto o en otro: la app lee la accesión, el taxón, la célula, el cromosoma, p, q, el satélite y su brazo, y la unidad. Si una célula se exportó en píxeles (sin calibrar), sigue en píxeles al volver, y el mensaje lo dice: «Una célula viene en píxeles (sin calibrar).»</p>
   </div>
 
   <!-- 2.7 -->
@@ -253,10 +253,10 @@
     <figcaption><b>Figura 2.11.</b> <span class="ui">Resumen de las mediciones</span> del maíz de ejemplo: 1 accesión, 5 células (1 con imagen), 100 cromosomas medidos y 1 / 1 células calibradas; la moda es de 20 cromosomas por célula.</figcaption>
   </figure>
 
-  <p>Las cuatro cifras son <span class="ui">Accesiones</span>, <span class="ui">Células</span> (con cuántas tienen imagen), <span class="ui">Cromosomas medidos</span> (los completos: un trazo sin centrómero no cuenta) y <span class="ui">Células calibradas</span> entre las que tienen imagen, que se marca como advertencia si falta alguna. La tabla da, por accesión, su taxón, sus células, cuántas tienen medidas, cuántos cromosomas y la moda de cromosomas medidos por célula. Debajo pueden aparecer dos avisos:</p>
+  <p>Las cuatro cifras son <span class="ui">Accesiones</span>, <span class="ui">Células</span> (con cuántas tienen imagen), <span class="ui">Cromosomas medidos</span> (los completos: un trazo sin centrómero no cuenta) y <span class="ui">Células calibradas</span> entre las que tienen imagen, que añade cuántas células sin imagen están en píxeles y se marca como advertencia si falta calibrar alguna. La tabla da, por accesión, su taxón, sus células, cuántas tienen medidas, cuántos cromosomas y la moda de cromosomas medidos por célula. Debajo pueden aparecer dos avisos:</p>
   <ul class="lista">
     <li>Si no todas las células de una accesión tienen el mismo número de cromosomas medidos: revisa que no falte ni sobre ninguno, porque el Bloque 3 agrupa lo que haya en cada célula.</li>
-    <li>Si una accesión tiene células con imagen sin calibrar: sus medidas están en píxeles y no deben mezclarse con las demás.</li>
+    <li>Si una accesión tiene células sin calibrar (con imagen sin calibrar, o capturadas o pegadas en píxeles): «… tiene una célula sin calibrar: sus medidas están en píxeles.», con la sugerencia de calibrar con la barra de escala o capturar las medidas en micras.</li>
   </ul>
 
   <div class="caja regla">
