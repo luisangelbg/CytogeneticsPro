@@ -111,7 +111,7 @@
     <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · la reducción del genoma</div>
     <p>Con la población diploide como referencia, la tetraploide tiene 1.961 veces su 2C y la hexaploide 2.919 veces: niveles estimados de 3.92x y 5.84x, frente a 4x y 6x por conteo. El cociente queda algo por debajo del entero, y por eso el 1Cx baja con el nivel (792, 777 y 771 Mpb). La nota de la tabla lo explica: un poliploide reciente suele tener algo menos del doble, porque pierde ADN después de duplicarse. Una diferencia así no cambia el nivel; una de media unidad (3.5x) sí pediría contar.</p>
   </div>
-  <p>La app revisa cada corrida y avisa en dos casos: si algún pico tiene un <b>CV mayor de 5&nbsp;%</b> (núcleos dañados o restos: hay que repetir la preparación) y si la <b>razón está entre 0.85 y 1.18</b>, cuando la muestra y el patrón casi coinciden y sus picos se enciman (hay que elegir un patrón más distinto).</p>
+  <p>La app revisa cada corrida y avisa en tres casos: si algún pico tiene un <b>CV mayor de 5&nbsp;%</b> (núcleos dañados o restos: hay que repetir la preparación); si la <b>razón está entre 0.85 y 1.18</b>, cuando la muestra y el patrón casi coinciden y sus picos se enciman (hay que elegir un patrón más distinto), y si la muestra y el patrón <b>difieren más de tres veces</b> en su contenido de ADN (razón mayor de 3 o menor de 1/3): tan lejos, la respuesta del citómetro puede dejar de ser lineal, y conviene un patrón de tamaño más cercano al de la muestra (Doležel et al. 2007). Ninguna corrida del ejemplo dispara estos avisos.</p>
 
   <!-- 6.4 -->
   <h2 id="s6-4"><span class="num">6.4</span>Histograma del citómetro</h2>
@@ -123,13 +123,13 @@
   <p>Debajo se eligen <span class="ui">Pico G0/G1 de la muestra</span>, <span class="ui">Pico G0/G1 del patrón</span> y <span class="ui">Patrón</span>. Por omisión, el patrón es la primera compuerta (la de menor fluorescencia), la muestra la segunda y el patrón interno el tomate. La línea de abajo da la razón y el 2C al momento; <span class="ui">Agregar a la citometría</span> escribe una fila nueva en la tabla de la sección 6.3, con los dos picos y sus CV, en la accesión del histograma.</p>
   <figure class="w70">
     <div class="marco"><img src="../img/b6-histograma.png" alt="Histograma del tetraploide con dos compuertas, su tabla y la elección de picos">
-      <span class="marca" style="left:11%;top:15.9%">1</span>
-      <span class="marca" style="left:41.7%;top:15.9%">2</span>
-      <span class="marca" style="left:18%;top:38.8%">3</span>
-      <span class="marca" style="left:2.3%;top:71.6%">4</span>
-      <span class="marca" style="left:2.2%;top:88.7%">5</span>
-      <span class="marca" style="left:72.7%;top:89.3%">6</span>
-      <span class="marca" style="left:2.2%;top:93.6%">7</span>
+      <span class="marca" style="left:11%;top:14.8%">1</span>
+      <span class="marca" style="left:41.7%;top:14.8%">2</span>
+      <span class="marca" style="left:18%;top:36.2%">3</span>
+      <span class="marca" style="left:2.3%;top:66.7%">4</span>
+      <span class="marca" style="left:2.2%;top:82.6%">5</span>
+      <span class="marca" style="left:2.2%;top:90.1%">6</span>
+      <span class="marca" style="left:2.2%;top:94%">7</span>
     </div>
     <figcaption><b>Figura 6.6.</b> El histograma de ejemplo, de 1024 canales y 9010 núcleos: un tetraploide con patrón de tomate. Los restos celulares ocupan los canales bajos; P1 es el pico G0/G1 del patrón y P2 el de la muestra.</figcaption>
   </figure>
@@ -200,6 +200,7 @@
       <tr><td><b>Si</b> la moda no es múltiplo de x</td><td><b>entonces</b> piensa en aneuploidía, cromosomas B o un x distinto (disploidía); revisa también el x.</td></tr>
       <tr><td><b>Si</b> un pico tiene CV &gt; 5&nbsp;%</td><td><b>entonces</b> repite la preparación; un pico confiable tiene CV menor de 3–5&nbsp;%.</td></tr>
       <tr><td><b>Si</b> la razón muestra/patrón está entre 0.85 y 1.18</td><td><b>entonces</b> cambia de patrón: los picos se enciman.</td></tr>
+      <tr><td><b>Si</b> la razón es mayor de 3 o menor de 1/3</td><td><b>entonces</b> elige un patrón más cercano: la respuesta del citómetro puede dejar de ser lineal.</td></tr>
       <tr><td><b>Si</b> el nivel estimado por citometría difiere del conteo en menos de media unidad</td><td><b>entonces</b> es la reducción del genoma de los poliploides; si difiere más, cuenta cromosomas.</td></tr>
       <tr><td><b>Si</b> un tratamiento baja el índice mitótico a menos de la mitad del testigo</td><td><b>entonces</b> es una señal fuerte de citotoxicidad, y la app lo avisa.</td></tr>
     </tbody></table>
