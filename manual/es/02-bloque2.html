@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · Manual de usuario · Capítulo 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-2" data-pestana="2" data-orden="2" style="--acento: var(--b2)">
+  <div class="cap-apertura">
+    <div class="cap-num">2</div>
+    <div class="cap-etiqueta">Capítulo dos · Bloque 2</div>
+    <h1 data-corto="Imágenes y medición">Imágenes y medición</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Aquí empieza el trabajo con datos: «calibrar, contar, trazar cada cromosoma y medir sus brazos». El bloque abre las fotomicrografías de tus metafases, las convierte a micras con su barra de escala, cuenta los cromosomas con marcas y mide cada brazo a lo largo de un trazo que sigue la curvatura del cromosoma. Si ya tienes las medidas, se capturan a mano o se pegan de una hoja de cálculo. Todo lo que se mide aquí lo usan el cariotipo y los bloques que siguen.</p>
+    <div class="cap-franja"><span class="k2"></span><span class="k2"></span><span class="k3"></span><span class="k6"></span><span class="k10"></span></div>
+    <ul class="cap-contenido">
+      <li><b>2.1</b>Abrir imágenes, medidas o un proyecto</li>
+      <li><b>2.2</b>Accesiones y células</li>
+      <li><b>2.3</b>Calibrar y contar</li>
+      <li><b>2.4</b>Trazar, centrómero y satélite</li>
+      <li><b>2.5</b>Editar, borrar, deshacer y la imagen anotada</li>
+      <li><b>2.6</b>Mediciones de la célula y medidas pegadas</li>
+      <li><b>2.7</b>Resumen de las mediciones</li>
+    </ul>
+  </div>
+
+  <p>Las figuras de este capítulo usan el ejemplo del maíz (<span class="ruta">Bloque 1<span class="sep">›</span>Ejemplos incluidos</span>, o el mosaico <span class="ui">Ejemplo: maíz simulado</span> del propio bloque): una accesión, «Maíz criollo · Texcoco», con cinco células de 20 cromosomas. La primera trae una metafase dibujada por la app con sus veinte trazos ya hechos; las otras cuatro, medidas capturadas a mano. Recuerda que son datos simulados: es «el maíz de ejemplo», no el maíz.</p>
+
+  <!-- 2.1 -->
+  <h2 id="s2-1"><span class="num">2.1</span>Abrir imágenes, medidas o un proyecto</h2>
+  <p class="lead">La primera tarjeta es la puerta de entrada. Tiene cuatro mosaicos, uno por cada manera de empezar, y dos botones para guardar el trabajo o empezar de nuevo.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b2-abrir.png" alt="La tarjeta Abrir imágenes, medidas o un proyecto con sus cuatro mosaicos y los botones de guardar y proyecto nuevo"></div>
+    <figcaption><b>Figura 2.1.</b> <span class="ui">Abrir imágenes, medidas o un proyecto</span>. El primer mosaico, con borde punteado, también recibe archivos arrastrados desde el explorador.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <thead><tr><th style="width:1.9in">Mosaico o botón</th><th>Qué hace</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Abrir imágenes o un proyecto</span></td><td>Haz clic o suelta aquí fotomicrografías <code>.png</code> o <code>.jpg</code> (varias a la vez) o un proyecto <code>.json</code>. Cada imagen abre una célula nueva en la accesión elegida en la tarjeta siguiente, con el nombre del archivo sin su extensión; si todavía no hay accesiones, la app crea «Accesión 1». Al terminar, pasa sola a la herramienta <span class="ui">Calibrar</span> y lo dice: «Empieza por calibrar con la barra de escala».</td></tr>
+      <tr><td><span class="ui">Célula sin imagen</span></td><td>Crea una célula con cuatro renglones vacíos en la tabla de mediciones, para escribir a mano la longitud de los brazos (sección 2.6).</td></tr>
+      <tr><td><span class="ui">Pegar medidas</span></td><td>Abre (o cierra) un recuadro donde se pegan columnas copiadas de una hoja de cálculo o de un artículo (sección 2.6).</td></tr>
+      <tr><td><span class="ui">Ejemplo: maíz simulado</span></td><td>Abre el ejemplo del maíz. Reemplaza el proyecto, y si ya hay datos lo pregunta antes.</td></tr>
+      <tr><td><span class="ui">Guardar el proyecto (.json)</span></td><td>Guarda todo el proyecto —accesiones, células, imágenes, trazos y lo de los demás bloques— en un solo archivo. Es lo mismo que <code>Ctrl + S</code>.</td></tr>
+      <tr><td><span class="ui">Proyecto nuevo</span></td><td>Deja la app vacía. Si hay datos, pregunta antes: «¿Empezar un proyecto nuevo? Lo que no hayas guardado se perderá.»</td></tr>
+    </tbody>
+  </table>
+  <p>Mientras no haya células, en lugar de las tarjetas siguientes aparece un recuadro, <span class="ui">Todavía no hay células</span>, que recuerda las cuatro maneras de empezar.</p>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Qué abre y qué no</div>
+    <p>Sólo se abren imágenes PNG o JPG y proyectos <code>.json</code>; con cualquier otro archivo la app avisa. Una imagen de más de 25 MB se abre, pero con un aviso: el proyecto la guarda dentro y se vuelve pesado. Recorta cada fotografía a la metafase antes de abrirla. Si entre los archivos que sueltas hay un <code>.json</code>, se abre sólo el proyecto.</p>
+  </div>
+
+  <!-- 2.2 -->
+  <h2 id="s2-2"><span class="num">2.2</span>Accesiones y células</h2>
+  <p>Una <b>accesión</b> es una muestra: una población, una colecta, una variedad. Sus <b>células</b> son las metafases que mediste de ella, y el Bloque 3 las promedia para obtener su cariotipo. Un proyecto puede tener varias accesiones, cada una con sus células.</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/b2-accesiones.png" alt="La tarjeta Accesiones y células con los datos de la accesión del maíz y sus cinco células"></div>
+    <figcaption><b>Figura 2.2.</b> <span class="ui">Accesiones y células</span> con el maíz de ejemplo. La célula 1 (con borde de color) es la elegida: tiene imagen, 20 cromosomas medidos y está calibrada (µm); las otras cuatro no tienen imagen (✎).</figcaption>
+  </figure>
+
+  <ul class="lista">
+    <li><span class="ui">Accesión</span> elige la accesión con la que trabajas; <span class="ui">+ Accesión</span> crea otra (con el nombre «Accesión 2», «Accesión 3»…, listo para cambiarlo) y <span class="ui">Borrar la accesión</span> la quita con todas sus células, después de preguntar.</li>
+    <li>Los seis campos describen la accesión: <span class="ui">Nombre</span>, <span class="ui">Taxón</span>, <span class="ui">Localidad</span>, <span class="ui">Latitud</span> y <span class="ui">Longitud</span> (en grados decimales, con signo: el maíz de ejemplo está en 19.49 y −98.88) y <span class="ui">Número básico x</span>. Las coordenadas sirven para el mapa de citotipos del Bloque 8; el número básico, para escribir la fórmula (2n = 2x = 20) y estimar la ploidía (Bloques 3 y 6).</li>
+    <li><span class="ui">Células de esta accesión</span> muestra un mosaico por célula, con la miniatura de su imagen (o ✎ si no tiene) y una línea de estado: cuántos cromosomas están medidos, cuántos trazos están <i>incompletos</i> (sin centrómero), si la imagen está en µm o <i>sin calibrar</i> y, si se contó, «2n» con el número de marcas. Un clic elige la célula; el último mosaico, <span class="ui">Célula sin imagen</span>, crea una vacía.</li>
+    <li>Debajo, con la célula elegida, <span class="ui">Nombre de la célula</span> la renombra; <span class="ui">Poner o cambiar su imagen</span> le asigna una fotomicrografía (útil para una célula capturada a mano), y <span class="ui">Borrar la célula</span> la quita con sus mediciones, preguntando antes si tenía alguna.</li>
+  </ul>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Cada cambio se propaga</div>
+    <p>Cualquier cambio en las medidas, en la calibración o en las células marca el cariotipo de esa accesión para volver a calcularse: el Bloque 3 y el 4 lo rehacen la siguiente vez que los abres. No hay que avisarles nada.</p>
+  </div>
+
+  <!-- 2.3 -->
+  <h2 id="s2-3"><span class="num">2.3</span>Calibrar y contar</h2>
+  <p>Cuando la célula elegida tiene imagen aparece la tarjeta <span class="ui">Medición sobre la imagen</span>: arriba, la barra de herramientas; a la izquierda, el lienzo con la fotomicrografía; a la derecha, un panel con la ayuda de la herramienta activa y los datos de la célula.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b2-editor.png" alt="El editor de medición con la metafase del maíz, la barra de herramientas y el panel lateral, con sus partes numeradas">
+      <span class="marca" style="left:2.9%;top:9.8%">1</span>
+      <span class="marca" style="left:72.9%;top:9.8%">2</span>
+      <span class="marca" style="left:2.9%;top:14.8%">3</span>
+      <span class="marca" style="left:24.4%;top:14.8%">4</span>
+      <span class="marca" style="left:5.2%;top:37.6%">5</span>
+      <span class="marca" style="left:65.1%;top:22.1%">6</span>
+      <span class="marca" style="left:65.1%;top:39.2%">7</span>
+      <span class="marca" style="left:65.1%;top:60.1%">8</span>
+      <span class="marca" style="left:65.1%;top:72.4%">9</span>
+      <span class="marca" style="left:65.1%;top:86%">10</span>
+    </div>
+    <figcaption><b>Figura 2.3.</b> <span class="ui">Medición sobre la imagen</span> con la célula 1 del maíz de ejemplo: veinte cromosomas trazados, cada uno con su número y su centrómero (círculo blanco); los rombos naranjas son los satélites de los cromosomas 11 y 12, y la línea verde, la calibración.</figcaption>
+  </figure>
+  <ul class="leyenda-marcas">
+    <li><span class="n">1</span><b>Las ocho herramientas,</b> cada una con su tecla: <span class="ui">Mover</span> (<code>V</code>), <span class="ui">Calibrar</span> (<code>C</code>), <span class="ui">Contar</span> (<code>N</code>), <span class="ui">Trazar</span> (<code>T</code>), <span class="ui">Centrómero</span> (<code>M</code>), <span class="ui">Satélite</span> (<code>S</code>), <span class="ui">Editar</span> (<code>E</code>) y <span class="ui">Borrar</span> (<code>B</code>). La activa va rellena de color.</li>
+    <li><span class="n">2</span><b>La vista:</b> <span class="ui">−</span> y <span class="ui">+</span> alejan y acercan; <span class="ui">Ajustar (0)</span> devuelve la imagen entera al lienzo.</li>
+    <li><span class="n">3</span><b><span class="ui">↶ Deshacer</span> y <span class="ui">↷ Rehacer</span>,</b> también con <code>Ctrl + Z</code> y <code>Ctrl + Y</code> (sección 2.5).</li>
+    <li><span class="n">4</span><b><span class="ui">Imagen anotada (PNG)</span>:</b> la fotografía con todos los trazos, a su resolución original (sección 2.5).</li>
+    <li><span class="n">5</span><b>El lienzo.</b> Las teclas de las herramientas funcionan cuando el lienzo tiene el foco (haz clic en él).</li>
+    <li><span class="n">6</span><b>La ayuda</b> de la herramienta activa, que cambia con ella.</li>
+    <li><span class="n">7</span><b><span class="ui">Calibración</span>:</b> la longitud de la barra de escala y la escala que resulta.</li>
+    <li><span class="n">8</span><b><span class="ui">Imagen</span>:</b> <span class="ui">Brillo</span> y <span class="ui">Contraste</span>.</li>
+    <li><span class="n">9</span><b><span class="ui">Conteo</span>:</b> las marcas de la célula y el botón que las lleva al Bloque 6.</li>
+    <li><span class="n">10</span><b><span class="ui">Cromosoma elegido</span>:</b> las medidas del trazo elegido con <span class="ui">Editar</span> (sección 2.5).</li>
+  </ul>
+
+  <h3>Moverse por la imagen</h3>
+  <p>Con <span class="ui">Mover</span> se arrastra la imagen; la rueda del ratón acerca y aleja alrededor del puntero, <code>+</code> y <code>−</code> lo hacen alrededor del centro, <code>0</code> ajusta la imagen a la ventana y las flechas la desplazan. Con cualquier otra herramienta también se mueve arrastrando con el botón derecho o con la barra espaciadora oprimida, así que no hace falta cambiar de herramienta a cada rato. Acercar no cambia ninguna medida: los trazos se guardan en píxeles de la imagen original.</p>
+
+  <h3>Calibrar con la barra de escala</h3>
+  <p>Una longitud en píxeles no dice nada por sí sola: depende del objetivo, de la cámara y de cómo se guardó la imagen. Por eso cada célula se calibra con la barra de micras de su propia fotografía. Con <span class="ui">Calibrar</span>, arrastra una línea de un extremo al otro de la barra y escribe su longitud en <span class="ui">Longitud de la barra de escala (µm)</span> (10 por omisión). Desde ese momento todas las medidas de la célula están en micras, y el panel da la escala: en la célula 1 del maíz de ejemplo, «Barra: 135 px = 10 µm · <b>0.0741 µm por píxel</b>».</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/b2-calibrar.png" alt="La herramienta Calibrar con la vista acercada a la barra de 10 micras y la línea verde de calibración encima"></div>
+    <figcaption><b>Figura 2.4.</b> <span class="ui">Calibrar</span>, con la vista acercada a la barra de 10 µm de la célula 1. La línea verde de la calibración va de un extremo al otro de la barra negra: 135 px.</figcaption>
+  </figure>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · la escala del maíz</div>
+    <p>La barra mide 10 µm y la línea trazada sobre ella, 135 píxeles: 10 / 135 = 0.0741 µm por píxel. Un brazo que mide 50 píxeles a lo largo de su trazo mide entonces 50 × 0.0741 = 3.70 µm. Si cambias la longitud de la barra después de calibrar, todas las medidas de la célula se recalculan con la nueva escala, y el cambio se puede deshacer.</p>
+  </div>
+  <p>Mientras una célula con imagen no se calibra, sus medidas salen en píxeles: el panel dice «Sin calibrar: las medidas salen en píxeles. Usa la herramienta Calibrar.», su mosaico dice <i>sin calibrar</i> y el resumen lo advierte (sección 2.7). Una línea de menos de seis píxeles en pantalla no cuenta como calibración, para que un clic accidental no la cambie.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Una calibración por célula</div>
+    <p>Calibra cada célula aunque todas vengan del mismo microscopio: si una fotografía se recortó o se guardó a otro tamaño, su escala cambia. Las células sin calibrar no deben mezclarse con las calibradas: el Bloque 3 promediaría píxeles con micras.</p>
+  </div>
+
+  <h3>Brillo y contraste</h3>
+  <p>Los controles <span class="ui">Brillo</span> (de 40 a 200) y <span class="ui">Contraste</span> (de 40 a 300), en 100 por omisión, ayudan a distinguir los extremos y el centrómero en una preparación pálida u oscura. Se guardan con cada célula, se aplican también a la imagen anotada y no tocan ninguna medida ni la imagen original.</p>
+
+  <h3>Contar</h3>
+  <p>Con <span class="ui">Contar</span>, un clic sobre cada cromosoma deja una marca amarilla con su número de orden, y el panel lleva la cuenta: «<b>20</b> cromosomas contados en esta célula». Para quitar una marca se usa <span class="ui">Borrar</span>. Contar no exige trazar: es la manera rápida de registrar el 2n de muchas células, aunque sólo vayas a medir algunas.</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/b2-contar.png" alt="La herramienta Contar con veinte marcas amarillas numeradas sobre los cromosomas de la metafase y el panel con 20 cromosomas contados"></div>
+    <figcaption><b>Figura 2.5.</b> <span class="ui">Contar</span>, como se usa antes de trazar. La célula 1 del ejemplo no trae marcas de conteo: para esta figura se quitaron sus trazos y se puso una marca en cada cromosoma, como lo haría quien cuenta con clics. Con al menos una marca se activa <span class="ui">Llevar el conteo a la ploidía (Bloque 6)</span>.</figcaption>
+  </figure>
+  <p><span class="ui">Llevar el conteo a la ploidía (Bloque 6)</span> escribe el conteo en la tabla de conteos del Bloque 6, con la accesión y el nombre de la célula; si esa célula ya tenía un renglón, lo reemplaza. La app lo confirma, por ejemplo: «Conteo enviado al Bloque 6: 2n = 20 en «Célula 1 (imagen)».» Allí se calcula la moda de cada accesión y su nivel de ploidía (capítulo 6).</p>
+
+  <!-- 2.4 -->
+  <h2 id="s2-4"><span class="num">2.4</span>Trazar, centrómero y satélite</h2>
+  <p class="lead">Un cromosoma se mide en tres pasos: se traza su eje de un extremo al otro, se marca su centrómero y, si lo tiene, su constricción secundaria. Las tres cosas se hacen sobre la imagen, y la app mide a lo largo del trazo.</p>
+
+  <h3>Trazar</h3>
+  <p>Con <span class="ui">Trazar</span>, haz clic a lo largo del cromosoma, de un telómero al otro, siguiendo su curvatura; cada clic agrega un punto. También puedes mantener el botón oprimido y trazar a mano alzada: la app toma un punto cada seis píxeles de pantalla. Para terminar, doble clic o <code>Intro</code>; <code>Retroceso</code> quita el último punto y <code>Esc</code> cancela el trazo. Mientras trazas, la línea va en rosa y sigue al puntero.</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/b2-trazar.png" alt="Un trazo rosa a medio hacer a lo largo de un cromosoma acercado, con sus puntos marcados"></div>
+    <figcaption><b>Figura 2.6.</b> Un trazo a medio hacer. Para esta figura se borró el trazo del cromosoma 1 de la célula 1 y se volvió a empezar: los cuadritos son los clics, y el último tramo sigue al puntero. Conviene acercar la vista para que los puntos caigan sobre el eje del cromosoma, entre sus dos cromátidas.</figcaption>
+  </figure>
+
+  <p>Al terminar, el cromosoma recibe el primer número libre de la célula (1, 2, 3…) y la app pasa sola a <span class="ui">Centrómero</span>, porque un trazo sin centrómero todavía no da brazos: su número se ve en naranja, su mosaico lo cuenta como <i>incompleto</i> y la tabla de mediciones dice <span class="ui">sin centrómero</span>. Un trazo de menos de tres píxeles se descarta.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · medir a lo largo de la curvatura</div>
+    <p>El trazo es una polilínea: una cadena de segmentos rectos. Su longitud es la suma de las longitudes de sus segmentos, y con suficientes puntos se acerca a la del eje curvo del cromosoma. Una recta entre los dos extremos de un cromosoma doblado lo acortaría; la polilínea mide lo que mediría el cromosoma estirado. Las posiciones del centrómero y del satélite se guardan como distancias a lo largo de la polilínea, desde su primer punto.</p>
+  </div>
+
+  <h3>Centrómero</h3>
+  <p>Con <span class="ui">Centrómero</span>, haz clic sobre el trazo donde está la constricción primaria. No hace falta atinar a la línea: la app lleva el clic al punto más cercano del trazo (del cromosoma elegido, o del que esté más cerca del clic) y mide los dos brazos a lo largo de la curvatura. El brazo más corto es p y el más largo, q. Un nuevo clic cambia la posición del centrómero. El centrómero se dibuja como un círculo blanco.</p>
+
+  <h3>Satélite</h3>
+  <p>Algunos cromosomas tienen una constricción secundaria, casi siempre en el brazo corto, donde está la región organizadora del nucléolo; el trozo de más allá es el <b>satélite</b> (Battaglia, 1955). Con <span class="ui">Satélite</span>, haz clic sobre el trazo en la constricción secundaria: lo que queda hasta el extremo de ese brazo es el satélite, y se dibuja con un rombo naranja. Primero hay que marcar el centrómero; si no, la app lo recuerda: «Primero marca el centrómero de este cromosoma.»</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/b2-elegido.png" alt="El cromosoma 11 acercado y elegido, con su centrómero, su satélite y sus medidas en el panel"></div>
+    <figcaption><b>Figura 2.7.</b> El cromosoma 11 de la célula 1, elegido con <span class="ui">Editar</span>: su trazo en rosa con sus puntos, el centrómero (círculo) y la constricción secundaria (rombo) del brazo corto. Abajo a la izquierda se ve su nudo heterocromático. El panel <span class="ui">Cromosoma 11</span> da sus medidas.</figcaption>
+  </figure>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo resuelto · el cromosoma 11 del maíz de ejemplo</div>
+    <p>El panel dice p = 1.08 µm, q = 3.74 µm, satélite = 0.46 µm (en p) y total = 5.28 µm. El brazo p se da sin el satélite, que va aparte. Para la clase, en cambio, la app suma el satélite a su brazo, como lo hace por omisión el Bloque 3: el brazo corto completo mide 1.08 + 0.46 = 1.54 µm, así que IC = 100 × 1.54 / 5.28 = 29.2 y r = 3.74 / 1.54 = 2.42, un submetacéntrico (sm). Es uno de los dos homólogos que en el Bloque 3 forman el par 6, el del satélite.</p>
+  </div>
+  <p>Al marcar un centrómero o un satélite, la app anuncia las medidas para los lectores de pantalla («Cromosoma 11: p 1.08, q 3.74, satélite 0.46»), de modo que también se puede trabajar con ellos.</p>
+
+  <!-- 2.5 -->
+  <h2 id="s2-5"><span class="num">2.5</span>Editar, borrar, deshacer y la imagen anotada</h2>
+  <h3>Editar</h3>
+  <p>Con <span class="ui">Editar</span>, un clic sobre un trazo lo elige: se dibuja en rosa, con sus puntos a la vista, y su renglón se resalta en la tabla. Ya elegido, puedes arrastrar cualquiera de sus puntos para corregir el trazo, y arrastrar el centrómero o el satélite a lo largo de la línea. <code>Supr</code> borra el trazo elegido. Un clic en un lugar vacío deja de elegirlo y, si arrastras, mueve la imagen.</p>
+  <p>El panel <span class="ui">Cromosoma elegido</span> cambia entonces a <span class="ui">Cromosoma</span> con su número (figura 2.7) y da p, q, el satélite y su brazo, el total, IC, r y la clase con el esquema elegido en el Bloque 3. Si al trazo le falta el centrómero, da sólo su longitud y lo dice. Dos botones actúan sobre él: <span class="ui">Quitar el satélite</span> (sólo si lo tiene) y <span class="ui">Borrar</span>.</p>
+
+  <h3>Borrar</h3>
+  <p>Con <span class="ui">Borrar</span>, un clic sobre una marca de conteo la quita; si no hay marca cerca, quita el trazo que está bajo el clic. Las marcas se renumeran solas. Lo borrado se recupera con <span class="ui">↶ Deshacer</span>.</p>
+
+  <h3>Deshacer y rehacer</h3>
+  <p><span class="ui">↶ Deshacer</span> (<code>Ctrl + Z</code>) y <span class="ui">↷ Rehacer</span> (<code>Ctrl + Y</code> o <code>Ctrl + Mayús + Z</code>) recorren los últimos cambios de la célula: trazos, centrómeros, satélites, puntos movidos, marcas de conteo, calibración y borrados, hasta 120 pasos atrás. Con un trazo a medio hacer, <span class="ui">↶ Deshacer</span> lo descarta. El historial es de la célula abierta: al elegir otra célula empieza uno nuevo.</p>
+
+  <h3>La imagen anotada</h3>
+  <p><span class="ui">Imagen anotada (PNG)</span> descarga la fotomicrografía a su resolución original, con el brillo y el contraste que elegiste y con todo lo que dibujaste encima: la línea de calibración, las marcas de conteo, los trazos con su número, los centrómeros y los satélites. El nombre del archivo se forma con la accesión y la célula y termina en <code>_anotada.png</code>. Es la figura que conviene guardar con los datos crudos, porque muestra exactamente qué se midió.</p>
+
+  <!-- 2.6 -->
+  <h2 id="s2-6"><span class="num">2.6</span>Mediciones de la célula y medidas pegadas</h2>
+  <p>La tarjeta <span class="ui">Mediciones de la célula</span> da un renglón por cromosoma de la célula elegida, con imagen o sin ella.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b2-tabla.png" alt="La tabla de mediciones de la célula 1 con sus primeros diez cromosomas trazados"></div>
+    <figcaption><b>Figura 2.8.</b> <span class="ui">Mediciones de la célula</span> para la célula 1 del maíz de ejemplo. Los valores salen de los trazos (<i>trazo</i> en <span class="ui">Origen</span>) y no se editan aquí; la tabla se desplaza para ver los veinte.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <thead><tr><th style="width:1.5in">Columna</th><th>Qué contiene</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Cromosoma</span></td><td>El número o nombre del cromosoma en la célula.</td></tr>
+      <tr><td>p · q</td><td>El brazo corto y el largo, sin el satélite, en µm (o en px si la célula con imagen no está calibrada).</td></tr>
+      <tr><td><span class="ui">Satélite</span> · <span class="ui">Brazo</span></td><td>La longitud del satélite y el brazo que lo lleva (p o q).</td></tr>
+      <tr><td><span class="ui">Total</span></td><td>p + q + satélite.</td></tr>
+      <tr><td>IC · r</td><td>El índice centromérico y la razón de brazos, con el satélite sumado a su brazo como en el ejemplo del cromosoma 11.</td></tr>
+      <tr><td><span class="ui">Clase</span></td><td>m, sm, st o t (y M o T en los casos exactos), con el esquema del Bloque 3; <span class="ui">sin centrómero</span> si el trazo está incompleto.</td></tr>
+      <tr><td><span class="ui">Origen</span></td><td><i>trazo</i> si sale de la imagen; <i>a mano</i> si se escribió o se pegó. El botón × borra el renglón.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Capturar a mano</h3>
+  <p>En una célula sin imagen, o para los cromosomas que no se trazaron, cada valor es un campo editable: el nombre, p, q, el satélite y, en una lista, su brazo. <span class="ui">+ Cromosoma</span> agrega un renglón vacío. Si copias de una hoja de cálculo un bloque de celdas (p, q y satélite, varios renglones) y lo pegas sobre una celda de p, la app llena los renglones hacia abajo y crea los que falten.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b2-amano.png" alt="Los primeros seis renglones de la célula 2, capturados a mano, con sus campos editables"></div>
+    <figcaption><b>Figura 2.9.</b> Los primeros renglones de la célula 2 del maíz de ejemplo, capturada a mano. El cromosoma 6 lleva un satélite de 0.47 µm en p: su total es 5.50 µm, con IC = 28.2 y r = 2.55 (sm).</figcaption>
+  </figure>
+
+  <p>Al pie de la tabla, <span class="ui">Esta célula (CSV)</span> descarga las mediciones de la célula elegida; <span class="ui">Todas las mediciones (CSV)</span> y <span class="ui">Todas (TSV)</span>, las de todo el proyecto, en <code>mediciones.csv</code> o <code>mediciones.tsv</code>. Las columnas son accesión, taxón, célula, cromosoma, p, q, satélite, brazo del satélite, unidad (µm o px) y origen; los trazos incompletos no se exportan.</p>
+
+  <h3>Pegar medidas</h3>
+  <p>Si ya tienes las medidas en una hoja de cálculo o en la tabla de un artículo, <span class="ui">Pegar medidas</span> las lee de una vez. Una fila por cromosoma, en micras, con tabulador, punto y coma o coma como separador:</p>
+  <ul class="lista">
+    <li><b>Con encabezados,</b> la app reconoce las columnas por su nombre: accesión (o muestra, población, taxón), célula (o placa, metafase), cromosoma, p (o corto), q (o largo), satélite y brazo del satélite. Basta con que estén p y q.</li>
+    <li><b>Sin encabezados,</b> decide por el número de columnas: <b>p q</b> (todo en una célula nueva), <b>cromosoma p q</b>, <b>célula cromosoma p q</b> o <b>accesión célula cromosoma p q [satélite] [brazo]</b>.</li>
+  </ul>
+  <p>Las filas sin un número válido para p (cero o más) y para q (mayor que cero) se saltan, y el mensaje dice cuáles. Las accesiones se buscan por su nombre; las que no existen se crean.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b2-pegar.png" alt="El recuadro Pegar medidas con el archivo CSV de la célula 2 y el mensaje de que se leyeron 20 cromosomas"></div>
+    <figcaption><b>Figura 2.10.</b> <span class="ui">Pegar medidas</span> en un proyecto nuevo, con el CSV que la propia app escribió para la célula 2 del maíz de ejemplo (<span class="ui">Esta célula (CSV)</span>). Después de <span class="ui">Leer las medidas</span>, la app responde: «Se leyeron 20 cromosomas en 1 células y 1 accesiones nuevas.»</figcaption>
+  </figure>
+
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Lo que hay que revisar después de pegar</div>
+    <p>Si pegas en un proyecto vacío filas que traen el nombre de su accesión, la app deja además una «Accesión 1» vacía, que se quita con <span class="ui">Borrar la accesión</span>. Y de las columnas del CSV que ella misma exporta lee la accesión, la célula, el cromosoma, p, q y el satélite, pero no el taxón ni la unidad: escribe el taxón en su campo de <span class="ui">Accesiones y células</span>, y no pegues medidas en píxeles, porque se tomarán como micras.</p>
+  </div>
+
+  <!-- 2.7 -->
+  <h2 id="s2-7"><span class="num">2.7</span>Resumen de las mediciones</h2>
+  <p>La última tarjeta resume todo lo medido en el proyecto, en cuatro cifras y una tabla por accesión, y avisa de lo que conviene revisar antes de pasar al cariotipo.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b2-resumen.png" alt="El resumen de las mediciones del maíz: una accesión, cinco células, cien cromosomas medidos y una célula calibrada de una"></div>
+    <figcaption><b>Figura 2.11.</b> <span class="ui">Resumen de las mediciones</span> del maíz de ejemplo: 1 accesión, 5 células (1 con imagen), 100 cromosomas medidos y 1 / 1 células calibradas; la moda es de 20 cromosomas por célula.</figcaption>
+  </figure>
+
+  <p>Las cuatro cifras son <span class="ui">Accesiones</span>, <span class="ui">Células</span> (con cuántas tienen imagen), <span class="ui">Cromosomas medidos</span> (los completos: un trazo sin centrómero no cuenta) y <span class="ui">Células calibradas</span> entre las que tienen imagen, que se marca como advertencia si falta alguna. La tabla da, por accesión, su taxón, sus células, cuántas tienen medidas, cuántos cromosomas y la moda de cromosomas medidos por célula. Debajo pueden aparecer dos avisos:</p>
+  <ul class="lista">
+    <li>Si no todas las células de una accesión tienen el mismo número de cromosomas medidos: revisa que no falte ni sobre ninguno, porque el Bloque 3 agrupa lo que haya en cada célula.</li>
+    <li>Si una accesión tiene células con imagen sin calibrar: sus medidas están en píxeles y no deben mezclarse con las demás.</li>
+  </ul>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión · antes de pasar al Bloque 3</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> <span class="ui">Células calibradas</span> no es «n / n»</td><td><b>entonces</b> calibra las que faltan con su barra de escala.</td></tr>
+      <tr><td><b>Si</b> una célula tiene trazos <i>incompletos</i></td><td><b>entonces</b> márcales el centrómero o bórralos; no entran al cariotipo.</td></tr>
+      <tr><td><b>Si</b> el resumen avisa que el número varía entre células</td><td><b>entonces</b> busca el cromosoma que falta o el que se trazó dos veces; si la célula es aneuploide de verdad, anótalo y considera dejarla fuera del cariotipo.</td></tr>
+      <tr><td><b>Si</b> sólo contaste, sin medir</td><td><b>entonces</b> lleva los conteos al Bloque 6; el cariotipo necesita medidas.</td></tr>
+      <tr><td><b>Si</b> todo está en orden</td><td><b>entonces</b> guarda el proyecto (<code>Ctrl + S</code>) y pasa al Bloque 3.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Conviene medir varias metafases bien extendidas por accesión; la app acepta cualquier número, y el Bloque 3 muestra la desviación entre células.</p>
+  </div>
+
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Cuando algo sale mal</div>
+    <p><b>Las teclas de las herramientas no hacen nada.</b> El lienzo debe tener el foco: haz clic en la imagen o en el botón de la herramienta. <b>«Haz clic sobre el trazo de un cromosoma.»</b> El clic con <span class="ui">Centrómero</span> o <span class="ui">Satélite</span> cayó lejos de todo trazo: acerca la vista y vuelve a intentarlo. <b>Las medidas salen en px.</b> La célula no está calibrada. <b>Un cromosoma no aparece en el resumen.</b> Le falta el centrómero. <b>p y q salieron al revés de lo que esperabas.</b> La app llama p al brazo más corto (con su satélite), sin importar por qué extremo empezaste a trazar. <b>Calibré con la longitud equivocada.</b> Corrige el número en <span class="ui">Longitud de la barra de escala (µm)</span>: todo se recalcula. <b>El proyecto pesa mucho.</b> Las imágenes van dentro del <code>.json</code>: recórtalas a la metafase antes de abrirlas.</p>
+  </div>
+</section>
+
+</body>
+</html>

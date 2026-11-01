@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · Manual de usuario · Capítulo 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-1" data-pestana="1" data-orden="1" style="--acento: var(--b1)">
+  <div class="cap-apertura">
+    <div class="cap-num">1</div>
+    <div class="cap-etiqueta">Capítulo uno · Bloque 1</div>
+    <h1 data-corto="Inicio">Inicio: la teoría, los laboratorios y los ejemplos</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">El primer bloque no pide datos: orienta. Es la portada de la app, y en una sola página reúne lo que conviene saber antes de medir el primer cromosoma: la ruta de un estudio, dos laboratorios que calculan con los mismos motores que usará la app con tus imágenes, los diez bloques y los cuatro ejemplos, los 36 métodos con el trabajo que define cada uno, la teoría en lenguaje llano, lo que el programa no hace, las 48 referencias y la cita.</p>
+    <div class="cap-franja"><span class="k1"></span><span class="k1"></span><span class="k3"></span><span class="k4"></span><span class="k5"></span></div>
+    <ul class="cap-contenido">
+      <li><b>1.1</b>La portada y su idiograma</li>
+      <li><b>1.2</b>Cómo funciona: la ruta de un estudio</li>
+      <li><b>1.3</b>Dos laboratorios que calculan de verdad</li>
+      <li><b>1.4</b>Los diez bloques y los ejemplos</li>
+      <li><b>1.5</b>Los métodos y de dónde vienen</li>
+      <li><b>1.6</b>La teoría, en lenguaje llano</li>
+      <li><b>1.7</b>Límites, referencias y cómo citar</li>
+    </ul>
+  </div>
+
+  <!-- 1.1 -->
+  <h2 id="s1-1"><span class="num">1.1</span>La portada y su idiograma</h2>
+  <p class="lead">Al abrir la app aparece el Bloque 1. Arriba está el lema, «Del conteo cromosómico al cariotipo publicable», con un párrafo que resume lo que hace el programa, cuatro botones para empezar y, a la derecha, una figura que no es un adorno: un idiograma calculado por la app.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b1-heroe.png" alt="La portada de la app: el lema, los cuatro botones, las insignias y una metafase con su idiograma de diez pares"></div>
+    <figcaption><b>Figura 1.1.</b> La portada. La metafase de arriba se ordena en el idiograma de abajo, a escala en micras, con la clase de cada par bajo su número. Debajo, la fórmula y tres números del cariotipo: <i>2n</i> = 2x = 20 = 8m + 10sm + 2sm-sat, categoría 3B de Stebbins, MCA = 29.9 y CVCL = 25.6.</figcaption>
+  </figure>
+
+  <p>La figura sale del cariotipo base del maíz de ejemplo (el mismo que generó las medidas simuladas del ejemplo <i>Zea mays</i>) y se dibuja con los mismos motores que el Bloque 3 y el Bloque 4. Se lee así: los diez pares van de mayor a menor; la línea punteada es el centrómero, con el brazo corto (p) arriba y el largo (q) abajo; las bandas negras son nudos heterocromáticos —siete, uno en cada par del 2 al 9 salvo el 3—, y el asterisco del par 6 marca su satélite, la región organizadora del nucléolo (NOR). Es un ejemplo simulado, y así lo dice la propia figura.</p>
+
+  <table class="compacta">
+    <thead><tr><th style="width:2.1in">Botón</th><th>Qué hace</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Empezar con mis imágenes →</span></td><td>Abre el Bloque 2, donde se abren las fotomicrografías o se capturan las medidas.</td></tr>
+      <tr><td><span class="ui">Probar los laboratorios</span></td><td>Baja, en esta misma página, a la sección de los dos laboratorios (sección 1.3).</td></tr>
+      <tr><td><span class="ui">Leer la teoría</span></td><td>Baja a <span class="ui">La teoría, en lenguaje llano</span> (sección 1.6).</td></tr>
+      <tr><td><span class="ui">Abrir un proyecto</span></td><td>Pide un archivo <code>.json</code> guardado antes por la app, lo abre con sus imágenes y lleva al Bloque 2. Es lo mismo que <code>Ctrl + O</code> desde cualquier bloque.</td></tr>
+    </tbody>
+  </table>
+  <p>Debajo de los botones, cuatro insignias recuerdan tres compromisos del programa —funciona completo en el navegador, tus datos no salen de tu computadora y la interfaz está en español y en inglés— y que sus índices se comprobaron contra un programa de cálculo independiente (sección I.9).</p>
+
+  <!-- 1.2 -->
+  <h2 id="s1-2"><span class="num">1.2</span>Cómo funciona: la ruta de un estudio</h2>
+  <p>Bajo la portada, <span class="ui">Cómo funciona</span> pone en una tira los siete pasos de un estudio citogenético, en el orden en que se hacen (figura I.6 de la introducción). Cada paso tiene un nombre y una línea que dice qué se hace en él:</p>
+  <table class="compacta">
+    <thead><tr><th style="width:0.6in" class="c">Paso</th><th style="width:1.1in">Nombre</th><th>En la app</th><th style="width:0.9in" class="c">Bloque</th></tr></thead>
+    <tbody>
+      <tr><td class="c">1</td><td><b>Preparar</b></td><td>raíces, anteras, tinción: ocurre en el laboratorio; la hoja de práctica del Bloque 9 lo explica</td><td class="c"><span class="chip k9">9</span></td></tr>
+      <tr><td class="c">2</td><td><b>Contar</b></td><td>el número 2n, con marcas sobre la imagen o en la tabla de conteos</td><td class="c"><span class="chip k2">2</span> <span class="chip k6">6</span></td></tr>
+      <tr><td class="c">3</td><td><b>Medir</b></td><td>cada brazo, a escala, sobre la fotomicrografía calibrada</td><td class="c"><span class="chip k2">2</span></td></tr>
+      <tr><td class="c">4</td><td><b>Ordenar</b></td><td>homólogos e idiograma</td><td class="c"><span class="chip k3">3</span></td></tr>
+      <tr><td class="c">5</td><td><b>Describir</b></td><td>asimetría y fórmula; también la meiosis, la ploidía y las señales</td><td class="c"><span class="chip k4">4</span> <span class="chip k5">5</span> <span class="chip k7">7</span></td></tr>
+      <tr><td class="c">6</td><td><b>Comparar</b></td><td>citotipos y taxones</td><td class="c"><span class="chip k8">8</span></td></tr>
+      <tr><td class="c">7</td><td><b>Publicar</b></td><td>figuras, métodos, paquete</td><td class="c"><span class="chip k10">10</span></td></tr>
+    </tbody>
+  </table>
+  <p>La tira es una guía, no un trámite: puedes entrar a cualquier bloque desde la barra de la izquierda, y los que no apliquen a tu estudio se saltan.</p>
+
+  <!-- 1.3 -->
+  <h2 id="s1-3"><span class="num">1.3</span>Dos laboratorios que calculan de verdad</h2>
+  <p>La sección <span class="ui">Pruébalo: dos laboratorios que calculan de verdad</span> tiene dos pestañas. Ninguna es una animación grabada: cada cambio vuelve a calcular, con los motores del cariotipo, de la asimetría y de la meiosis, lo que la app calculará después con tus datos. Sirven para entender qué mueve cada índice antes de tener resultados propios, y en clase.</p>
+
+  <h3>Dibuja un idiograma</h3>
+  <p>Un idiograma de cuatro pares que se modifica con el ratón: arrastra los círculos de los extremos para alargar o acortar cada brazo. También se puede escribir la longitud en la tabla de abajo, en micras (p, el brazo corto; q, el largo), o usar el teclado: con un círculo elegido, las flechas lo mueven 0.05 µm, y con <code>Mayús</code>, 0.5 µm. La tabla da para cada par su índice centromérico (IC), su razón de brazos (r) y su clase según Levan et al. (1964), con el nombre completo.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b1-lab1.png" alt="El laboratorio Dibuja un idiograma con cuatro pares, la tabla de brazos, los doce índices y la cuadrícula de Stebbins"></div>
+    <figcaption><b>Figura 1.2.</b> <span class="ui">Dibuja un idiograma</span> con sus cuatro pares de partida. Los índices recomendados (MCA, CVCI y CVCL) van enmarcados; la etiqueta de cada uno dice si mide asimetría intracromosómica (<i>intra</i>), intercromosómica (<i>inter</i>) o las dos (<i>ambas</i>). El cariotipo cae en la casilla 3A de Stebbins.</figcaption>
+  </figure>
+
+  <p>Los cinco botones de arriba cambian el punto de partida:</p>
+  <table class="compacta">
+    <thead><tr><th style="width:1.5in">Botón</th><th>Qué hace</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Restablecer</span></td><td>Vuelve a los cuatro pares de partida: p = 3.00, 2.10, 1.20 y 0.70 µm con q = 3.40, 3.70, 3.60 y 4.00 µm.</td></tr>
+      <tr><td><span class="ui">Todo simétrico</span></td><td>Pone todos los pares iguales y casi metacéntricos (2.90 y 3.10 µm).</td></tr>
+      <tr><td><span class="ui">Muy asimétrico</span></td><td>Pone pares de tamaños muy distintos con el centrómero cerca de un extremo.</td></tr>
+      <tr><td><span class="ui">+ Cromosoma</span> · <span class="ui">− Cromosoma</span></td><td>Agrega un par (de 1.50 y 2.50 µm) o quita el último. El laboratorio admite de tres a seis pares, y avisa si se pide más o menos.</td></tr>
+    </tbody>
+  </table>
+  <p>A la derecha, doce casillas dan los índices de asimetría que calcula el Bloque 4 —TF%, AsK%, Syi, A1, A, MCA, CVCI, Rec, A2, CVCL, AI y DI— y, debajo, la cuadrícula de las categorías de Stebbins (1971): las columnas van de 1 a 4 según baja la proporción de cromosomas con r &lt; 2, y las filas de A a C según crece la razón entre el par más largo y el más corto (&lt; 2, 2–4, &gt; 4). Pasa el ratón sobre una casilla de índice para ver su fórmula y su referencia. El renglón del pie lo resume todo en palabras: la fórmula, la categoría con sus dos razones y los dos índices recomendados.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b1-lab1-asim.png" alt="El laboratorio después de pulsar Muy asimétrico: tres telocéntricos y un subtelocéntrico, categoría 4B"></div>
+    <figcaption><b>Figura 1.3.</b> El mismo laboratorio con <span class="ui">Muy asimétrico</span>: tres pares telocéntricos y uno subtelocéntrico (el 3, con r = 6.67). El orden de los pares no cambia al moverlos, así que el más largo puede quedar en cualquier lugar; la categoría pasa a 4B y MCA sube a 84.05.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <caption>Los tres puntos de partida del laboratorio, como los da la app</caption>
+    <thead><tr><th>Botón</th><th>Fórmula (como diploide)</th><th class="c">Stebbins</th><th class="c">Mayor / menor</th><th class="c">r &lt; 2</th><th class="c">MCA</th><th class="c">CVCL</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Restablecer</span></td><td>2n = 8 = 2m + 4sm + 2st</td><td class="c">3A</td><td class="c">1.36</td><td class="c">50&nbsp;%</td><td class="c">38.5</td><td class="c">15.1</td></tr>
+      <tr><td><span class="ui">Todo simétrico</span></td><td>2n = 8 = 8m</td><td class="c">1A</td><td class="c">1.00</td><td class="c">100&nbsp;%</td><td class="c">3.3</td><td class="c">0.0</td></tr>
+      <tr><td><span class="ui">Muy asimétrico</span></td><td>2n = 8 = 2st + 6t</td><td class="c">4B</td><td class="c">3.11</td><td class="c">0&nbsp;%</td><td class="c">84.1</td><td class="c">44.0</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo · dos asimetrías que no se confunden</div>
+    <p>Pulsa <span class="ui">Todo simétrico</span>: MCA = 3.3 y CVCL = 0.0, categoría 1A. Ahora arrastra hacia abajo sólo el extremo del brazo largo del par 1: MCA sube (el centrómero de ese par se aleja del centro) y CVCL también sube (ese par ya es más largo que los demás). Regresa y cambia en cambio los dos brazos del par 1 en la misma proporción: CVCL sube, pero MCA no cambia, porque la posición relativa del centrómero de ese par es la misma. Por eso se recomienda describir la asimetría con dos números y no con uno (Peruzzi y Eroğlu, 2013); el capítulo 4 lo explica a fondo.</p>
+  </div>
+
+  <h3>Ploidía y meiosis</h3>
+  <p>La segunda pestaña muestra qué configuraciones meióticas se esperan en un poliploide según su origen. En un <b>autopoliploide</b> los homólogos se emparejan al azar y pueden formar multivalentes; en un <b>alopoliploide</b> cada cromosoma sólo se empareja con el de su propio genoma, y se esperan bivalentes.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b1-lab2.png" alt="El laboratorio Ploidía y meiosis con un autotetraploide de x = 7: barras y tabla de configuraciones esperadas y una célula en diacinesis"></div>
+    <figcaption><b>Figura 1.4.</b> <span class="ui">Ploidía y meiosis</span> con sus valores de partida: un autotetraploide (AAAA) con x = 7 y c = 0.85. A la izquierda, las configuraciones esperadas por célula, en barras y en tabla (los multivalentes en azul); a la derecha, una célula en diacinesis sacada del mismo modelo: 1 I + 2 II anillo + 1 III + 3 IV cadena + 2 IV anillo, que suman los 28 cromosomas.</figcaption>
+  </figure>
+
+  <p>Los controles de la pestaña son:</p>
+  <ul class="lista">
+    <li><span class="ui">Nivel de ploidía</span>: 2x, 3x, 4x, 5x, 6x u 8x.</li>
+    <li><span class="ui">Origen</span>: <span class="ui">Autopoliploide</span>, <span class="ui">Alopoliploide</span> o <span class="ui">Fórmula propia</span>; esta última abre el campo <span class="ui">Fórmula genómica</span>, donde cada letra es un genoma (AAAABB, por ejemplo, un segmental), hasta ocho genomas.</li>
+    <li><span class="ui">Número básico x</span>, de 3 a 20, y <span class="ui">Quiasma por brazo, c</span>, de 0 a 1: la probabilidad de que un brazo apareado forme al menos un quiasma.</li>
+    <li><span class="ui">Otra célula al azar</span>, que saca otra célula del mismo modelo.</li>
+  </ul>
+
+  <p>Con los valores de partida la app escribe al pie: 2n = 4x = 28; se esperan <b>23.8 quiasmas por célula</b> (28 brazos apareados × c), y cada grupo de cuatro homólogos forma un multivalente con probabilidad <b>63.7&nbsp;%</b>, de modo que una célula tiene en promedio <b>4.46</b> multivalentes. Cambia el origen a <span class="ui">Alopoliploide</span> y la fórmula pasa a AABB: los quiasmas esperados son los mismos, pero desaparecen los multivalentes —sólo quedan 0.630 univalentes, 3.570 bivalentes en varilla y 10.115 en anillo por célula—. Sube c a 1 y verás el máximo de multivalentes que permite el apareamiento al azar.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve</div>
+    <p>El modelo sigue a Jackson y Casey (1982): los homólogos de cada grupo se aparean al azar por brazos, y cada brazo apareado forma un quiasma con probabilidad c. Un bivalente con quiasma en los dos brazos es un <b>anillo</b>; con uno solo, una <b>varilla</b>; un cromosoma sin quiasma queda como <b>univalente</b>. Es el mismo modelo con el que el Bloque 5 compara tus configuraciones observadas con lo esperado para cada origen.</p>
+  </div>
+
+  <!-- 1.4 -->
+  <h2 id="s1-4"><span class="num">1.4</span>Los diez bloques y los ejemplos</h2>
+  <p><span class="ui">Los diez bloques</span> presenta cada bloque en una tarjeta con su número, un dibujo hecho por la app, el verbo del paso que cubre (Medir, Ordenar, Describir…), su nombre y lo que hace. Un clic en la tarjeta abre el bloque; es lo mismo que elegirlo en la barra de la izquierda.</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/b1-bloques.png" alt="Las diez tarjetas de los bloques, cada una con su dibujo, su verbo, su nombre y su descripción"></div>
+    <figcaption><b>Figura 1.5.</b> <span class="ui">Los diez bloques</span>. El verbo de cada tarjeta es su paso en el estudio: Teoría y laboratorios, Medir, Ordenar, Describir, Aparear, Contar, Marcar, Comparar, Enseñar y Publicar.</figcaption>
+  </figure>
+
+  <p>Más abajo, <span class="ui">Ejemplos incluidos</span> ofrece los cuatro conjuntos de datos simulados que se describen en la sección I.7 (figura I.5). Cada tarjeta dice en qué bloques se usa su ejemplo, y el botón <span class="ui">Abrir el ejemplo</span> lo carga y lleva al bloque donde empieza: el maíz al Bloque 2, el chayote al 3, la serie poliploide al 5 y la prueba de <i>Allium</i> al 6.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Abrir un ejemplo reemplaza el proyecto</div>
+    <p>Un ejemplo no se suma a tus datos: los sustituye. Si ya hay datos en la app, te pregunta antes de seguir. Guarda tu proyecto con <code>Ctrl + S</code> si quieres volver a él.</p>
+  </div>
+
+  <!-- 1.5 -->
+  <h2 id="s1-5"><span class="num">1.5</span>Los métodos y de dónde vienen</h2>
+  <p>La sección <span class="ui">Los métodos y de dónde vienen</span> pone en fichas los 36 métodos que calcula la app, cada una con su familia, su nombre y el trabajo que lo define. Los botones de arriba filtran por familia; <span class="ui">Todos (36)</span> los vuelve a mostrar.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b1-metodos.png" alt="Las 36 fichas de los métodos con los filtros por familia"></div>
+    <figcaption><b>Figura 1.6.</b> Los 36 métodos con su fuente. El color de la etiqueta dice la familia.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <thead><tr><th style="width:1.45in">Familia</th><th class="c" style="width:0.5in">Fichas</th><th>Métodos y fuente</th></tr></thead>
+    <tbody>
+      <tr><td>Imagen y medición</td><td class="c">2</td><td>Calibración con la barra de escala (µm por píxel); longitud a lo largo de la curvatura (polilínea)</td></tr>
+      <tr><td>Cariotipo</td><td class="c">4</td><td>Posición del centrómero (Levan et al., 1964); nomenclatura revisada (Guerra, 1986); satélites (Battaglia, 1955); número cromosómico y número básico (Guerra, 2008)</td></tr>
+      <tr><td>Asimetría</td><td class="c">10</td><td>TF% (Huziwara, 1962); AsK% (Arano, 1963); Syi y Rec (Greilhuber y Speta, 1976); A1 y A2 (Romero Zarco, 1986); A (Watanabe et al., 1999); CVCL, CVCI y AI (Paszko, 2006); MCA (Peruzzi y Eroğlu, 2013); heterogeneidad del índice centromérico (Zuo y Yuan, 2011); DI (Lavania y Srivastava, 1992); categorías 1A–4C (Stebbins, 1971)</td></tr>
+      <tr><td>Meiosis</td><td class="c">5</td><td>Configuraciones y quiasmas (Sybenga, 1975); configuraciones esperadas en poliploides (Jackson y Casey, 1982); índice de recombinación (Colombo, 1992); índice meiótico (Love, 1951); viabilidad del polen (Alexander, 1969)</td></tr>
+      <tr><td>Ploidía y genoma</td><td class="c">4</td><td>Contenido de ADN por citometría (Doležel et al., 2007); de picogramos a pares de bases (Doležel et al., 2003); valores C y Cx (Greilhuber et al., 2005); prueba de <i>Allium</i> (Fiskesjö, 1985)</td></tr>
+      <tr><td>Bandeo y FISH</td><td class="c">2</td><td>Heterocromatina y fluorocromos (Guerra, 2000); hibridación in situ fluorescente (Jiang y Gill, 2006)</td></tr>
+      <tr><td>Comparación</td><td class="c">7</td><td>Relaciones cariológicas multivariadas (Peruzzi y Altınordu, 2014); distancia de Gower (Gower, 1971); UPGMA (Sneath y Sokal, 1973); Ward (Ward, 1963); correlación cofenética (Sokal y Rohlf, 1962); componentes principales y biplot (Jolliffe, 2002; Gabriel, 1971); evolución del número por parsimonia (Sankoff, 1975)</td></tr>
+      <tr><td>Estadística</td><td class="c">2</td><td>Intervalos para una proporción (Wilson, 1927; Clopper y Pearson, 1934); homogeneidad χ² y G (Sokal y Rohlf, 1995)</td></tr>
+    </tbody>
+  </table>
+  <p>Esta lista es el catálogo completo. El informe y los métodos redactados del Bloque 10, en cambio, citan sólo los métodos que tu proyecto usó.</p>
+
+  <!-- 1.6 -->
+  <h2 id="s1-6"><span class="num">1.6</span>La teoría, en lenguaje llano</h2>
+  <p><span class="ui">La teoría, en lenguaje llano</span> reúne en diez temas desplegables las ideas que sostienen el resto de la app. Cada tema dice a la derecha en qué bloque se usa, y cinco de ellos llevan un dibujo hecho por la app. El primero aparece abierto; un clic en el título abre o cierra cualquiera.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b1-teoria.png" alt="La sección de teoría con los dos primeros temas abiertos: las partes del cromosoma y las cuatro clases de Levan"></div>
+    <figcaption><b>Figura 1.7.</b> La teoría con los dos primeros temas abiertos: las partes de un cromosoma en metafase y las cuatro clases de Levan et al. (1964) por la razón de brazos.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <thead><tr><th style="width:0.35in" class="c">#</th><th>Tema</th><th style="width:0.9in" class="c">Bloque</th><th>La idea, en una línea</th></tr></thead>
+    <tbody>
+      <tr><td class="c">1</td><td>El cromosoma y sus partes</td><td class="c"><span class="chip k2">2</span> <span class="chip k3">3</span></td><td>Cromátidas, centrómero, brazos p y q, telómeros, constricción secundaria y satélite; un brazo se mide siguiendo su curvatura.</td></tr>
+      <tr><td class="c">2</td><td>Dónde está el centrómero: m, sm, st y t</td><td class="c"><span class="chip k3">3</span></td><td>r = q/p e IC = 100·p/(p + q) dan la clase; los límites de Levan son 1.7, 3.0 y 7.0.</td></tr>
+      <tr><td class="c">3</td><td>Cariotipo, idiograma y fórmula</td><td class="c"><span class="chip k3">3</span></td><td>Promedios de varias células, longitud relativa, fórmula cariotípica y número fundamental.</td></tr>
+      <tr><td class="c">4</td><td>Asimetría: dos cosas distintas</td><td class="c"><span class="chip k4">4</span></td><td>La intracromosómica (centrómeros) y la intercromosómica (longitudes); MCA, CVCL y CVCI.</td></tr>
+      <tr><td class="c">5</td><td>La mitosis y el conteo de 2n</td><td class="c"><span class="chip k2">2</span> <span class="chip k6">6</span></td><td>Pretratamiento, fijación, hidrólisis, tinción y aplastado; la moda de varias células; índice mitótico.</td></tr>
+      <tr><td class="c">6</td><td>La meiosis: apareamiento, quiasmas y configuraciones</td><td class="c"><span class="chip k5">5</span></td><td>Bivalentes en anillo o en varilla, univalentes, multivalentes; índice de recombinación e índice meiótico.</td></tr>
+      <tr><td class="c">7</td><td>Ploidía, número básico, aneuploidía y disploidía</td><td class="c"><span class="chip k6">6</span> <span class="chip k8">8</span></td><td>x, nivel de ploidía y serie euploide; ganar cromosomas sueltos no es lo mismo que cambiar x.</td></tr>
+      <tr><td class="c">8</td><td>El tamaño del genoma: valores C y Cx</td><td class="c"><span class="chip k6">6</span></td><td>2C, 1C y 1Cx; el patrón interno de la citometría; 1 pg = 978 Mpb.</td></tr>
+      <tr><td class="c">9</td><td>Bandeo e hibridación in situ</td><td class="c"><span class="chip k7">7</span></td><td>Bandas C, CMA⁺ y DAPI⁺; ADNr 5S y 45S, telómeros y GISH; cada señal por cromosoma, brazo y posición.</td></tr>
+      <tr><td class="c">10</td><td>Comparar cariotipos y la evolución del número</td><td class="c"><span class="chip k8">8</span></td><td>Una matriz de parámetros, métodos multivariados y la parsimonia sobre un árbol.</td></tr>
+    </tbody>
+  </table>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión · las clases de Levan</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:40%"><b>Si</b> r ≤ 1.7</td><td><b>entonces</b> metacéntrico (m); M si r = 1 exactamente.</td></tr>
+      <tr><td><b>Si</b> 1.7 &lt; r ≤ 3.0</td><td><b>entonces</b> submetacéntrico (sm).</td></tr>
+      <tr><td><b>Si</b> 3.0 &lt; r ≤ 7.0</td><td><b>entonces</b> subtelocéntrico (st).</td></tr>
+      <tr><td><b>Si</b> r &gt; 7.0</td><td><b>entonces</b> telocéntrico (t); T si no hay brazo corto (r = ∞).</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son los límites que usan por omisión los laboratorios y el Bloque 3; allí se pueden cambiar por los de Guerra (1986) o por unos propios.</p>
+  </div>
+
+  <!-- 1.7 -->
+  <h2 id="s1-7"><span class="num">1.7</span>Límites, referencias y cómo citar</h2>
+  <h3>Lo que este programa no hace</h3>
+  <p>La portada termina con tres secciones prácticas. La primera, <span class="ui">Lo que este programa no hace</span>, nombra cuatro límites, que la sección I.10 de la introducción explica con más detalle:</p>
+  <ul class="lista">
+    <li><b>Reconocer cromosomas solo:</b> tú trazas cada cromosoma; la app mide con exactitud lo que trazas, sin segmentación automática.</li>
+    <li><b>Controlar el microscopio o el citómetro:</b> lee las imágenes y los archivos de texto que exportan, nunca los equipos.</li>
+    <li><b>Modelos de verosimilitud:</b> la evolución del número cromosómico se reconstruye por parsimonia con costos por evento.</li>
+    <li><b>Mapas con capas ajenas:</b> el mapa de citotipos se dibuja sobre una retícula de coordenadas, con tu propio contorno si lo cargas.</li>
+  </ul>
+
+  <h3>Referencias</h3>
+  <p><span class="ui">Referencias</span> da las 48 obras que cita la app, en orden alfabético, cada una con su tema. Los botones de arriba filtran por tema; la numeración se rehace con lo que queda a la vista. Son las mismas que reúne el apéndice F de este manual.</p>
+  <table class="compacta">
+    <thead><tr><th>Tema</th><th class="c">Obras</th><th>Tema</th><th class="c">Obras</th></tr></thead>
+    <tbody>
+      <tr><td>Técnicas</td><td class="c">4</td><td>Ploidía y genoma</td><td class="c">5</td></tr>
+      <tr><td>Cariotipo</td><td class="c">5</td><td>Bandeo y FISH</td><td class="c">3</td></tr>
+      <tr><td>Asimetría</td><td class="c">11</td><td>Comparación</td><td class="c">10</td></tr>
+      <tr><td>Meiosis</td><td class="c">5</td><td>Estadística</td><td class="c">5</td></tr>
+    </tbody>
+  </table>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b1-referencias.png" alt="La lista de referencias filtrada por el tema Asimetría, con once obras"></div>
+    <figcaption><b>Figura 1.8.</b> <span class="ui">Referencias</span> con el filtro <span class="ui">Asimetría</span>: las once obras de los índices de asimetría, numeradas de nuevo.</figcaption>
+  </figure>
+
+  <h3>Cómo citar</h3>
+  <p>Si la app te sirvió para un trabajo publicado, <span class="ui">Cómo citar</span> da la cita lista para copiar con <span class="ui">Copiar la cita</span>, y al desplegar <span class="ui">BibTeX</span>, la misma cita como registro para un gestor de referencias, con <span class="ui">Copiar BibTeX</span>. La versión sale del propio programa, así que siempre coincide con la que usaste. Todavía no hay un identificador digital (DOI); se añadirá a la cita cuando el programa se publique.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b1-cita.png" alt="El recuadro Cómo citar con la cita en texto y el registro BibTeX desplegado"></div>
+    <figcaption><b>Figura 1.9.</b> <span class="ui">Cómo citar</span>, con el registro BibTeX desplegado.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Cita también los métodos</div>
+    <p>Citar el programa no sustituye citar los métodos. Si publicas MCA y CVCL, cita a Peruzzi y Eroğlu (2013) y a Paszko (2006); si publicas la categoría de Stebbins, a Stebbins (1971). Los métodos redactados del Bloque 10 ya traen esas citas, sólo las de lo que usaste.</p>
+  </div>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión · por dónde seguir</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:40%"><b>Si</b> tienes fotomicrografías de metafases</td><td><b>entonces</b> <span class="ui">Empezar con mis imágenes →</span> y el capítulo 2.</td></tr>
+      <tr><td><b>Si</b> ya tienes las medidas de los brazos</td><td><b>entonces</b> Bloque 2, <span class="ui">Pegar medidas</span> (sección 2.6), y después el Bloque 3.</td></tr>
+      <tr><td><b>Si</b> tienes un proyecto guardado</td><td><b>entonces</b> <span class="ui">Abrir un proyecto</span> o <code>Ctrl + O</code>.</td></tr>
+      <tr><td><b>Si</b> sólo quieres ver cómo funciona</td><td><b>entonces</b> un ejemplo de <span class="ui">Ejemplos incluidos</span>, o los laboratorios.</td></tr>
+      <tr><td><b>Si</b> vas a enseñar</td><td><b>entonces</b> los laboratorios de esta página y el Bloque 9.</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Cuando algo sale mal</div>
+    <p><b>El laboratorio no deja agregar ni quitar pares.</b> Admite de tres a seis; fuera de ese intervalo la app avisa y no cambia nada. <b>La fórmula propia no calcula.</b> Admite hasta ocho genomas (ocho letras); con más, el pie lo dice. <b>Abrir un proyecto no hace nada.</b> El archivo debe ser un <code>.json</code> guardado por la app; si no lo es, aparece un aviso con el motivo.</p>
+  </div>
+</section>
+
+</body>
+</html>
