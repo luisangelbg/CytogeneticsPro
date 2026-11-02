@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · User’s Manual · Chapter 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-2" data-pestana="2" data-orden="2" style="--acento: var(--b2)">
+  <div class="cap-apertura">
+    <div class="cap-num">2</div>
+    <div class="cap-etiqueta">Chapter two · Block 2</div>
+    <h1 data-corto="Images and measurement">Images and measurement</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">This is where the work with data begins: “calibrate, count, trace every chromosome and measure its arms.” The block opens the micrographs of your metaphases, converts them to microns with their scale bar, counts the chromosomes with marks and measures each arm along a trace that follows the curvature of the chromosome. If you already have the measurements, they are typed in by hand or pasted from a spreadsheet. Everything measured here is used by the karyotype and the blocks that follow.</p>
+    <div class="cap-franja"><span class="k2"></span><span class="k2"></span><span class="k3"></span><span class="k6"></span><span class="k10"></span></div>
+    <ul class="cap-contenido">
+      <li><b>2.1</b>Open images, measurements or a project</li>
+      <li><b>2.2</b>Accessions and cells</li>
+      <li><b>2.3</b>Calibrate and count</li>
+      <li><b>2.4</b>Trace, centromere and satellite</li>
+      <li><b>2.5</b>Edit, erase, undo and the annotated image</li>
+      <li><b>2.6</b>Measurements of the cell and pasted measurements</li>
+      <li><b>2.7</b>Summary of the measurements</li>
+    </ul>
+  </div>
+
+  <p>The figures in this chapter use the maize example (<span class="ruta">Block 1<span class="sep">›</span>Included examples</span>, or the tile <span class="ui">Example: simulated maize</span> of the block itself): one accession, “Landrace maize · Texcoco,” with five cells of 20 chromosomes. The first carries a metaphase drawn by the app with its twenty traces already made; the other four, measurements typed in by hand. Remember that these are simulated data: it is “the example maize,” not maize.</p>
+
+  <!-- 2.1 -->
+  <h2 id="s2-1"><span class="num">2.1</span>Open images, measurements or a project</h2>
+  <p class="lead">The first card is the way in. It has four tiles, one for each way of getting started, and two buttons to save your work or start afresh.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b2-abrir.png" alt="The card Open images, measurements or a project with its four tiles and the buttons to save and start a new project"></div>
+    <figcaption><b>Figure 2.1.</b> <span class="ui">Open images, measurements or a project</span>. The first tile, with a dashed border, also takes files dragged from the file explorer.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <thead><tr><th style="width:1.9in">Tile or button</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Open images or a project</span></td><td>Click or drop here <code>.png</code> or <code>.jpg</code> micrographs (several at once) or a <code>.json</code> project. Each image opens a new cell in the accession chosen in the next card, named after the file without its extension; if there are no accessions yet, the app creates “Accession 1.” When it is done, it switches by itself to the <span class="ui">Calibrate</span> tool and says so: “Start by calibrating with the scale bar.”</td></tr>
+      <tr><td><span class="ui">Cell without an image</span></td><td>Creates a cell with four empty rows in the table of measurements, to type in the length of the arms by hand (Section 2.6).</td></tr>
+      <tr><td><span class="ui">Paste measurements</span></td><td>Opens (or closes) a box where you paste columns copied from a spreadsheet or a paper (Section 2.6).</td></tr>
+      <tr><td><span class="ui">Example: simulated maize</span></td><td>Opens the maize example. It replaces the project, and if there are already data it asks first.</td></tr>
+      <tr><td><span class="ui">Save the project (.json)</span></td><td>Saves the whole project—accessions, cells, images, traces and the content of the other blocks—in a single file. It is the same as <code>Ctrl + S</code>.</td></tr>
+      <tr><td><span class="ui">New project</span></td><td>Empties the app. If there are data, it asks first: “Start a new project? Anything not saved will be lost.”</td></tr>
+    </tbody>
+  </table>
+  <p>While there are no cells, a box, <span class="ui">There are no cells yet</span>, takes the place of the next cards and reminds you of the four ways to get started.</p>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>What it opens and what it does not</div>
+    <p>Only PNG or JPG images and <code>.json</code> projects are opened; with any other file the app warns you. An image over 25 MB is opened, but with a warning: the project stores it inside and becomes heavy. Crop each photograph to the metaphase before opening it. If the files you drop include a <code>.json</code>, only the project is opened.</p>
+  </div>
+
+  <!-- 2.2 -->
+  <h2 id="s2-2"><span class="num">2.2</span>Accessions and cells</h2>
+  <p>An <b>accession</b> is a sample: a population, a collection, a variety. Its <b>cells</b> are the metaphases you measured from it, and Block 3 averages them to obtain its karyotype. A project can have several accessions, each with its cells.</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b2-accesiones.png" alt="The card Accessions and cells with the data of the maize accession and its five cells"></div>
+    <figcaption><b>Figure 2.2.</b> <span class="ui">Accessions and cells</span> with the example maize. Cell 1 (with a colored border) is the selected one: it has an image, 20 chromosomes measured and is calibrated (µm); the other four have no image (✎).</figcaption>
+  </figure>
+
+  <ul class="lista">
+    <li><span class="ui">Accession</span> chooses the accession you work with; <span class="ui">+ Accession</span> creates another (named “Accession 2,” “Accession 3”…, ready to be renamed) and <span class="ui">Delete the accession</span> removes it with all its cells, after asking.</li>
+    <li>The six fields describe the accession: <span class="ui">Name</span>, <span class="ui">Taxon</span>, <span class="ui">Locality</span>, <span class="ui">Latitude</span> and <span class="ui">Longitude</span> (in decimal degrees, with sign: the example maize is at 19.49 and −98.88) and <span class="ui">Base number x</span>. The coordinates serve the map of cytotypes in Block 8; the base number, to write the formula (2n = 2x = 20) and to estimate the ploidy (Blocks 3 and 6).</li>
+    <li><span class="ui">Cells of this accession</span> shows one tile per cell, with the thumbnail of its image (or ✎ if it has none) and a status line: how many chromosomes are measured, how many traces are <i>incomplete</i> (without a centromere), whether the image is in µm or <i>not calibrated</i> and, if it was counted, “2n” with the number of marks. A click selects the cell; the last tile, <span class="ui">Cell without image</span>, creates an empty one.</li>
+    <li>Below, with the cell selected, <span class="ui">Name of the cell</span> renames it; <span class="ui">Set or change its image</span> assigns a micrograph to it (useful for a cell typed in by hand), and <span class="ui">Delete the cell</span> removes it with its measurements, asking first if it had any.</li>
+  </ul>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Every change spreads</div>
+    <p>Any change in the measurements, the calibration or the cells marks the karyotype of that accession to be computed again: Blocks 3 and 4 redo it the next time you open them. There is no need to tell them anything.</p>
+  </div>
+
+  <!-- 2.3 -->
+  <h2 id="s2-3"><span class="num">2.3</span>Calibrate and count</h2>
+  <p>When the selected cell has an image, the card <span class="ui">Measuring on the image</span> appears: at the top, the toolbar; on the left, the canvas with the micrograph; on the right, a panel with the help for the active tool and the data of the cell.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b2-editor.png" alt="The measuring editor with the maize metaphase, the toolbar and the side panel, with its parts numbered">
+      <span class="marca" style="left:2.9%;top:9.8%">1</span>
+      <span class="marca" style="left:69%;top:9.8%">2</span>
+      <span class="marca" style="left:84.6%;top:9.8%">3</span>
+      <span class="marca" style="left:11.3%;top:14.8%">4</span>
+      <span class="marca" style="left:5.2%;top:37.6%">5</span>
+      <span class="marca" style="left:65.1%;top:20.8%">6</span>
+      <span class="marca" style="left:65.1%;top:35.4%">7</span>
+      <span class="marca" style="left:65.1%;top:55.1%">8</span>
+      <span class="marca" style="left:65.1%;top:67.4%">9</span>
+      <span class="marca" style="left:65.1%;top:81%">10</span>
+    </div>
+    <figcaption><b>Figure 2.3.</b> <span class="ui">Measuring on the image</span> with cell 1 of the example maize: twenty chromosomes traced, each with its number and its centromere (white circle); the orange diamonds are the satellites of chromosomes 11 and 12, and the green line, the calibration.</figcaption>
+  </figure>
+  <ul class="leyenda-marcas">
+    <li><span class="n">1</span><b>The eight tools,</b> each with its key: <span class="ui">Pan</span> (<code>V</code>), <span class="ui">Calibrate</span> (<code>C</code>), <span class="ui">Count</span> (<code>N</code>), <span class="ui">Trace</span> (<code>T</code>), <span class="ui">Centromere</span> (<code>M</code>), <span class="ui">Satellite</span> (<code>S</code>), <span class="ui">Edit</span> (<code>E</code>) and <span class="ui">Erase</span> (<code>B</code>). The active one is filled with color.</li>
+    <li><span class="n">2</span><b>The view:</b> <span class="ui">−</span> and <span class="ui">+</span> zoom out and in; <span class="ui">Fit (0)</span> puts the whole image back in the canvas.</li>
+    <li><span class="n">3</span><b><span class="ui">↶ Undo</span> and <span class="ui">↷ Redo</span>,</b> also with <code>Ctrl + Z</code> and <code>Ctrl + Y</code> (Section 2.5).</li>
+    <li><span class="n">4</span><b><span class="ui">Annotated image (PNG)</span>:</b> the photograph with all the traces, at its original resolution (Section 2.5).</li>
+    <li><span class="n">5</span><b>The canvas.</b> The tool keys work when the canvas has the focus (click on it).</li>
+    <li><span class="n">6</span><b>The help</b> for the active tool, which changes with it.</li>
+    <li><span class="n">7</span><b><span class="ui">Calibration</span>:</b> the length of the scale bar and the resulting scale.</li>
+    <li><span class="n">8</span><b><span class="ui">Image</span>:</b> <span class="ui">Brightness</span> and <span class="ui">Contrast</span>.</li>
+    <li><span class="n">9</span><b><span class="ui">Count</span>:</b> the marks of the cell and the button that takes them to Block 6.</li>
+    <li><span class="n">10</span><b><span class="ui">Selected chromosome</span>:</b> the measurements of the trace selected with <span class="ui">Edit</span> (Section 2.5).</li>
+  </ul>
+
+  <h3>Moving around the image</h3>
+  <p>With <span class="ui">Pan</span> you drag the image; the mouse wheel zooms in and out around the pointer, <code>+</code> and <code>−</code> do so around the center, <code>0</code> fits the image to the window and the arrow keys scroll it. With any other tool you can also pan by dragging with the right button or with the space bar held down, so there is no need to keep switching tools. Zooming changes no measurement: the traces are stored in pixels of the original image.</p>
+
+  <h3>Calibrating with the scale bar</h3>
+  <p>A length in pixels says nothing by itself: it depends on the objective, the camera and how the image was saved. That is why each cell is calibrated with the micron bar of its own photograph. With <span class="ui">Calibrate</span>, drag a line from one end of the bar to the other and type its length in <span class="ui">Length of the scale bar (µm)</span> (10 by default). From then on all the measurements of the cell are in microns, and the panel gives the scale: in cell 1 of the example maize, “Bar: 135 px = 10 µm · <b>0.0741 µm per pixel</b>.”</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b2-calibrar.png" alt="The Calibrate tool with the view zoomed in on the 10-micron bar and the green calibration line over it"></div>
+    <figcaption><b>Figure 2.4.</b> <span class="ui">Calibrate</span>, with the view zoomed in on the 10 µm bar of cell 1. The green calibration line runs from one end of the black bar to the other: 135 px.</figcaption>
+  </figure>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · the scale of the maize</div>
+    <p>The bar measures 10 µm and the line drawn over it, 135 pixels: 10 / 135 = 0.0741 µm per pixel. An arm that measures 50 pixels along its trace then measures 50 × 0.0741 = 3.70 µm. If you change the length of the bar after calibrating, all the measurements of the cell are recomputed with the new scale, and the change can be undone.</p>
+  </div>
+  <p>As long as a cell with an image is not calibrated, its measurements come out in pixels: the panel says “Not calibrated: measurements come out in pixels. Use the Calibrate tool.”, its tile says <i>not calibrated</i> and the summary warns about it (Section 2.7). A line shorter than six screen pixels does not count as a calibration, so that an accidental click does not change it.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>One calibration per cell</div>
+    <p>Calibrate every cell even if they all come from the same microscope: if a photograph was cropped or saved at another size, its scale changes. Uncalibrated cells must not be mixed with calibrated ones: Block 3 would average pixels with microns.</p>
+  </div>
+
+  <h3>Brightness and contrast</h3>
+  <p>The controls <span class="ui">Brightness</span> (from 40 to 200) and <span class="ui">Contrast</span> (from 40 to 300), at 100 by default, help to make out the ends and the centromere in a pale or dark preparation. They are saved with each cell, they also apply to the annotated image and they touch neither the measurements nor the original image.</p>
+
+  <h3>Counting</h3>
+  <p>With <span class="ui">Count</span>, a click on each chromosome leaves a yellow mark with its serial number, and the panel keeps the tally: “<b>20</b> chromosomes counted in this cell.” To remove a mark, use <span class="ui">Erase</span>. You can count before or after tracing, and counting does not require tracing: it is the quick way to record the 2n of many cells, even if you are only going to measure some of them.</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b2-contar.png" alt="The Count tool with twenty numbered yellow marks next to the traced chromosomes and the panel with 20 chromosomes counted"></div>
+    <figcaption><b>Figure 2.5.</b> <span class="ui">Count</span> on cell 1. The example carries no count marks: for this figure one was placed next to each trace, as someone counting with clicks would do. The marks are drawn on top of the traces, so their number can always be read. With at least one mark, <span class="ui">Take the count to ploidy (Block 6)</span> becomes active.</figcaption>
+  </figure>
+  <p><span class="ui">Take the count to ploidy (Block 6)</span> writes the count into the table of counts of Block 6, with the accession and the name of the cell; if that cell already had a row, it replaces it. The app confirms it, for example: “Count sent to Block 6: 2n = 20 in “Cell 1 (image)”.” There the mode of each accession and its ploidy level are computed (Chapter 6).</p>
+
+  <!-- 2.4 -->
+  <h2 id="s2-4"><span class="num">2.4</span>Trace, centromere and satellite</h2>
+  <p class="lead">A chromosome is measured in three steps: its axis is traced from one end to the other, its centromere is marked and, if it has one, its secondary constriction. All three are done on the image, and the app measures along the trace.</p>
+
+  <h3>Trace</h3>
+  <p>With <span class="ui">Trace</span>, click along the chromosome, from one telomere to the other, following its curvature; each click adds a point. You can also hold the button down and trace freehand: the app takes a point every six screen pixels. To finish, double-click or press <code>Enter</code>; <code>Backspace</code> removes the last point and <code>Esc</code> cancels the trace. While you trace, the line is pink and follows the pointer.</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b2-trazar.png" alt="A pink trace half done along a zoomed-in chromosome, with its points marked"></div>
+    <figcaption><b>Figure 2.6.</b> A trace half done. For this figure the trace of chromosome 1 of cell 1 was erased and started again: the small squares are the clicks, and the last stretch follows the pointer. It is worth zooming in so that the points fall on the axis of the chromosome, between its two chromatids.</figcaption>
+  </figure>
+
+  <p>When you finish, the chromosome receives the first free number of the cell (1, 2, 3…) and the app switches by itself to <span class="ui">Centromere</span>, because a trace without a centromere does not yet give arms: its number is shown in orange, its tile counts it as <i>incomplete</i> and the table of measurements says <span class="ui">no centromere</span>. A trace shorter than three pixels is discarded.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · measuring along the curvature</div>
+    <p>The trace is a polyline: a chain of straight segments. Its length is the sum of the lengths of its segments, and with enough points it approaches that of the curved axis of the chromosome. A straight line between the two ends of a bent chromosome would shorten it; the polyline measures what the chromosome would measure stretched out. The positions of the centromere and the satellite are stored as distances along the polyline, from its first point.</p>
+  </div>
+
+  <h3>Centromere</h3>
+  <p>With <span class="ui">Centromere</span>, click on the trace where the primary constriction is. You do not need to hit the line: the app moves the click to the nearest point of the trace (of the selected chromosome, or of the one closest to the click) and measures both arms along the curvature. The shorter arm is p and the longer, q. A new click changes the position of the centromere. The centromere is drawn as a white circle.</p>
+
+  <h3>Satellite</h3>
+  <p>Some chromosomes have a secondary constriction, almost always on the short arm, where the nucleolus organizer region lies; the piece beyond it is the <b>satellite</b> (Battaglia, 1955). With <span class="ui">Satellite</span>, click on the trace at the secondary constriction: what is left to the end of that arm is the satellite, and it is drawn with an orange diamond. The centromere must be marked first; otherwise the app reminds you: “First mark the centromere of this chromosome.”</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b2-elegido.png" alt="Chromosome 11 zoomed in and selected, with its centromere, its satellite and its measurements in the panel"></div>
+    <figcaption><b>Figure 2.7.</b> Chromosome 11 of cell 1, selected with <span class="ui">Edit</span>: its trace in pink with its points, the centromere (circle) and the secondary constriction (diamond) on the short arm. Its heterochromatic knob can be seen at the lower left. The panel <span class="ui">Chromosome 11</span> gives its measurements.</figcaption>
+  </figure>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · chromosome 11 of the example maize</div>
+    <p>The panel says p = 1.08 µm, q = 3.74 µm, satellite = 0.46 µm (on p) and total = 5.28 µm. The p arm is given without the satellite, which goes separately. For the class, however, the app adds the satellite to its arm, as Block 3 does by default: the whole short arm measures 1.08 + 0.46 = 1.54 µm, so the centromeric index (“IC” in the panel) is 100 × 1.54 / 5.28 = 29.2 and r = 3.74 / 1.54 = 2.42, a submetacentric (sm). It is one of the two homologues that form pair 6, the satellite pair, in Block 3.</p>
+  </div>
+  <p>When you mark a centromere or a satellite, the app announces the measurements to screen readers (“Chromosome 11: p 1.08, q 3.74, satellite 0.46”), so the editor can also be used with them.</p>
+
+  <!-- 2.5 -->
+  <h2 id="s2-5"><span class="num">2.5</span>Edit, erase, undo and the annotated image</h2>
+  <h3>Edit</h3>
+  <p>With <span class="ui">Edit</span>, a click on a trace selects it: it is drawn in pink, with its points in view, and its row is highlighted in the table. Once it is selected, you can drag any of its points to correct the trace, and drag the centromere or the satellite along the line. <code>Delete</code> removes the selected trace. A click on an empty spot deselects it and, if you drag, pans the image.</p>
+  <p>The panel <span class="ui">Selected chromosome</span> then turns into <span class="ui">Chromosome</span> with its number (Figure 2.7) and gives p, q, the satellite and its arm, the total, the centromeric index, r and the class with the scheme chosen in Block 3. If the trace lacks a centromere, it gives only its length and says so. Two buttons act on it: <span class="ui">Remove the satellite</span> (only if it has one) and <span class="ui">Delete</span>.</p>
+
+  <h3>Erase</h3>
+  <p>With <span class="ui">Erase</span>, a click on a count mark removes it; if there is no mark nearby, it removes the trace under the click. The marks are renumbered automatically. Whatever you erase comes back with <span class="ui">↶ Undo</span>.</p>
+
+  <h3>Undo and redo</h3>
+  <p><span class="ui">↶ Undo</span> (<code>Ctrl + Z</code>) and <span class="ui">↷ Redo</span> (<code>Ctrl + Y</code> or <code>Ctrl + Shift + Z</code>) step through the latest changes of the cell: traces, centromeres, satellites, moved points, count marks, calibration and deletions, up to 120 steps back. With a trace half done, <span class="ui">↶ Undo</span> discards it. The history belongs to the open cell: choosing another cell starts a new one.</p>
+
+  <h3>The annotated image</h3>
+  <p><span class="ui">Annotated image (PNG)</span> downloads the micrograph at its original resolution, with the brightness and contrast you chose and with everything you drew on it: the calibration line, the count marks, the traces with their number, the centromeres and the satellites. The file name is made of the accession and the cell and ends in <code>_anotada.png</code>. It is the figure worth keeping with the raw data, because it shows exactly what was measured.</p>
+
+  <!-- 2.6 -->
+  <h2 id="s2-6"><span class="num">2.6</span>Measurements of the cell and pasted measurements</h2>
+  <p>The card <span class="ui">Measurements of the cell</span> gives one row per chromosome of the selected cell, with or without an image.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b2-tabla.png" alt="The table of measurements of cell 1 with its first ten traced chromosomes"></div>
+    <figcaption><b>Figure 2.8.</b> <span class="ui">Measurements of the cell</span> for cell 1 of the example maize. The values come from the traces (<i>trace</i> under <span class="ui">Source</span>) and are not edited here; the table scrolls to show all twenty.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <thead><tr><th style="width:1.5in">Column</th><th>What it contains</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Chromosome</span></td><td>The number or name of the chromosome in the cell.</td></tr>
+      <tr><td>p · q</td><td>The short and the long arm, without the satellite, in µm (or in px if the cell with an image is not calibrated).</td></tr>
+      <tr><td><span class="ui">Satellite</span> · <span class="ui">Arm</span></td><td>The length of the satellite and the arm that carries it (p or q).</td></tr>
+      <tr><td><span class="ui">Total</span></td><td>p + q + satellite.</td></tr>
+      <tr><td>IC · r</td><td>The centromeric index (headed “IC”) and the arm ratio, with the satellite added to its arm as in the example of chromosome 11.</td></tr>
+      <tr><td><span class="ui">Class</span></td><td>m, sm, st or t (and M or T in the exact cases), with the scheme of Block 3; <span class="ui">no centromere</span> if the trace is incomplete.</td></tr>
+      <tr><td><span class="ui">Source</span></td><td><i>trace</i> if it comes from the image; <i>typed</i> if it was typed or pasted. The × button deletes the row.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Typing by hand</h3>
+  <p>In a cell without an image, or for the chromosomes that were not traced, each value is an editable field: the name, p, q, the satellite and, in a list, its arm. <span class="ui">+ Chromosome</span> adds an empty row. If you copy a block of cells from a spreadsheet (p, q and satellite, several rows) and paste it onto a p cell, the app fills the rows downward and creates the ones that are missing.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b2-amano.png" alt="The first six rows of cell 2, typed by hand, with their editable fields"></div>
+    <figcaption><b>Figure 2.9.</b> The first rows of cell 2 of the example maize, typed in by hand. Chromosome 6 carries a satellite of 0.47 µm on p: its total is 5.50 µm, with a centromeric index of 28.2 and r = 2.55 (sm).</figcaption>
+  </figure>
+
+  <p>At the foot of the table, <span class="ui">This cell (CSV)</span> downloads the measurements of the selected cell; <span class="ui">All measurements (CSV)</span> and <span class="ui">All (TSV)</span>, those of the whole project, in <code>mediciones.csv</code> or <code>mediciones.tsv</code>. The columns are accession, taxon, cell, chromosome, p, q, satellite, satellite arm, unit (µm or px) and source; incomplete traces are not exported.</p>
+
+  <h3>Paste measurements</h3>
+  <p>If you already have the measurements in a spreadsheet or in the table of a paper, <span class="ui">Paste measurements</span> reads them in one go. One row per chromosome, in microns, with tab, semicolon or comma as the separator:</p>
+  <ul class="lista">
+    <li><b>With headers,</b> the app recognizes the columns by their name: accession (or sample, population), taxon (or species), cell (or plate, metaphase), chromosome, p (or short), q (or long), satellite, satellite arm and unit. It is enough for p and q to be there.</li>
+    <li><b>Without headers,</b> it decides by the number of columns: <b>p q</b> (all in a new cell), <b>chromosome p q</b>, <b>cell chromosome p q</b> or <b>accession cell chromosome p q [satellite] [arm]</b>.</li>
+  </ul>
+  <p>Rows without a valid number for p (zero or more) and for q (greater than zero) are skipped, and the message says which ones. Accessions are looked up by name and those that do not exist are created, with their taxon if the table carries it; a table with a taxon and no accession column makes one accession per taxon. Rows that name no accession go to the selected accession, which is created only if needed.</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b2-pegar.png" alt="The Paste measurements box with the CSV file of cell 2 and the message that 20 chromosomes were read"></div>
+    <figcaption><b>Figure 2.10.</b> <span class="ui">Paste measurements</span> in a new project, with the CSV that the app itself wrote for cell 2 of the example maize (<span class="ui">This cell (CSV)</span>). After <span class="ui">Read the measurements</span>, the app replies: “20 chromosomes read in 1 cell and 1 new accession.” The accession “Landrace maize · Texcoco” is created with its taxon, <i>Zea mays</i>.</figcaption>
+  </figure>
+
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>The app’s CSV reads back whole</div>
+    <p>What <span class="ui">This cell (CSV)</span> and <span class="ui">All measurements (CSV)</span> export can be pasted back as it is, in this project or in another: the app reads the accession, the taxon, the cell, the chromosome, p, q, the satellite and its arm, and the unit. If a cell was exported in pixels (not calibrated), it stays in pixels when it comes back, and the message says so: “One cell comes in pixels (not calibrated).”</p>
+  </div>
+
+  <!-- 2.7 -->
+  <h2 id="s2-7"><span class="num">2.7</span>Summary of the measurements</h2>
+  <p>The last card sums up everything measured in the project, in four figures and one table per accession, and warns about what is worth checking before moving on to the karyotype.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b2-resumen.png" alt="The summary of the measurements of the maize: one accession, five cells, a hundred chromosomes measured and one calibrated cell out of one"></div>
+    <figcaption><b>Figure 2.11.</b> <span class="ui">Summary of the measurements</span> of the example maize: 1 accession, 5 cells (1 with image), 100 chromosomes measured and 1 / 1 calibrated cells; the mode is 20 chromosomes per cell.</figcaption>
+  </figure>
+
+  <p>The four figures are <span class="ui">Accessions</span>, <span class="ui">Cells</span> (with how many have an image), <span class="ui">Chromosomes measured</span> (the complete ones: a trace without a centromere does not count) and <span class="ui">Calibrated cells</span> among those with an image, which adds how many cells without an image are in pixels and is flagged as a warning if any still needs calibrating. The table gives, per accession, its taxon, its cells, how many have measurements, how many chromosomes and the mode of chromosomes measured per cell. Two warnings may appear below:</p>
+  <ul class="lista">
+    <li>If not every cell of an accession has the same number of measured chromosomes: check that none is missing or duplicated, because Block 3 groups whatever each cell has.</li>
+    <li>If an accession has uncalibrated cells (with an uncalibrated image, or typed or pasted in pixels): “… has one uncalibrated cell: their measurements are in pixels.”, with the suggestion to calibrate with the scale bar or to type the measurements in microns.</li>
+  </ul>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Decision rule · before moving on to Block 3</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> <span class="ui">Calibrated cells</span> is not “n / n”</td><td><b>then</b> calibrate the missing ones with their scale bar.</td></tr>
+      <tr><td><b>If</b> a cell has <i>incomplete</i> traces</td><td><b>then</b> mark their centromere or delete them; they do not enter the karyotype.</td></tr>
+      <tr><td><b>If</b> the summary warns that the number varies among cells</td><td><b>then</b> look for the missing chromosome or the one traced twice; if the cell is truly aneuploid, note it and consider leaving it out of the karyotype.</td></tr>
+      <tr><td><b>If</b> you only counted, without measuring</td><td><b>then</b> take the counts to Block 6; the karyotype needs measurements.</td></tr>
+      <tr><td><b>If</b> everything is in order</td><td><b>then</b> save the project (<code>Ctrl + S</code>) and move on to Block 3.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">It is worth measuring several well-spread metaphases per accession; the app accepts any number, and Block 3 shows the deviation among cells.</p>
+  </div>
+
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>When something goes wrong</div>
+    <p><b>The tool keys do nothing.</b> The canvas must have the focus: click on the image or on the tool’s button. <b>“Click on the trace of a chromosome.”</b> The click with <span class="ui">Centromere</span> or <span class="ui">Satellite</span> landed far from any trace: zoom in and try again. <b>The measurements come out in px.</b> The cell is not calibrated. <b>A chromosome does not appear in the summary.</b> It lacks its centromere. <b>p and q came out the other way around from what you expected.</b> The app calls p the shorter arm (with its satellite), regardless of which end you started tracing from. <b>I calibrated with the wrong length.</b> Correct the number in <span class="ui">Length of the scale bar (µm)</span>: everything is recomputed. <b>The project is very heavy.</b> The images go inside the <code>.json</code>: crop them to the metaphase before opening them.</p>
+  </div>
+</section>
+
+</body>
+</html>

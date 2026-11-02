@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · User’s Manual · Chapter 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-1" data-pestana="1" data-orden="1" style="--acento: var(--b1)">
+  <div class="cap-apertura">
+    <div class="cap-num">1</div>
+    <div class="cap-etiqueta">Chapter one · Block 1</div>
+    <h1 data-corto="Home">Home: the theory, the labs and the examples</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">The first block asks for no data: it gets you oriented. It is the home page of the app, and on a single page it gathers what is worth knowing before you measure your first chromosome: the route of a study, two labs that compute with the same engines the app will use on your images, the ten blocks and the four examples, the 36 methods with the work that defines each one, the theory in plain words, what the program does not do, the 48 references and the citation.</p>
+    <div class="cap-franja"><span class="k1"></span><span class="k1"></span><span class="k3"></span><span class="k4"></span><span class="k5"></span></div>
+    <ul class="cap-contenido">
+      <li><b>1.1</b>The home page and its idiogram</li>
+      <li><b>1.2</b>How it works: the route of a study</li>
+      <li><b>1.3</b>Two labs that really compute</li>
+      <li><b>1.4</b>The ten blocks and the examples</li>
+      <li><b>1.5</b>The methods and where they come from</li>
+      <li><b>1.6</b>The theory, in plain words</li>
+      <li><b>1.7</b>Limits, references and how to cite</li>
+    </ul>
+  </div>
+
+  <!-- 1.1 -->
+  <h2 id="s1-1"><span class="num">1.1</span>The home page and its idiogram</h2>
+  <p class="lead">When you open the app, Block 1 appears. At the top is the motto, “From the chromosome count to the publishable karyotype,” with a paragraph that sums up what the program does, four buttons to get started and, on the right, a figure that is no mere decoration: an idiogram computed by the app.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-heroe.png" alt="The home page of the app: the motto, the four buttons, the badges and a metaphase with its ten-pair idiogram"></div>
+    <figcaption><b>Figure 1.1.</b> The home page. The metaphase at the top is arranged into the idiogram below, to scale in microns, with the class of each pair under its number. Underneath, the formula and three numbers of the karyotype: <i>2n</i> = 2x = 20 = 8m + 10sm + 2sm-sat, Stebbins category 3B, MCA = 29.9 and CVCL = 25.6.</figcaption>
+  </figure>
+
+  <p>The figure comes from the base karyotype of the example maize (the same one that generated the simulated measurements of the <i>Zea mays</i> example) and is drawn with the same engines as Block 3 and Block 4. Read it like this: the ten pairs go from longest to shortest; the dashed line is the centromere, with the short arm (p) above and the long arm (q) below; the black bands are heterochromatic knobs—seven, one on each pair from 2 to 9 except pair 3—and the asterisk on pair 6 marks its satellite, the nucleolus organizer region (NOR). It is a simulated example, and the figure itself says so.</p>
+
+  <table class="compacta">
+    <thead><tr><th style="width:2.1in">Button</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Start with my images →</span></td><td>Opens Block 2, where the micrographs are opened or the measurements are typed in.</td></tr>
+      <tr><td><span class="ui">Try the labs</span></td><td>Scrolls down, on this same page, to the section of the two labs (Section 1.3).</td></tr>
+      <tr><td><span class="ui">Read the theory</span></td><td>Scrolls down to <span class="ui">The theory, in plain words</span> (Section 1.6).</td></tr>
+      <tr><td><span class="ui">Open a project</span></td><td>Asks for a <code>.json</code> file saved earlier by the app, opens it with its images and takes you to Block 2. It is the same as <code>Ctrl + O</code> from any block.</td></tr>
+    </tbody>
+  </table>
+  <p>Below the buttons, four badges sum up its commitments: <span class="ui">Runs entirely in your browser</span>, <span class="ui">Your data never leave your computer</span>, <span class="ui">Indices validated against independent implementations</span> (Section I.9) and <span class="ui">Spanish and English</span>.</p>
+
+  <!-- 1.2 -->
+  <h2 id="s1-2"><span class="num">1.2</span>How it works: the route of a study</h2>
+  <p>Below the home banner, <span class="ui">How it works</span> lays out in a strip the seven steps of a cytogenetic study, in the order in which they are done (Figure I.6 of the introduction). Each step has a name and a line that says what is done in it:</p>
+  <table class="compacta">
+    <thead><tr><th style="width:0.6in" class="c">Step</th><th style="width:1.1in">Name</th><th>In the app</th><th style="width:0.9in" class="c">Block</th></tr></thead>
+    <tbody>
+      <tr><td class="c">1</td><td><b>Prepare</b></td><td>roots, anthers, staining: this happens at the bench; the practical sheet of Block 9 explains it</td><td class="c"><span class="chip k9">9</span></td></tr>
+      <tr><td class="c">2</td><td><b>Count</b></td><td>the number 2n, with marks on the image or in the table of counts</td><td class="c"><span class="chip k2">2</span> <span class="chip k6">6</span></td></tr>
+      <tr><td class="c">3</td><td><b>Measure</b></td><td>each arm, to scale, on the calibrated micrograph</td><td class="c"><span class="chip k2">2</span></td></tr>
+      <tr><td class="c">4</td><td><b>Arrange</b></td><td>homologues and idiogram</td><td class="c"><span class="chip k3">3</span></td></tr>
+      <tr><td class="c">5</td><td><b>Describe</b></td><td>asymmetry and formula; also meiosis, ploidy and the signals</td><td class="c"><span class="chip k4">4</span> <span class="chip k5">5</span> <span class="chip k7">7</span></td></tr>
+      <tr><td class="c">6</td><td><b>Compare</b></td><td>cytotypes and taxa</td><td class="c"><span class="chip k8">8</span></td></tr>
+      <tr><td class="c">7</td><td><b>Publish</b></td><td>figures, methods, package</td><td class="c"><span class="chip k10">10</span></td></tr>
+    </tbody>
+  </table>
+  <p>The strip is a guide, not a checklist: you can enter any block from the bar on the left, and the ones that do not apply to your study are skipped.</p>
+
+  <!-- 1.3 -->
+  <h2 id="s1-3"><span class="num">1.3</span>Two labs that really compute</h2>
+  <p>The section <span class="ui">Try it: two labs that really compute</span> has two tabs. Neither is a recorded animation: every change recomputes, with the karyotype, asymmetry and meiosis engines, what the app will later compute with your data. They help you understand what moves each index before you have results of your own, and they work well in class.</p>
+
+  <h3>Draw an idiogram</h3>
+  <p>A four-pair idiogram that you change with the mouse: drag the circles at the ends to lengthen or shorten each arm. You can also type the length in the table below, in microns (p, the short arm; q, the long one), or use the keyboard: with a circle selected, the arrow keys move it 0.05 µm, and with <code>Shift</code>, 0.5 µm. For each pair the table gives its centromeric index (headed “IC” in the app), its arm ratio (r) and its class according to Levan et al. (1964), with the full name.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-lab1.png" alt="The Draw an idiogram lab with four pairs, the table of arms, the twelve indices and the Stebbins grid"></div>
+    <figcaption><b>Figure 1.2.</b> <span class="ui">Draw an idiogram</span> with its four starting pairs. The recommended indices (MCA, CVCI and CVCL) are framed; the tag of each one says whether it measures intrachromosomal asymmetry (<i>intra</i>), interchromosomal asymmetry (<i>inter</i>) or both (<i>both</i>). The karyotype falls in cell 3A of the Stebbins grid.</figcaption>
+  </figure>
+
+  <p>The five buttons at the top change the starting point:</p>
+  <table class="compacta">
+    <thead><tr><th style="width:1.5in">Button</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Reset</span></td><td>Returns to the four starting pairs: p = 3.00, 2.10, 1.20 and 0.70 µm with q = 3.40, 3.70, 3.60 and 4.00 µm.</td></tr>
+      <tr><td><span class="ui">All symmetric</span></td><td>Makes every pair equal and nearly metacentric (2.90 and 3.10 µm).</td></tr>
+      <tr><td><span class="ui">Very asymmetric</span></td><td>Sets pairs of very different sizes with the centromere near one end.</td></tr>
+      <tr><td><span class="ui">+ Chromosome</span> · <span class="ui">− Chromosome</span></td><td>Adds a pair (of 1.50 and 2.50 µm) or removes the last one. The lab takes three to six pairs, and warns you if you ask for more or fewer.</td></tr>
+    </tbody>
+  </table>
+  <p>On the right, twelve tiles give the asymmetry indices computed by Block 4—TF%, AsK%, Syi, A1, A, MCA, CVCI, Rec, A2, CVCL, AI and DI—and, below them, the grid of the Stebbins (1971) categories: the columns go from 1 to 4 as the proportion of chromosomes with r &lt; 2 falls, and the rows from A to C as the ratio between the longest and the shortest pair grows (&lt; 2, 2–4, &gt; 4). Hover over an index tile to see its formula and its reference. The line at the foot puts it all into words: the formula, the category with its two ratios and the two recommended indices.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-lab1-asim.png" alt="The lab after pressing Very asymmetric: three telocentric pairs and one subtelocentric, category 4B"></div>
+    <figcaption><b>Figure 1.3.</b> The same lab with <span class="ui">Very asymmetric</span>: three telocentric pairs and one subtelocentric (pair 3, with r = 6.67). The order of the pairs does not change when they are moved, so the longest one can end up anywhere; the category becomes 4B and MCA rises to 84.05.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <caption>The three starting points of the lab, as the app gives them</caption>
+    <thead><tr><th>Button</th><th>Formula (as a diploid)</th><th class="c">Stebbins</th><th class="c">Longest / shortest</th><th class="c">r &lt; 2</th><th class="c">MCA</th><th class="c">CVCL</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Reset</span></td><td>2n = 8 = 2m + 4sm + 2st</td><td class="c">3A</td><td class="c">1.36</td><td class="c">50%</td><td class="c">38.5</td><td class="c">15.1</td></tr>
+      <tr><td><span class="ui">All symmetric</span></td><td>2n = 8 = 8m</td><td class="c">1A</td><td class="c">1.00</td><td class="c">100%</td><td class="c">3.3</td><td class="c">0.0</td></tr>
+      <tr><td><span class="ui">Very asymmetric</span></td><td>2n = 8 = 2st + 6t</td><td class="c">4B</td><td class="c">3.11</td><td class="c">0%</td><td class="c">84.1</td><td class="c">44.0</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Example · two asymmetries that do not get mixed up</div>
+    <p>Press <span class="ui">All symmetric</span>: MCA = 3.3 and CVCL = 0.0, category 1A. Now drag down only the end of the long arm of pair 1: MCA rises (the centromere of that pair moves away from the middle) and CVCL rises too (that pair is now longer than the others). Go back and instead change both arms of pair 1 in the same proportion: CVCL rises, but MCA does not change, because the relative position of the centromere of that pair is the same. That is why asymmetry is best described with two numbers rather than one (Peruzzi and Eroğlu, 2013); Chapter 4 explains it in depth.</p>
+  </div>
+
+  <h3>Ploidy and meiosis</h3>
+  <p>The second tab shows which meiotic configurations are expected in a polyploid according to its origin. In an <b>autopolyploid</b> the homologues pair at random and may form multivalents; in an <b>allopolyploid</b> each chromosome pairs only with the one of its own genome, and bivalents are expected.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-lab2.png" alt="The Ploidy and meiosis lab with an autotetraploid of x = 7: bars and table of expected configurations and one cell at diakinesis"></div>
+    <figcaption><b>Figure 1.4.</b> <span class="ui">Ploidy and meiosis</span> with its starting values: an autotetraploid (AAAA) with x = 7 and c = 0.85. On the left, the configurations expected per cell, as bars and as a table (multivalents in blue); on the right, one cell at diakinesis drawn from the same model: 1 I + 2 II ring + 1 III + 3 IV chain + 2 IV ring, which add up to the 28 chromosomes.</figcaption>
+  </figure>
+
+  <p>The controls of the tab are:</p>
+  <ul class="lista">
+    <li><span class="ui">Ploidy level</span>: 2x, 3x, 4x, 5x, 6x or 8x.</li>
+    <li><span class="ui">Origin</span>: <span class="ui">Autopolyploid</span>, <span class="ui">Allopolyploid</span> or <span class="ui">Own formula</span>; the last one opens the field <span class="ui">Genome formula</span>, where each letter is a genome (AAAABB, for instance, a segmental allopolyploid), up to eight genomes.</li>
+    <li><span class="ui">Base number x</span>, from 3 to 20, and <span class="ui">Chiasma per arm, c</span>, from 0 to 1: the probability that a paired arm forms at least one chiasma.</li>
+    <li><span class="ui">Another random cell</span>, which draws another cell from the same model.</li>
+  </ul>
+
+  <p>With the starting values the app writes at the foot: 2n = 4x = 28; <b>23.8 chiasmata per cell</b> are expected (28 paired arms × c), and each group of four homologues forms a multivalent with probability <b>63.7%</b>, so a cell has <b>4.46</b> multivalents on average. Change the origin to <span class="ui">Allopolyploid</span> and the formula becomes AABB: the expected chiasmata are the same, but the multivalents vanish—only 0.630 univalents, 3.570 rod bivalents and 10.115 ring bivalents per cell remain. Raise c to 1 and you will see the maximum number of multivalents that random pairing allows.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief</div>
+    <p>The model follows Jackson and Casey (1982): the homologues of each group pair at random by arms, and each paired arm forms a chiasma with probability c. A bivalent with chiasmata in both arms is a <b>ring</b>; with only one, a <b>rod</b>; a chromosome without a chiasma remains as a <b>univalent</b>. It is the same model with which Block 5 compares your observed configurations with what is expected for each origin.</p>
+  </div>
+
+  <!-- 1.4 -->
+  <h2 id="s1-4"><span class="num">1.4</span>The ten blocks and the examples</h2>
+  <p><span class="ui">The ten blocks</span> presents each block on a card with its number, a drawing made by the app, the verb of the step it covers (Measure, Arrange, Describe…), its name and what it does. A click on the card opens the block; it is the same as choosing it in the bar on the left.</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b1-bloques.png" alt="The ten block cards, each with its drawing, its verb, its name and its description"></div>
+    <figcaption><b>Figure 1.5.</b> <span class="ui">The ten blocks</span>. The verb on each card is its step in the study: Theory and labs, Measure, Arrange, Describe, Pair, Count, Mark, Compare, Teach and Publish.</figcaption>
+  </figure>
+
+  <p>Further down, <span class="ui">Included examples</span> offers the four simulated data sets described in Section I.7 (Figure I.5). Each card says in which blocks its example is used, and the button <span class="ui">Open the example</span> loads it and takes you to the block where it starts: the maize to Block 2, the chayote to Block 3, the polyploid series to Block 5 and the <i>Allium</i> test to Block 6.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Opening an example replaces the project</div>
+    <p>An example is not added to your data: it replaces them. If there are already data in the app, it asks you before going on. Save your project with <code>Ctrl + S</code> if you want to come back to it.</p>
+  </div>
+
+  <!-- 1.5 -->
+  <h2 id="s1-5"><span class="num">1.5</span>The methods and where they come from</h2>
+  <p>The section <span class="ui">The methods and where they come from</span> sets out on cards the 36 methods the app computes, each with its family, its name and the work that defines it. The buttons at the top filter by family; <span class="ui">All (36)</span> shows them all again.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-metodos.png" alt="The 36 method cards with the filters by family"></div>
+    <figcaption><b>Figure 1.6.</b> The 36 methods with their source. The color of the tag says the family.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <thead><tr><th style="width:1.45in">Family</th><th class="c" style="width:0.5in">Cards</th><th>Methods and source</th></tr></thead>
+    <tbody>
+      <tr><td>Image and measurement</td><td class="c">2</td><td>Calibration with the scale bar (µm per pixel); length along the curvature (traced as a polyline)</td></tr>
+      <tr><td>Karyotype</td><td class="c">4</td><td>Centromere position (Levan et al., 1964); revised nomenclature (Guerra, 1986); satellites (Battaglia, 1955); chromosome and base number (Guerra, 2008)</td></tr>
+      <tr><td>Asymmetry</td><td class="c">10</td><td>TF% (Huziwara, 1962); AsK% (Arano, 1963); Syi and Rec (Greilhuber and Speta, 1976); A1 and A2 (Romero Zarco, 1986); A (Watanabe et al., 1999); CVCL, CVCI and AI (Paszko, 2006); MCA (Peruzzi and Eroğlu, 2013); heterogeneity of the centromeric index (Zuo and Yuan, 2011); DI (Lavania and Srivastava, 1992); categories 1A–4C (Stebbins, 1971)</td></tr>
+      <tr><td>Meiosis</td><td class="c">5</td><td>Configurations and chiasmata (Sybenga, 1975); expected configurations in polyploids (Jackson and Casey, 1982); recombination index (Colombo, 1992); meiotic index (Love, 1951); pollen viability (Alexander, 1969)</td></tr>
+      <tr><td>Ploidy and genome</td><td class="c">4</td><td>DNA content by flow cytometry (Doležel et al., 2007); from picograms to base pairs (Doležel et al., 2003); C- and Cx-values (Greilhuber et al., 2005); <i>Allium</i> test (Fiskesjö, 1985)</td></tr>
+      <tr><td>Banding and FISH</td><td class="c">2</td><td>Heterochromatin and fluorochromes (Guerra, 2000); fluorescence in situ hybridization (Jiang and Gill, 2006)</td></tr>
+      <tr><td>Comparison</td><td class="c">7</td><td>Multivariate karyological relationships (Peruzzi and Altınordu, 2014); Gower distance (Gower, 1971); UPGMA (Sneath and Sokal, 1973); Ward (Ward, 1963); cophenetic correlation (Sokal and Rohlf, 1962); principal components and biplot (Jolliffe, 2002; Gabriel, 1971); number evolution by parsimony (Sankoff, 1975)</td></tr>
+      <tr><td>Statistics</td><td class="c">2</td><td>Intervals for a proportion (Wilson, 1927; Clopper and Pearson, 1934); homogeneity χ² and G (Sokal and Rohlf, 1995)</td></tr>
+    </tbody>
+  </table>
+  <p>This list is the complete catalog. The report and the written methods of Block 10, by contrast, cite only the methods your project used.</p>
+
+  <!-- 1.6 -->
+  <h2 id="s1-6"><span class="num">1.6</span>The theory, in plain words</h2>
+  <p><span class="ui">The theory, in plain words</span> gathers in ten expandable topics the ideas that hold up the rest of the app. Each topic says on the right in which block it is used, and five of them carry a drawing made by the app. The first one appears open; a click on the title opens or closes any of them.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-teoria.png" alt="The theory section with the first two topics open: the parts of the chromosome and the four Levan classes"></div>
+    <figcaption><b>Figure 1.7.</b> The theory with the first two topics open: the parts of a metaphase chromosome and the four classes of Levan et al. (1964) by arm ratio.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <thead><tr><th style="width:0.35in" class="c">#</th><th>Topic</th><th style="width:0.9in" class="c">Block</th><th>The idea, in one line</th></tr></thead>
+    <tbody>
+      <tr><td class="c">1</td><td>The chromosome and its parts</td><td class="c"><span class="chip k2">2</span> <span class="chip k3">3</span></td><td>Chromatids, centromere, arms p and q, telomeres, secondary constriction and satellite; an arm is measured along its curvature.</td></tr>
+      <tr><td class="c">2</td><td>Where the centromere is: m, sm, st and t</td><td class="c"><span class="chip k3">3</span></td><td>r = q/p and CI = 100·p/(p + q) give the class; the Levan limits are 1.7, 3.0 and 7.0.</td></tr>
+      <tr><td class="c">3</td><td>Karyotype, idiogram and formula</td><td class="c"><span class="chip k3">3</span></td><td>Means of several cells, relative length, karyotype formula and fundamental number.</td></tr>
+      <tr><td class="c">4</td><td>Asymmetry: two different things</td><td class="c"><span class="chip k4">4</span></td><td>Intrachromosomal (centromeres) and interchromosomal (lengths); MCA, CVCL and CVCI.</td></tr>
+      <tr><td class="c">5</td><td>Mitosis and the count of 2n</td><td class="c"><span class="chip k2">2</span> <span class="chip k6">6</span></td><td>Pretreatment, fixation, hydrolysis, staining and squashing; the mode of several cells; mitotic index.</td></tr>
+      <tr><td class="c">6</td><td>Meiosis: pairing, chiasmata and configurations</td><td class="c"><span class="chip k5">5</span></td><td>Ring and rod bivalents, univalents, multivalents; recombination index and meiotic index.</td></tr>
+      <tr><td class="c">7</td><td>Ploidy, base number, aneuploidy and dysploidy</td><td class="c"><span class="chip k6">6</span> <span class="chip k8">8</span></td><td>x, ploidy level and euploid series; gaining single chromosomes is not the same as changing x.</td></tr>
+      <tr><td class="c">8</td><td>Genome size: C- and Cx-values</td><td class="c"><span class="chip k6">6</span></td><td>2C, 1C and 1Cx; the internal standard of flow cytometry; 1 pg = 978 Mbp.</td></tr>
+      <tr><td class="c">9</td><td>Banding and in-situ hybridization</td><td class="c"><span class="chip k7">7</span></td><td>C-bands, CMA⁺ and DAPI⁺; 5S and 45S rDNA, telomeres and GISH; each signal by chromosome, arm and position.</td></tr>
+      <tr><td class="c">10</td><td>Comparing karyotypes and number evolution</td><td class="c"><span class="chip k8">8</span></td><td>A matrix of parameters, multivariate methods and parsimony on a tree.</td></tr>
+    </tbody>
+  </table>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Decision rule · the Levan classes</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:40%"><b>If</b> r ≤ 1.7</td><td><b>then</b> metacentric (m); M if r = 1 exactly.</td></tr>
+      <tr><td><b>If</b> 1.7 &lt; r ≤ 3.0</td><td><b>then</b> submetacentric (sm).</td></tr>
+      <tr><td><b>If</b> 3.0 &lt; r ≤ 7.0</td><td><b>then</b> subtelocentric (st).</td></tr>
+      <tr><td><b>If</b> r &gt; 7.0</td><td><b>then</b> telocentric (t); T if there is no short arm (r = ∞).</td></tr>
+    </tbody></table>
+    <p class="regla-pie">These are the limits the labs and Block 3 use by default; there they can be changed for those of Guerra (1986) or for your own.</p>
+  </div>
+
+  <!-- 1.7 -->
+  <h2 id="s1-7"><span class="num">1.7</span>Limits, references and how to cite</h2>
+  <h3>What this program does not do</h3>
+  <p>The home page ends with three practical sections. The first, <span class="ui">What this program does not do</span>, names four limits, which Section I.10 of the introduction explains in more detail:</p>
+  <ul class="lista">
+    <li><b>Recognizing chromosomes by itself:</b> you trace each chromosome; the app measures exactly what you trace, without automatic segmentation.</li>
+    <li><b>Driving the microscope or the cytometer:</b> it reads the images and text files they export, never the instruments.</li>
+    <li><b>Likelihood models:</b> chromosome number evolution is reconstructed by parsimony with costs per event.</li>
+    <li><b>Maps with third-party layers:</b> the map of cytotypes is drawn on a grid of coordinates, with your own outline if you load one.</li>
+  </ul>
+
+  <h3>References</h3>
+  <p><span class="ui">References</span> lists the 48 works the app cites, in alphabetical order, each with its topic. The buttons at the top filter by topic; the numbering is redone with what remains in view. They are the same works gathered in Appendix F of this manual.</p>
+  <table class="compacta">
+    <thead><tr><th>Topic</th><th class="c">Works</th><th>Topic</th><th class="c">Works</th></tr></thead>
+    <tbody>
+      <tr><td>Techniques</td><td class="c">4</td><td>Ploidy and genome</td><td class="c">5</td></tr>
+      <tr><td>Karyotype</td><td class="c">5</td><td>Banding and FISH</td><td class="c">3</td></tr>
+      <tr><td>Asymmetry</td><td class="c">11</td><td>Comparison</td><td class="c">10</td></tr>
+      <tr><td>Meiosis</td><td class="c">5</td><td>Statistics</td><td class="c">5</td></tr>
+    </tbody>
+  </table>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-referencias.png" alt="The list of references filtered by the topic Asymmetry, with eleven works"></div>
+    <figcaption><b>Figure 1.8.</b> <span class="ui">References</span> with the filter <span class="ui">Asymmetry</span>: the eleven works on the asymmetry indices, numbered anew.</figcaption>
+  </figure>
+
+  <h3>How to cite</h3>
+  <p>If the app helped you with a published work, <span class="ui">How to cite</span> gives the citation ready to copy with <span class="ui">Copy the citation</span> and, when you expand <span class="ui">BibTeX</span>, the same citation as a record for a reference manager, with <span class="ui">Copy BibTeX</span>. The version comes from the program itself, so it always matches the one you used. There is no digital object identifier (DOI) yet; it will be added to the citation when the program is published.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-cita.png" alt="The How to cite box with the citation as text and the BibTeX record expanded"></div>
+    <figcaption><b>Figure 1.9.</b> <span class="ui">How to cite</span>, with the BibTeX record expanded.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Cite the methods too</div>
+    <p>Citing the program does not replace citing the methods. If you publish MCA and CVCL, cite Peruzzi and Eroğlu (2013) and Paszko (2006); if you publish the Stebbins category, cite Stebbins (1971). The written methods of Block 10 already carry those citations, only for what you used.</p>
+  </div>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Decision rule · where to go next</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:40%"><b>If</b> you have micrographs of metaphases</td><td><b>then</b> <span class="ui">Start with my images →</span> and Chapter 2.</td></tr>
+      <tr><td><b>If</b> you already have the arm measurements</td><td><b>then</b> Block 2, <span class="ui">Paste measurements</span> (Section 2.6), and then Block 3.</td></tr>
+      <tr><td><b>If</b> you have a saved project</td><td><b>then</b> <span class="ui">Open a project</span> or <code>Ctrl + O</code>.</td></tr>
+      <tr><td><b>If</b> you only want to see how it works</td><td><b>then</b> an example from <span class="ui">Included examples</span>, or the labs.</td></tr>
+      <tr><td><b>If</b> you are going to teach</td><td><b>then</b> the labs on this page and Block 9.</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>When something goes wrong</div>
+    <p><b>The lab will not add or remove pairs.</b> It takes three to six; outside that range the app warns you and changes nothing. <b>The own formula does not compute.</b> It takes up to eight genomes (eight letters); with more, the foot says so. <b>Opening a project does nothing.</b> The file must be a <code>.json</code> saved by the app; if it is not, a notice appears with the reason.</p>
+  </div>
+</section>
+
+</body>
+</html>
