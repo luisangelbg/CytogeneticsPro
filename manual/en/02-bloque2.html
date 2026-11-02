@@ -175,7 +175,7 @@
 
   <div class="caja ejemplo">
     <div class="caja-t"><span class="ico">▸</span>Worked example · chromosome 11 of the example maize</div>
-    <p>The panel says p = 1.08 µm, q = 3.74 µm, satellite = 0.46 µm (on p) and total = 5.28 µm. The p arm is given without the satellite, which goes separately. For the class, however, the app adds the satellite to its arm, as Block 3 does by default: the whole short arm measures 1.08 + 0.46 = 1.54 µm, so the centromeric index (“IC” in the panel) is 100 × 1.54 / 5.28 = 29.2 and r = 3.74 / 1.54 = 2.42, a submetacentric (sm). It is one of the two homologues that form pair 6, the satellite pair, in Block 3.</p>
+    <p>The panel says p = 1.08 µm, q = 3.74 µm, satellite = 0.46 µm (on p) and total = 5.28 µm. The p arm is given without the satellite, which goes separately. For the class, however, the app adds the satellite to its arm, as Block 3 does by default: the whole short arm measures 1.08 + 0.46 = 1.54 µm, so CI = 100 × 1.54 / 5.28 = 29.2 and r = 3.74 / 1.54 = 2.42, a submetacentric (sm). It is one of the two homologs that form pair 6, the satellite pair, in Block 3.</p>
   </div>
   <p>When you mark a centromere or a satellite, the app announces the measurements to screen readers (“Chromosome 11: p 1.08, q 3.74, satellite 0.46”), so the editor can also be used with them.</p>
 
@@ -183,7 +183,7 @@
   <h2 id="s2-5"><span class="num">2.5</span>Edit, erase, undo and the annotated image</h2>
   <h3>Edit</h3>
   <p>With <span class="ui">Edit</span>, a click on a trace selects it: it is drawn in pink, with its points in view, and its row is highlighted in the table. Once it is selected, you can drag any of its points to correct the trace, and drag the centromere or the satellite along the line. <code>Delete</code> removes the selected trace. A click on an empty spot deselects it and, if you drag, pans the image.</p>
-  <p>The panel <span class="ui">Selected chromosome</span> then turns into <span class="ui">Chromosome</span> with its number (Figure 2.7) and gives p, q, the satellite and its arm, the total, the centromeric index, r and the class with the scheme chosen in Block 3. If the trace lacks a centromere, it gives only its length and says so. Two buttons act on it: <span class="ui">Remove the satellite</span> (only if it has one) and <span class="ui">Delete</span>.</p>
+  <p>The panel <span class="ui">Selected chromosome</span> then turns into <span class="ui">Chromosome</span> with its number (Figure 2.7) and gives p, q, the satellite and its arm, the total, CI, r and the class with the scheme chosen in Block 3. If the trace lacks a centromere, it gives only its length and says so. Two buttons act on it: <span class="ui">Remove the satellite</span> (only if it has one) and <span class="ui">Delete</span>.</p>
 
   <h3>Erase</h3>
   <p>With <span class="ui">Erase</span>, a click on a count mark removes it; if there is no mark nearby, it removes the trace under the click. The marks are renumbered automatically. Whatever you erase comes back with <span class="ui">↶ Undo</span>.</p>
@@ -192,7 +192,7 @@
   <p><span class="ui">↶ Undo</span> (<code>Ctrl + Z</code>) and <span class="ui">↷ Redo</span> (<code>Ctrl + Y</code> or <code>Ctrl + Shift + Z</code>) step through the latest changes of the cell: traces, centromeres, satellites, moved points, count marks, calibration and deletions, up to 120 steps back. With a trace half done, <span class="ui">↶ Undo</span> discards it. The history belongs to the open cell: choosing another cell starts a new one.</p>
 
   <h3>The annotated image</h3>
-  <p><span class="ui">Annotated image (PNG)</span> downloads the micrograph at its original resolution, with the brightness and contrast you chose and with everything you drew on it: the calibration line, the count marks, the traces with their number, the centromeres and the satellites. The file name is made of the accession and the cell and ends in <code>_anotada.png</code>. It is the figure worth keeping with the raw data, because it shows exactly what was measured.</p>
+  <p><span class="ui">Annotated image (PNG)</span> downloads the micrograph at its original resolution, with the brightness and contrast you chose and with everything you drew on it: the calibration line, the count marks, the traces with their number, the centromeres and the satellites. The file name is made of the accession and the cell and ends in <code>_annotated.png</code>. It is the figure worth keeping with the raw data, because it shows exactly what was measured.</p>
 
   <!-- 2.6 -->
   <h2 id="s2-6"><span class="num">2.6</span>Measurements of the cell and pasted measurements</h2>
@@ -210,7 +210,7 @@
       <tr><td>p · q</td><td>The short and the long arm, without the satellite, in µm (or in px if the cell with an image is not calibrated).</td></tr>
       <tr><td><span class="ui">Satellite</span> · <span class="ui">Arm</span></td><td>The length of the satellite and the arm that carries it (p or q).</td></tr>
       <tr><td><span class="ui">Total</span></td><td>p + q + satellite.</td></tr>
-      <tr><td>IC · r</td><td>The centromeric index (headed “IC”) and the arm ratio, with the satellite added to its arm as in the example of chromosome 11.</td></tr>
+      <tr><td>CI · r</td><td>The centromeric index and the arm ratio, with the satellite added to its arm as in the example of chromosome 11.</td></tr>
       <tr><td><span class="ui">Class</span></td><td>m, sm, st or t (and M or T in the exact cases), with the scheme of Block 3; <span class="ui">no centromere</span> if the trace is incomplete.</td></tr>
       <tr><td><span class="ui">Source</span></td><td><i>trace</i> if it comes from the image; <i>typed</i> if it was typed or pasted. The × button deletes the row.</td></tr>
     </tbody>
@@ -221,10 +221,10 @@
 
   <figure class="w70">
     <div class="marco"><img src="../img/en/b2-amano.png" alt="The first six rows of cell 2, typed by hand, with their editable fields"></div>
-    <figcaption><b>Figure 2.9.</b> The first rows of cell 2 of the example maize, typed in by hand. Chromosome 6 carries a satellite of 0.47 µm on p: its total is 5.50 µm, with a centromeric index of 28.2 and r = 2.55 (sm).</figcaption>
+    <figcaption><b>Figure 2.9.</b> The first rows of cell 2 of the example maize, typed in by hand. Chromosome 6 carries a satellite of 0.47 µm on p: its total is 5.50 µm, with CI = 28.2 and r = 2.55 (sm).</figcaption>
   </figure>
 
-  <p>At the foot of the table, <span class="ui">This cell (CSV)</span> downloads the measurements of the selected cell; <span class="ui">All measurements (CSV)</span> and <span class="ui">All (TSV)</span>, those of the whole project, in <code>mediciones.csv</code> or <code>mediciones.tsv</code>. The columns are accession, taxon, cell, chromosome, p, q, satellite, satellite arm, unit (µm or px) and source; incomplete traces are not exported.</p>
+  <p>At the foot of the table, <span class="ui">This cell (CSV)</span> downloads the measurements of the selected cell; <span class="ui">All measurements (CSV)</span> and <span class="ui">All (TSV)</span>, those of the whole project, in <code>measurements.csv</code> or <code>measurements.tsv</code>. The columns are accession, taxon, cell, chromosome, p, q, satellite, satellite arm, unit (µm or px) and source; incomplete traces are not exported.</p>
 
   <h3>Paste measurements</h3>
   <p>If you already have the measurements in a spreadsheet or in the table of a paper, <span class="ui">Paste measurements</span> reads them in one go. One row per chromosome, in microns, with tab, semicolon or comma as the separator:</p>

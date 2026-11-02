@@ -62,7 +62,7 @@
       <tr><td class="c">1</td><td><b>Prepare</b></td><td>roots, anthers, staining: this happens at the bench; the practical sheet of Block 9 explains it</td><td class="c"><span class="chip k9">9</span></td></tr>
       <tr><td class="c">2</td><td><b>Count</b></td><td>the number 2n, with marks on the image or in the table of counts</td><td class="c"><span class="chip k2">2</span> <span class="chip k6">6</span></td></tr>
       <tr><td class="c">3</td><td><b>Measure</b></td><td>each arm, to scale, on the calibrated micrograph</td><td class="c"><span class="chip k2">2</span></td></tr>
-      <tr><td class="c">4</td><td><b>Arrange</b></td><td>homologues and idiogram</td><td class="c"><span class="chip k3">3</span></td></tr>
+      <tr><td class="c">4</td><td><b>Arrange</b></td><td>homologs and idiogram</td><td class="c"><span class="chip k3">3</span></td></tr>
       <tr><td class="c">5</td><td><b>Describe</b></td><td>asymmetry and formula; also meiosis, ploidy and the signals</td><td class="c"><span class="chip k4">4</span> <span class="chip k5">5</span> <span class="chip k7">7</span></td></tr>
       <tr><td class="c">6</td><td><b>Compare</b></td><td>cytotypes and taxa</td><td class="c"><span class="chip k8">8</span></td></tr>
       <tr><td class="c">7</td><td><b>Publish</b></td><td>figures, methods, package</td><td class="c"><span class="chip k10">10</span></td></tr>
@@ -75,7 +75,7 @@
   <p>The section <span class="ui">Try it: two labs that really compute</span> has two tabs. Neither is a recorded animation: every change recomputes, with the karyotype, asymmetry and meiosis engines, what the app will later compute with your data. They help you understand what moves each index before you have results of your own, and they work well in class.</p>
 
   <h3>Draw an idiogram</h3>
-  <p>A four-pair idiogram that you change with the mouse: drag the circles at the ends to lengthen or shorten each arm. You can also type the length in the table below, in microns (p, the short arm; q, the long one), or use the keyboard: with a circle selected, the arrow keys move it 0.05 µm, and with <code>Shift</code>, 0.5 µm. For each pair the table gives its centromeric index (headed “IC” in the app), its arm ratio (r) and its class according to Levan et al. (1964), with the full name.</p>
+  <p>A four-pair idiogram that you change with the mouse: drag the circles at the ends to lengthen or shorten each arm. You can also type the length in the table below, in microns (p, the short arm; q, the long one), or use the keyboard: with a circle selected, the arrow keys move it 0.05 µm, and with <code>Shift</code>, 0.5 µm. For each pair the table gives its centromeric index (CI), its arm ratio (r) and its class according to Levan et al. (1964), with the full name.</p>
 
   <figure class="w70">
     <div class="marco"><img src="../img/en/b1-lab1.png" alt="The Draw an idiogram lab with four pairs, the table of arms, the twelve indices and the Stebbins grid"></div>
@@ -115,7 +115,7 @@
   </div>
 
   <h3>Ploidy and meiosis</h3>
-  <p>The second tab shows which meiotic configurations are expected in a polyploid according to its origin. In an <b>autopolyploid</b> the homologues pair at random and may form multivalents; in an <b>allopolyploid</b> each chromosome pairs only with the one of its own genome, and bivalents are expected.</p>
+  <p>The second tab shows which meiotic configurations are expected in a polyploid according to its origin. In an <b>autopolyploid</b> the homologs pair at random and may form multivalents; in an <b>allopolyploid</b> each chromosome pairs only with the one of its own genome, and bivalents are expected.</p>
   <figure class="w70">
     <div class="marco"><img src="../img/en/b1-lab2.png" alt="The Ploidy and meiosis lab with an autotetraploid of x = 7: bars and table of expected configurations and one cell at diakinesis"></div>
     <figcaption><b>Figure 1.4.</b> <span class="ui">Ploidy and meiosis</span> with its starting values: an autotetraploid (AAAA) with x = 7 and c = 0.85. On the left, the configurations expected per cell, as bars and as a table (multivalents in blue); on the right, one cell at diakinesis drawn from the same model: 1 I + 2 II ring + 1 III + 3 IV chain + 2 IV ring, which add up to the 28 chromosomes.</figcaption>
@@ -129,10 +129,10 @@
     <li><span class="ui">Another random cell</span>, which draws another cell from the same model.</li>
   </ul>
 
-  <p>With the starting values the app writes at the foot: 2n = 4x = 28; <b>23.8 chiasmata per cell</b> are expected (28 paired arms × c), and each group of four homologues forms a multivalent with probability <b>63.7%</b>, so a cell has <b>4.46</b> multivalents on average. Change the origin to <span class="ui">Allopolyploid</span> and the formula becomes AABB: the expected chiasmata are the same, but the multivalents vanish—only 0.630 univalents, 3.570 rod bivalents and 10.115 ring bivalents per cell remain. Raise c to 1 and you will see the maximum number of multivalents that random pairing allows.</p>
+  <p>With the starting values the app writes at the foot: 2n = 4x = 28; <b>23.8 chiasmata per cell</b> are expected (28 paired arms × c), and each group of four homologs forms a multivalent with probability <b>63.7%</b>, so a cell has <b>4.46</b> multivalents on average. Change the origin to <span class="ui">Allopolyploid</span> and the formula becomes AABB: the expected chiasmata are the same, but the multivalents vanish—only 0.630 univalents, 3.570 rod bivalents and 10.115 ring bivalents per cell remain. Raise c to 1 and you will see the maximum number of multivalents that random pairing allows.</p>
   <div class="caja teoria">
     <div class="caja-t"><span class="ico">θ</span>Theory in brief</div>
-    <p>The model follows Jackson and Casey (1982): the homologues of each group pair at random by arms, and each paired arm forms a chiasma with probability c. A bivalent with chiasmata in both arms is a <b>ring</b>; with only one, a <b>rod</b>; a chromosome without a chiasma remains as a <b>univalent</b>. It is the same model with which Block 5 compares your observed configurations with what is expected for each origin.</p>
+    <p>The model follows Jackson and Casey (1982): the homologs of each group pair at random by arms, and each paired arm forms a chiasma with probability c. A bivalent with chiasmata in both arms is a <b>ring</b>; with only one, a <b>rod</b>; a chromosome without a chiasma remains as a <b>univalent</b>. It is the same model with which Block 5 compares your observed configurations with what is expected for each origin.</p>
   </div>
 
   <!-- 1.4 -->
