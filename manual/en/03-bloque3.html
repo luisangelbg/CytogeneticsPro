@@ -18,11 +18,11 @@
     <div class="cap-etiqueta">Chapter three · Block 3</div>
     <h1 data-corto="Karyotype">Karyotype</h1>
     <div class="cap-regla"></div>
-    <p class="cap-resumen">From the measurements of each cell, Block 3 builds the karyotype of the accession: it groups the homologues of each cell, matches the same pair across all the cells, averages the arms, computes the relative length, the centromeric index and the arm ratio, classifies each pair, writes the karyotype formula with its fundamental number and draws the idiogram. What you decide here—the classification, the basic number, the homologues corrected by hand—is used later by Blocks 4, 7, 8 and 10.</p>
+    <p class="cap-resumen">From the measurements of each cell, Block 3 builds the karyotype of the accession: it groups the homologs of each cell, matches the same pair across all the cells, averages the arms, computes the relative length, the centromeric index and the arm ratio, classifies each pair, writes the karyotype formula with its fundamental number and draws the idiogram. What you decide here—the classification, the basic number, the homologs corrected by hand—is used later by Blocks 4, 7, 8 and 10.</p>
     <div class="cap-franja"><span class="k2"></span><span class="k3"></span><span class="k3"></span><span class="k4"></span><span class="k7"></span><span class="k8"></span><span class="k10"></span></div>
     <ul class="cap-contenido">
       <li><b>3.1</b>Karyotype settings</li>
-      <li><b>3.2</b>Pairing of homologues</li>
+      <li><b>3.2</b>Pairing of homologs</li>
       <li><b>3.3</b>Karyotype of the accession</li>
       <li><b>3.4</b>Formula, length and fundamental number</li>
       <li><b>3.5</b>Idiogram</li>
@@ -35,8 +35,8 @@
   <p>If there are no measurements yet, the block shows the notice <span class="ui">There are no measurements yet</span> with two buttons: <span class="ui">Go to Block 2</span>, to measure, and <span class="ui">Open the chayote example</span>, which loads four accessions of <i>Sechium edule</i> with three cells each. The figures in this chapter use that example and the maize one (<span class="ruta">Block 1<span class="sep">›</span>Included examples</span>); remember that both are simulated.</p>
 
   <figure>
-    <div class="marco"><img src="../img/en/b3-ajustes.png" alt="The Karyotype settings card with the accession Chayote · Huatusco, the Levan classification, basic number 14, two homologues per group, order by length, one arm for st chromosomes, sample deviation and the three checkboxes"></div>
-    <figcaption><b>Figure 3.1.</b> The default settings with the Huatusco chayote: classification of Levan et al. (1964) by arm ratio, basic number x = 14 (it comes with the example), pairs of homologues, sample deviation, and the satellite added to its arm and marked in the formula.</figcaption>
+    <div class="marco"><img src="../img/en/b3-ajustes.png" alt="The Karyotype settings card with the accession Chayote · Huatusco, the Levan classification, basic number 14, two homologs per group, order by length, one arm for st chromosomes, sample deviation and the three checkboxes"></div>
+    <figcaption><b>Figure 3.1.</b> The default settings with the Huatusco chayote: classification of Levan et al. (1964) by arm ratio, basic number x = 14 (it comes with the example), pairs of homologs, sample deviation, and the satellite added to its arm and marked in the formula.</figcaption>
   </figure>
 
   <p>The card has seven fields and three checkboxes:</p>
@@ -47,7 +47,7 @@
       <tr><td><span class="ui">Accession</span></td><td>The accession whose karyotype is shown. Only those with at least one measured cell appear. Each accession has its own karyotype; the other settings apply to all of them.</td></tr>
       <tr><td><span class="ui">Classification</span></td><td>The system used to name each pair: <span class="ui">Levan et al. 1964 · arm ratio</span> (the default), <span class="ui">Levan et al. 1964 · centromeric index</span>, <span class="ui">Guerra 1986 · m, sm, a</span> or <span class="ui">Own limits</span>. The last one shows two more fields: <span class="ui">Limits of r (comma separated)</span>, which starts at “1.7, 3, 7”, and <span class="ui">Names of the classes</span>, “m, sm, st, t”. There must be one more name than limits; otherwise a notice reminds you, and the last valid own limits are used or, if there were none, those of Levan by arm ratio.</td></tr>
       <tr><td><span class="ui">Base number x</span></td><td>The basic chromosome number of the accession. It only changes the formula: with x, the formula states the ploidy level (2n = 2x = 28); without x, it omits it (2n = 28). It is stored with the accession and shared with Blocks 5, 6 and 8.</td></tr>
-      <tr><td><span class="ui">Homologues per group</span></td><td><span class="ui">2 (pairs)</span> for a diploid; 3, 4, 6 or 8 to group the homologues of an autopolyploid in groups of that size.</td></tr>
+      <tr><td><span class="ui">Homologs per group</span></td><td><span class="ui">2 (pairs)</span> for a diploid; 3, 4, 6 or 8 to group the homologs of an autopolyploid in groups of that size.</td></tr>
       <tr><td><span class="ui">Order of the pairs</span></td><td><span class="ui">By length</span> (longest to shortest) or <span class="ui">By type and length</span>: first the m, then the sm, and so on, and within each class from longest to shortest. It only changes the order of the idiogram; the pairs are still numbered by length.</td></tr>
       <tr><td><span class="ui">Arms of an st in the NF</span></td><td>How many arms a subtelocentric counts in the fundamental number: 1 (default) or 2.</td></tr>
       <tr><td><span class="ui">Standard deviation</span></td><td><span class="ui">Sample (n − 1)</span> or <span class="ui">Population (n)</span>, for the deviations among cells in the table. It is the same setting as the <span class="ui">Standard deviation</span> of Block 4: changing it in one changes it in the other.</td></tr>
@@ -74,23 +74,23 @@
   </div>
 
   <!-- 3.2 -->
-  <h2 id="s3-2"><span class="num">3.2</span>Pairing of homologues</h2>
-  <p class="lead">Before averaging, the app decides which chromosomes of each cell are homologues and which is the same pair in every cell. This card shows the result cell by cell so that you can check and correct it.</p>
-  <p>At the top, the cells of the accession are buttons, with their number of chromosomes (“Cell 2 · 20”). A cell whose pairs you corrected by hand also carries the sign ✎. Below, one box per pair: its number, its class and the mean length of that pair <i>in that cell</i>, and its homologues with the number they have in Block 2. If the chromosome was traced on an image, it is shown cut out and straightened from the image itself; if it was measured some other way, it is drawn to scale, with its two arms and a dot where the satellite is. A pair missing from an incomplete cell says <span class="ui">not in this cell</span>.</p>
+  <h2 id="s3-2"><span class="num">3.2</span>Pairing of homologs</h2>
+  <p class="lead">Before averaging, the app decides which chromosomes of each cell are homologs and which is the same pair in every cell. This card shows the result cell by cell so that you can check and correct it.</p>
+  <p>At the top, the cells of the accession are buttons, with their number of chromosomes (“Cell 2 · 20”). A cell whose pairs you corrected by hand also carries the sign ✎. Below, one box per pair: its number, its class and the mean length of that pair <i>in that cell</i>, and its homologs with the number they have in Block 2. If the chromosome was traced on an image, it is shown cut out and straightened from the image itself; if it was measured some other way, it is drawn to scale, with its two arms and a dot where the satellite is. A pair missing from an incomplete cell says <span class="ui">not in this cell</span>.</p>
 
   <figure>
-    <div class="marco"><img src="../img/en/b3-emparejar.png" alt="The board of homologues of cell 1 of the example maize, with the straightened chromosomes from the image grouped into ten pairs"></div>
-    <figcaption><b>Figure 3.2.</b> Cell 1 of the example maize, the one with an image: each homologue is a straightened cutout of the metaphase, with its heterochromatic knobs. Pair 1 of this cell measures 8.05 µm on average. The order follows the numbering of the accession, not that of this cell: here pair 4 (6.43 µm) is longer than pair 3 (6.23 µm).</figcaption>
+    <div class="marco"><img src="../img/en/b3-emparejar.png" alt="The board of homologs of cell 1 of the example maize, with the straightened chromosomes from the image grouped into ten pairs"></div>
+    <figcaption><b>Figure 3.2.</b> Cell 1 of the example maize, the one with an image: each homolog is a straightened cutout of the metaphase, with its heterochromatic knobs. Pair 1 of this cell measures 8.05 µm on average. The order follows the numbering of the accession, not that of this cell: here pair 4 (6.43 µm) is longer than pair 3 (6.23 µm).</figcaption>
   </figure>
 
   <h3>How the app pairs</h3>
-  <p>Within each cell, it sorts the chromosomes from longest to shortest and cuts them into consecutive groups of the size set in <span class="ui">Homologues per group</span>. Then it tries swaps between groups as long as the total difference within groups goes down, measured with the length (as a percentage of the mean length of the cell), the centromeric index (in points) and a penalty when a chromosome with a satellite ends up with one without. It is a local optimum: it is almost always right, but it is not a proof.</p>
+  <p>Within each cell, it sorts the chromosomes from longest to shortest and cuts them into consecutive groups of the size set in <span class="ui">Homologs per group</span>. Then it tries swaps between groups as long as the total difference within groups goes down, measured with the length (as a percentage of the mean length of the cell), the centromeric index (in points) and a penalty when a chromosome with a satellite ends up with one without. It is a local optimum: it is almost always right, but it is not a proof.</p>
   <p>Then it matches the cells to each other. Numbering the pairs of each cell by their length alone would mix two pairs of nearly the same length but with the centromere in different places, because a slightly more condensed cell swaps their order. That is why each cell is assigned to the pairs of a reference (the cell with most pairs) by the optimal assignment, the Hungarian method, on the relative length, the centromeric index (five CI points weigh as much as one point of relative length) and the satellite; the reference is replaced by the means and the process is repeated. In the end the pairs are numbered by their mean relative length. That explains Figure 3.2: pair 3 of the accession is submetacentric, and in cell 1 it turned out shorter than pair 4, a metacentric.</p>
 
   <h3>How to correct a pairing</h3>
   <ol class="pasos">
     <li>Choose the cell with the buttons at the top.</li>
-    <li>Drag the misplaced homologue onto the chromosome it should swap with. Or, without dragging, click one (it stays marked, Figure 3.3) and then the other. A second click on the same chromosome unmarks it.</li>
+    <li>Drag the misplaced homolog onto the chromosome it should swap with. Or, without dragging, click one (it stays marked, Figure 3.3) and then the other. A second click on the same chromosome unmarks it.</li>
     <li>If you drop it on the box of a pair and not on a chromosome, the chromosome moves to that pair without a swap, and its original pair is left with one fewer.</li>
     <li>Check the table of Section 3.3: the length and the centromeric index of the pair should become more even among cells.</li>
   </ol>
@@ -98,7 +98,7 @@
 
   <figure>
     <div class="marco"><img src="../img/en/b3-emparejar-medidas.png" alt="The board of cell 2 of the example maize, with the chromosomes drawn to scale and chromosome 9 of pair 3 marked"></div>
-    <figcaption><b>Figure 3.3.</b> Cell 2 of the example maize was measured without an image, so its chromosomes are drawn to scale. Chromosome 9 of pair 3 is marked: the next click on another chromosome swaps them. The two homologues of pair 6 carry the satellite dot on their short arm.</figcaption>
+    <figcaption><b>Figure 3.3.</b> Cell 2 of the example maize was measured without an image, so its chromosomes are drawn to scale. Chromosome 9 of pair 3 is marked: the next click on another chromosome swaps them. The two homologs of pair 6 carry the satellite dot on their short arm.</figcaption>
   </figure>
 
   <h3>The notices on the settings card</h3>
@@ -106,8 +106,8 @@
   <ul>
     <li><span class="ui">This accession mixes calibrated cells (µm) and uncalibrated ones (pixels).</span> Relative lengths still hold, but absolute ones do not: calibrate all of them in Block 2. If no cell is calibrated, everything is in pixels and the table says so in its headers.</li>
     <li><span class="ui">The cells do not have the same number of chromosomes</span>, with the numbers found. The pairs of incomplete cells are averaged with what they have: check the pairing.</li>
-    <li>An incomplete group, when the number of chromosomes is not a multiple of <span class="ui">Homologues per group</span>.</li>
-    <li>The pairs that vary by more than 20% among cells. It may be different condensation—then look at the relative length, which does not depend on it—or a mispaired homologue.</li>
+    <li>An incomplete group, when the number of chromosomes is not a multiple of <span class="ui">Homologs per group</span>.</li>
+    <li>The pairs that vary by more than 20% among cells. It may be different condensation—then look at the relative length, which does not depend on it—or a mispaired homolog.</li>
   </ul>
 
   <!-- 3.3 -->
@@ -133,7 +133,7 @@
     <figcaption><b>Figure 3.4.</b> The karyotype of the Huatusco chayote: three cells of 28 chromosomes, 2n = 2x = 28 = 18m + 2m-sat + 8sm. Pair 1 carries the satellite (m-sat); pair 12, with <i>r</i> = 1.73, is already past the 1.70 limit and is sm.</figcaption>
   </figure>
 
-  <p>The footer of the table recalls which deviation was used, (<i>n</i> − 1) or (<i>n</i>), and the classification. Three buttons save the table: <span class="ui">Table (CSV)</span> and <span class="ui">Table (TSV)</span> that of the chosen accession, and <span class="ui">All accessions (CSV)</span> those of all of them in a single file. The files carry each mean and its deviation in separate columns, with more decimals than the screen, the class, the satellite and the unit.</p>
+  <p>The footer of the table recalls which deviation was used, (<i>n</i> − 1) or (<i>n</i>), and the classification. Three buttons save the table: <span class="ui">Table (CSV)</span> and <span class="ui">Table (TSV)</span> that of the chosen accession, and <span class="ui">All accessions (CSV)</span> those of all of them in a single file (<code>karyotype_&lt;accession&gt;.csv</code> or <code>.tsv</code>, and <code>karyotypes.csv</code>). The files carry each mean and its deviation in separate columns, with more decimals than the screen, the class, the satellite and the unit.</p>
 
   <div class="caja nota">
     <div class="caja-t"><span class="ico">i</span>A deviation of zero</div>
@@ -164,8 +164,8 @@
   </div>
 
   <div class="caja teoria">
-    <div class="caja-t"><span class="ico">θ</span>Theory in brief · the fundamental number and the groups of homologues</div>
-    <p>The fundamental number (NF) counts the visible arms of the complement. It is used to compare karyotypes with different chromosome numbers: a fusion of two acrocentrics into a metacentric lowers 2n but keeps the NF. Counting a subtelocentric as one or two arms is a convention that changes from author to author; the field <span class="ui">Arms of an st in the NF</span> leaves it to you. In an autopolyploid the homologues do not come in twos but in groups the size of the ploidy level: set that number in <span class="ui">Homologues per group</span> and the table will give one row per group. With an allopolyploid, whose genomes pair separately, keep the pairs.</p>
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · the fundamental number and the groups of homologs</div>
+    <p>The fundamental number (NF) counts the visible arms of the complement. It is used to compare karyotypes with different chromosome numbers: a fusion of two acrocentrics into a metacentric lowers 2n but keeps the NF. Counting a subtelocentric as one or two arms is a convention that changes from author to author; the field <span class="ui">Arms of an st in the NF</span> leaves it to you. In an autopolyploid the homologs do not come in twos but in groups the size of the ploidy level: set that number in <span class="ui">Homologs per group</span> and the table will give one row per group. With an allopolyploid, whose genomes pair separately, keep the pairs.</p>
   </div>
 
   <!-- 3.5 -->
@@ -173,10 +173,10 @@
   <p class="lead">The idiogram draws the karyotype of the accession: the pairs in the chosen order, with the centromere aligned on a dashed line, the short arms up and the long arms down, to the scale of a vertical axis.</p>
   <p>Below each chromosome go the number of the pair and its class; an asterisk next to the class marks the pair with a satellite, which is drawn joined to its arm by a thin line. The controls at the top change only the drawing:</p>
   <ul>
-    <li><span class="ui">View</span>: <span class="ui">One chromosome per pair</span> (the classic idiogram, with the means) or <span class="ui">The homologues</span>, which draws the homologues of each pair side by side: the longest of each cell averaged with the longest of the others, and likewise with the other one. Since that figure is wider, its legend goes below.</li>
+    <li><span class="ui">View</span>: <span class="ui">One chromosome per pair</span> (the classic idiogram, with the means) or <span class="ui">The homologs</span>, which draws the homologs of each pair side by side: the longest of each cell averaged with the longest of the others, and likewise with the other one. Since that figure is wider, its legend goes below.</li>
     <li><span class="ui">Scale</span>: <span class="ui">Microns</span> or <span class="ui">Relative length (%)</span>, as a percentage of the set, to compare accessions of different size.</li>
     <li><span class="ui">Color by class</span>: paints each chromosome with the color of its class and adds its name to the legend.</li>
-    <li><span class="ui">Deviation among cells</span>: a thin bar next to each arm with ± one standard deviation. It only works with <span class="ui">One chromosome per pair</span>: with <span class="ui">The homologues</span> the checkbox is disabled and says so in parentheses, <span class="ui">(only with one chromosome per pair)</span>.</li>
+    <li><span class="ui">Deviation among cells</span>: a thin bar next to each arm with ± one standard deviation. It only works with <span class="ui">One chromosome per pair</span>: with <span class="ui">The homologs</span> the checkbox is disabled and says so in parentheses, <span class="ui">(only with one chromosome per pair)</span>.</li>
     <li><span class="ui">Bands and signals (Block 7)</span>: on by default, it places on the idiogram the bands and FISH signals recorded in Block 7, with their legend.</li>
     <li><span class="ui">Title</span>: the title of the figure. Empty, the field suggests the taxon and the name of the accession, but the drawing has no title.</li>
   </ul>
@@ -196,10 +196,10 @@
   <div class="caja regla">
     <div class="caja-t"><span class="ico">✓</span>Decision rule · before accepting a karyotype</div>
     <table class="compacta"><tbody>
-      <tr><td style="width:42%"><b>If</b> a pair varies by more than 20% among cells</td><td><b>then</b> compare its relative length: if that is stable, it is condensation; if not, look for a mispaired homologue on the board.</td></tr>
+      <tr><td style="width:42%"><b>If</b> a pair varies by more than 20% among cells</td><td><b>then</b> compare its relative length: if that is stable, it is condensation; if not, look for a mispaired homolog on the board.</td></tr>
       <tr><td><b>If</b> the <i>r</i> of a pair falls close to a limit (1.70, 3.00, 7.00)</td><td><b>then</b> its class depends on hundredths: look at its deviation among cells and say so in the text, like pair 12 of the Huatusco chayote (<i>r</i> = 1.73).</td></tr>
       <tr><td><b>If</b> you compare with a published formula</td><td><b>then</b> use the same classification and the same treatment of the satellite, and compare relative lengths, not absolute ones.</td></tr>
-      <tr><td><b>If</b> the species is autopolyploid</td><td><b>then</b> group the homologues by the ploidy level; if it is allopolyploid, keep the pairs.</td></tr>
+      <tr><td><b>If</b> the species is autopolyploid</td><td><b>then</b> group the homologs by the ploidy level; if it is allopolyploid, keep the pairs.</td></tr>
     </tbody></table>
     <p class="regla-pie">Guides for interpretation, not laws: the karyotype is only as good as the measurements it comes from.</p>
   </div>
