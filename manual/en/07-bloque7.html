@@ -61,7 +61,7 @@
     <thead><tr><th style="width:1.6in">Column</th><th>What it holds</th></tr></thead>
     <tbody>
       <tr><td><span class="ui">Pair</span></td><td>The number of the pair in the karyotype of Block 3.</td></tr>
-      <tr><td><span class="ui">Homologue</span></td><td><span class="ui">both</span>, or 1 to 4 if the signal is on a single homolog (a <b>heteromorphism</b>).</td></tr>
+      <tr><td><span class="ui">Homolog</span></td><td><span class="ui">both</span>, or 1 to 4 if the signal is on a single homolog (a <b>heteromorphism</b>).</td></tr>
       <tr><td><span class="ui">Arm</span></td><td><span class="ui">p (short)</span> or <span class="ui">q (long)</span>.</td></tr>
       <tr><td><span class="ui">Position (0–1)</span></td><td>The center of the signal as a fraction of the arm, from the centromere (0) to the telomere (1).</td></tr>
       <tr><td><span class="ui">Size (0–1)</span></td><td>Its extent, also as a fraction of the arm (0.08 if not given).</td></tr>
@@ -80,14 +80,14 @@
     <p class="regla-pie">A signal exactly at 0.8 counts as interstitial, like the 45S of pair 9 in Uruapan.</p>
   </div>
   <figure class="w70">
-    <div class="marco"><img src="../img/en/b7-senales.png" alt="Signals card with the idiogram of Uruapan in the homologues view and the table of seven signals">
+    <div class="marco"><img src="../img/en/b7-senales.png" alt="Signals card with the idiogram of Uruapan in the homologs view and the table of seven signals">
       <span class="marca" style="left:23.4%;top:8.1%">1</span>
       <span class="marca" style="left:39.8%;top:8.1%">2</span>
       <span class="marca" style="left:8%;top:18.6%">3</span>
       <span class="marca" style="left:6.2%;top:36.8%">4</span>
       <span class="marca" style="left:2.3%;top:72.5%">5</span>
     </div>
-    <figcaption><b>Figure 7.2.</b> The Uruapan accession in the <span class="ui">The homologues</span> view: the 45S rDNA site of pair 9 is on a single homolog, number 1. The last three rows are the 5S signal recorded in three cells (<code>uru-c1</code> to <code>uru-c3</code>).</figcaption>
+    <figcaption><b>Figure 7.2.</b> The Uruapan accession in the <span class="ui">The homologs</span> view: the 45S rDNA site of pair 9 is on a single homolog, number 1. The last three rows are the 5S signal recorded in three cells (<code>uru-c1</code> to <code>uru-c3</code>).</figcaption>
   </figure>
   <ul class="leyenda-marcas">
     <li><span class="n">1</span><b>Probe of the click.</b> Which probe a click on the idiogram adds.</li>
@@ -97,8 +97,8 @@
     <li><span class="n">5</span><b>Signal table.</b> One row per signal, editable.</li>
   </ul>
   <h3>A click on the idiogram</h3>
-  <p>Choose the probe in <span class="ui">On clicking the idiogram, add</span> and, in <span class="ui">on</span>, whether it goes on <span class="ui">both homologues</span>, <span class="ui">homologue 1</span> or <span class="ui">homologue 2</span>. A click on a chromosome of the idiogram adds a row: the arm is the one on the side of the centromere where you clicked and the position is the distance to the centromere as a fraction of that arm, rounded to hundredths. A message confirms the pair, the arm and the position. In the <span class="ui">The homologues</span> view the click falls on a particular homolog and the signal goes there, whatever <span class="ui">on</span> says. You can then fine-tune the position or the size in the table.</p>
-  <p>The <span class="ui">View</span> selector of the idiogram switches between <span class="ui">One chromosome per pair</span>, with the means of the pairs, and <span class="ui">The homologues</span>, each homolog with its own measurements. The <span class="ui">Idiogram with bands and signals</span> figure downloads as <span class="ui">SVG</span> or <span class="ui">PNG</span> and is edited like the others. If the accession has no karyotype, the card says so: the idiogram needs the measurements of Block 2.</p>
+  <p>Choose the probe in <span class="ui">On clicking the idiogram, add</span> and, in <span class="ui">on</span>, whether it goes on <span class="ui">both homologs</span>, <span class="ui">homolog 1</span> or <span class="ui">homolog 2</span>. A click on a chromosome of the idiogram adds a row: the arm is the one on the side of the centromere where you clicked and the position is the distance to the centromere as a fraction of that arm, rounded to hundredths. A message confirms the pair, the arm and the position. In the <span class="ui">The homologs</span> view the click falls on a particular homolog and the signal goes there, whatever <span class="ui">on</span> says. You can then fine-tune the position or the size in the table.</p>
+  <p>The <span class="ui">View</span> selector of the idiogram switches between <span class="ui">One chromosome per pair</span>, with the means of the pairs, and <span class="ui">The homologs</span>, each homolog with its own measurements. The <span class="ui">Idiogram with bands and signals</span> figure downloads as <span class="ui">SVG</span> or <span class="ui">PNG</span> and is edited like the others. If the accession has no karyotype, the card says so: the idiogram needs the measurements of Block 2.</p>
   <figure class="w70">
     <div class="marco"><img src="../img/en/b7-nudos.png" alt="Idiogram of the example maize with seven heterochromatic knobs and the NOR of pair 6"></div>
     <figcaption><b>Figure 7.3.</b> The example maize, one chromosome per pair: seven knobs (C-band) on the long arms of pairs 2, 4, 5, 6, 7 and 8 and near the telomere of the short arm of pair 9, and the 45S rDNA on the satellite of pair 6, the NOR.</figcaption>
@@ -132,7 +132,7 @@
     <li><span class="ui">Sites per set</span>, how many sites there are in one chromosome set; a site on a single homolog counts as half.</li>
     <li><span class="ui">Pairs</span>, in order, and <span class="ui">Where</span>: each site as pair, arm and position in percent, with the homolog in brackets if it is a heteromorphism (“9q(1) 80 %”).</li>
     <li><span class="ui">Regions</span>, how many sites are proximal, interstitial or terminal, with the same counting of half sites.</li>
-    <li><span class="ui">On one homologue only</span>, how many are heteromorphisms.</li>
+    <li><span class="ui">On one homolog only</span>, how many are heteromorphisms.</li>
   </ul>
   <figure class="w70">
     <div class="marco"><img src="../img/en/b7-patron.png" alt="Pattern of the Uruapan accession, concordance among cells and sites of the four accessions"></div>
@@ -140,7 +140,7 @@
   </figure>
   <div class="caja nota">
     <div class="caja-t"><span class="ico">i</span>The half site</div>
-    <p>A site on a single homolog is in one of the two sets, and that is why it counts as half in the sites per set and in the regions. The footer of the table recalls it, and the counting is the same in the <span class="ui">All accessions</span> table (Section 7.5) and in the matrix of Block 8: the 45S of Uruapan is worth 1.5 in all three. “(1)” in <span class="ui">Where</span> tells which homolog it is on, and the <span class="ui">On one homologue only</span> column how many sites are heteromorphisms.</p>
+    <p>A site on a single homolog is in one of the two sets, and that is why it counts as half in the sites per set and in the regions. The footer of the table recalls it, and the counting is the same in the <span class="ui">All accessions</span> table (Section 7.5) and in the matrix of Block 8: the 45S of Uruapan is worth 1.5 in all three. “(1)” in <span class="ui">Where</span> tells which homolog it is on, and the <span class="ui">On one homolog only</span> column how many sites are heteromorphisms.</p>
   </div>
   <div class="caja ejemplo">
     <div class="caja-t"><span class="ico">▸</span>Worked example · the wild accession</div>
