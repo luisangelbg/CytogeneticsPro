@@ -1,0 +1,35 @@
+{
+  "title": "CytogeneticsPro: plant cytogenetics in the browser",
+  "description": "<p>CytogeneticsPro is a self-contained web application for plant cytogenetics, from the chromosome count to the publishable karyotype, that runs entirely in the browser, with no installation and no server-side computation; the data never leave the computer. It measures chromosomes on calibrated micrographs (numbered counting markers, polylines that follow the curvature of each chromosome, centromeres, secondary constrictions and satellites, several cells per accession) or from typed or pasted measurements. It builds the karyotype by pairing homologs, with correction by dragging, averages over cells, computes absolute and relative lengths, centromeric index and arm ratio, classifies each pair by Levan et al. (1964) or Guerra (1986) with configurable limits, writes the karyotype formula, the total length of the complement and the fundamental number, and draws the idiogram to scale. It computes the karyotype asymmetry indices TF%, AsK%, Syi, Rec, A1, A2, A, CVCL, CVCI, MCA, AI and DI and the Stebbins (1971) categories, with what each one measures and which are redundant. It analyses meiosis (configurations per cell, chiasmata, recombination index, abnormalities by phase, Love's meiotic index, pollen viability with intervals and homogeneity tests) and compares the observed configurations with those expected for autopolyploids and allopolyploids, computed exactly from a model of random pairing of chromosome ends. It estimates ploidy level and aneuploidy from counts, genome size by flow cytometry (2C, 1Cx, pg and Mbp, with the histogram) and evaluates the <i>Allium</i> test (mitotic index, phase indices, aberrations and micronuclei). It records C and N bands, fluorochromes and in-situ hybridization (FISH) signals by chromosome and position, drawn on the idiogram. It compares taxa by a matrix of karyological parameters, distances, UPGMA, Ward and principal components with a biplot, parallel idiograms, chromosome number evolution by parsimony on a Newick tree and a map of cytotypes.</p><p>A teaching block offers mitosis and meiosis step by step for one to six pairs, a karyotype exercise on a simulated metaphase that grades itself, self-assessment in Spanish and English with new numbers each time, an illustrated glossary and a printable practice sheet with cited protocols. The last block gathers every figure of the project (idiograms, karyogram cut from the image, Stebbins categories, MCA &times; CVCL, cytometry histograms, dendrogram, biplot, tree and map) in SVG or PNG, every table in CSV or TSV, a methods section written in Spanish or English with its references, a printable report and a reproducible package. The interface is in Spanish and English.</p><p>The asymmetry indices, the classification of 1,289 chromosomes, the proportion intervals, the contingency tests and the genome-size conversions were checked against formulas written independently in R 4.4.2: 9,310 comparisons, none failing; 684 unit tests run in the browser. The archive includes four simulated examples, announced as such (the species and places are real, the measurements are not), and user manuals in Spanish (HTML and PDF, 145 pages) and English (HTML and PDF, 147 pages).</p>",
+  "upload_type": "software",
+  "version": "1.0.0",
+  "creators": [
+    {
+      "name": "Barrera-Guzmán, Luis Ángel",
+      "orcid": "0000-0001-8057-2583"
+    }
+  ],
+  "license": "gpl-3.0-or-later",
+  "access_right": "open",
+  "language": "eng",
+  "keywords": [
+    "plant cytogenetics",
+    "karyotype",
+    "idiogram",
+    "karyotype asymmetry",
+    "chromosome measurement",
+    "image analysis",
+    "meiosis",
+    "chiasma frequency",
+    "pollen viability",
+    "polyploidy",
+    "genome size",
+    "flow cytometry",
+    "fluorescence in situ hybridization",
+    "chromosome banding",
+    "chromosome number evolution",
+    "Allium test",
+    "genetics education",
+    "data visualization"
+  ]
+}

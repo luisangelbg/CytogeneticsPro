@@ -12,6 +12,12 @@ desktop.ini
 *.swp
 *~
 
+# Node and logs (the tools of the manual and of the validation need no packages)
+node_modules/
+*.log
+*.tmp
+*.bak
+
 # Local development tools
 tools/local/
 

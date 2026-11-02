@@ -1,96 +1,152 @@
 # CytogeneticsPro
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+<!-- DOI: when the Zenodo record exists, put its badge here:
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXXX) -->
 
-**Del conteo cromosómico al cariotipo publicable: citogenética vegetal en el navegador.**
-Versión 1.0.0 · Luis Ángel Barrera-Guzmán · software libre (GPL-3.0 o posterior) · parte de la
-[LABG Suite](https://luisangelbg.github.io/).
+**From the chromosome count to the publishable karyotype** · *Español: [LEEME.md](LEEME.md)*
 
-CytogeneticsPro reúne en una sola página el trabajo de un estudio citogenético:
-medir los cromosomas sobre las fotomicrografías, construir el cariotipo y el
-idiograma, calcular los índices de asimetría, analizar la meiosis, estimar la
-ploidía y el tamaño del genoma, registrar el bandeo y las señales de
-hibridación in situ, comparar cariotipos entre taxones y obtener las figuras y
-los métodos redactados. Está pensada para cultivos y sus parientes silvestres
-(maíz, chayote, frutales, forestales) y para la docencia de la genética. Todo
-se calcula en el propio equipo: los datos no salen de él.
+Plant cytogenetics in the browser: chromosome measurement on calibrated
+micrographs, karyotype and idiogram, asymmetry indices, meiosis, ploidy and
+genome size, banding and in-situ hybridization, comparison among taxa,
+teaching, and figures and methods ready to publish. It is meant for crops and
+their wild relatives (maize, chayote, fruit and forest trees) and for teaching
+genetics. The interface is in Spanish and English, with light and dark themes.
+There is nothing to install, and everything is computed on your own computer:
+the data never leave it.
 
-## Cómo abrirlo
+## Statement of need
 
-- **Doble clic en `index.html`**. Funciona sin servidor y sin conexión, con los
-  ejemplos incluidos.
-- O bien `Open CytogeneticsPro.bat` (o `server.ps1`), que sirve la carpeta en
-  `http://localhost:9900`; sólo hace falta para abrir la app desde otro equipo
-  de la misma red.
+A cytogenetic study goes from photographs to numbers through many small
+steps: calibrating the micrographs, measuring each chromosome along its
+curvature, pairing homologs, averaging over cells, classifying the
+chromosomes, computing a dozen asymmetry indices, checking the meiosis,
+converting flow-cytometry peaks into genome size, and drawing the idiogram
+for the paper. In practice those steps are spread over an image editor, a
+spreadsheet, a drawing program and scripts, and every transfer is a chance
+for error. CytogeneticsPro puts the whole chain in one page that opens with a
+double click: it measures on the image, computes each index with its source
+cited, explains what each number means, draws the figures at journal widths
+and writes the methods section from what was actually done.
 
-## Los diez bloques
+## Open it
 
-1. **Inicio** — la lógica de la citogenética en lenguaje llano, dos laboratorios
-   que calculan de verdad (un idiograma que se dibuja arrastrando los brazos y
-   las configuraciones meióticas esperadas según la ploidía), las referencias y
-   los ejemplos incluidos.
-2. **Imágenes y medición** — fotomicrografías calibradas con la barra de
-   micras; conteo con marcadores numerados, trazo de cada cromosoma con una
-   polilínea que sigue su curvatura, centrómero, constricciones secundarias y
-   satélites, zoom, contraste, brillo y deshacer; varias células por accesión y
-   la imagen anotada. También se pueden capturar o pegar las medidas.
-3. **Cariotipo** — emparejamiento de homólogos con corrección por arrastre,
-   promedios entre células, longitudes absoluta y relativa, índice
-   centromérico, razón de brazos, clasificación de Levan et al. (1964) con
-   límites configurables, satélites, fórmula cariotípica, longitud del
-   complemento, número fundamental e idiograma a escala.
-4. **Asimetría** — TF%, AsK%, Syi, Rec, A1, A2, A, CVCL, CVCI, MCA, AI, DI y las
-   categorías de Stebbins (1971), con qué mide cada índice, cuáles son
-   redundantes y cuáles se recomiendan.
-5. **Meiosis** — configuraciones por célula, quiasmas, índice de recombinación,
-   anormalidades por fase, índice meiótico de Love (1951), viabilidad del polen
-   con sus intervalos y pruebas de homogeneidad, y las configuraciones
-   esperadas según la ploidía y el origen (autopoliploide o alopoliploide).
-6. **Ploidía y genoma** — conteos de 2n, nivel de ploidía por el número
-   básico, aneuploidía, citometría de flujo en pg y Mpb con su histograma, y la
-   prueba de *Allium*: índice mitótico, fases, aberraciones y micronúcleos.
-7. **Bandeo y FISH** — bandas C y N, fluorocromos y señales de hibridación in
-   situ por cromosoma y posición, dibujadas sobre el idiograma y en el mapa de
-   cada cromosoma, con su concordancia entre células.
-8. **Comparación** — matriz de parámetros cariológicos, distancias, UPGMA,
-   Ward, componentes principales con biplot, idiogramas en paralelo, evolución
-   del número cromosómico por parsimonia sobre un árbol en Newick y mapa de
-   citotipos.
-9. **Docencia** — mitosis y meiosis paso a paso para 1 a 6 pares (con el
-   entrecruzamiento, la orientación al azar y lo que hay que contar en cada
-   fase), un ejercicio de cariotipo sobre una metafase simulada que se califica
-   solo, autoevaluación en español e inglés con preguntas de números nuevos,
-   glosario ilustrado y una hoja de práctica imprimible con protocolos citados.
-10. **Figuras e informe** — todas las figuras del proyecto (idiogramas,
-    cariograma recortado de la imagen, categorías de Stebbins, MCA × CVCL,
-    histogramas de citometría, dendrograma, biplot, árbol con los números y
-    mapa) en SVG o PNG; todas las tablas en CSV o TSV; métodos redactados en
-    español o inglés con sus referencias; informe imprimible y paquete `.zip`
-    reproducible con el proyecto, las tablas, las figuras y el informe.
+- **On line:** https://luisangelbg.github.io/CytogeneticsPro/
+- **On your computer:** download the repository and double-click
+  `index.html`. No server, no installation, no build step and no internet
+  connection; the bundled examples work offline. Any current browser works.
 
-## Carpetas
+To open it from another device on the same network, run
+`Open CytogeneticsPro.bat` (Windows; it starts `server.ps1`, a minimal local
+server on port 9900).
 
-| Carpeta | Qué hay |
-|---|---|
-| `index.html`, `css/`, `js/` | el programa |
-| `tests/` | las pruebas automáticas (659): abrir `tests/index.html` |
-| `validation/` | los guiones en R que recalculan los índices, la estadística y la comparación con fórmulas independientes, y sus informes (`validation/LEEME.md`) |
-| `data/` | cómo se simularon los ejemplos (ya incrustados en `js/examples.js`) |
-| `manual/` | el manual de usuario (pendiente) |
-| `tools/portal/` | la captura, la imagen para redes y la ficha del catálogo del portal |
+## The ten blocks
 
-`PROCEDENCIA.md` explica qué es obra propia y de dónde salen los métodos;
-`CHANGELOG.md`, qué cambió en cada etapa; `LICENSES-TERCEROS.md`, los íconos de
-los módulos compartidos de la suite.
+1. **Home** — the logic of cytogenetics in plain words, two labs that really
+   compute (an idiogram drawn by dragging the arms, and the meiotic
+   configurations expected for each ploidy level), the methods with their
+   sources, the references and the bundled examples.
+2. **Images and measurement** — micrographs calibrated with the micron bar;
+   counting with numbered markers, each chromosome traced with a polyline that
+   follows its curvature, centromere, secondary constrictions and satellites,
+   zoom, contrast, brightness and undo; several cells per accession and the
+   annotated image. Measurements can also be typed or pasted.
+3. **Karyotype** — homolog pairing with correction by dragging, means over
+   cells, absolute and relative lengths, centromeric index, arm ratio,
+   classification by Levan et al. (1964) or Guerra (1986) with configurable
+   limits, satellites, karyotype formula, total length of the complement,
+   fundamental number and the idiogram to scale.
+4. **Asymmetry** — TF%, AsK%, Syi, Rec, A1, A2, A, CVCL, CVCI, MCA, AI and DI
+   and the Stebbins (1971) categories, with what each index measures, which
+   ones are redundant and which are recommended.
+5. **Meiosis** — configurations per cell, chiasmata, recombination index,
+   abnormalities by phase, Love's (1951) meiotic index, pollen viability with
+   its intervals and homogeneity tests, and the configurations expected for
+   each ploidy level and origin (autopolyploid or allopolyploid), computed
+   exactly from a model of random pairing of chromosome ends.
+6. **Ploidy and genome** — 2n counts, ploidy level from the basic number,
+   aneuploidy, flow cytometry in pg and Mbp with its histogram, and the
+   *Allium* test: mitotic index, phases, aberrations and micronuclei.
+7. **Banding and FISH** — C and N bands, fluorochromes and in-situ
+   hybridization signals by chromosome and position, drawn on the idiogram and
+   on the map of each chromosome, with their agreement among cells.
+8. **Comparison** — matrix of karyological parameters, distances, UPGMA,
+   Ward, principal components with a biplot, parallel idiograms, chromosome
+   number evolution by parsimony on a Newick tree and a map of cytotypes.
+9. **Teaching** — mitosis and meiosis step by step for one to six pairs (with
+   crossing-over, random orientation and what to count in each phase), a
+   karyotype exercise on a simulated metaphase that grades itself,
+   self-assessment in Spanish and English with new numbers each time, an
+   illustrated glossary and a printable practice sheet with cited protocols.
+10. **Figures and report** — every figure of the project (idiograms,
+    karyogram cut from the image, Stebbins categories, MCA × CVCL, cytometry
+    histograms, dendrogram, biplot, tree with the numbers and map) in SVG or
+    PNG; every table in CSV or TSV; methods written in Spanish or English with
+    their references; a printable report and a reproducible `.zip` package
+    with the project, the tables, the figures and the report.
 
-## Cómo citarlo
+## Tests and validation
 
-Barrera-Guzmán, L. Á. (2026). *CytogeneticsPro: citogenética vegetal en el
-navegador* (versión 1.0.0) [Programa de cómputo]. LABG Suite.
+- **Unit tests.** Open `tests/index.html` with a double click: 684 tests of
+  every engine, against published examples (Peruzzi and Eroğlu 2013; Zuo and
+  Yuan 2011), values computed in R, closed formulas and small cases solved by
+  hand. Every line must be green.
+- **Validation against R.** The asymmetry indices of 81 karyotypes, the
+  Stebbins categories, the centromeric index, the arm ratio and the class of
+  1,289 chromosomes (Levan et al. 1964 and Guerra 1986), the Wilson and
+  Clopper–Pearson intervals, the χ² and G tests, the two-proportion test,
+  Holm's correction and the genome-size conversions were recomputed with
+  formulas written independently in R 4.4.2: **9,310 comparisons, none
+  failing** (tolerance 1e-6). The distances, UPGMA, Ward, the cophenetic
+  correlation and the principal components were also checked against base R.
+  The comparison scripts and their reports stay on the author's computer and
+  are not part of the distributed program; `CHANGELOG.md` gives the counts
+  and the errors the validation caught.
 
-## Licencia
+## Documentation
 
-Este programa es software libre: puede redistribuirse y modificarse bajo los
-términos de la Licencia Pública General de GNU, versión 3 o (a elección de
-quien lo use) cualquier versión posterior. Se distribuye con la esperanza de
-que sea útil, pero SIN NINGUNA GARANTÍA. Ver `LICENSE`.
+| Document | Language | What it is |
+|---|---|---|
+| `manual/CytogeneticsPro_Manual_de_usuario_ES.pdf` | Spanish | User manual, 145 pages: introduction, one chapter per block, appendices (files, decision rules, glossary, common problems, licence and how to cite, the 48 references) |
+| `manual/en/CytogeneticsPro User's Manual (English).pdf` | English | The same manual in English, 147 pages |
+| `manual/es/`, `manual/en/` | Spanish, English | The parts of the manuals in HTML; `manual/LEEME.md` explains how they are built |
+| Home page of the app (Block 1) | Spanish and English | Theory in plain words, the methods with their sources, and the references |
+| [`CHANGELOG.md`](CHANGELOG.md) | Spanish | What changed in each stage and version |
+| [`PROCEDENCIA.md`](PROCEDENCIA.md) | Spanish | Item by item, what is original work and where the methods and the example data come from |
+
+## Data and third-party material
+
+All the statistical and cytogenetic engines, the figures and the interface
+are the author's own code, and the program requests nothing from the
+internet. It implements published methods, each one cited to its original
+source in the code, on the Home page and in the methods written by Block 10.
+The only third-party material is the line icons drawn by the shared modules
+of the suite (navigator, figure studio and effects), from the Lucide project
+under the ISC licence (those derived from Feather also under MIT), listed
+with their licence texts in [`LICENSES-TERCEROS.md`](LICENSES-TERCEROS.md).
+The four examples are simulated with the author's own script
+(`data/generar_ejemplos.js`): the species and places are real, the
+measurements are not, and the app says so on screen. `PROCEDENCIA.md` (in
+Spanish) gives the details.
+
+## How to cite
+
+Barrera-Guzmán, L. Á. (2026). CytogeneticsPro: plant cytogenetics in the
+browser (Version 1.0.0) [Computer software].
+https://github.com/luisangelbg/CytogeneticsPro
+
+<!-- DOI: when the Zenodo record exists, replace the repository address above with
+https://doi.org/10.5281/zenodo.XXXXXXXX (concept DOI) and add the line below. -->
+
+The **Home** page of the app gives the citation ready to copy, also as a
+BibTeX entry. `CITATION.cff` has the same data for reference managers.
+
+## Contributing and support
+
+Problems and proposals go to
+https://github.com/luisangelbg/CytogeneticsPro/issues (the **Report a
+problem** button of the app opens one with the block and the browser already
+filled in).
+
+## Licence
+
+GNU General Public License, version 3 or later (`LICENSE`).

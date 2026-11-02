@@ -1,12 +1,12 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "CytogeneticsPro: citogenética vegetal en el navegador"
+title: "CytogeneticsPro: plant cytogenetics in the browser"
 abstract: >-
   CytogeneticsPro (from chromosome count to karyotype) is a self-contained web application for
   plant cytogenetics that runs entirely in the browser, with no installation and no server-side
   computation. It measures chromosomes on calibrated micrographs (counting markers, polylines that
   follow the curvature of each chromosome, centromeres, secondary constrictions and satellites) or
-  from typed measurements; builds the karyotype by pairing homologues by length and centromeric
+  from typed measurements; builds the karyotype by pairing homologs by length and centromeric
   index, averages over cells, classifies each pair by the nomenclature of Levan et al. (1964) or
   Guerra (1986) with configurable limits, writes the karyotype formula, the total length of the
   complement and the fundamental number, and draws the idiogram to scale with satellites, bands and
@@ -21,7 +21,9 @@ abstract: >-
   parameters, distances, UPGMA, Ward and principal components, and reconstructs chromosome number
   evolution on a tree by parsimony with costs per event; offers teaching simulators and exercises;
   and writes figures, tables, a methods section in Spanish or English and a reproducible package.
-  Bilingual interface (Spanish and English).
+  Bilingual interface (Spanish and English). The indices, the classification, the statistics and
+  the genome-size conversions were checked against formulas written independently in R (9,310
+  comparisons, none failing), and 684 unit tests run in the browser.
 type: software
 authors:
   - given-names: "Luis Ángel"
@@ -29,7 +31,11 @@ authors:
     email: lbarrerag@chapingo.mx
     orcid: "https://orcid.org/0000-0001-8057-2583"
 version: "1.0.0"
-url: "https://luisangelbg.github.io/"
+# DOI: when the Zenodo record exists, add here (concept DOI) and the release date:
+# doi: 10.5281/zenodo.XXXXXXXX
+# date-released: "YYYY-MM-DD"
+url: "https://luisangelbg.github.io/CytogeneticsPro/"
+repository-code: "https://github.com/luisangelbg/CytogeneticsPro"
 license: GPL-3.0-or-later
 keywords:
   - plant cytogenetics

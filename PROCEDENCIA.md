@@ -170,7 +170,8 @@ números igual de parsimoniosos de cada nodo y dibuja una de las historias
   tablas 1 y 2) y con los cariotipos ideales de Zuo y Yuan (2011); las
   distribuciones, con los valores que da R.
 - `validation/`: guiones en R que recalculan los índices con fórmulas escritas
-  aparte, con sus informes.
+  aparte, con sus informes (9 310 comparaciones, 0 fallan). La carpeta se
+  queda en el equipo del autor y no forma parte del programa que se distribuye.
 - `validation/comparacion/`: la distancia de Gower, la euclidiana, UPGMA, Ward,
   la correlación cofenética y los componentes principales de una matriz de seis
   taxones calculados con R base; los mismos números están en las pruebas.
