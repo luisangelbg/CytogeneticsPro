@@ -10,6 +10,8 @@
      – al pie, tres viñetas: una célula en diacinesis de un autotetraploide (Meiosis.simulateCell, AAAA, x = 7,
        c = 0.78, como la serie poliploide de ejemplo), el histograma del citómetro con el patrón interno de tomate
        (2C = 1.96 pg) y la muestra de 3.18 pg, y la cuadrícula de Stebbins con la casilla del maíz (Asym.compute).
+   Fondo blanco, como las demás portadas de la suite; la metafase y la célula meiótica van en campos oscuros de
+   micrografía, para que las señales de fluorescencia se lean, y lo demás en ciruela, azul DAPI y oro.
    Sin azar libre: la disposición de la metafase y la célula meiótica salen de un generador con semilla fija.
    Uso, desde la carpeta de la app:   node manual/herramientas/genera-portada.js
    La edición inglesa (en/00a-portada.html: el mismo dibujo con los textos en inglés):  … genera-portada.js --idioma en */
@@ -41,6 +43,12 @@ const f1 = v => (Math.round(v * 10) / 10).toFixed(1);
 const C = {
   marfil: '#f4ebf1', oro: '#d9b456', dapi: '#86aef0', dapiOsc: '#3d6fc4', ciruela: '#d47cb8', rojo: '#ff5a6e', verde: '#5fe08a',
 };
+/* the same identity on white paper: ink and accents dark enough to read on the page (the metaphase and the
+   meiotic cell stay inside dark micrographs, with the fluorescence colours above) */
+const PB = {
+  tinta: '#2a1024', gris: '#64566a', oro: '#8f6a1c', oroLin: '#b98d2c', ciruela: '#a3407f', dapi: '#2f62b8',
+  rojo: '#d62a44', verde: '#24a052', st: '#cc7a26', t: '#55923f',
+};
 const BLOQUES = ['#8a2a6b', '#2f5f9e', '#b0641c', '#4a7d42', '#6a5cb5', '#237a7a', '#00795c', '#55606e', '#a8457f', '#94701c'];
 /* the CSS variables that Art writes, in the colours of the cover */
 const VARS = { '--primary': C.ciruela, '--accent': C.dapi, '--leaf': '#8cc478', '--ty-st': '#f0a35e', '--chart5': '#b3a6f0', '--chart6': '#55cfcf', '--card-bg': '#1c0d18', '--text': C.marfil };
@@ -57,10 +65,10 @@ const formula = '2n = 2x = 20 = ' + ['m', 'sm', 'st', 't', 'm-sat', 'sm-sat', 's
 
 const W = 850, H = 1100;
 let s = `<defs>
-  <radialGradient id="fondo" cx="50%" cy="44%" r="78%"><stop offset="0" stop-color="#341430"/><stop offset="0.55" stop-color="#1d0b19"/><stop offset="1" stop-color="#0e050c"/></radialGradient>
-  <linearGradient id="oro" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ebcb73"/><stop offset="0.5" stop-color="#b98d2c"/><stop offset="1" stop-color="#e3bd5e"/></linearGradient>
+  <radialGradient id="fondo" cx="50%" cy="46%" r="72%"><stop offset="0" stop-color="#f8f0f6"/><stop offset="0.6" stop-color="#fffcfe"/><stop offset="1" stop-color="#ffffff"/></radialGradient>
+  <linearGradient id="oro" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6ae55"/><stop offset="0.5" stop-color="#9c7320"/><stop offset="1" stop-color="#cfa548"/></linearGradient>
   <radialGradient id="campo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#0d1a33"/><stop offset="0.82" stop-color="#091224"/><stop offset="1" stop-color="#050a16"/></radialGradient>
-  <radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0.7" stop-color="#86aef0" stop-opacity="0.16"/><stop offset="1" stop-color="#86aef0" stop-opacity="0"/></radialGradient>
+  <radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0.7" stop-color="#7a3a6e" stop-opacity="0.14"/><stop offset="1" stop-color="#7a3a6e" stop-opacity="0"/></radialGradient>
   <filter id="brillo" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   <clipPath id="ocular"><circle cx="425" cy="525" r="168"/></clipPath>
 </defs>
@@ -70,24 +78,24 @@ let s = `<defs>
 /* corner ornaments: a small metaphase chromosome in each corner, m, sm, st and t */
 [[62, 62, 1.0, -35], [W - 62, 62, 2.2, 35], [62, H - 62, 4.0, 35], [W - 62, H - 62, 1.6, -35]].forEach(([x, y, r, a]) => {
   const tot = 26, sh = tot / (1 + r);
-  s += sinVars(Art.metaChr(x, y + (tot / 2 - sh) * 0.5, sh, tot - sh, 5.2, a, C.oro));
+  s += sinVars(Art.metaChr(x, y + (tot / 2 - sh) * 0.5, sh, tot - sh, 5.2, a, PB.oroLin));
 });
 
 /* ---------------- title ---------------- */
-s += `<text x="${W / 2}" y="104" text-anchor="middle" font-family="Jost" font-weight="500" font-size="12.5" letter-spacing="5.5" fill="${C.oro}">${L('LABG SUITE · CIENCIA ABIERTA EN EL NAVEGADOR', 'LABG SUITE · OPEN SCIENCE IN THE BROWSER')}</text>
-<text x="${W / 2}" y="194" text-anchor="middle" font-family="Cormorant" font-weight="600" font-size="86" fill="${C.marfil}">Cytogenetics<tspan fill="${C.dapi}">Pro</tspan></text>
-<line x1="${W / 2 - 70}" y1="220" x2="${W / 2 + 70}" y2="220" stroke="${C.oro}" stroke-width="1.4"/>`;
+s += `<text x="${W / 2}" y="104" text-anchor="middle" font-family="Jost" font-weight="500" font-size="12.5" letter-spacing="5.5" fill="${PB.oro}">${L('LABG SUITE · CIENCIA ABIERTA EN EL NAVEGADOR', 'LABG SUITE · OPEN SCIENCE IN THE BROWSER')}</text>
+<text x="${W / 2}" y="194" text-anchor="middle" font-family="Cormorant" font-weight="600" font-size="86" fill="${PB.tinta}">Cytogenetics<tspan fill="${PB.dapi}">Pro</tspan></text>
+<line x1="${W / 2 - 70}" y1="220" x2="${W / 2 + 70}" y2="220" stroke="${PB.oroLin}" stroke-width="1.4"/>`;
 s += EN
   ? `
-<text x="${W / 2}" y="258" text-anchor="middle" font-family="Cormorant" font-weight="600" font-size="38" fill="${C.marfil}">User’s Manual</text>
-<text x="${W / 2}" y="287" text-anchor="middle" font-family="Cormorant" font-style="italic" font-weight="500" font-size="25" fill="${C.oro}">Manual de usuario</text>
-<text x="${W / 2}" y="316" text-anchor="middle" font-family="Jost" font-weight="400" font-size="15" fill="${C.marfil}" opacity="0.88">From the chromosome count to the publishable karyotype</text>
-<text x="${W / 2}" y="335" text-anchor="middle" font-family="Cormorant" font-style="italic" font-weight="500" font-size="14" fill="${C.marfil}" opacity="0.6">Del conteo cromosómico al cariotipo publicable</text>`
+<text x="${W / 2}" y="258" text-anchor="middle" font-family="Cormorant" font-weight="600" font-size="38" fill="${PB.tinta}">User’s Manual</text>
+<text x="${W / 2}" y="287" text-anchor="middle" font-family="Cormorant" font-style="italic" font-weight="500" font-size="25" fill="${PB.oro}">Manual de usuario</text>
+<text x="${W / 2}" y="316" text-anchor="middle" font-family="Jost" font-weight="400" font-size="15" fill="${PB.tinta}" opacity="0.9">From the chromosome count to the publishable karyotype</text>
+<text x="${W / 2}" y="335" text-anchor="middle" font-family="Cormorant" font-style="italic" font-weight="500" font-size="14" fill="${PB.gris}">Del conteo cromosómico al cariotipo publicable</text>`
   : `
-<text x="${W / 2}" y="258" text-anchor="middle" font-family="Cormorant" font-weight="600" font-size="38" fill="${C.marfil}">Manual de usuario</text>
-<text x="${W / 2}" y="287" text-anchor="middle" font-family="Cormorant" font-style="italic" font-weight="500" font-size="25" fill="${C.oro}">User’s Manual</text>
-<text x="${W / 2}" y="316" text-anchor="middle" font-family="Jost" font-weight="400" font-size="15" fill="${C.marfil}" opacity="0.88">Del conteo cromosómico al cariotipo publicable</text>
-<text x="${W / 2}" y="335" text-anchor="middle" font-family="Cormorant" font-style="italic" font-weight="500" font-size="14" fill="${C.marfil}" opacity="0.6">From the chromosome count to the publishable karyotype</text>`;
+<text x="${W / 2}" y="258" text-anchor="middle" font-family="Cormorant" font-weight="600" font-size="38" fill="${PB.tinta}">Manual de usuario</text>
+<text x="${W / 2}" y="287" text-anchor="middle" font-family="Cormorant" font-style="italic" font-weight="500" font-size="25" fill="${PB.oro}">User’s Manual</text>
+<text x="${W / 2}" y="316" text-anchor="middle" font-family="Jost" font-weight="400" font-size="15" fill="${PB.tinta}" opacity="0.9">Del conteo cromosómico al cariotipo publicable</text>
+<text x="${W / 2}" y="335" text-anchor="middle" font-family="Cormorant" font-style="italic" font-weight="500" font-size="14" fill="${PB.gris}">From the chromosome count to the publishable karyotype</text>`;
 
 /* ---------------- the DAPI metaphase with its FISH signals ---------------- */
 const CX = 425, CY = 525, RAD = 168, ESC = 8.4; /* px per µm */
@@ -128,51 +136,51 @@ s += `<circle cx="${CX}" cy="${CY}" r="${RAD + 26}" fill="url(#halo)"/>
   s += `<g clip-path="url(#ocular)" filter="url(#brillo)">${g}</g>`;
 }
 s += `<circle cx="${CX}" cy="${CY}" r="${RAD}" fill="none" stroke="url(#oro)" stroke-width="1.6"/>
-<circle cx="${CX}" cy="${CY}" r="${RAD + 7}" fill="none" stroke="#b98d2c" stroke-width="0.6" opacity="0.6"/>`;
-/* scale bar of 10 µm inside the field, and the legend of the signals outside it */
-s += `<line x1="${CX + 52}" y1="${CY + 146}" x2="${CX + 52 + 10 * ESC}" y2="${CY + 146}" stroke="${C.marfil}" stroke-width="2.2"/>
-<text x="${CX + 52 + 5 * ESC}" y="${CY + 140}" text-anchor="middle" font-family="Jost" font-size="9" fill="${C.marfil}">10 µm</text>`;
-s += `<g font-family="Jost" font-size="10" fill="${C.marfil}" opacity="0.88">
-<circle cx="${CX + 196}" cy="${CY - 120}" r="4" fill="${C.dapi}"/><text x="${CX + 206}" y="${CY - 116.5}">DAPI</text>
-<circle cx="${CX + 196}" cy="${CY - 100}" r="4" fill="${C.rojo}"/><text x="${CX + 206}" y="${CY - 96.5}">${L('ADNr 45S', '45S rDNA')}</text>
-<circle cx="${CX + 196}" cy="${CY - 80}" r="4" fill="${C.verde}"/><text x="${CX + 206}" y="${CY - 76.5}">${L('nudos', 'knobs')}</text></g>
-<text x="${CX - 196}" y="${CY - 116}" text-anchor="end" font-family="Cormorant" font-style="italic" font-size="17" fill="${C.marfil}">Zea mays</text>
-<text x="${CX - 196}" y="${CY - 99}" text-anchor="end" font-family="Jost" font-size="10" fill="${C.oro}">2n = 20</text>
-<text x="${CX - 196}" y="${CY - 85}" text-anchor="end" font-family="Jost" font-size="8.5" fill="${C.marfil}" opacity="0.6">${L('ejemplo simulado', 'simulated example')}</text>`;
+<circle cx="${CX}" cy="${CY}" r="${RAD + 7}" fill="none" stroke="#b98d2c" stroke-width="0.6" opacity="0.7"/>`;
+/* scale bar of 10 µm inside the field (centred, so that the white bar never runs off the dark field onto the paper), and the legend of the signals outside it */
+s += `<line x1="${CX - 42}" y1="${CY + 146}" x2="${CX - 42 + 10 * ESC}" y2="${CY + 146}" stroke="${C.marfil}" stroke-width="2.2"/>
+<text x="${CX - 42 + 5 * ESC}" y="${CY + 140}" text-anchor="middle" font-family="Jost" font-size="9" fill="${C.marfil}">10 µm</text>`;
+s += `<g font-family="Jost" font-size="10" fill="${PB.tinta}">
+<circle cx="${CX + 196}" cy="${CY - 120}" r="4" fill="${C.dapi}" stroke="${PB.dapi}" stroke-width="0.8"/><text x="${CX + 206}" y="${CY - 116.5}">DAPI</text>
+<circle cx="${CX + 196}" cy="${CY - 100}" r="4" fill="${C.rojo}" stroke="${PB.rojo}" stroke-width="0.8"/><text x="${CX + 206}" y="${CY - 96.5}">${L('ADNr 45S', '45S rDNA')}</text>
+<circle cx="${CX + 196}" cy="${CY - 80}" r="4" fill="${C.verde}" stroke="${PB.verde}" stroke-width="0.8"/><text x="${CX + 206}" y="${CY - 76.5}">${L('nudos', 'knobs')}</text></g>
+<text x="${CX - 196}" y="${CY - 116}" text-anchor="end" font-family="Cormorant" font-style="italic" font-size="17" fill="${PB.tinta}">Zea mays</text>
+<text x="${CX - 196}" y="${CY - 99}" text-anchor="end" font-family="Jost" font-size="10" fill="${PB.oro}">2n = 20</text>
+<text x="${CX - 196}" y="${CY - 85}" text-anchor="end" font-family="Jost" font-size="8.5" fill="${PB.gris}">${L('ejemplo simulado', 'simulated example')}</text>`;
 
 /* ---------------- the haploid idiogram ---------------- */
 {
   const y0 = 758, esc = 10.5, paso = 48, x0 = W / 2 - paso * 4.5;
-  const col = { m: C.ciruela, sm: C.dapi, st: '#f0a35e', t: '#8cc478' };
-  let g = `<line x1="${x0 - 30}" y1="${y0}" x2="${x0 + paso * 9 + 30}" y2="${y0}" stroke="${C.oro}" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.7"/>`;
+  const col = { m: PB.ciruela, sm: PB.dapi, st: PB.st, t: PB.t };
+  let g = `<line x1="${x0 - 30}" y1="${y0}" x2="${x0 + paso * 9 + 30}" y2="${y0}" stroke="${PB.oroLin}" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.9"/>`;
   pares.forEach((P, i) => {
     const x = x0 + i * paso, s0 = P.p * esc, sat = P.sat * esc, q = P.q * esc, w = 13;
-    const fill = col[clases[i]] || C.marfil;
+    const fill = col[clases[i]] || PB.gris;
     /* short arm up (with its satellite over a gap), long arm down */
     g += `<rect x="${f1(x - w / 2)}" y="${f1(y0 - 2 - s0)}" width="${w}" height="${f1(s0)}" rx="5" fill="${fill}"/>`;
     g += `<rect x="${f1(x - w / 2)}" y="${f1(y0 + 2)}" width="${w}" height="${f1(q)}" rx="5" fill="${fill}"/>`;
-    if (sat) g += `<rect x="${f1(x - w / 2 + 1.5)}" y="${f1(y0 - 2 - s0 - 3 - sat)}" width="${w - 3}" height="${f1(Math.max(sat, 3.5))}" rx="2" fill="${C.rojo}"/>`;
+    if (sat) g += `<rect x="${f1(x - w / 2 + 1.5)}" y="${f1(y0 - 2 - s0 - 3 - sat)}" width="${w - 3}" height="${f1(Math.max(sat, 3.5))}" rx="2" fill="${PB.rojo}"/>`;
     (B.knobs[i + 1] || []).forEach(([arm, fr]) => {
       const yy = arm === 'l' ? y0 + 2 + fr * q : y0 - 2 - fr * s0;
-      g += `<rect x="${f1(x - w / 2)}" y="${f1(yy - 2.2)}" width="${w}" height="4.4" fill="${C.verde}"/>`;
+      g += `<rect x="${f1(x - w / 2)}" y="${f1(yy - 2.2)}" width="${w}" height="4.4" fill="${PB.verde}"/>`;
     });
-    g += `<text x="${f1(x)}" y="${f1(y0 + 2 + 4.6 * esc + 12)}" text-anchor="middle" font-family="Jost" font-weight="500" font-size="10" fill="${C.marfil}">${i + 1}</text>`;
-    g += `<text x="${f1(x)}" y="${f1(y0 + 2 + 4.6 * esc + 24)}" text-anchor="middle" font-family="Jost" font-size="8.5" fill="${C.oro}">${clases[i]}${P.sat ? '*' : ''}</text>`;
+    g += `<text x="${f1(x)}" y="${f1(y0 + 2 + 4.6 * esc + 12)}" text-anchor="middle" font-family="Jost" font-weight="500" font-size="10" fill="${PB.tinta}">${i + 1}</text>`;
+    g += `<text x="${f1(x)}" y="${f1(y0 + 2 + 4.6 * esc + 24)}" text-anchor="middle" font-family="Jost" font-size="8.5" fill="${PB.oro}">${clases[i]}${P.sat ? '*' : ''}</text>`;
   });
   s += g;
-  s += `<text x="${W / 2}" y="${y0 + 94}" text-anchor="middle" font-family="Jost" font-weight="500" font-size="12" letter-spacing="0.5" fill="${C.marfil}">${formula}</text>`;
+  s += `<text x="${W / 2}" y="${y0 + 94}" text-anchor="middle" font-family="Jost" font-weight="500" font-size="12" letter-spacing="0.5" fill="${PB.tinta}">${formula}</text>`;
 }
 
 /* ---------------- the strip of the ten block colours ---------------- */
 BLOQUES.forEach((c, i) => { s += `<rect x="${f1(150 + i * 55.5)}" y="874" width="52" height="6" fill="${c}"/>`; });
 
 /* ---------------- three vignettes ---------------- */
-const vin = (x, titulo, g) => `<g transform="translate(${x} 892)"><rect width="176" height="104" rx="6" fill="#ffffff" fill-opacity="0.035" stroke="#b98d2c" stroke-opacity="0.5" stroke-width="0.8"/>${g}<text x="88" y="96" text-anchor="middle" font-family="Jost" font-weight="500" font-size="8.5" letter-spacing="2" fill="${C.oro}">${titulo}</text></g>`;
+const vin = (x, titulo, g) => `<g transform="translate(${x} 892)"><rect width="176" height="104" rx="6" fill="#fbf6fa" stroke="#b98d2c" stroke-opacity="0.7" stroke-width="0.8"/>${g}<text x="88" y="96" text-anchor="middle" font-family="Jost" font-weight="500" font-size="8.5" letter-spacing="2" fill="${PB.oro}">${titulo}</text></g>`;
 /* 1 · a diakinesis cell of an autotetraploid, from the app's model */
 {
   const R = rng(7), cel = Meiosis.simulateCell('AAAA', 7, 0.78, R), claves = [];
   Object.keys(cel).sort().forEach(k => { for (let j = 0; j < cel[k]; j++) claves.push(k); });
-  let g = `<circle cx="88" cy="44" r="38" fill="#2a1226" stroke="${C.marfil}" stroke-opacity="0.35" stroke-width="0.8"/>`;
+  let g = `<circle cx="88" cy="44" r="38" fill="#1d0b19" stroke="${PB.oroLin}" stroke-opacity="0.8" stroke-width="0.8"/>`;
   const n = claves.length;
   claves.forEach((k, j) => {
     const a = j / n * 2 * Math.PI + 0.3, rr = j % 2 ? 23 : 13 + (j % 3) * 4;
@@ -187,10 +195,10 @@ const vin = (x, titulo, g) => `<g transform="translate(${x} 892)"><rect width="1
   const ys = xs.map(x => 0.9 * Math.exp(-(x - 60) / 22) + gau(x, ch0, 0.024, 1) + gau(x, 2 * ch0, 0.024, 0.12) + gau(x, ch1, 0.031, 0.78) + gau(x, 2 * ch1, 0.031, 0.08));
   const gx = x => 14 + (x - 60) / (xs[xs.length - 1] - 60) * 148, gy = y => 78 - y / 1.05 * 62;
   const d = xs.map((x, k) => (k ? 'L' : 'M') + f1(gx(x)) + ' ' + f1(gy(ys[k]))).join('');
-  let g = `<line x1="14" y1="78" x2="162" y2="78" stroke="${C.oro}" stroke-opacity="0.6" stroke-width="0.8"/>`;
-  g += `<path d="${d}L162 78L14 78Z" fill="${C.dapi}" fill-opacity="0.22"/><path d="${d}" fill="none" stroke="${C.dapi}" stroke-width="1.5"/>`;
-  g += `<text x="${f1(gx(ch0))}" y="${f1(gy(1) - 4)}" text-anchor="middle" font-family="Jost" font-size="7" fill="${C.marfil}" opacity="0.85">${L('patrón', 'standard')}</text>`;
-  g += `<text x="${f1(gx(ch1))}" y="${f1(gy(0.78) - 4)}" text-anchor="middle" font-family="Jost" font-size="7" fill="${C.rojo}">2C = 3.18 pg</text>`;
+  let g = `<line x1="14" y1="78" x2="162" y2="78" stroke="${PB.tinta}" stroke-opacity="0.6" stroke-width="0.8"/>`;
+  g += `<path d="${d}L162 78L14 78Z" fill="${PB.dapi}" fill-opacity="0.16"/><path d="${d}" fill="none" stroke="${PB.dapi}" stroke-width="1.5"/>`;
+  g += `<text x="${f1(gx(ch0))}" y="${f1(gy(1) - 4)}" text-anchor="middle" font-family="Jost" font-size="7" fill="${PB.tinta}">${L('patrón', 'standard')}</text>`;
+  g += `<text x="${f1(gx(ch1))}" y="${f1(gy(0.78) - 4)}" text-anchor="middle" font-family="Jost" font-size="7" fill="${PB.rojo}">2C = 3.18 pg</text>`;
   s += vin(337, L('LA CITOMETRÍA', 'FLOW CYTOMETRY'), g);
 }
 /* 3 · the Stebbins grid with the cell of the maize karyotype */
@@ -199,16 +207,16 @@ const vin = (x, titulo, g) => `<g transform="translate(${x} 892)"><rect width="1
   let g = '';
   filas.forEach((f, r) => cols.forEach((c, k) => {
     const on = A.stebbins === c + f;
-    g += `<rect x="${x0 + k * cw}" y="${y0 + r * chh}" width="${cw - 2}" height="${chh - 2}" rx="2" fill="${on ? C.ciruela : '#ffffff'}" fill-opacity="${on ? 1 : 0.06}" stroke="${C.marfil}" stroke-opacity="0.25" stroke-width="0.6"/>`;
-    g += `<text x="${x0 + k * cw + (cw - 2) / 2}" y="${y0 + r * chh + 11.5}" text-anchor="middle" font-family="Jost" font-size="7.5" fill="${on ? '#1c0d18' : C.marfil}" opacity="${on ? 1 : 0.6}" font-weight="${on ? 600 : 400}">${c}${f}</text>`;
+    g += `<rect x="${x0 + k * cw}" y="${y0 + r * chh}" width="${cw - 2}" height="${chh - 2}" rx="2" fill="${on ? PB.ciruela : '#ffffff'}" fill-opacity="1" stroke="${PB.tinta}" stroke-opacity="0.25" stroke-width="0.6"/>`;
+    g += `<text x="${x0 + k * cw + (cw - 2) / 2}" y="${y0 + r * chh + 11.5}" text-anchor="middle" font-family="Jost" font-size="7.5" fill="${on ? '#ffffff' : PB.tinta}" opacity="${on ? 1 : 0.65}" font-weight="${on ? 600 : 400}">${c}${f}</text>`;
   }));
-  g += `<text x="88" y="81" text-anchor="middle" font-family="Jost" font-size="7" fill="${C.marfil}" opacity="0.85">MCA ${A.MCA.toFixed(1)} · CVCL ${A.CVCL.toFixed(1)}</text>`;
+  g += `<text x="88" y="81" text-anchor="middle" font-family="Jost" font-size="7" fill="${PB.tinta}">MCA ${A.MCA.toFixed(1)} · CVCL ${A.CVCL.toFixed(1)}</text>`;
   s += vin(544, L('LA ASIMETRÍA', 'ASYMMETRY'), g);
 }
 
 /* ---------------- footer ---------------- */
-s += `<text x="${W / 2}" y="1028" text-anchor="middle" font-family="Jost" font-weight="400" font-size="12" letter-spacing="2.5" fill="${C.marfil}" opacity="0.85">LUIS ÁNGEL BARRERA-GUZMÁN</text>
-<text x="${W / 2}" y="1047" text-anchor="middle" font-family="Jost" font-weight="300" font-size="10" letter-spacing="1.5" fill="${C.oro}">${L('PRIMERA EDICIÓN · 2026 · VERSIÓN 1.0', 'FIRST ENGLISH EDITION · 2026 · VERSION 1.0')}</text>`;
+s += `<text x="${W / 2}" y="1028" text-anchor="middle" font-family="Jost" font-weight="400" font-size="12" letter-spacing="2.5" fill="${PB.tinta}" opacity="0.9">LUIS ÁNGEL BARRERA-GUZMÁN</text>
+<text x="${W / 2}" y="1047" text-anchor="middle" font-family="Jost" font-weight="400" font-size="10" letter-spacing="1.5" fill="${PB.oro}">${L('PRIMERA EDICIÓN · 2026 · VERSIÓN 1.0', 'FIRST ENGLISH EDITION · 2026 · VERSION 1.0')}</text>`;
 
 const html = `<!doctype html>
 <html lang="${L('es', 'en')}">
