@@ -285,18 +285,18 @@
     }
     host.innerHTML = REFS.map(r => `<li data-t="${r[1]}">${L2(r[0], refLang(r[0], 'en'))} <span class="ref-topic">${L2(REF_TOPICS[r[1]][0], REF_TOPICS[r[1]][1])}</span></li>`).join('');
   }
-  /* cited by its author, title, version and the address of the repository; there
-     is no DOI yet (when the Zenodo record exists, the APA ends in «Zenodo.
-     https://doi.org/10.5281/zenodo.XXXXXXXX» and the BibTeX gains doi = {…} with
-     that address as url). The English citation carries the English title */
+  /* cited by its author, title, version and the concept DOI of Zenodo, which
+     always resolves to the latest version. The English citation carries the
+     English title */
   const CITE_TITLE = 'CytogeneticsPro: citogenética vegetal en el navegador';
   const CITE_TITLE_EN = 'CytogeneticsPro: plant cytogenetics in the browser';
-  const CITE_URL = 'https://github.com/luisangelbg/CytogeneticsPro';
+  const CITE_DOI = '10.5281/zenodo.23873606';
+  const CITE_URL = 'https://doi.org/' + CITE_DOI;
   function citeText() {
-    const bib = title => `@software{barreraguzman2026cytogeneticspro,\n  author  = {Barrera-Guzmán, Luis Ángel},\n  title   = {${title}},\n  version = {${APP_VERSION}},\n  year    = {2026},\n  license = {GPL-3.0-or-later},\n  url     = {${CITE_URL}}\n}`;
+    const bib = title => `@software{barreraguzman2026cytogeneticspro,\n  author  = {Barrera-Guzmán, Luis Ángel},\n  title   = {${title}},\n  version = {${APP_VERSION}},\n  year    = {2026},\n  license = {GPL-3.0-or-later},\n  doi     = {${CITE_DOI}},\n  url     = {${CITE_URL}}\n}`;
     return {
-      apa: `Barrera-Guzmán, L. Á. (2026). <i>${CITE_TITLE}</i> (versión ${APP_VERSION}) [Programa de cómputo]. ${CITE_URL}`,
-      apaEn: `Barrera-Guzmán, L. Á. (2026). <i>${CITE_TITLE_EN}</i> (version ${APP_VERSION}) [Computer software]. ${CITE_URL}`,
+      apa: `Barrera-Guzmán, L. Á. (2026). <i>${CITE_TITLE}</i> (versión ${APP_VERSION}) [Programa de cómputo]. Zenodo. ${CITE_URL}`,
+      apaEn: `Barrera-Guzmán, L. Á. (2026). <i>${CITE_TITLE_EN}</i> (version ${APP_VERSION}) [Computer software]. Zenodo. ${CITE_URL}`,
       bib: bib(CITE_TITLE),
       bibEn: bib(CITE_TITLE_EN),
     };

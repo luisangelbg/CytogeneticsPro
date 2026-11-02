@@ -1,7 +1,6 @@
 # CytogeneticsPro
 
-<!-- DOI: cuando exista el registro de Zenodo, va aquí su insignia:
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXXX) -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23873606.svg)](https://doi.org/10.5281/zenodo.23873606)
 
 **Del conteo cromosómico al cariotipo publicable** · *English: [README.md](README.md)*
 
@@ -119,11 +118,12 @@ lo dice en la pantalla. Ver `PROCEDENCIA.md`.
 ## Cómo citar
 
 Barrera-Guzmán, L. Á. (2026). *CytogeneticsPro: citogenética vegetal en el
-navegador* (versión 1.0.0) [Programa de cómputo].
-https://github.com/luisangelbg/CytogeneticsPro
+navegador* (versión 1.0.0) [Programa de cómputo]. Zenodo.
+https://doi.org/10.5281/zenodo.23873606
 
-<!-- DOI: cuando exista el registro de Zenodo, se cambia la dirección del repositorio de
-arriba por https://doi.org/10.5281/zenodo.XXXXXXXX (DOI de concepto). -->
+El DOI de arriba lleva siempre a la versión más reciente; cada versión tiene
+además el suyo en la página de Zenodo (la 1.0.0: 10.5281/zenodo.23873607).
+Cita la versión que usaste. Código: https://github.com/luisangelbg/CytogeneticsPro
 
 La sección **Cómo citar** de la portada de la app da la cita lista para
 copiar, también como entrada BibTeX; `CITATION.cff` tiene los mismos datos

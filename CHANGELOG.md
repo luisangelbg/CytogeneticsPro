@@ -1,5 +1,23 @@
 # Cambios de CytogeneticsPro
 
+## Versión 1.0.0 · Publicación: DOI de Zenodo — 2 de noviembre de 2026
+
+Sin cambio de versión. CytogeneticsPro está en GitHub (https://github.com/luisangelbg/CytogeneticsPro), en línea
+en https://luisangelbg.github.io/CytogeneticsPro/ y archivada en Zenodo con el DOI de concepto
+**10.5281/zenodo.23873606** (siempre lleva a la versión más reciente; la 1.0.0 tiene además el suyo,
+10.5281/zenodo.23873607).
+
+- **Cita de la app** (español e inglés): termina en «Zenodo. https://doi.org/10.5281/zenodo.23873606»; el BibTeX
+  lleva `doi` y la dirección del DOI como `url`. La misma cita va en los métodos, en el informe y en el `README.txt`
+  del paquete .zip.
+- **Metadatos**: `README.md` y `LEEME.md` con la insignia del DOI y la cita; `CITATION.cff` con `doi`,
+  `date-released`, `identifiers` (concepto y versión) y `preferred-citation`; `codemeta.json` con `identifier`,
+  `datePublished` y `relatedLink`.
+- **Manuales** español e inglés: créditos (cita del programa, cita del manual y renglón del DOI), apéndice E.3 (cita,
+  BibTeX y renglón) y sección 1.7 con el DOI; la captura de «Cómo citar» retomada en los dos idiomas; PDF
+  reimpresos (145 y 147 hojas).
+- 684 pruebas, todas pasan.
+
 ## Versión 1.0.0 · Correcciones de la interfaz inglesa — 1 de noviembre de 2026
 
 Sin cambio de versión. Problemas que sólo se veían con la interfaz en inglés y salieron al traducir el manual. En

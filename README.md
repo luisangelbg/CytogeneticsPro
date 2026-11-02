@@ -1,7 +1,6 @@
 # CytogeneticsPro
 
-<!-- DOI: when the Zenodo record exists, put its badge here:
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXXX) -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23873606.svg)](https://doi.org/10.5281/zenodo.23873606)
 
 **From the chromosome count to the publishable karyotype** · *Español: [LEEME.md](LEEME.md)*
 
@@ -131,11 +130,12 @@ Spanish) gives the details.
 ## How to cite
 
 Barrera-Guzmán, L. Á. (2026). CytogeneticsPro: plant cytogenetics in the
-browser (Version 1.0.0) [Computer software].
-https://github.com/luisangelbg/CytogeneticsPro
+browser (Version 1.0.0) [Computer software]. Zenodo.
+https://doi.org/10.5281/zenodo.23873606
 
-<!-- DOI: when the Zenodo record exists, replace the repository address above with
-https://doi.org/10.5281/zenodo.XXXXXXXX (concept DOI) and add the line below. -->
+The DOI above always resolves to the latest version; each version has its own
+DOI on the Zenodo page (version 1.0.0: 10.5281/zenodo.23873607). Cite the
+version you used. Code: https://github.com/luisangelbg/CytogeneticsPro
 
 The **Home** page of the app gives the citation ready to copy, also as a
 BibTeX entry. `CITATION.cff` has the same data for reference managers.

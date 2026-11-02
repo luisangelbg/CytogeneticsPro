@@ -31,9 +31,15 @@ authors:
     email: lbarrerag@chapingo.mx
     orcid: "https://orcid.org/0000-0001-8057-2583"
 version: "1.0.0"
-# DOI: when the Zenodo record exists, add here (concept DOI) and the release date:
-# doi: 10.5281/zenodo.XXXXXXXX
-# date-released: "YYYY-MM-DD"
+date-released: "2026-11-02"
+doi: 10.5281/zenodo.23873606
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23873606
+    description: "Concept DOI — always resolves to the latest version. Cite this one."
+  - type: doi
+    value: 10.5281/zenodo.23873607
+    description: "DOI of version 1.0.0."
 url: "https://luisangelbg.github.io/CytogeneticsPro/"
 repository-code: "https://github.com/luisangelbg/CytogeneticsPro"
 license: GPL-3.0-or-later
@@ -51,3 +57,16 @@ keywords:
   - fluorescence in situ hybridization
   - chromosome number evolution
   - Allium test
+preferred-citation:
+  type: software
+  title: "CytogeneticsPro: plant cytogenetics in the browser"
+  authors:
+    - given-names: "Luis Ángel"
+      family-names: "Barrera-Guzmán"
+      orcid: "https://orcid.org/0000-0001-8057-2583"
+  version: "1.0.0"
+  year: 2026
+  doi: 10.5281/zenodo.23873606
+  publisher:
+    name: "Zenodo"
+  url: "https://doi.org/10.5281/zenodo.23873606"
