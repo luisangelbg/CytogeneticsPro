@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · User’s Manual · Chapter 7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-7" data-pestana="7" data-orden="7" style="--acento: var(--b7)">
+  <div class="cap-apertura">
+    <div class="cap-num">7</div>
+    <div class="cap-etiqueta">Chapter seven · Block 7</div>
+    <h1 data-corto="Banding and FISH">Banding and FISH</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Two karyotypes with the same formula can be different: heterochromatin bands, fluorochromes and DNA probes mark sites that morphology does not see. This block records each signal by its pair, its arm and its position, draws it on the idiogram of Block 3, builds the physical map of one chromosome and summarizes the pattern of each accession, its concordance among cells and the sites of each probe in every accession.</p>
+    <div class="cap-franja"><span class="k7"></span><span class="k7"></span><span class="k3"></span><span class="k8"></span><span class="k10"></span></div>
+    <ul class="cap-contenido">
+      <li><b>7.1</b>Accession, probes and bands</li>
+      <li><b>7.2</b>Signals</li>
+      <li><b>7.3</b>Physical map of one chromosome</li>
+      <li><b>7.4</b>Pattern of the accession</li>
+      <li><b>7.5</b>Concordance among cells and all accessions</li>
+    </ul>
+  </div>
+
+  <p>The chapter uses two examples, both simulated. The <b>chayote</b> one (<i>Sechium edule</i>) has four accessions with 45S rDNA and CMA⁺ on the satellite of pair 1, 5S rDNA on the long arm of pair 4, an extra 45S site on a single homolog of pair 9 in Uruapan, and the 5S signal also recorded cell by cell. The <b>maize</b> one brings the heterochromatic knobs and the nucleolus organizer region (NOR) as bands.</p>
+
+  <!-- 7.1 -->
+  <h2 id="s7-1"><span class="num">7.1</span>Accession, probes and bands</h2>
+  <p class="lead">A signal only makes sense on a karyotype: that is why the block works with the pair numbering of Block 3, and an accession without a karyotype cannot draw its idiogram (although it can keep its signals).</p>
+  <p>The <span class="ui">Accession and probes</span> card has the <span class="ui">Accession</span> selector and two buttons that open the examples: <span class="ui">Open the chayote example (rDNA)</span> and <span class="ui">Open the maize example (knobs)</span>. On entering, the block picks the first accession that has signals. Its text summarizes the convention of the app: each signal is recorded by its pair, its arm and its <b>relative position</b>, the fraction of the arm from the centromere (0) to the telomere (1).</p>
+  <p>Below, the <span class="ui">Probes and bands</span> table defines what can be marked in the whole project, with four columns:</p>
+  <ul>
+    <li><span class="ui">Name</span>, the one shown in the tables, in the legend and on the physical map.</li>
+    <li><span class="ui">Kind</span>: <span class="ui">C-band</span>, <span class="ui">N-band</span>, <span class="ui">Fluorochrome (CMA, DAPI)</span>, <span class="ui">FISH (DNA probe)</span>, <span class="ui">GISH (genome)</span> or <span class="ui">Other</span>.</li>
+    <li><span class="ui">Color</span>, among <span class="ui">Heterochromatin (dark)</span> and eight colors that remain distinguishable with color blindness (vermilion, bluish green, blue, orange, reddish purple, sky blue, yellow and gray).</li>
+    <li><span class="ui">Drawing</span>: <span class="ui">Band</span>, a stripe across the chromosome, or <span class="ui">Dots on the chromatids</span>, one dot on each chromatid, as FISH signals look.</li>
+  </ul>
+  <p>A new project starts with six: C-band, CMA⁺, DAPI⁺, 45S rDNA, 5S rDNA and Telomere (the last drawn as dots). You can rename them, delete them or add your own with <span class="ui">+ Row</span>; a new probe is called “New probe”, is of kind FISH and comes in sky blue.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b7-sondas.png" alt="Accession and probes card with the three probes of the chayote example"></div>
+    <figcaption><b>Figure 7.1.</b> The chayote example defines three: 45S rDNA (vermilion) and 5S rDNA (bluish green), from FISH, and CMA⁺ (orange), a fluorochrome. All three are drawn as bands.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · what each technique marks</div>
+    <p><b>C-banding</b> stains constitutive heterochromatin; <b>fluorochromes</b> tell it apart by composition: chromomycin A₃ (CMA⁺) shines on GC-rich heterochromatin, like that of many NORs, and DAPI (DAPI⁺) on AT-rich heterochromatin (Guerra 2000). <b>FISH</b> locates a specific sequence with a labeled probe: the 45S and 5S ribosomal genes are the probes most used in plants because they give few sites, large and easy to compare (Jiang and Gill 2006; Schwarzacher and Heslop-Harrison 2000). <b>GISH</b> uses the whole genome of a parent as a probe to recognize its chromosomes in a hybrid.</p>
+  </div>
+
+  <!-- 7.2 -->
+  <h2 id="s7-2"><span class="num">7.2</span>Signals</h2>
+  <p class="lead">Signals are typed in a table or placed with a click on the idiogram. Both ways fill the same table.</p>
+  <p>The signal table shows those of the chosen accession, with these columns:</p>
+  <table class="compacta">
+    <caption><b>Table 7.1.</b> The columns of the signal table</caption>
+    <thead><tr><th style="width:1.6in">Column</th><th>What it holds</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Pair</span></td><td>The number of the pair in the karyotype of Block 3.</td></tr>
+      <tr><td><span class="ui">Homologue</span></td><td><span class="ui">both</span>, or 1 to 4 if the signal is on a single homolog (a <b>heteromorphism</b>).</td></tr>
+      <tr><td><span class="ui">Arm</span></td><td><span class="ui">p (short)</span> or <span class="ui">q (long)</span>.</td></tr>
+      <tr><td><span class="ui">Position (0–1)</span></td><td>The center of the signal as a fraction of the arm, from the centromere (0) to the telomere (1).</td></tr>
+      <tr><td><span class="ui">Size (0–1)</span></td><td>Its extent, also as a fraction of the arm (0.08 if not given).</td></tr>
+      <tr><td><span class="ui">Probe</span></td><td>One from the <span class="ui">Probes and bands</span> table.</td></tr>
+      <tr><td><span class="ui">Cell (optional)</span></td><td>Empty, the signal belongs to the pattern of the accession; with the name of a cell, it is an observation of that cell.</td></tr>
+      <tr><td><span class="ui">Region</span></td><td>Computed by the app: proximal, interstitial or terminal.</td></tr>
+    </tbody>
+  </table>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Decision rule · the region of a signal</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:40%"><b>If</b> position &lt; 1/3 of the arm</td><td><b>then</b> proximal, near the centromere.</td></tr>
+      <tr><td><b>If</b> 1/3 ≤ position ≤ 0.8</td><td><b>then</b> interstitial.</td></tr>
+      <tr><td><b>If</b> position &gt; 0.8</td><td><b>then</b> terminal, near the telomere.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">A signal exactly at 0.8 counts as interstitial, like the 45S of pair 9 in Uruapan.</p>
+  </div>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b7-senales.png" alt="Signals card with the idiogram of Uruapan in the homologues view and the table of seven signals">
+      <span class="marca" style="left:23.4%;top:8.1%">1</span>
+      <span class="marca" style="left:39.8%;top:8.1%">2</span>
+      <span class="marca" style="left:8%;top:18.6%">3</span>
+      <span class="marca" style="left:6.2%;top:36.8%">4</span>
+      <span class="marca" style="left:2.3%;top:72.5%">5</span>
+    </div>
+    <figcaption><b>Figure 7.2.</b> The Uruapan accession in the <span class="ui">The homologues</span> view: the 45S rDNA site of pair 9 is on a single homolog, number 1. The last three rows are the 5S signal recorded in three cells (<code>uru-c1</code> to <code>uru-c3</code>).</figcaption>
+  </figure>
+  <ul class="leyenda-marcas">
+    <li><span class="n">1</span><b>Probe of the click.</b> Which probe a click on the idiogram adds.</li>
+    <li><span class="n">2</span><b>Homolog of the click.</b> On both homologs or on one.</li>
+    <li><span class="n">3</span><b>View.</b> One chromosome per pair or the homologs.</li>
+    <li><span class="n">4</span><b>Idiogram.</b> That of Block 3, with the bands and signals on top.</li>
+    <li><span class="n">5</span><b>Signal table.</b> One row per signal, editable.</li>
+  </ul>
+  <h3>A click on the idiogram</h3>
+  <p>Choose the probe in <span class="ui">On clicking the idiogram, add</span> and, in <span class="ui">on</span>, whether it goes on <span class="ui">both homologues</span>, <span class="ui">homologue 1</span> or <span class="ui">homologue 2</span>. A click on a chromosome of the idiogram adds a row: the arm is the one on the side of the centromere where you clicked and the position is the distance to the centromere as a fraction of that arm, rounded to hundredths. A message confirms the pair, the arm and the position. In the <span class="ui">The homologues</span> view the click falls on a particular homolog and the signal goes there, whatever <span class="ui">on</span> says. You can then fine-tune the position or the size in the table.</p>
+  <p>The <span class="ui">View</span> selector of the idiogram switches between <span class="ui">One chromosome per pair</span>, with the means of the pairs, and <span class="ui">The homologues</span>, each homolog with its own measurements. The <span class="ui">Idiogram with bands and signals</span> figure downloads as <span class="ui">SVG</span> or <span class="ui">PNG</span> and is edited like the others. If the accession has no karyotype, the card says so: the idiogram needs the measurements of Block 2.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b7-nudos.png" alt="Idiogram of the example maize with seven heterochromatic knobs and the NOR of pair 6"></div>
+    <figcaption><b>Figure 7.3.</b> The example maize, one chromosome per pair: seven knobs (C-band) on the long arms of pairs 2, 4, 5, 6, 7 and 8 and near the telomere of the short arm of pair 9, and the 45S rDNA on the satellite of pair 6, the NOR.</figcaption>
+  </figure>
+
+  <!-- 7.3 -->
+  <h2 id="s7-3"><span class="num">7.3</span>Physical map of one chromosome</h2>
+  <p class="lead">The physical map draws a single pair large, with a ruler in microns from the centromere and each signal labeled: its probe, its arm, its position as a percentage of the arm, its distance to the centromere in microns and, if it is a heteromorphism, the homolog.</p>
+  <p>Choose the pair in <span class="ui">Pair</span>; each option gives its number, its class and, if it has one, “-sat”. The title of the drawing repeats the pair, the class and the total length. It is the figure that goes into a paper when a chromosome has several signals close together, because the labels move apart so as not to overlap.</p>
+  <div class="dos">
+    <figure>
+      <div class="marco"><img src="../img/en/b7-mapa1.png" alt="Physical map of pair 1 of Huatusco with 45S rDNA and CMA on the satellite"></div>
+      <figcaption><b>Figure 7.4.</b> Pair 1 of Huatusco (m-sat, 2.96 µm): 45S rDNA and CMA⁺ on the satellite, at 90% of the short arm, 1.26 µm from the centromere.</figcaption>
+    </figure>
+    <figure>
+      <div class="marco"><img src="../img/en/b7-mapa.png" alt="Physical map card with pair 9 of Uruapan and its 45S rDNA site on homolog 1"></div>
+      <figcaption><b>Figure 7.5.</b> Pair 9 of Uruapan (m, 1.96 µm): the 45S rDNA site at 80% of the long arm, at 0.91 µm, on homolog 1.</figcaption>
+    </figure>
+  </div>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Relative position and microns</div>
+    <p>The relative position does not change with condensation: the 45S of pair 1 is at 90% of the short arm in the three cultivated accessions although the arm measures differently in each. That is why it is the one compared. The microns depend on the measured arm and serve to place the signal in the figure of that accession.</p>
+  </div>
+
+  <!-- 7.4 -->
+  <h2 id="s7-4"><span class="num">7.4</span>Pattern of the accession</h2>
+  <p class="lead">The pattern of an accession is its signals without a cell. If a combination of pair, probe, arm and homolog was only recorded cell by cell, the app fills it in with the mean position of those cells; that way the idiogram and the tables do not lose the signal.</p>
+  <p>The <span class="ui">Pattern of the accession</span> table, on the card of the same name, has one row per probe with at least one site:</p>
+  <ul>
+    <li><span class="ui">Probe or band</span>, with its color, and its <span class="ui">Kind</span>.</li>
+    <li><span class="ui">Sites per set</span>, how many sites there are in one chromosome set; a site on a single homolog counts as half.</li>
+    <li><span class="ui">Pairs</span>, in order, and <span class="ui">Where</span>: each site as pair, arm and position in percent, with the homolog in brackets if it is a heteromorphism (“9q(1) 80 %”).</li>
+    <li><span class="ui">Regions</span>, how many sites are proximal, interstitial or terminal, with the same counting of half sites.</li>
+    <li><span class="ui">On one homologue only</span>, how many are heteromorphisms.</li>
+  </ul>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b7-patron.png" alt="Pattern of the Uruapan accession, concordance among cells and sites of the four accessions"></div>
+    <figcaption><b>Figure 7.6.</b> The <span class="ui">Pattern of the accession</span> card with Uruapan: 1.5 sites of 45S rDNA per set, one terminal at 1p 90% and half an interstitial one at 9q(1) 80%, which is on a single homolog (“0.5 interstitial, 1 terminal”); one of 5S rDNA (4q 45%) and one of CMA⁺ (1p 90%). Below, the concordance of the 5S signal and the sites of the four accessions.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>The half site</div>
+    <p>A site on a single homolog is in one of the two sets, and that is why it counts as half in the sites per set and in the regions. The footer of the table recalls it, and the counting is the same in the <span class="ui">All accessions</span> table (Section 7.5) and in the matrix of Block 8: the 45S of Uruapan is worth 1.5 in all three. “(1)” in <span class="ui">Where</span> tells which homolog it is on, and the <span class="ui">On one homologue only</span> column how many sites are heteromorphisms.</p>
+  </div>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · the wild accession</div>
+    <p>In Coscomatepec, the 45S rDNA has two terminal sites, on pairs 2 and 3 (2p 85% and 3p 90%), and the CMA⁺ one on pair 3. The pair carrying the satellite with 45S and CMA⁺ is number 3 here, not 1: the fusion of two pairs of the base karyotype left two longer chromosomes that move to the start of the karyotype, and the numbering of Block 3 goes by length. When comparing accessions, compare the sites by their mark and position, not by the number of the pair.</p>
+  </div>
+
+  <!-- 7.5 -->
+  <h2 id="s7-5"><span class="num">7.5</span>Concordance among cells and all accessions</h2>
+  <p class="lead">A signal that appears in every cell is a feature of the accession; one that appears in a single cell may be a hybridization artifact. The <span class="ui">Concordance among cells</span> table measures this with the signals that have a cell noted.</p>
+  <p>It groups those signals by pair, probe and arm and gives, for each group, the <span class="ui">Cells with the signal</span> out of the total of cells with any signal recorded, the <span class="ui">Concordance</span> in percent and the <span class="ui">Position (mean ± sd)</span> among cells. If the accession has no cell-by-cell signals, the table says so. In the example, the 5S signal of pair 4 is in the three cells of each accession (100%), with position 0.47 ± 0.03 in Huatusco, 0.42 ± 0.03 in Chilchotla, 0.46 ± 0.03 in Uruapan and 0.47 ± 0.03 in the wild one.</p>
+  <p>The <span class="ui">All accessions</span> table crosses the accessions with signals and the probes used: each cell is the number of sites per chromosome set, with a site on a single homolog counted as half, as its footer says. In the chayote, the 45S rDNA gives 1 in Huatusco and Chilchotla, 1.5 in Uruapan and 2 in the wild one; the 5S and the CMA⁺ give 1 in all four. These figures go into the matrix of Block 8 as “Sites …” variables (Section 8.1).</p>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Decision rule · reading the pattern</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>If</b> the concordance of a signal is low</td><td><b>then</b> check the preparations before giving it as a feature of the accession.</td></tr>
+      <tr><td><b>If</b> the deviation of the position among cells is large</td><td><b>then</b> the signal was measured on chromosomes with different condensation or pairs were confused.</td></tr>
+      <tr><td><b>If</b> a site is on a single homolog</td><td><b>then</b> it is a heteromorphism: confirm it in several cells before interpreting it as a polymorphism of the population.</td></tr>
+      <tr><td><b>If</b> two accessions with the same formula differ in their sites</td><td><b>then</b> the signals distinguish what morphology does not; take them to the comparison of Block 8.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Guides for interpretation, not laws.</p>
+  </div>
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>When something goes wrong</div>
+    <p><b>“This accession has no karyotype”.</b> The idiogram and the physical map need the measurements of Block 2 and the karyotype of Block 3. The signals are kept anyway.</p>
+    <p><b>A signal does not appear on the idiogram.</b> Its pair is higher than the number of pairs in the karyotype, the arm is missing or the position is not a number; correct it in the table.</p>
+    <p><b>The signals ended up on the wrong pair after changing the karyotype.</b> Signals keep the number of the pair, not the chromosome: if you change the order of the pairs in Block 3, check the table.</p>
+    <p><b>The click added the signal on the wrong arm.</b> The arm depends on the side of the centromere where the click falls; correct <span class="ui">Arm</span> and <span class="ui">Position (0–1)</span> in the table.</p>
+    <p><b>The concordance does not appear.</b> No signal of the accession has a <span class="ui">Cell (optional)</span> written.</p>
+  </div>
+</section>
+
+</body>
+</html>

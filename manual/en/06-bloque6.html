@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · User’s Manual · Chapter 6</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-6" data-pestana="6" data-orden="6" style="--acento: var(--b6)">
+  <div class="cap-apertura">
+    <div class="cap-num">6</div>
+    <div class="cap-etiqueta">Chapter six · Block 6</div>
+    <h1 data-corto="Ploidy and genome">Ploidy and genome size</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">How many chromosomes the plant has and how many sets they make: cell-by-cell counts with their mode, the ploidy level from the basic number, the euploid series and hints of dysploidy; genome size by flow cytometry, read from the table of runs or from the cytometer histogram; conversion between picograms and base pairs; and the <i>Allium</i> test, which uses mitosis to measure whether a substance is cytotoxic.</p>
+    <div class="cap-franja"><span class="k6"></span><span class="k6"></span><span class="k2"></span><span class="k5"></span><span class="k8"></span></div>
+    <ul class="cap-contenido">
+      <li><b>6.1</b>Chromosome counts</li>
+      <li><b>6.2</b>Basic number, euploid series and dysploidy</li>
+      <li><b>6.3</b>Flow cytometry: genome size</li>
+      <li><b>6.4</b>Cytometer histogram</li>
+      <li><b>6.5</b>Unit conversion</li>
+      <li><b>6.6</b>Mitosis and cytotoxicity: the <i>Allium</i> test</li>
+    </ul>
+  </div>
+
+  <p>The block opens with the <span class="ui">Accession</span> card, which decides which accession the counts and the cytometry refer to. It holds the <span class="ui">Accession</span> selector, the <span class="ui">+ Accession</span> button, the <span class="ui">Base number x</span> field of the chosen accession and two buttons that open the examples of the block: <span class="ui">Example: polyploid series</span> and <span class="ui">Example: Allium test</span>. Opening an example replaces the project, and the app asks first. On entering, the block picks the first accession that already has counts or cytometry runs.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b6-accesion.png" alt="Accession card of Block 6 with the tetraploid population chosen and basic number 7"></div>
+    <figcaption><b>Figure 6.1.</b> The <span class="ui">Accession</span> card with the polyploid series example open and the tetraploid population chosen. Its basic number, x&nbsp;=&nbsp;7, is the one used by the counts and the cytometry of that accession.</figcaption>
+  </figure>
+  <p>This chapter uses the two examples of the block. The <b>polyploid series</b> is an invented species (“Fictitious species A”) with three populations, diploid, tetraploid and hexaploid, with basic number x = 7: it brings fifteen counts per population, nine cytometry runs and the histogram of a tetraploid. The <b><i>Allium</i> test</b> brings a control and two concentrations of a fictitious extract. Both are simulated.</p>
+
+  <!-- 6.1 -->
+  <h2 id="s6-1"><span class="num">6.1</span>Chromosome counts</h2>
+  <p class="lead">A plant’s chromosome number is not read from a single cell: it is counted in several metaphases and the <b>mode</b> is taken. Cells with another number are almost always imperfect preparations—a chromosome that slipped out of the cell during squashing, two that ended up overlapping—not different plants.</p>
+  <p>The <span class="ui">Chromosome counts</span> card has a table with one row per counted cell and two columns: <span class="ui">Cell</span> and <span class="ui">2n counted</span>. Like every data-entry table in the app, it has <span class="ui">+ Row</span>, <span class="ui">Export (CSV)</span>, <span class="ui">Import CSV</span> and <span class="ui">Clear</span> below it; on import, the number column may be called <code>2n</code> or <code>n2</code>. The table shows only the rows of the chosen accession. If you counted with marks on the image in Block 2, the <span class="ui">Take the count to ploidy (Block 6)</span> button there writes that cell’s row here.</p>
+  <p>Below the table, four figures summarize the counts:</p>
+  <ul>
+    <li><span class="ui">Cells counted</span>, the rows with a positive whole number.</li>
+    <li><span class="ui">Modal number</span>, the most frequent 2n, with the share of cells that have it. If that share is below 60%, the figure is flagged as doubtful.</li>
+    <li><span class="ui">Range</span>, from the smallest to the largest number counted.</li>
+    <li><span class="ui">Ploidy level</span>, the formula 2n = <i>k</i>x = 2n with its name (diploid, tetraploid…), if the accession has a basic number; otherwise it says “x missing”.</li>
+  </ul>
+  <p>The <span class="ui">Frequency of the numbers counted</span> chart shows how many cells had each number, from smallest to largest, and downloads as <span class="ui">SVG</span> or <span class="ui">PNG</span> or opens in the figure studio. The <span class="ui">All accessions</span> table gathers, for each accession with counts, its x, the number of cells, the mode, the <span class="ui">% modal</span>, the formula and the level.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b6-conteos.png" alt="Count figures of the tetraploid population, its frequency chart and the table of the three populations"></div>
+    <figcaption><b>Figure 6.2.</b> The example tetraploid population: of fifteen cells, eleven have 2n = 28 (73%), two have 27 and two have 29. With x = 7, the level is 2n = 4x = 28. Below, the three populations: the diploid gives 2n = 14 in all fifteen cells, and the hexaploid 2n = 42 in eleven (three with 41 and one with 43).</figcaption>
+  </figure>
+  <p>Two warnings go with the counts. If there is <b>more than one mode</b>, the figure shows both (“28 / 30”) and the app asks you to count more cells before deciding. If the mode is <b>not a multiple of x</b>, the formula shows the remainder (for example, 2n = 2x + 1 = 15, with the name “trisomic (2n + 1)” when the level is 2x) and a warning recalls the three possible explanations: aneuploidy, B chromosomes or a different basic number.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · how the level is computed</div>
+    <p>The level is the multiple of x closest to the mode: <i>k</i> = round(2n / x), and the remainder is 2n − <i>k</i>x. If the remainder is zero, the plant is <b>euploid</b> (2x, 3x, 4x…); if not, it is <b>aneuploid</b> and the formula says so, 2n = 4x − 1, for example. The special names of aneuploidy (monosomic, trisomic, nullisomic, tetrasomic) are given when the level is 2x and one or two chromosomes are gained or lost.</p>
+  </div>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · the example maize</div>
+    <p>The maize example brings twelve counts. Eleven give 2n = 20 and one 19, a chromosome lost during squashing: the mode is 2n = 20 in 92% of the cells, the range 19 – 20 and, with x = 10, the level 2n = 2x = 20, diploid. The cell with 19 does not change the conclusion.</p>
+  </div>
+
+  <!-- 6.2 -->
+  <h2 id="s6-2"><span class="num">6.2</span>Basic number, euploid series and dysploidy</h2>
+  <p class="lead">The basic number x is the number of chromosomes in one monoploid set. Without it there is no ploidy level and no 1Cx in the cytometry: that is why every accession has its own.</p>
+  <p>You can type it in <span class="ui">Base number x</span> on the <span class="ui">Accession</span> card or take it from the <span class="ui">Base number, euploid series and dysploidy</span> card, which brings an editable table with 55 genera in frequent use (<span class="ui">Family</span>, <span class="ui">Genus</span> and <span class="ui">x</span>). They are common values, not the last word: the card itself asks you to check them in the chromosome counts databases for your group (Rice et al. 2015). <span class="ui">Search genus or family</span> filters the table, which you can edit, extend with <span class="ui">+ Row</span> or restore with <span class="ui">Back to the original table</span>.</p>
+  <p>Below, <span class="ui">Set in the accession the x of</span> offers all the genera of the table; if the taxon of the accession begins with one of them, it comes already chosen. <span class="ui">Set</span> writes that x into the accession and recomputes the counts and the cytometry.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b6-serie.png" alt="Basic number card filtered by Rosaceae, with the euploid series for x equal to 7"></div>
+    <figcaption><b>Figure 6.3.</b> The table filtered by “Rosaceae” and the euploid series of the tetraploid population (x = 7), from 2x = 14 to 8x = 56, with its level, 4x = 28, highlighted. The fictitious species is not in the table, so the selector proposes the first genus on the list.</figcaption>
+  </figure>
+  <p>The <b>euploid series</b> lists the levels from 2x to 8x with their 2n and name, and highlights the one of the accession. It shows at a glance which numbers would be expected in other populations of the same taxon.</p>
+  <p><b>Dysploidy</b> is the change of the basic number one by one, through chromosome fusion or fission. The app looks for it among the accessions: if two or more accessions of the same genus (the first word of the taxon) have different basic numbers, a warning appears with those values, and if the steps are of one chromosome it says so.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b6-disploidia.png" alt="Euploid series for x equal to 14 and the dysploidy warning for Sechium"></div>
+    <figcaption><b>Figure 6.4.</b> With the chayote example, the genus <i>Sechium</i> gathers accessions with x = 14 (the cultivated ones) and x = 12 (the wild one from Coscomatepec): the app suggests a dysploid series and points to Block 8, which reconstructs it on a tree (Section 8.5).</figcaption>
+  </figure>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Important</div>
+    <p>The warning only compares numbers; it does not know whether x = 12 comes from x = 14 or the other way around. In the example, the wild accession has 2n = 24 because two pairs of the base karyotype fused (descending dysploidy), but that is what the simulated data say, not the warning. The direction of change is inferred with a tree, in Block 8.</p>
+  </div>
+
+  <!-- 6.3 -->
+  <h2 id="s6-3"><span class="num">6.3</span>Flow cytometry: genome size</h2>
+  <p class="lead">In flow cytometry, nuclei stained with a DNA-binding fluorochrome pass one by one in front of a laser; the fluorescence of each is proportional to its DNA content. An <b>internal standard</b> of known content is processed together with the sample, and genome size comes from comparing the two peaks.</p>
+  <div class="formula">2C (pg) = (G0/G1 peak of the sample ÷ G0/G1 peak of the standard) × 2C of the standard</div>
+  <p>From the 2C, the app computes the <b>1C</b> (2C ÷ 2, the content of the unreplicated nucleus of a gamete) and the <b>1Cx</b> (2C ÷ ploidy level, the content of one monoploid set), with the terms of Greilhuber et al. (2005), and converts them to millions of base pairs with 1 pg = 978 Mbp (Doležel et al. 2003). The laboratory procedure is in Doležel et al. (2007).</p>
+  <p>The table on the <span class="ui">Flow cytometry: genome size</span> card has one row per run of the chosen accession:</p>
+  <table class="compacta">
+    <caption><b>Table 6.1.</b> The columns of the cytometry table</caption>
+    <thead><tr><th style="width:1.7in">Column</th><th>What it holds</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Sample</span></td><td>The name of the run (a plant, a replicate).</td></tr>
+      <tr><td><span class="ui">Internal standard</span></td><td>Eight plant DNA standards with their 2C, from <i>Raphanus sativus</i> «Saxa» (1.11 pg) to <i>Allium cepa</i> «Alice» (34.89 pg), or <span class="ui">Other (type its 2C)</span>.</td></tr>
+      <tr><td><span class="ui">Standard 2C (pg)</span></td><td>Empty, it uses the 2C of the chosen standard; with a number, that number rules (and it is required with <span class="ui">Other</span>).</td></tr>
+      <tr><td><span class="ui">Standard peak</span> · <span class="ui">Sample peak</span></td><td>The position (channel or mean intensity) of the G0/G1 peak of each.</td></tr>
+      <tr><td><span class="ui">Standard CV (%)</span> · <span class="ui">Sample CV (%)</span></td><td>The coefficient of variation of each peak, which measures its quality.</td></tr>
+      <tr><td><span class="ui">Ratio</span> · <span class="ui">2C (pg)</span> · <span class="ui">2C (Mbp)</span></td><td>Computed by the app; the table scrolls sideways to show them.</td></tr>
+    </tbody>
+  </table>
+  <p>Below, a table summarizes the runs by accession: <span class="ui">Runs</span>, the mean 2C with its standard deviation in pg and in Mbp, the 1C, the <span class="ui">Level</span> and the 1Cx in pg and in Mbp. The level comes from the mode of the counts with the x of the accession; if the accession has no counts but does have a genome formula from Block 5 (AA, AAAA, AABBCC…), the level is the number of letters.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b6-citometria.png" alt="Table of runs of the diploid population, summary of the three populations and relative ploidy"></div>
+    <figcaption><b>Figure 6.5.</b> The polyploid series with a tomato standard (2C = 1.96 pg). The first diploid run has the standard at 191.87 and the sample at 160.29: ratio 0.835, 2C = 1.637 pg. The summary gives 1.620 ± 0.016, 3.176 ± 0.046 and 4.728 ± 0.050 pg for 2x, 4x and 6x, and a 1Cx that falls from 0.810 to 0.794 and 0.788 pg.</figcaption>
+  </figure>
+  <p>The last part is the <b>relative ploidy</b>. Choose an accession of known level in <span class="ui">Reference accession for the relative ploidy</span>; the table divides the 2C of each accession by that of the reference and multiplies by the level of the reference (from its counts, or 2x if it has none), and shows the <span class="ui">Level by counting</span> next to it for comparison. It is the way to estimate the level of plants that have only been measured, not counted. At least two accessions with runs are needed.</p>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · genome downsizing</div>
+    <p>With the diploid population as reference, the tetraploid has 1.961 times its 2C and the hexaploid 2.919 times: estimated levels of 3.92x and 5.84x, against 4x and 6x by counting. The quotient falls somewhat below the whole number, and that is why the 1Cx decreases with the level (792, 777 and 771 Mbp). The note of the table explains it: a recent polyploid often has somewhat less than double, because it loses DNA after doubling. A difference like this does not change the level; one of half a unit (3.5x) would call for counting.</p>
+  </div>
+  <p>The app checks each run and warns in three cases: if a peak has a <b>CV above 5%</b> (damaged nuclei or debris: repeat the preparation); if the <b>ratio is between 0.85 and 1.18</b>, when sample and standard nearly coincide and their peaks overlap (choose a more different standard); and if sample and standard <b>differ more than threefold</b> in DNA content (ratio above 3 or below 1/3): that far apart, the response of the cytometer may stop being linear, and a standard closer in size to the sample is advisable (Doležel et al. 2007). No run of the example triggers these warnings.</p>
+
+  <!-- 6.4 -->
+  <h2 id="s6-4"><span class="num">6.4</span>Cytometer histogram</h2>
+  <p class="lead">Instead of typing the peaks by hand you can open the histogram exported by the cytometer: the app finds the peaks, sets a gate on each, measures their mean and CV, and with two clicks takes the run to the table of the previous section.</p>
+  <p><span class="ui">Open a cytometer CSV</span> accepts two file layouts (<code>.csv</code>, <code>.tsv</code> or <code>.txt</code>): <b>two columns</b>, channel and number of nuclei, which is the finished histogram; or <b>one column</b> with the intensity of each event, which the app bins into 512 channels. The first row may hold headers. The histogram is saved in the project under the file name and linked to the chosen accession; if you open several, the <span class="ui">Histogram</span> selector switches between them. <span class="ui">Log scale</span> draws the number of nuclei on a logarithmic scale, useful to see small peaks.</p>
+  <h3>How it finds the peaks</h3>
+  <p>The app smooths the histogram with a five-channel moving average, ignores the lowest 4% of the scale (where debris piles up) and looks for local maxima that meet three conditions: reaching at least 4% of the highest peak, standing out enough from the valleys that separate them from higher ground (so that noise on the debris slope is not taken for a peak) and lying no closer than 6% of the scale to a higher peak. Each gate runs from halfway to its neighbor to halfway to the next one, without going beyond ±15% of the peak position.</p>
+  <p>The gate table gives, for each gate, <span class="ui">From</span> and <span class="ui">To</span> (which you can correct by typing), the <span class="ui">Nuclei</span> that fall inside, the <span class="ui">Mean</span> and the <span class="ui">CV (%)</span>, weighted by the number of nuclei in each channel. The × button deletes one; <span class="ui">+ Gate</span> adds another between 40 and 50% of the scale, for you to move where needed, and <span class="ui">Find the peaks again</span> discards the gates and computes them again.</p>
+  <p>Below, you choose <span class="ui">G0/G1 peak of the sample</span>, <span class="ui">G0/G1 peak of the standard</span> and <span class="ui">Standard</span>. By default, the standard is the first gate (the one with the lowest fluorescence), the sample the second, and the internal standard tomato. The line below gives the ratio and the 2C instantly; <span class="ui">Add to cytometry</span> writes a new row into the table of Section 6.3, with both peaks and their CVs, in the accession of the histogram.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b6-histograma.png" alt="Histogram of the tetraploid with two gates, its table and the choice of peaks">
+      <span class="marca" style="left:10.2%;top:14.5%">1</span>
+      <span class="marca" style="left:39.9%;top:14.5%">2</span>
+      <span class="marca" style="left:18%;top:35.4%">3</span>
+      <span class="marca" style="left:2.3%;top:65.3%">4</span>
+      <span class="marca" style="left:2.2%;top:83%">5</span>
+      <span class="marca" style="left:2.2%;top:90.3%">6</span>
+      <span class="marca" style="left:2.2%;top:94.2%">7</span>
+    </div>
+    <figcaption><b>Figure 6.6.</b> The example histogram, with 1,024 channels and 9,010 nuclei: a tetraploid with a tomato standard. Cell debris fills the low channels; P1 is the G0/G1 peak of the standard and P2 that of the sample.</figcaption>
+  </figure>
+  <ul class="leyenda-marcas">
+    <li><span class="n">1</span><b>Histogram.</b> Which of the project’s histograms is shown.</li>
+    <li><span class="n">2</span><b>Open.</b> Reads a cytometer CSV; next to it, <span class="ui">Log scale</span>.</li>
+    <li><span class="n">3</span><b>The chart.</b> The shaded gates and a dotted line at the mean of each.</li>
+    <li><span class="n">4</span><b>Gates.</b> Their limits, editable, with nuclei, mean and CV.</li>
+    <li><span class="n">5</span><b>Peaks.</b> Which gate is the sample, which the standard and which standard it is.</li>
+    <li><span class="n">6</span><b>Add to cytometry.</b> Writes the run into the table of Section 6.3.</li>
+    <li><span class="n">7</span><b>Result.</b> The ratio and the 2C, in pg and in Mbp.</li>
+  </ul>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · the example tetraploid</div>
+    <p>The app finds two peaks. P1, from 170 to 230, has 2,485 nuclei with mean 199.92 and CV 2.93%; P2, from 275.4 to 372.6, has 3,614 nuclei with mean 324.52 and CV 3.15%. The ratio is 1.6233 and, with tomato, 2C = 3.182 pg (3,112 Mbp), very close to the 3.176 pg of the summary of runs. The G2 peaks (twice each G0/G1, around channels 400 and 650) are barely visible: they do not reach 4% of the highest peak and get no gate, which is what you want.</p>
+  </div>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Note</div>
+    <p>In the example, the standard’s gate gives a CV of 2.93%, somewhat higher than that of its peak alone, because its left edge picks up the tail of the debris. If the same happens with your data, narrow the gate by hand: the CV worth reporting is that of the peak, not of the debris that comes with it.</p>
+  </div>
+
+  <!-- 6.5 -->
+  <h2 id="s6-5"><span class="num">6.5</span>Unit conversion</h2>
+  <p class="lead">Genome size is published in picograms (pg) or in base pairs; the <span class="ui">Unit conversion</span> card turns a value in one unit into the other three.</p>
+  <p>Type the number in <span class="ui">Value</span> and choose its <span class="ui">Unit</span>: pg, Mbp, Gbp or bp. The four figures below update as you type, with the equivalence 1 pg = 978 Mbp (Doležel et al. 2003). By default, 1 pg is 978 Mbp, 0.978 Gbp and 978,000,000 bp.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b6-conversion.png" alt="Conversion of 1 pg to megabase pairs, gigabase pairs and base pairs"></div>
+    <figcaption><b>Figure 6.7.</b> The conversion with its default value, 1 pg.</figcaption>
+  </figure>
+
+  <!-- 6.6 -->
+  <h2 id="s6-6"><span class="num">6.6</span>Mitosis and cytotoxicity: the <i>Allium</i> test</h2>
+  <p class="lead">The <i>Allium</i> test measures whether a substance damages cell division: onion bulbs are set to root in the control water and in the substance, and in the root tips the cells that divide, and those that divide badly, are counted (Fiskesjö 1985; Leme and Marin-Morales 2009). This card does not depend on the chosen accession: it has its own table, by treatment.</p>
+  <p>The table on the <span class="ui">Mitosis and cytotoxicity (Allium test)</span> card has one row per bulb or root, with <span class="ui">Treatment</span> and <span class="ui">Replicate</span>, the cells in <span class="ui">Interphase</span>, <span class="ui">Prophase</span>, <span class="ui">Metaphase</span>, <span class="ui">Anaphase</span> and <span class="ui">Telophase</span>, the six aberrations (<span class="ui">c-metaphase</span>, <span class="ui">stickiness</span>, <span class="ui">bridges</span>, <span class="ui">laggards</span>, <span class="ui">fragments</span> and <span class="ui">multipolar spindles</span>, counted among the dividing cells), the <span class="ui">Micronuclei</span> in interphase and, at the end, the <span class="ui">MI (%)</span> of each row.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b6-allium-datos.png" alt="Data-entry table of the Allium test with nine bulbs"></div>
+    <figcaption><b>Figure 6.8.</b> The table of the example: three treatments with three bulbs each and 1,000 cells per bulb. The first control bulb has 892 cells in interphase and 45, 27, 11 and 25 in prophase, metaphase, anaphase and telophase. The table continues to the right with the other aberrations, the micronuclei and the mitotic index.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · the indices</div>
+    <p><b>Mitotic index</b> (MI) = dividing cells ÷ cells observed × 100: if it falls, the substance slows division (cytotoxicity). <b>Phase index</b> = cells in each phase ÷ dividing cells × 100. <b>Aberration index</b> = aberrant cells ÷ dividing cells × 100: if it rises, the substance damages the spindle or the chromosomes (genotoxicity). <b>Micronuclei</b>, per thousand interphase cells (‰): remains of chromosomes or fragments left outside the nucleus.</p>
+  </div>
+  <p>The <span class="ui">Control</span> selector says which treatment is the comparison; the app proposes the one named “control”, “testigo” or “water”. The first results table gives, by treatment, the replicates, the cells, the mitotic index, the percentage of each phase, the aberrations (%) and the micronuclei (‰). The indices are computed with the counts of the replicates pooled and, in brackets, the mean ± standard deviation of the replicates; the control carries ★.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b6-allium-tabla.png" alt="Summary by treatment and tests against the control of the Allium test"></div>
+    <figcaption><b>Figure 6.9.</b> The mitotic index falls from 9.07% in the control to 6.70 and 4.03% with the extract at 1 and 5%, and the aberrations rise from 1.10 to 5.47 and 14.05%. All the differences with the control are significant after the Holm correction.</figcaption>
+  </figure>
+  <p>The second table compares each treatment with the control in the three indices: the <span class="ui">Difference (% points)</span>, the <span class="ui">z</span> statistic and its <span class="ui">p</span> from a two-proportion test with pooled counts, and the <span class="ui">p (Holm)</span>, corrected for the number of comparisons of each index (Holm 1979), in bold if below 0.05. Its footer adds a χ² homogeneity test of the mitotic index among all the treatments.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b6-allium-fig.png" alt="Bar chart of the mitotic and aberration indices by treatment, with the cytotoxicity warning"></div>
+    <figcaption><b>Figure 6.10.</b> The <span class="ui">Mitotic and aberration indices</span> chart, with the mean ± standard deviation of the replicates, and the warning that goes with it: the extract at 5% lowers the mitotic index below half of the control.</figcaption>
+  </figure>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · the extract at 1%</div>
+    <p>Against the control, the mitotic index falls 2.37 points (z = −3.40, p &lt; 0.001), the aberrations rise 4.37 points (z = 2.77, p = 0.006) and the micronuclei 0.21 points, from 0.00 to 2.14‰ (z = 2.42, p = 0.016). With two treatments per index, Holm leaves those p unchanged because they are the largest of their index. Among the three treatments, the mitotic index gives χ² = 61.72 with 2 degrees of freedom, p &lt; 0.001. It is a cytotoxic and genotoxic substance, more so at higher concentration; only the 5% one crosses the threshold of half the control (4.03 against 9.07%).</p>
+  </div>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Pooled counts</div>
+    <p>The tests pool the cells of the replicates, as if they were one large sample. This is usual in the <i>Allium</i> test, but it ignores the variation among bulbs. That is why the table also shows the mean ± standard deviation of the replicates: if a treatment has one bulb very different from the others, it shows there before it shows in the <i>p</i>.</p>
+  </div>
+
+  <h3>Reading rules for the block</h3>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Decision rule</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>If</b> the modal number has fewer than 60% of the cells</td><td><b>then</b> count more cells before giving the number: the figure is flagged as doubtful.</td></tr>
+      <tr><td><b>If</b> there are two modes</td><td><b>then</b> there is no number yet: count more cells.</td></tr>
+      <tr><td><b>If</b> the mode is not a multiple of x</td><td><b>then</b> think of aneuploidy, B chromosomes or a different x (dysploidy); also check the x.</td></tr>
+      <tr><td><b>If</b> a peak has CV &gt; 5%</td><td><b>then</b> repeat the preparation; a reliable peak has a CV below 3–5%.</td></tr>
+      <tr><td><b>If</b> the sample/standard ratio is between 0.85 and 1.18</td><td><b>then</b> change the standard: the peaks overlap.</td></tr>
+      <tr><td><b>If</b> the ratio is above 3 or below 1/3</td><td><b>then</b> choose a closer standard: the response of the cytometer may stop being linear.</td></tr>
+      <tr><td><b>If</b> the level estimated by cytometry differs from the count by less than half a unit</td><td><b>then</b> it is the genome downsizing of polyploids; if it differs more, count chromosomes.</td></tr>
+      <tr><td><b>If</b> a treatment lowers the mitotic index below half of the control</td><td><b>then</b> it is a strong sign of cytotoxicity, and the app warns about it.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Guides for interpretation, not laws.</p>
+  </div>
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>When something goes wrong</div>
+    <p><b>The level says “x missing”.</b> The accession has no basic number: type it on the <span class="ui">Accession</span> card or use <span class="ui">Set</span>.</p>
+    <p><b>The cytometry table does not compute the 2C.</b> One of the two peaks is missing, or you chose <span class="ui">Other (type its 2C)</span> without typing the 2C of the standard.</p>
+    <p><b>The relative ploidy does not appear.</b> At least two accessions need runs.</p>
+    <p><b>“No numbers were found in the file.”</b> The CSV has no numeric columns; check the separator or remove the long header lines some instruments export.</p>
+    <p><b>The app finds one peak too many or too few.</b> Correct the gates by hand, delete them with × or add one with <span class="ui">+ Gate</span>; <span class="ui">Find the peaks again</span> returns to the automatic computation.</p>
+    <p><b>The <i>Allium</i> test compares against the wrong treatment.</b> Choose the right one in <span class="ui">Control</span>.</p>
+  </div>
+</section>
+
+</body>
+</html>

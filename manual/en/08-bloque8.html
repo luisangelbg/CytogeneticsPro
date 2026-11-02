@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · User’s Manual · Chapter 8</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-8" data-pestana="8" data-orden="8" style="--acento: var(--b8)">
+  <div class="cap-apertura">
+    <div class="cap-num">8</div>
+    <div class="cap-etiqueta">Chapter eight · Block 8</div>
+    <h1 data-corto="Comparison">Comparison among taxa</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">What the previous blocks computed for each accession, put into a single matrix together with any published taxa you want to add: their karyological distances and the dendrogram, the principal components, the idiograms at the same scale, the evolution of the chromosome number on a tree and a map of the cytotypes.</p>
+    <div class="cap-franja"><span class="k8"></span><span class="k8"></span><span class="k3"></span><span class="k4"></span><span class="k6"></span><span class="k7"></span></div>
+    <ul class="cap-contenido">
+      <li><b>8.1</b>Matrix of karyological parameters</li>
+      <li><b>8.2</b>Distances and clustering</li>
+      <li><b>8.3</b>Principal components</li>
+      <li><b>8.4</b>Parallel idiograms</li>
+      <li><b>8.5</b>Chromosome number evolution</li>
+      <li><b>8.6</b>Map of cytotypes</li>
+    </ul>
+  </div>
+
+  <p>The block has no accession selector: it works with all of them at once. The whole chapter uses the chayote example, which brings the four accessions of <i>Sechium edule</i> with their karyotype, indices and signals, seven more cucurbits typed by hand with their 2n and x, the coordinates of the localities and an illustrative tree in Newick. The data are simulated and the tree is not a published phylogeny.</p>
+
+  <!-- 8.1 -->
+  <h2 id="s8-1"><span class="num">8.1</span>Matrix of karyological parameters</h2>
+  <p class="lead">Each accession brings whatever it has computed: the 2n (the mode of its counts in Block 6 or, if it has none, that of its karyotype), the x, the length of one set (THL) and the asymmetry indices of Block 4, the mean 2C of its cytometry and the number of sites of each probe in Block 7.</p>
+  <p>Any accession with at least 2n, THL, 2C or some signal enters the matrix. The <b>chips</b> at the top choose the variables of the analysis: <span class="ui">2n</span>, <span class="ui">x</span>, <span class="ui">Length of one set (THL)</span>, <span class="ui">MCA</span>, <span class="ui">CVCL</span>, <span class="ui">CVCI</span>, <span class="ui">A1</span>, <span class="ui">A2</span>, <span class="ui">TF%</span>, <span class="ui">Syi</span>, <span class="ui">2C (pg)</span> and one “Sites …” variable for each probe with signals. By default the six proposed by Peruzzi and Altınordu (2014) are on: 2n, x, the haploid length, MCA, CVCL and CVCI. A click turns one on or off.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b8-matriz.png" alt="Variable chips and matrix of karyological parameters of the chayote example"></div>
+    <figcaption><b>Figure 8.1.</b> The chayote matrix: four accessions with all their parameters and seven taxa (¹) with only 2n and x. The variables of the analysis carry ✓. Huatusco has THL = 29.13 µm, MCA = 18.90, CVCL = 21.23 and CVCI = 14.67; the wild one, 2n = 24, x = 12 and CVCL = 22.15. The table continues to the right with Syi and the sites of each probe.</figcaption>
+  </figure>
+  <p>The table shows every variable that some row has, chosen or not, so that you see what is available. Taxa typed by hand carry ¹.</p>
+  <h3>Other taxa</h3>
+  <p>The <span class="ui">Other taxa</span> table, below the matrix, adds published taxa or taxa from other studies: <span class="ui">Taxon</span>, <span class="ui">2n</span>, <span class="ui">x</span>, <span class="ui">THL</span>, <span class="ui">MCA</span>, <span class="ui">CVCL</span>, <span class="ui">CVCI</span>, <span class="ui">A1</span>, <span class="ui">2C (pg)</span>, <span class="ui">Latitude</span> and <span class="ui">Longitude</span>. It is typed by hand, pasted or imported as CSV; on import, the name column may also be called “especie” or “species”.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b8-otros.png" alt="Other taxa table with seven cucurbits and the warning about the rows left out"></div>
+    <figcaption><b>Figure 8.2.</b> The seven cucurbits of the example, from <i>Cucumis sativus</i> (2n = 14) to <i>Cucurbita pepo</i> (2n = 40), with only 2n and x. The warning below says that, with the default option of <span class="ui">Incomplete rows</span> (Section 8.2), those seven rows are left out of the clustering and the component analysis because they lack THL, MCA, CVCL and CVCI.</figcaption>
+  </figure>
+
+  <!-- 8.2 -->
+  <h2 id="s8-2"><span class="num">8.2</span>Distances and clustering</h2>
+  <p class="lead">With the chosen variables, the app computes a karyological distance between each pair of rows and clusters them into a dendrogram. At least three accessions or taxa with data are needed.</p>
+  <p><span class="ui">Distance</span> offers two:</p>
+  <ul>
+    <li><span class="ui">Gower</span> (the default; Gower 1971): each variable is divided by its range, so that all weigh the same, and the distance is the mean of the differences. It runs from 0 to 1.</li>
+    <li><span class="ui">Euclidean (standardized values)</span>: each variable is standardized (mean 0, deviation 1) and the Euclidean distance is taken.</li>
+  </ul>
+  <p><span class="ui">Method</span> chooses the clustering: <span class="ui">UPGMA</span>, the average of the distances between groups (Sneath and Sokal 1973), or <span class="ui">Ward</span>, which joins the groups that least increase the variance within them (Ward 1963); the app applies it to the squared distances and gives the heights on the scale of the distance. The dendrogram downloads as <span class="ui">SVG</span> or <span class="ui">PNG</span> or, with <span class="ui">Newick</span>, as tree text (<code>dendrograma_upgma.nwk</code> or <code>dendrograma_ward.nwk</code>) to open in other programs.</p>
+  <h3>Incomplete rows</h3>
+  <p>A distance between two rows is only comparable with another if both were computed with the same variables. The <span class="ui">Incomplete rows</span> menu decides what to do with the rows that lack some chosen variable:</p>
+  <table class="compacta">
+    <caption><b>Table 8.1.</b> The three options of “Incomplete rows”</caption>
+    <thead><tr><th style="width:2.2in">Option</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Left out (only rows with every variable)</span> (the default)</td><td>Only the rows that have every chosen variable enter the clustering and the component analysis. A warning says how many and which are left out and what they lack; they stay in the matrix, in the number tree (Section 8.5) and on the map (Section 8.6).</td></tr>
+      <tr><td><span class="ui">All, with the variables every row has</span></td><td>All the rows enter, but only with the chosen variables that every row has; a warning says which are used and which are left out.</td></tr>
+      <tr><td><span class="ui">All; each pair with the variables it shares</span></td><td>All the rows enter and each pair is compared with the variables both have. One warning recalls that there are empty cells and another points to the pair that shares the fewest variables, with its distance.</td></tr>
+    </tbody>
+  </table>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b8-dendro.png" alt="UPGMA dendrogram with Gower distance of the four chayote accessions"></div>
+    <figcaption><b>Figure 8.3.</b> The default dendrogram (Gower, UPGMA, incomplete rows left out): the four chayote accessions with the six variables. Huatusco and Chilchotla join first, then Uruapan, and the wild one stays apart. The cophenetic correlation is 0.870.</figcaption>
+  </figure>
+  <p>Below the dendrogram, three figures: <span class="ui">Taxa</span>, <span class="ui">Variables</span> and the <span class="ui">Cophenetic correlation</span>, the correlation between the original distances and those read on the tree (Sokal and Rohlf 1962). If it is 0.8 or more, the app says “the tree summarizes the distances well”; if it is lower, it warns that the tree distorts them. At the end, the full <span class="ui">Distance matrix</span>.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b8-distancias.png" alt="Gower distance matrix among the four accessions"></div>
+    <figcaption><b>Figure 8.4.</b> The Gower distance matrix. Among the cultivated accessions, 0.212 (Huatusco–Chilchotla), 0.336 (Chilchotla–Uruapan) and 0.482 (Huatusco–Uruapan); the wild one is at 0.563, 0.701 and 0.934 from Huatusco, Chilchotla and Uruapan.</figcaption>
+  </figure>
+  <p>With the same four rows, Ward also gives a cophenetic correlation of 0.870 and the Euclidean distance with UPGMA 0.918; all three draw the same tree.</p>
+  <h3>Comparing each pair with what it shares</h3>
+  <p>With the third option the eleven rows enter, and the result shows why it is not the default. The seven taxa typed by hand only have 2n and x; between them and the accessions, the distance is computed only with those two numbers, which moreover say the same thing (x = 2n / 2 in all of them).</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b8-avisos.png" alt="Warnings about empty cells and pairs that share few variables"></div>
+    <figcaption><b>Figure 8.5.</b> The warnings with <span class="ui">All; each pair with the variables it shares</span>: the wild accession and <i>Cucumis melo</i> only have 2n and x in common (2 of 6), and their distance, 0.000, comes from those alone.</figcaption>
+  </figure>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b8-pareja.png" alt="Dendrogram of eleven rows comparing each pair with the variables it shares"></div>
+    <figcaption><b>Figure 8.6.</b> The dendrogram of the eleven rows with that option (cophenetic correlation 0.867). The chayote accessions do not form a group: Uruapan stays apart, the wild one next to <i>Cucumis melo</i> and <i>Sicyos angulatus</i>, and Huatusco next to <i>Luffa aegyptiaca</i>.</figcaption>
+  </figure>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Important · which option to choose</div>
+    <p>With <span class="ui">All; each pair with the variables it shares</span>, the wild accession (2n = 24) ends up at distance 0.000 from <i>Cucumis melo</i> and Huatusco (2n = 28) at 0.077 from <i>Luffa</i> (2n = 26), while between two chayotes, compared with the six variables, the small differences in THL, MCA, CVCL and CVCI add up to more (Huatusco–Uruapan, 0.482). The tree is not miscalculated: it mixes distances that measure different things. With <span class="ui">All, with the variables every row has</span> the eleven rows enter but only with 2n and x: the three cultivated accessions end up at 0.000 from each other and the tree speaks only of the chromosome number (cophenetic correlation 0.934). Keep the default option to compare karyotypes and choose another only when you know which question it answers.</p>
+  </div>
+
+  <!-- 8.3 -->
+  <h2 id="s8-3"><span class="num">8.3</span>Principal components</h2>
+  <p class="lead">Principal component analysis summarizes the variables in a few axes that are uncorrelated with each other (Jolliffe 2002). The app computes it on the correlation matrix, with the rows that entered the clustering and the variables that vary, and draws it as a biplot (Gabriel 1971): the points are the rows and the arrows the variables.</p>
+  <p><span class="ui">x axis</span> and <span class="ui">y axis</span> choose which components are drawn; each option says how much variance it explains. In the biplot, the accessions of the project are circles with their color and the other taxa, if they enter, gray squares. A long arrow in the direction of an axis says that the variable weighs on that component; two arrows close together, that the variables go hand in hand. The table below gives, per component, the <span class="ui">Eigenvalue</span>, the <span class="ui">Variance</span>, the <span class="ui">Cumulative</span> and the loadings of each variable, which are its correlations with the component.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b8-biplot.png" alt="Biplot of the first two components of the four accessions and table of eigenvalues and loadings"></div>
+    <figcaption><b>Figure 8.7.</b> PC1 explains 66.6% of the variance and PC2 26.5% (93.0% together). On PC1 load 2n and x (0.934), THL (0.818) and, in the opposite direction, CVCL (−0.824): they separate the wild accession from the cultivated ones. On PC2 load CVCI (0.754) and MCA (0.655), which set Uruapan apart from Huatusco and Chilchotla.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Note</div>
+    <p>With four rows there cannot be more than three components with variance, and since 2n and x are redundant, the last three have eigenvalue 0.0000: do not interpret them. If you choose an option of <span class="ui">Incomplete rows</span> that leaves empty cells, the analysis puts them at the mean of their variable and the footer of the table adds “(There are empty cells.)”.</p>
+  </div>
+  <p>If fewer than two variables vary, there is no component analysis, and the app says so.</p>
+
+  <!-- 8.4 -->
+  <h2 id="s8-4"><span class="num">8.4</span>Parallel idiograms</h2>
+  <p class="lead">The idiograms of every accession with a karyotype, one below the other, at the same scale and with their formula in the title: the figure that shows at a glance how they resemble each other and how they differ.</p>
+  <p><span class="ui">Scale</span> chooses between <span class="ui">The same, in microns</span>, which respects the real sizes, and <span class="ui">Relative length (%)</span>, which puts each chromosome as a percentage of its set and compares only the proportions. The <span class="ui">Bands and signals</span> checkbox adds or removes the marks of Block 7.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b8-paralelo.png" alt="Idiograms of the four chayote accessions at the same scale with their signals"></div>
+    <figcaption><b>Figure 8.8.</b> The three cultivated accessions, 2n = 2x = 28 = 18m + 2m-sat + 8sm, and the wild one, 2n = 2x = 24 = 16m + 2m-sat + 6sm, with its two longest pairs at the start, the satellite with 45S and CMA⁺ on pair 3 and a second 45S site on pair 2. In Uruapan the 45S site of pair 9 is visible.</figcaption>
+  </figure>
+
+  <!-- 8.5 -->
+  <h2 id="s8-5"><span class="num">8.5</span>Chromosome number evolution</h2>
+  <p class="lead">On a tree of the taxa, parsimony reconstructs the chromosome numbers of the ancestors: it looks for the history with the lowest total cost of events (Sankoff 1975). The events are those of the models of chromosome number evolution (Mayrose et al. 2010): +1 and −1, ascending and descending dysploidy; ×2, polyploidy; and ×1.5, demiploidy.</p>
+  <p>Type or paste the tree in <span class="ui">Newick</span>, open it with <span class="ui">Open a tree file</span> (Newick or NEXUS; from a NEXUS file the first tree is taken) or use <span class="ui">Use the dendrogram above</span>, which copies the dendrogram of Section 8.2. The four costs are changed in <span class="ui">Cost of +1</span>, <span class="ui">Cost of −1</span>, <span class="ui">Cost of ×2</span> and <span class="ui">Cost of ×1.5</span> (1, 1, 1 and 1.5 by default), and <span class="ui">Show</span> chooses whether the tree writes the <span class="ui">Haploid number n</span> or the <span class="ui">Somatic number 2n</span>. The app always works with haploid numbers.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b8-puntas.png" alt="Newick tree, event costs and table of the numbers of the tips"></div>
+    <figcaption><b>Figure 8.9.</b> The illustrative tree of the example, with eleven tips, and the <span class="ui">Numbers of the tips</span> table: the seven taxa take their 2n from “Other taxa” and the four <i>Sechium</i> tips, from the accessions.</figcaption>
+  </figure>
+  <p>The <span class="ui">Numbers of the tips</span> table says where the number of each tip comes from: from an accession (by name, by taxon or by the correspondence the example brings), from an <span class="ui">other taxon</span>, <span class="ui">typed here</span> or <span class="ui">no number</span>. In the <span class="ui">2n (several: 24/26)</span> column you can type the number by hand, or several separated by a slash when the species has more than one cytotype; what you type overrides what comes from the accessions, and erasing it restores the automatic one. The last column gives the <span class="ui">n used</span>. An odd 2n has no whole haploid number and is left out, with a warning; a tip without a number is treated as unknown.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b8-arbol.png" alt="Parsimony figures and tree with the reconstructed haploid numbers"></div>
+    <figcaption><b>Figure 8.10.</b> With the default costs, the most parsimonious history costs 11: five +1 events, five −1 and one duplication, on the branch of <i>Cucurbita pepo</i> (−1 and ×2: from n = 11 to 10 and to 20). The root is n = 11; the ancestor of <i>Sechium</i> and <i>Sicyos</i>, n = 12, and the cultivated accessions rise to n = 14 with two +1 events.</figcaption>
+  </figure>
+  <p>The figures above the tree are the <span class="ui">Minimum cost</span>, the <span class="ui">Number at the root</span>, how many events of each kind there are in the history shown and the <span class="ui">Ambiguous nodes</span>, those with more than one equally parsimonious number. On the tree, each node carries its number in a circle, the branches with events are highlighted and labeled with them, and the ambiguous nodes have a dotted border and their other optimal numbers below: the tree shows one of the optimal histories, not the only one.</p>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · how firm the reconstruction is</div>
+    <p>Raise the <span class="ui">Cost of ×2</span> from 1 to 3. The minimum cost becomes 11.5: the duplication disappears and the history uses one demiploidy and ten one-by-one events (six +1 and four −1), and four ambiguous nodes appear. The root stays at n = 11. What does not change when you move the costs is the firm part of the reconstruction; what changes depends on assumptions and should be reported as such.</p>
+  </div>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · Sankoff parsimony</div>
+    <p>The cost of going from one number to another is the cheapest sequence of events that achieves it: from 7 to 12, five +1 or one duplication and two −1, whichever costs less with the chosen costs. The algorithm runs through the tree from the tips to the root computing, for each node and each possible number, the minimum cost of what hangs from it; the root keeps the number of lowest cost, and from there it descends choosing an optimal number at each node. Parsimony does not use branch lengths or give probabilities: that is what the models of Mayrose et al. (2010) are for.</p>
+  </div>
+
+  <!-- 8.6 -->
+  <h2 id="s8-6"><span class="num">8.6</span>Map of cytotypes</h2>
+  <p class="lead">The accessions and taxa with coordinates, as points colored by their 2n on a grid of latitude and longitude.</p>
+  <p>The coordinates of an accession are typed in its record, in Block 2; those of the other taxa, in the <span class="ui">Latitude</span> and <span class="ui">Longitude</span> columns of their table. The app brings no maps of others: with <span class="ui">Load an outline (GeoJSON)</span> you can add one of your own (a state, a basin), and <span class="ui">Remove the outline</span> takes it away. The legend gives one color for each 2n, and gray for the rows without a number.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b8-mapa.png" alt="Map of cytotypes with the four chayote localities"></div>
+    <figcaption><b>Figure 8.11.</b> The four localities of the example, between 97 and 102° W and near 19° N: three with 2n = 28 (Huatusco, Chilchotla and Uruapan) and the wild one from Coscomatepec with 2n = 24. The other taxa have no coordinates and do not appear.</figcaption>
+  </figure>
+
+  <h3>Reading rules for the block</h3>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Decision rule</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>If</b> the cophenetic correlation is ≥ 0.8</td><td><b>then</b> the dendrogram summarizes the distances well; if it is lower, read it with care or use the biplot.</td></tr>
+      <tr><td><b>If</b> some rows do not have every variable</td><td><b>then</b> keep <span class="ui">Incomplete rows</span> at <span class="ui">Left out (only rows with every variable)</span>, or choose only the variables that every row has; comparing each pair with what it shares mixes different distances.</td></tr>
+      <tr><td><b>If</b> two variables say the same thing (2n and x in diploids)</td><td><b>then</b> they weigh double in the distance: remove one.</td></tr>
+      <tr><td><b>If</b> a component has eigenvalue 0</td><td><b>then</b> there are redundant variables; do not interpret it.</td></tr>
+      <tr><td><b>If</b> the root or an event changes when you move the costs</td><td><b>then</b> that part of the reconstruction depends on assumptions.</td></tr>
+      <tr><td><b>If</b> there are ambiguous nodes</td><td><b>then</b> the tree shows one of several equally good histories.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Guides for interpretation, not laws.</p>
+  </div>
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>When something goes wrong</div>
+    <p><b>“At least three accessions or taxa with data are needed to compare.”</b> Add accessions with a karyotype or counts, or taxa in “Other taxa”. With the default option of <span class="ui">Incomplete rows</span>, only the rows with every variable count: turn off the variables they lack or change the option.</p>
+    <p><b>“None of the chosen variables is in every row.”</b> With <span class="ui">All, with the variables every row has</span> no common variable is left; choose another option or change the variables.</p>
+    <p><b>“These pairs share no variable: …”</b> Two rows have no chosen variable in common; remove variables or complete the data.</p>
+    <p><b>“Choose at least one variable.”</b> All the chips are off.</p>
+    <p><b>A tip of the tree has “no number”.</b> Its name does not match any accession or taxon: type its 2n in the tips table or correct the name (underscores in the Newick count as spaces).</p>
+    <p><b>Error reading the Newick.</b> The message says what is missing (“A closing parenthesis is missing in the Newick.”) or what is left over at the end.</p>
+    <p><b>The map is empty.</b> No row has latitude and longitude.</p>
+    <p><b>“The file is not valid GeoJSON.”</b> The outline must be a GeoJSON object (a collection, a feature, a polygon or a line).</p>
+  </div>
+</section>
+
+</body>
+</html>
