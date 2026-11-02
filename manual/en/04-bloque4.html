@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CytogeneticsPro · User’s Manual · Chapter 4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-4" data-pestana="4" data-orden="4" style="--acento: var(--b4)">
+  <div class="cap-apertura">
+    <div class="cap-num">4</div>
+    <div class="cap-etiqueta">Chapter four · Block 4</div>
+    <h1 data-corto="Asymmetry">Asymmetry and karyological parameters</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">A symmetric karyotype has chromosomes of similar size with the centromere near the middle; an asymmetric one has chromosomes of unequal sizes or with the centromere near one end. Block 4 measures those two asymmetries with twelve indices on the karyotypes of Block 3, places each accession on the Stebbins grid, compares them in a scatter plot and with Gower’s dissimilarity, and explains what each index measures and which ones are worth reporting.</p>
+    <div class="cap-franja"><span class="k3"></span><span class="k4"></span><span class="k4"></span><span class="k8"></span><span class="k10"></span></div>
+    <ul class="cap-contenido">
+      <li><b>4.1</b>How they are computed</li>
+      <li><b>4.2</b>Indices by accession</li>
+      <li><b>4.3</b>Stebbins categories and scatter</li>
+      <li><b>4.4</b>Dissimilarity among karyotypes</li>
+      <li><b>4.5</b>What each index measures</li>
+    </ul>
+  </div>
+
+  <!-- 4.1 -->
+  <h2 id="s4-1"><span class="num">4.1</span>How they are computed</h2>
+  <p class="lead">The block computes the indices of every accession that has a karyotype in Block 3, with no Compute button. If there is none yet, it shows <span class="ui">There is no karyotype yet</span> with <span class="ui">Go to Block 2</span> and <span class="ui">Open the chayote example</span>.</p>
+  <p>All the figures in this chapter come from the chayote example, with its four simulated accessions: three cultivated ones with 2n = 28 (Huatusco, Chilchotla and Uruapan) and a wild one with 2n = 24 (Coscomatepec).</p>
+
+  <figure>
+    <div class="marco"><img src="../img/en/b4-ajustes.png" alt="The How they are computed card with its three fields: on which chromosomes, standard deviation and indices in the table"></div>
+    <figcaption><b>Figure 4.1.</b> The three settings of the block, with their default values.</figcaption>
+  </figure>
+
+  <ul>
+    <li><span class="ui">On which chromosomes</span>: <span class="ui">The means of the pairs (one set)</span>, the default, computes each index once with one chromosome per pair, the average of its homologues over all the cells; <span class="ui">Each cell with all its chromosomes; mean ± sd</span> computes it in each cell with all its chromosomes and gives the mean ± the deviation among cells.</li>
+    <li><span class="ui">Standard deviation</span>: <span class="ui">Sample (n − 1)</span> or <span class="ui">Population (n)</span>. It changes the indices that are coefficients of variation (A2, CVCL, CVCI and those that depend on them: AI and DI) and the deviations among cells. It is the same setting as in Block 3. The sources of the indices do not say which one to use; the app uses the sample one by default.</li>
+    <li><span class="ui">Indices in the table</span>: <span class="ui">All</span> or <span class="ui">The recommended ones (MCA, CVCL, CVCI)</span>. It only changes the columns shown; the CSV file always carries all of them.</li>
+  </ul>
+  <p>The note on the card recalls that A1 (Romero Zarco 1986) and A (Watanabe et al. 1999) were defined on homologous pairs, while MCA, CVCL and CVCI can be computed with all the chromosomes of each cell. It adds that TF%, AsK% and Syi change very little from one way to the other, but they are not identical, because the mean of the ratios of each cell is not the ratio of the means (TF% of the Huatusco chayote: 40.67 on the pairs, 40.66 ± 0.18 cell by cell), and that either way the length is that of one set.</p>
+
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Pairs or cells: do not mix them</div>
+    <p>The indices of length dispersion do not give the same result both ways: the CVCL of the Huatusco chayote is 21.23 on the means of the pairs and 21.04 ± 0.36 cell by cell, and the population deviation lowers it to 20.46. When you compare with other studies, use the same way and the same deviation as they did, and state it in the methods.</p>
+  </div>
+
+  <!-- 4.2 -->
+  <h2 id="s4-2"><span class="num">4.2</span>Indices by accession</h2>
+  <p class="lead">Four summary figures and a table with one row per accession: its 2n, the length of one set, the twelve indices and its Stebbins category.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b4-indices.png" alt="The Indices by accession card with the four chayote accessions and the twelve indices"></div>
+    <figcaption><b>Figure 4.2.</b> The chayote indices on the means of the pairs. The four accessions fall in 2A; MCA ranges from 18.7 (the wild one) to 19.9 (Uruapan) and CVCL from 21.2 to 22.1. The recommended ones carry ★. Long headers break into two lines and the table fits without sideways scrolling.</figcaption>
+  </figure>
+
+  <p>The figures at the top give the number of accessions, the range of MCA (intrachromosomal asymmetry) and of CVCL (interchromosomal asymmetry) among them, and the Stebbins categories that occur. When you hover over the name of an index in the table, the app shows its formula and its author. Table 4.1 brings them together.</p>
+
+  <table class="compacta">
+    <caption><b>Table 4.1.</b> The twelve indices, with <i>s</i> and <i>l</i> the short and the long arm of each chromosome, <i>c</i> = <i>s</i> + <i>l</i> its length and <i>n</i> the number of chromosomes</caption>
+    <thead><tr><th style="width:0.6in">Index</th><th style="width:2.35in">Formula</th><th>Author · which asymmetry</th></tr></thead>
+    <tbody>
+      <tr><td>TF%</td><td>100 · Σ<i>s</i> / Σ(<i>s</i> + <i>l</i>)</td><td>Huziwara 1962 · intra; falls with asymmetry (50 = all metacentric)</td></tr>
+      <tr><td>AsK%</td><td>100 · Σ<i>l</i> / Σ(<i>s</i> + <i>l</i>)</td><td>Arano 1963 · intra; it is 100 − TF%</td></tr>
+      <tr><td>Syi</td><td>100 · <i>s̄</i> / <i>l̄</i></td><td>Greilhuber and Speta 1976 · intra; a function of TF%</td></tr>
+      <tr><td>A1</td><td>1 − (1/<i>n</i>) Σ (<i>s</i><sub>i</sub> / <i>l</i><sub>i</sub>)</td><td>Romero Zarco 1986 · intra; 0 if all are metacentric</td></tr>
+      <tr><td>A</td><td>(1/<i>n</i>) Σ (<i>l</i><sub>i</sub> − <i>s</i><sub>i</sub>) / (<i>l</i><sub>i</sub> + <i>s</i><sub>i</sub>)</td><td>Watanabe et al. 1999 · intra; from 0 to 1</td></tr>
+      <tr><td>MCA ★</td><td>100 · A</td><td>Peruzzi and Eroğlu 2013 · intra; the recommended one</td></tr>
+      <tr><td>CVCI ★</td><td>100 · sd(CI) / mean(CI)</td><td>Paszko 2006 · heterogeneity of the centromeres</td></tr>
+      <tr><td>Rec</td><td>100 · (1/<i>n</i>) Σ (<i>c</i><sub>i</sub> / <i>c</i><sub>max</sub>)</td><td>Greilhuber and Speta 1976 · inter; 100 if all are the same length</td></tr>
+      <tr><td>A2</td><td>sd(<i>c</i>) / mean(<i>c</i>)</td><td>Romero Zarco 1986 · inter</td></tr>
+      <tr><td>CVCL ★</td><td>100 · A2</td><td>Paszko 2006 · inter; the recommended one</td></tr>
+      <tr><td>AI</td><td>CVCL · CVCI / 100</td><td>Paszko 2006 · both; historical</td></tr>
+      <tr><td>DI</td><td>CG · CVCL / 100, with CG = 100 · median(<i>s</i>) / median(<i>c</i>)</td><td>Lavania and Srivastava 1992 · both; historical</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · what the chayote indices say</div>
+    <p>The four accessions have very symmetric and nearly identical karyotypes: TF% close to 40, MCA between 18.66 and 19.87, CVCL between 21.22 and 22.15. Uruapan has the highest MCA (19.87) and the highest CVCI (16.26): its centromeres are, on average, slightly farther from the middle and more varied, because in the example one or two of its arm ratios changed. The wild one, with two longer pairs from fusion, has the highest CVCL (22.15). Its Rec is also the highest (71.89), which seems to contradict the above: Rec only compares each chromosome with the longest one, while CVCL looks at the whole dispersion. That is why CVCL is reported.</p>
+  </div>
+
+  <h3>Cell by cell</h3>
+  <p>With <span class="ui">Each cell with all its chromosomes; mean ± sd</span>, each cell of the table carries the mean and, on a second line, ± the deviation among cells. The Stebbins category is then the most frequent among the cells, and a notice says which accessions fall in different categories depending on the cell.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b4-celulas.png" alt="The table of the recommended indices computed cell by cell, with three notices about Stebbins categories that differ by cell"></div>
+    <figcaption><b>Figure 4.3.</b> The recommended indices cell by cell. Chilchotla and Uruapan move to 2B, and three accessions have cells in 2A and in 2B. The “Set (µm)” column gives the length of one set in each cell, as mean ± deviation: 29.14 ± 1.88 µm in Huatusco.</figcaption>
+  </figure>
+
+  <p>The categories change because each cell has all its chromosomes, and the longest and the shortest of a particular cell can exceed a twofold ratio even though the means of the pairs do not (1.95 in Huatusco). There is one more possible notice below the table: when all the chromosomes of an accession are telocentric, CVCI is undefined (0/0) and shows “—”.</p>
+  <p><span class="ui">Table (CSV)</span> and <span class="ui">Table (TSV)</span> save one row per accession with its taxon, 2n, the length of one set, the twelve indices with six decimals, their deviations (if computed cell by cell), the Stebbins category and the way they were computed.</p>
+
+  <!-- 4.3 -->
+  <h2 id="s4-3"><span class="num">4.3</span>Stebbins categories and scatter</h2>
+  <p class="lead">Two figures put the accessions side by side: the classic Stebbins (1971) grid and the scatter plot of two indices, MCA × CVCL by default.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b4-stebbins.png" alt="The Stebbins grid with the four chayote accessions in cell 2A and the scatter of MCA by CVCL"></div>
+    <figcaption><b>Figure 4.4.</b> At the top, the four accessions in cell 2A. At the bottom, the MCA × CVCL scatter separates what the grid lumps together: the wild one (4) at the upper left, with the most unequal lengths, Uruapan (3) to the right, with the centromeres farthest from the middle.</figcaption>
+  </figure>
+
+  <p>The <b>grid</b> has twelve cells. The row (A, B, C) is given by the ratio between the longest and the shortest chromosome: less than 2, from 2 to 4, more than 4. The column (1 to 4) is given by the proportion of chromosomes with an arm ratio below 2: all (1.00), from 0.99 to 0.51, from 0.50 to 0.01, none (0.00). Each accession is a numbered circle in the color of the accession, with its name in the legend. The most symmetric karyotypes sit at the upper left (1A) and the most asymmetric at the lower right (4C).</p>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · why Huatusco is 2A</div>
+    <p>Of its 14 pairs, only pair 6 (<i>r</i> = 2.51) and pair 10 (<i>r</i> = 2.10) have a ratio of 2 or more: 12 of 14, a proportion of 0.86, which falls in column 2. The longest pair measures 1.95 times the shortest, less than 2: row A. Pair 3, with <i>r</i> = 1.96, is very close to the cutoff; if it went past 2, Huatusco would stay in column 2 with 11 of 14.</p>
+  </div>
+
+  <p>In the <b>scatter plot</b>, <span class="ui">x axis</span> and <span class="ui">y axis</span> offer the twelve indices, the length of one set and 2n; the points carry the number of the accession. Peruzzi and Eroğlu (2013) propose MCA × CVCL because its two axes measure different things: to the right, centromeres farther from the middle; upwards, more unequal lengths. Both figures are exported with <span class="ui">SVG</span> and <span class="ui">PNG</span>, or edited with ✎ and in the figure studio.</p>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Decision rule · the Stebbins grid</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>Row</b> by the longest / shortest ratio</td><td>A if it is less than 2; B from 2 to 4, both ends included; C if it exceeds 4.</td></tr>
+      <tr><td><b>Column</b> by the proportion with <i>r</i> &lt; 2</td><td>1 if it is 1.00; 2 from 0.99 to 0.51; 3 from 0.50 to 0.01; 4 if it is 0.00. A chromosome with <i>r</i> = 2 exactly does not count as “less than 2”.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">The grid reduces the karyotype to twelve cells: it is good for a quick look, not for separating similar accessions.</p>
+  </div>
+
+  <!-- 4.4 -->
+  <h2 id="s4-4"><span class="num">4.4</span>Dissimilarity among karyotypes</h2>
+  <p class="lead">Gower’s (1971) dissimilarity summarizes in one number how different two karyotypes are according to the indices you choose: 0 if they are equal, 1 if they are as different as possible within the accessions of the project.</p>
+  <p>For each pair of accessions, the app takes the difference in each index, divides it by the range of that index over all the accessions and averages. The indices are chosen with the buttons: the twelve and the <span class="ui">Length of one set</span>; by default, MCA, CVCI and CVCL. At least one always stays selected. At least two accessions are needed. It is the measure with which Peruzzi and Altınordu (2014) compare karyotypes; Block 8 uses it with more parameters and clusters the taxa with it.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b4-disimilitud.png" alt="The Dissimilarity among karyotypes card with MCA, CVCI and CVCL selected and the matrix of the four chayote accessions"></div>
+    <figcaption><b>Figure 4.5.</b> With MCA, CVCI and CVCL, Huatusco and Chilchotla are almost equal (0.127) and Uruapan and the wild one are the most different (0.885).</figcaption>
+  </figure>
+
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · Gower with few accessions</div>
+    <p>Since each difference is divided by the range of that index in the project, the dissimilarity is relative: the two accessions farthest apart in an index contribute 1 in that index even if the difference is small in absolute terms. In the chayote, MCA only goes from 18.66 to 19.87, and yet Uruapan and the wild one add up to 0.885. Use it to rank the accessions of the project among themselves, not to say whether two karyotypes are “very” different; adding or removing an accession changes all the values.</p>
+  </div>
+
+  <!-- 4.5 -->
+  <h2 id="s4-5"><span class="num">4.5</span>What each index measures</h2>
+  <p class="lead">The last card explains the twelve indices, one per expandable row, with its formula, its author and what it measures.</p>
+  <p>Each row carries its tag on the right: <span class="ui">intrachromosomal</span>, <span class="ui">interchromosomal</span> or <span class="ui">both</span>, plus ★ if it is one of the recommended ones, <span class="ui">redundant</span> if it adds nothing to another (AsK% and Syi, which follow from TF%) or <span class="ui">historical</span> if it is discouraged today (AI and DI). The first one, TF%, comes expanded.</p>
+
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · two asymmetries, three numbers</div>
+    <p><b>Intrachromosomal</b> asymmetry tells where the centromere is; <b>interchromosomal</b> asymmetry, how much the lengths vary. Many indices measure the same thing on another scale: AsK% is 100 − TF%, Syi is a function of TF%, CVCL is 100 · A2 and MCA is 100 · A. CVCI does not measure asymmetry but heterogeneity: a karyotype with all chromosomes submetacentric is asymmetric but has a low CVCI (Zuo and Yuan 2011). AI follows CVCI almost alone and DI uses medians; both are kept to compare with older studies (Peruzzi et al. 2009). Today a karyotype is best described with <b>MCA</b> and <b>CVCL</b>, plus <b>CVCI</b> (Peruzzi and Eroğlu 2013).</p>
+  </div>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b4-info.png" alt="The What each index measures card with TF% and MCA expanded and the other indices collapsed with their tags"></div>
+    <figcaption><b>Figure 4.6.</b> The explanation of the indices, with TF% and MCA expanded.</figcaption>
+  </figure>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Decision rule · what to report</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:42%"><b>To describe</b> asymmetry</td><td>MCA (where the centromere is) and CVCL (how much the lengths vary); add CVCI if the centromeres differ a lot among chromosomes.</td></tr>
+      <tr><td><b>To compare</b> with older studies</td><td>TF%, AsK%, Syi, A1, A2, AI or DI, whichever the other study used, computed the same way.</td></tr>
+      <tr><td><b>To place</b> the karyotype in the literature</td><td>The Stebbins category, together with MCA and CVCL.</td></tr>
+      <tr><td><b>To compare accessions</b></td><td>The MCA × CVCL scatter and Gower’s dissimilarity; for more parameters and clustering, Block 8.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Always state whether the indices were computed on the means of the pairs or cell by cell, and with which deviation.</p>
+  </div>
+
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>When something goes wrong</div>
+    <p><b>The block says “There is no karyotype yet.”</b> There are no measured cells: go back to Block 2 or open an example. <b>CVCI shows “—”.</b> All the chromosomes of that accession are telocentric and the index is undefined. <b>The dissimilarity says accessions are missing.</b> At least two with a karyotype are needed. <b>I changed the deviation here and the table of Block 3 changed.</b> It is the same setting in both blocks. <b>The indices do not match a published study.</b> Check whether they added the satellite to the arm (Block 3), whether they used pairs or cells and which deviation.</p>
+  </div>
+</section>
+
+</body>
+</html>
