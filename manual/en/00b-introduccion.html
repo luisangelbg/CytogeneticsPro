@@ -30,10 +30,10 @@
   </dl>
 
   <h4>How to cite the program</h4>
-  <div class="cita">Barrera-Guzmán, L. Á. (2026). <i>CytogeneticsPro: citogenética vegetal en el navegador</i> (version 1.0.0) [Computer software]. LABG Suite.</div>
+  <div class="cita">Barrera-Guzmán, L. Á. (2026). <i>CytogeneticsPro: plant cytogenetics in the browser</i> (version 1.0.0) [Computer software]. LABG Suite.</div>
   <h4>How to cite this manual</h4>
   <div class="cita">Barrera-Guzmán, L. Á. (2026). <i>CytogeneticsPro: User’s Manual</i> (1st English ed.). Distributed with CytogeneticsPro, version 1.0.0. LABG Suite.</div>
-  <p class="small">The program’s citation also appears, ready to copy as text or in BibTeX, in the <span class="ui">How to cite</span> section of the app’s home page; the app gives the program’s title in Spanish in both languages. The program does not yet have a digital object identifier (DOI): it will be added to both citations when the program is published.</p>
+  <p class="small">The program’s citation also appears, ready to copy as text or in BibTeX, in the <span class="ui">How to cite</span> section of the app’s home page. The program does not yet have a digital object identifier (DOI): it will be added to both citations when the program is published.</p>
 
   <div class="caja nota">
     <div class="caja-t"><span class="ico">i</span>Privacy</div>
@@ -96,7 +96,7 @@
       <div class="toc-cap"><span class="chip k3">3</span><a href="#cap-3">Karyotype</a><a class="pag" href="#cap-3"></a></div>
       <ul>
         <li><span class="n">3.1</span><a href="#s3-1"><span class="t">Karyotype settings</span></a></li>
-        <li><span class="n">3.2</span><a href="#s3-2"><span class="t">Pairing of homologues</span></a></li>
+        <li><span class="n">3.2</span><a href="#s3-2"><span class="t">Pairing of homologs</span></a></li>
         <li><span class="n">3.3</span><a href="#s3-3"><span class="t">Karyotype of the accession</span></a></li>
         <li><span class="n">3.4</span><a href="#s3-4"><span class="t">Formula, length and fundamental number</span></a></li>
         <li><span class="n">3.5</span><a href="#s3-5"><span class="t">Idiogram</span></a></li>
@@ -202,7 +202,7 @@
     <tbody>
       <tr><td><span class="chip k1">1</span></td><td><span class="ui">Home</span></td><td>The logic of cytogenetics in plain words, two labs that really compute, the methods with their sources, the examples, the references and how to cite</td></tr>
       <tr><td><span class="chip k2">2</span></td><td><span class="ui">Images and measurement</span></td><td>Calibrate, count, trace every chromosome and measure its arms on the micrograph, or type in and paste the measurements</td></tr>
-      <tr><td><span class="chip k3">3</span></td><td><span class="ui">Karyotype</span></td><td>Homologues, means, classification, formula and idiogram</td></tr>
+      <tr><td><span class="chip k3">3</span></td><td><span class="ui">Karyotype</span></td><td>Homologs, means, classification, formula and idiogram</td></tr>
       <tr><td><span class="chip k4">4</span></td><td><span class="ui">Asymmetry</span></td><td>The indices, what each one measures and which are recommended, with the Stebbins categories</td></tr>
       <tr><td><span class="chip k5">5</span></td><td><span class="ui">Meiosis</span></td><td>Configurations, chiasmata, abnormalities, meiotic index and pollen</td></tr>
       <tr><td><span class="chip k6">6</span></td><td><span class="ui">Ploidy and genome</span></td><td>Counts, ploidy level, flow cytometry and the <i>Allium</i> test</td></tr>
@@ -229,7 +229,7 @@
   </div>
   <div class="caja error">
     <div class="caja-t"><span class="ico">✕</span>When something goes wrong</div>
-    <p>What tends to fail when using the block—an uncalibrated cell, a homologue in the wrong pair, a badly chosen peak—and how to fix it.</p>
+    <p>What tends to fail when using the block—an uncalibrated cell, a homolog in the wrong pair, a badly chosen peak—and how to fix it.</p>
   </div>
   <div class="caja dato">
     <div class="dato-cifra">12</div>
@@ -276,7 +276,7 @@
   <!-- I.1 -->
   <h2 id="si-1"><span class="num">I.1</span>What is CytogeneticsPro?</h2>
   <p class="lead">It is a plant cytogenetics program that runs in the browser, with nothing to install. It takes a study from the chromosome count to the publishable karyotype: measuring the chromosomes on the micrographs, arranging them, describing them, comparing them and writing the figures and the methods.</p>
-  <p>It is designed for crops and their wild relatives—maize, chayote, fruit trees, forest trees—and for teaching genetics. It measures each chromosome with a line that follows its curvature on a calibrated image; it pairs the homologues and averages over cells; it classifies each pair by the position of the centromere and writes the karyotype formula; it computes twelve asymmetry indices with the Stebbins categories; it analyzes meiotic configurations and compares them with what is expected for an autopolyploid or an allopolyploid; it estimates the ploidy level and the genome size by flow cytometry; it records bands and in situ hybridization signals on the idiogram; and it compares karyotypes among taxa, with chromosome number evolution on a tree.</p>
+  <p>It is designed for crops and their wild relatives—maize, chayote, fruit trees, forest trees—and for teaching genetics. It measures each chromosome with a line that follows its curvature on a calibrated image; it pairs the homologs and averages over cells; it classifies each pair by the position of the centromere and writes the karyotype formula; it computes twelve asymmetry indices with the Stebbins categories; it analyzes meiotic configurations and compares them with what is expected for an autopolyploid or an allopolyploid; it estimates the ploidy level and the genome size by flow cytometry; it records bands and in situ hybridization signals on the idiogram; and it compares karyotypes among taxa, with chromosome number evolution on a tree.</p>
   <p>Everything is computed by an engine written from scratch for this program, without other people’s libraries, and each method cites the work that defines it: on the app’s home page, in the notes of each block and in the methods written by Block 10.</p>
 
   <figure>
@@ -292,7 +292,7 @@
     <tbody>
       <tr><td>How long is each arm of each chromosome in my micrographs?</td><td class="c"><span class="chip k2">2</span></td></tr>
       <tr><td>How many chromosomes does this cell have, and what is the mode of 2n in the accession?</td><td class="c"><span class="chip k2">2</span> <span class="chip k6">6</span></td></tr>
-      <tr><td>Which are the homologues, what type is each pair and what is the karyotype formula?</td><td class="c"><span class="chip k3">3</span></td></tr>
+      <tr><td>Which are the homologs, what type is each pair and what is the karyotype formula?</td><td class="c"><span class="chip k3">3</span></td></tr>
       <tr><td>How asymmetric is the karyotype, and in which Stebbins category does it fall?</td><td class="c"><span class="chip k4">4</span></td></tr>
       <tr><td>How many chiasmata are there per cell? Is meiosis regular? How viable is the pollen?</td><td class="c"><span class="chip k5">5</span></td></tr>
       <tr><td>Are the meiotic configurations those of an autopolyploid or those of an allopolyploid?</td><td class="c"><span class="chip k5">5</span></td></tr>
@@ -311,7 +311,7 @@
   <ol class="pasos">
     <li><b>A measurement without a scale is not a measurement.</b> A length in pixels depends on the magnification and the camera; only the micron bar of the same photograph makes it comparable. That is why Block 2 asks you to calibrate each cell and warns about those that are not.</li>
     <li><b>Chromosomes bend, and the arm is measured along them.</b> A straight line between the ends shortens a bent chromosome. The app measures along a line that follows its axis, point by point.</li>
-    <li><b>A cell is not a karyotype.</b> Condensation changes from one cell to another, and a homologue can end up in the wrong pair. The karyotype comes from several cells, with their pairs aligned among them and their deviation in view.</li>
+    <li><b>A cell is not a karyotype.</b> Condensation changes from one cell to another, and a homolog can end up in the wrong pair. The karyotype comes from several cells, with their pairs aligned among them and their deviation in view.</li>
     <li><b>Names depend on a scheme, and the scheme is stated.</b> A chromosome with r = 1.70 is m under Levan et al. (1964) and sm under Guerra (1986). The app writes which scheme and which limits it used.</li>
     <li><b>Asymmetry is two things.</b> One is the position of the centromeres; the other, the difference in size between chromosomes. Today it is recommended to measure them separately—MCA and CVCL (Peruzzi and Eroğlu, 2013)—instead of with a single number.</li>
     <li><b>What is not reported cannot be checked.</b> The number of cells, the calibration, the classification scheme, the cytometry standard and the version of the program belong in the methods. Block 10 writes them from what the project contains.</li>
@@ -447,7 +447,7 @@
   </figure>
   <ol class="pasos">
     <li><b>Measure</b> (Block 2). Open the micrographs, calibrate each cell with its scale bar, count the chromosomes and trace each one with its centromere and its satellites; or type in the measurements.</li>
-    <li><b>Arrange</b> (Block 3). Check that each homologue ended up in its pair, choose the classification scheme and get the formula, the fundamental number and the idiogram.</li>
+    <li><b>Arrange</b> (Block 3). Check that each homolog ended up in its pair, choose the classification scheme and get the formula, the fundamental number and the idiogram.</li>
     <li><b>Describe</b> (Blocks 4 and 7). The asymmetry indices and the Stebbins category; the bands and the FISH signals on the idiogram.</li>
     <li><b>Count and weigh</b> (Blocks 5 and 6). Meiosis and pollen; the counts of 2n, the ploidy level, flow cytometry and, if needed, the <i>Allium</i> test.</li>
     <li><b>Compare</b> (Block 8). The accessions and other taxa in a single matrix, their distances, their principal components and number evolution on a tree.</li>
