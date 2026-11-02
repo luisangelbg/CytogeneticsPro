@@ -16,11 +16,12 @@ const vm = require('vm');
 const raiz = path.resolve(__dirname, '..', '..');
 /* home.js only needs these names when it is loaded; its builders run on DOMContentLoaded, which never comes */
 const noop = () => {};
-const caja = { console, document: { addEventListener: noop }, L2: (a) => a, T: (a) => a, el: () => null, STEPS: [], APP_VERSION: '1.0.0' };
+const caja = { console, document: { addEventListener: noop }, L2: (a) => a, T: (a) => a, el: () => null, STEPS: [], APP_VERSION: '1.0.0',
+  citeLang: (c) => c, fileLang: (n) => n };   /* home.js names these helpers of core.js when it is loaded */
 caja.window = caja;
 vm.createContext(caja);
 vm.runInContext(fs.readFileSync(path.join(raiz, 'js', 'home.js'), 'utf8'), caja);
-const { REFS, REF_TOPICS } = caja.window.Home;
+const { REFS, REF_TOPICS, refLang } = caja.window.Home;
 const iIdioma = process.argv.indexOf('--idioma'), en = iIdioma > 0 && process.argv[iIdioma + 1] === 'en';
 const lang = en ? 'en' : 'es';
 
@@ -34,7 +35,7 @@ const aIngles = s => s.replace(/(\d)\.ª ed\./g, (m, n) => n + ({ 1: 'st', 2: 'n
 
 let total = 0, html = '\n';
 temas.forEach((t, i) => {
-  const lista = REFS.filter(r => r[1] === t).map(r => (en ? aIngles(r[0]) : r[0])).sort((a, b) => clave(a).localeCompare(clave(b), lang));
+  const lista = REFS.filter(r => r[1] === t).map(r => (en ? (refLang ? refLang(r[0], 'en') : aIngles(r[0])) : r[0])).sort((a, b) => clave(a).localeCompare(clave(b), lang));
   total += lista.length;
   html += `  <h3>F.${i + 1} · ${REF_TOPICS[t][en ? 1 : 0]}</h3>\n  <ul class="refs">\n` + lista.map(r => `    <li>${r}</li>`).join('\n') + '\n  </ul>\n';
 });

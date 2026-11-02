@@ -77,31 +77,27 @@
     </tbody>
   </table>
   <p>Without a header, the columns are read by their number: 2 columns, <b>p q</b> (a new cell); 3, <b>chromosome p q</b>; 4, <b>cell chromosome p q</b>; 5 to 7, <b>accession cell chromosome p q [satellite] [arm]</b>. A row without a valid number for p (≥ 0) and for q (&gt; 0) is skipped, and the message says which. A satellite goes on the q arm if the arm column says q, l, largo or long; otherwise, on p. Accessions that do not exist are created with the name the column brings; if the table has a taxon but no accession, one accession is created per taxon, and the taxon is written into the accession. Rows with neither accession nor taxon go to the chosen accession, and a new one is created only if needed: pasting a table that names its accessions does not leave an empty “Accession 1” behind. A cell whose unit column says <i>px</i> (an uncalibrated cell exported earlier) stays in pixels, and the message warns about it: “One cell comes in pixels (not calibrated).”</p>
-  <p>So the <code>mediciones.csv</code> file written by Block 2 (accession, taxon, cell, chromosome, p, q, satellite, satellite arm, unit, source) can be pasted back without losing anything; the <i>source</i> column is ignored.</p>
-  <pre class="archivo">accession;cell;chromosome;p;q;satellite;arm
-Huatusco;C1;1;1,42;1,66;0,38;p
-Huatusco;C1;2;1,35;1,52;;
-Huatusco;C1;3;0,98;1,95;;</pre>
+  <p>So the <code>measurements.csv</code> file written by Block 2 (accession, taxon, cell, chromosome, p, q, satellite, satellite arm, unit, source) can be pasted back without losing anything; the <i>source</i> column is ignored.</p>
 
   <h3>A.2 · What the app writes</h3>
   <table class="compacta ficheros">
     <thead><tr><th style="width:0.5in">Block</th><th style="width:2.4in">File</th><th>What it contains</th></tr></thead>
     <tbody>
       <tr><td>all</td><td><code>&lt;title&gt;.cytogeneticspro.json</code> (<code>Ctrl + S</code>)</td><td>The project: data, block settings and images (as text inside the file). Results are not saved: they are recomputed when it is opened.</td></tr>
-      <tr><td><span class="chip k2">2</span></td><td><code>mediciones.csv</code> · <code>mediciones.tsv</code> · <code>&lt;accession&gt;_&lt;cell&gt;.csv</code></td><td>The measurements of every cell or of one: accession, taxon, cell, chromosome, p, q, satellite, satellite arm, unit and source.</td></tr>
-      <tr><td><span class="chip k2">2</span></td><td><code>&lt;accession&gt;_&lt;cell&gt;_anotada.png</code></td><td>The image with the count marks and the traces.</td></tr>
-      <tr><td><span class="chip k3">3</span></td><td><code>cariotipo_&lt;accession&gt;.csv</code> · <code>.tsv</code> · <code>cariotipos.csv</code></td><td>The karyotype of one accession or of all, one row per pair.</td></tr>
-      <tr><td><span class="chip k4">4</span></td><td><code>indices_asimetria.csv</code> · <code>.tsv</code></td><td>The indices of every accession, with their deviations if computed cell by cell.</td></tr>
-      <tr><td><span class="chip k5">5</span></td><td><code>configuraciones_</code>, <code>fases_</code>, <code>tetradas_</code>, <code>polen_&lt;accession&gt;.csv</code> · <code>polen_&lt;accession&gt;_palynopro.csv</code></td><td>The meiosis record tables; the last one, the pollen with the PalynoPro columns.</td></tr>
-      <tr><td><span class="chip k6">6</span></td><td><code>conteos_</code>, <code>citometria_&lt;accession&gt;.csv</code> · <code>prueba_allium.csv</code></td><td>The counts, the cytometer runs and the <i>Allium</i> test.</td></tr>
-      <tr><td><span class="chip k7">7</span></td><td><code>sondas.csv</code> · <code>senales_&lt;accession&gt;.csv</code></td><td>The probes and bands, and the signals of one accession.</td></tr>
-      <tr><td><span class="chip k8">8</span></td><td><code>otros_taxones.csv</code> · <code>dendrograma_upgma.nwk</code> or <code>_ward.nwk</code></td><td>The taxa added by hand and the dendrogram in Newick.</td></tr>
-      <tr><td><span class="chip k9">9</span></td><td><code>cytogenetics_practical.html</code></td><td>The practical sheet (<code>practica_citogenetica.html</code> in the Spanish interface).</td></tr>
-      <tr><td><span class="chip k10">10</span></td><td><code>informe_&lt;title&gt;.html</code> · <code>methods.txt</code> · <code>&lt;table&gt;.csv</code> · <code>.tsv</code> · <code>cytogeneticspro_&lt;title&gt;.zip</code></td><td>The report, the methods, each table and the reproducible package (Section 10.2).</td></tr>
+      <tr><td><span class="chip k2">2</span></td><td><code>measurements.csv</code> · <code>measurements.tsv</code> · <code>&lt;accession&gt;_&lt;cell&gt;.csv</code></td><td>The measurements of every cell or of one: accession, taxon, cell, chromosome, p, q, satellite, satellite arm, unit and source.</td></tr>
+      <tr><td><span class="chip k2">2</span></td><td><code>&lt;accession&gt;_&lt;cell&gt;_annotated.png</code></td><td>The image with the count marks and the traces.</td></tr>
+      <tr><td><span class="chip k3">3</span></td><td><code>karyotype_&lt;accession&gt;.csv</code> · <code>.tsv</code> · <code>karyotypes.csv</code></td><td>The karyotype of one accession or of all, one row per pair.</td></tr>
+      <tr><td><span class="chip k4">4</span></td><td><code>asymmetry_indices.csv</code> · <code>.tsv</code></td><td>The indices of every accession, with their deviations if computed cell by cell.</td></tr>
+      <tr><td><span class="chip k5">5</span></td><td><code>configurations_</code>, <code>phases_</code>, <code>tetrads_</code>, <code>pollen_&lt;accession&gt;.csv</code> · <code>pollen_&lt;accession&gt;_palynopro.csv</code></td><td>The meiosis record tables; the last one, the pollen with the PalynoPro columns.</td></tr>
+      <tr><td><span class="chip k6">6</span></td><td><code>counts_</code>, <code>cytometry_&lt;accession&gt;.csv</code> · <code>base_numbers.csv</code> · <code>allium_test.csv</code></td><td>The counts, the base numbers, the cytometer runs and the <i>Allium</i> test.</td></tr>
+      <tr><td><span class="chip k7">7</span></td><td><code>probes.csv</code> · <code>signals_&lt;accession&gt;.csv</code></td><td>The probes and bands, and the signals of one accession.</td></tr>
+      <tr><td><span class="chip k8">8</span></td><td><code>other_taxa.csv</code> · <code>dendrogram_upgma.nwk</code> or <code>_ward.nwk</code></td><td>The taxa added by hand and the dendrogram in Newick.</td></tr>
+      <tr><td><span class="chip k9">9</span></td><td><code>cytogenetics_practical.html</code></td><td>The practical sheet.</td></tr>
+      <tr><td><span class="chip k10">10</span></td><td><code>report_&lt;title&gt;.html</code> · <code>methods.txt</code> · <code>&lt;table&gt;.csv</code> · <code>.tsv</code> · <code>cytogeneticspro_&lt;title&gt;.zip</code></td><td>The report, the methods, each table and the reproducible package (Section 10.2).</td></tr>
       <tr><td>any</td><td><code>&lt;name&gt;.svg</code> · <code>.png</code></td><td>Each figure, in the colors of the light theme; the PNG at three times the resolution. The studio also exports PDF and TIFF at the size you ask for.</td></tr>
     </tbody>
   </table>
-  <p>Except for the practical sheet and the methods, the file names are the same in both interface languages. All CSV and TSV files use the decimal point and are in UTF-8 with a byte order mark, so that a spreadsheet reads the accents and the µ; the separator is the comma in CSV and the tab in TSV. The .txt texts also carry the mark.</p>
+  <p>With the interface in Spanish, the files get Spanish names (<code>mediciones.csv</code>, <code>informe_…</code>, <code>tablas/</code>…). All CSV and TSV files use the decimal point and are in UTF-8 with a byte order mark, so that a spreadsheet reads the accents and the µ; the separator is the comma in CSV and the tab in TSV. The .txt texts also carry the mark.</p>
   <div class="caja nota">
     <div class="caja-t"><span class="ico">i</span>What the browser remembers</div>
     <p>The browser keeps only preferences, not data: the interface language, the light or dark theme, the animations and the edits made with the editor ✎. To keep an analysis, save the project.</p>
@@ -125,7 +121,7 @@ Huatusco;C1;3;0,98;1,95;;</pre>
   <ul>
     <li><b>Satellite.</b> Its length is added to that of the arm where it sits; the pair is marked “-sat”.</li>
     <li><b>Fundamental number (NF).</b> Two arms per m and sm chromosome; one per st, a and t, unless you choose to count st with two.</li>
-    <li><b>Variation warning.</b> A pair whose length varies by more than 20% among cells (coefficient of variation) is flagged: it may be different condensation or a mispaired homologue.</li>
+    <li><b>Variation warning.</b> A pair whose length varies by more than 20% among cells (coefficient of variation) is flagged: it may be different condensation or a mispaired homolog.</li>
   </ul>
 
   <h3>B.2 · Asymmetry (Block 4)</h3>
@@ -161,7 +157,7 @@ Huatusco;C1;3;0,98;1,95;;</pre>
   <h3>B.5 · Banding and FISH (Block 7)</h3>
   <ul>
     <li><b>Position on the arm</b>, from the centromere (0) to the telomere (1): proximal &lt; 1/3; interstitial from 1/3 to 0.8; terminal &gt; 0.8.</li>
-    <li><b>Sites per set.</b> A site on both homologues counts one; on only one, half (and it is counted as a heteromorphism), with the same criterion in the pattern of the accession and its regions, in the table of all accessions and in the comparison matrix.</li>
+    <li><b>Sites per set.</b> A site on both homologs counts one; on only one, half (and it is counted as a heteromorphism), with the same criterion in the pattern of the accession and its regions, in the table of all accessions and in the comparison matrix.</li>
   </ul>
 
   <h3>B.6 · Comparison among taxa (Block 8)</h3>
@@ -183,7 +179,7 @@ Huatusco;C1;3;0,98;1,95;;</pre>
   <h2 id="ap-c"><span class="num">C</span>Glossary</h2>
   <p>The cytogenetic terms the manual uses, in the sense the app uses them, with the Spanish term that appears in the Spanish interface and manual. The illustrated glossary of Block 9 (Section 9.4) has 35 of them with drawings.</p>
   <table class="compacta">
-    <thead><tr><th style="width:1.45in">Term</th><th style="width:1.35in">Spanish</th><th>Meaning</th></tr></thead>
+    <thead><tr><th style="width:1.3in">Term</th><th style="width:1.2in">Spanish</th><th>Meaning</th></tr></thead>
     <tbody>
       <tr><td><b>Accession</b></td><td>accesión</td><td>Each sample studied: a population, a variety, a collection. In the app, the group of cells that make up a karyotype.</td></tr>
       <tr><td><b>Acrocentric (a)</b></td><td>acrocéntrico</td><td>In the Guerra (1986) scheme, a chromosome with r ≥ 3.00.</td></tr>
@@ -192,7 +188,7 @@ Huatusco;C1;3;0,98;1,95;;</pre>
       <tr><td><b>Arm ratio (r)</b></td><td>razón de brazos</td><td>q / p, the long arm over the short one.</td></tr>
       <tr><td><b>B chromosome</b></td><td>cromosoma B</td><td>A supernumerary, dispensable chromosome outside the basic (A) complement.</td></tr>
       <tr><td><b>Base number (x)</b></td><td>número básico</td><td>The number of chromosomes of one monoploid set of the group.</td></tr>
-      <tr><td><b>Bivalent</b></td><td>bivalente</td><td>A pair of homologues paired in prophase and metaphase I, held by chiasmata; a ring if it has them on both arms, a rod if on one.</td></tr>
+      <tr><td><b>Bivalent</b></td><td>bivalente</td><td>A pair of homologs paired in prophase and metaphase I, held by chiasmata; a ring if it has them on both arms, a rod if on one.</td></tr>
       <tr><td><b>C-band</b></td><td>banda C</td><td>A region of constitutive heterochromatin that stays stained after denaturing and renaturing the DNA; in maize, the “knobs”.</td></tr>
       <tr><td><b>C-value</b></td><td>valor C</td><td>The DNA content of an unreplicated gametic nucleus; 2C, that of a somatic nucleus in G1; Cx, that of a monoploid set.</td></tr>
       <tr><td><b>Calibration</b></td><td>calibración</td><td>The relation between pixels and microns of an image, which the app takes from the scale bar.</td></tr>
@@ -209,8 +205,8 @@ Huatusco;C1;3;0,98;1,95;;</pre>
       <tr><td><b>FISH</b></td><td>FISH</td><td>Fluorescence in situ hybridization: a labeled DNA probe shows where a sequence lies (45S and 5S rDNA, telomeres…).</td></tr>
       <tr><td><b>Fundamental number (NF)</b></td><td>número fundamental (NF)</td><td>The number of chromosome arms of the complement.</td></tr>
       <tr><td><b>Haploid length (THL)</b></td><td>longitud haploide</td><td>The sum of the lengths of one chromosome set.</td></tr>
-      <tr><td><b>Heteromorphism</b></td><td>heteromorfismo</td><td>A visible difference between the two homologues of a pair: size, a band or a signal on only one.</td></tr>
-      <tr><td><b>Homologues</b></td><td>homólogos</td><td>The two chromosomes of a pair, one from each parent.</td></tr>
+      <tr><td><b>Heteromorphism</b></td><td>heteromorfismo</td><td>A visible difference between the two homologs of a pair: size, a band or a signal on only one.</td></tr>
+      <tr><td><b>Homologs</b></td><td>homólogos</td><td>The two chromosomes of a pair, one from each parent.</td></tr>
       <tr><td><b>Idiogram</b></td><td>idiograma</td><td>A schematic drawing of the karyotype to scale, with the pairs in order and their landmarks.</td></tr>
       <tr><td><b>Karyogram</b></td><td>cariograma</td><td>The chromosomes of one cell cut out of the image and arranged in pairs.</td></tr>
       <tr><td><b>Karyotype</b></td><td>cariotipo</td><td>The chromosome set described by its number, size, centromere position and landmarks.</td></tr>
@@ -220,7 +216,7 @@ Huatusco;C1;3;0,98;1,95;;</pre>
       <tr><td><b>Micronucleus</b></td><td>micronúcleo</td><td>A small nucleus with a fragment or a chromosome that lagged in division.</td></tr>
       <tr><td><b>Mitotic index</b></td><td>índice mitótico</td><td>The percentage of dividing cells among those observed.</td></tr>
       <tr><td><b>Mode</b></td><td>moda</td><td>The most frequent value: the 2n of an accession is the mode of its counted cells.</td></tr>
-      <tr><td><b>Multivalent</b></td><td>multivalente</td><td>An association of three (trivalent) or more homologues in meiosis.</td></tr>
+      <tr><td><b>Multivalent</b></td><td>multivalente</td><td>An association of three (trivalent) or more homologs in meiosis.</td></tr>
       <tr><td><b>NOR</b></td><td>NOR</td><td>Nucleolus organizer region, with the 45S rDNA genes.</td></tr>
       <tr><td><b>Recombination index</b></td><td>índice de recombinación</td><td>n plus the number of chiasmata per cell.</td></tr>
       <tr><td><b>Relative length</b></td><td>longitud relativa</td><td>The length of a pair as a percentage of the haploid length.</td></tr>
@@ -251,8 +247,8 @@ Huatusco;C1;3;0,98;1,95;;</pre>
       <tr><td>“In … not every cell has the same number of measured chromosomes (mode …).”</td><td>Some chromosome is missing or duplicated in some cell; Block 3 groups whatever there is.</td></tr>
       <tr><td>“This accession mixes calibrated cells (µm) and uncalibrated ones (pixels).”</td><td>Relative lengths hold; absolute ones do not. Calibrate them all in Block 2.</td></tr>
       <tr><td>“The cells do not have the same number of chromosomes (…).”</td><td>Check the pairing of the incomplete cells.</td></tr>
-      <tr><td>“With … chromosomes and … homologues per group one group is incomplete.”</td><td>The number of homologues per group does not divide 2n; check that setting or the counts.</td></tr>
-      <tr><td>“Pairs … vary by more than 20 % among cells.”</td><td>Different condensation or a mispaired homologue; look at the relative length.</td></tr>
+      <tr><td>“With … chromosomes and … homologs per group one group is incomplete.”</td><td>The number of homologs per group does not divide 2n; check that setting or the counts.</td></tr>
+      <tr><td>“Pairs … vary by more than 20 % among cells.”</td><td>Different condensation or a mispaired homolog; look at the relative length.</td></tr>
       <tr><td>“There must be one more name than limits.”</td><td>In own limits, type for example limits “1.7, 3, 7” and names “m, sm, st, t”.</td></tr>
       <tr><td colspan="2"><b>Meiosis, ploidy and bands (Blocks 5 to 7)</b></td></tr>
       <tr><td>“Type the base number x of the accession to set out the hypotheses.”</td><td>Without x there are no genomic formulas to test.</td></tr>
@@ -279,7 +275,7 @@ Huatusco;C1;3;0,98;1,95;;</pre>
       <tr><td>“The file is not valid GeoJSON.”</td><td>The file is not JSON or its type is not one the app reads (Appendix A.1).</td></tr>
       <tr><td colspan="2"><b>Figures and report (Block 10)</b></td></tr>
       <tr><td>“The project has no figures yet: open an example or measure cells in Block 2.”</td><td>Without a karyotype there are no idiograms.</td></tr>
-      <tr><td>“Could not copy; use «Download».”</td><td>The browser did not allow the clipboard.</td></tr>
+      <tr><td>“Could not copy; use “Download”.”</td><td>The browser did not allow the clipboard.</td></tr>
       <tr><td>“Could not build the package: …”</td><td>It is usually memory with very large images; close other tabs or download in parts.</td></tr>
     </tbody>
   </table>
@@ -303,11 +299,11 @@ Huatusco;C1;3;0,98;1,95;;</pre>
   <p>The <span class="ui">How to cite</span> section of the app’s home page gives the citation ready to copy, as text and as a BibTeX entry. The program does not have a digital object identifier (DOI) yet; it will be added to the citation when it is published.</p>
   <div class="caja dato">
     <div class="dato-cifra">“</div>
-    <div class="dato-txt"><div class="caja-t">Suggested citation of the program</div>Barrera-Guzmán, L. Á. (2026). <i>CytogeneticsPro: citogenética vegetal en el navegador</i> (version 1.0.0) [Computer software]. LABG Suite.</div>
+    <div class="dato-txt"><div class="caja-t">Suggested citation of the program</div>Barrera-Guzmán, L. Á. (2026). <i>CytogeneticsPro: plant cytogenetics in the browser</i> (version 1.0.0) [Computer software]. LABG Suite.</div>
   </div>
   <pre class="archivo">@software{barreraguzman2026cytogeneticspro,
   author  = {Barrera-Guzmán, Luis Ángel},
-  title   = {CytogeneticsPro: citogenética vegetal en el navegador},
+  title   = {CytogeneticsPro: plant cytogenetics in the browser},
   version = {1.0.0},
   year    = {2026},
   note    = {LABG Suite}
@@ -350,7 +346,7 @@ Huatusco;C1;3;0,98;1,95;;</pre>
     <li>Colombo PC. 1992. A new index for estimating genetic recombination from chiasma distribution data. <i>Heredity</i> 69: 412–415.</li>
     <li>Jackson RC, Casey J. 1982. Cytogenetic analyses of autopolyploids: models and methods for triploids to octoploids. <i>American Journal of Botany</i> 69: 487–501.</li>
     <li>Love RM. 1951. Varietal differences in meiotic chromosome behavior of Brazilian wheats. <i>Agronomy Journal</i> 43: 72–76.</li>
-    <li>Sybenga J. 1975. <i>Meiotic Configurations: A Source of Information for Estimating Genetic Parameters</i>. Springer, Berlín.</li>
+    <li>Sybenga J. 1975. <i>Meiotic Configurations: A Source of Information for Estimating Genetic Parameters</i>. Springer, Berlin.</li>
   </ul>
   <h3>F.4 · Ploidy and genome</h3>
   <ul class="refs">

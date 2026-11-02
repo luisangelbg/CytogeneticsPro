@@ -36,12 +36,12 @@
   <p>The card has two fields: <span class="ui">Title</span>, which brings the title of the project (with an example, that of the example), and <span class="ui">Authorship</span>, empty on opening. Both are saved in the project. Below, four boxes say what will go in: the <span class="ui">Accessions</span>, the <span class="ui">Figures</span> (and how many are checked for the report), the <span class="ui">Tables</span> and the <span class="ui">References cited</span> in the methods.</p>
   <figure class="w80">
     <div class="marco"><img src="../img/en/b10-informe.png" alt="The report card with the chayote title, empty authorship, the four boxes and the three buttons"></div>
-    <figcaption><b>Figure 10.1.</b> The report of the chayote example: 4 accessions, 11 figures (all 11 in the report), 8 tables and 21 references cited. The title of the example stays in Spanish in the English interface.</figcaption>
+    <figcaption><b>Figure 10.1.</b> The report of the chayote example: 4 accessions, 11 figures (all 11 in the report), 8 tables and 21 references cited.</figcaption>
   </figure>
   <p>Three buttons produce it:</p>
   <ul>
     <li><span class="ui">View and print the report</span> opens the browser’s print dialog with the report alone, without the interface; from there it is printed or saved as PDF. If the browser does not allow printing from the page, the report opens in a new tab.</li>
-    <li><span class="ui">Download the report (HTML)</span> saves it as a page (<code>informe_</code> plus the title) that opens offline in any browser.</li>
+    <li><span class="ui">Download the report (HTML)</span> saves it as a page (<code>report_</code> plus the title) that opens offline in any browser.</li>
     <li><span class="ui">Download the reproducible package (.zip)</span> builds the package of Section 10.2.</li>
   </ul>
   <h3>What the report contains</h3>
@@ -62,20 +62,20 @@
   <!-- 10.2 -->
   <h2 id="s10-2"><span class="num">10.2</span>The reproducible package</h2>
   <p class="lead">A .zip file with the project and everything the app computed with it: what a reviewer, a coauthor or your thesis advisor needs to repeat the analysis.</p>
-  <p>While it is built, the app shows the “Building the package” wait with its progress, because each figure is also converted to PNG; when it is done it downloads the file and says “Package ready: … files.” With the chayote, the package is called <code>cytogeneticspro_Sechium_edule_tres_accesiones.zip</code> and holds 35 files:</p>
+  <p>While it is built, the app shows the “Building the package” wait with its progress, because each figure is also converted to PNG; when it is done it downloads the file and says “Package ready: … files.” With the chayote, the package is called <code>cytogeneticspro_Sechium_edule_three_cultivated.zip</code> and holds 35 files:</p>
   <table class="compacta">
     <caption><b>Table 10.2.</b> The contents of the package of the chayote example</caption>
     <thead><tr><th style="width:2.5in">File</th><th>What it is</th></tr></thead>
     <tbody>
-      <tr><td><code>LEEME.txt</code></td><td>In Spanish and English: what the package is, how to repeat the analysis, the list of files and the citation of the app.</td></tr>
-      <tr><td><code>proyecto_Sechium_edule_tres_accesiones.json</code></td><td>The full project, with the images inside; it opens with <span class="ui">Open a project</span> (<code>Ctrl + O</code>).</td></tr>
-      <tr><td><code>informe.html</code></td><td>The report of Section 10.1.</td></tr>
+      <tr><td><code>README.txt</code></td><td>In Spanish and English: what the package is, how to repeat the analysis, the list of files and the citation of the app.</td></tr>
+      <tr><td><code>project_Sechium_edule_three_cultivated.json</code></td><td>The full project, with the images inside; it opens with <span class="ui">Open a project</span> (<code>Ctrl + O</code>).</td></tr>
+      <tr><td><code>report.html</code></td><td>The report of Section 10.1.</td></tr>
       <tr><td><code>metodos_es.txt</code> · <code>methods_en.txt</code></td><td>The written methods in both languages.</td></tr>
-      <tr><td><code>tablas/</code> (8 .csv files)</td><td>Every table of Section 10.4.</td></tr>
-      <tr><td><code>figuras/</code> (11 .svg and 11 .png)</td><td>Every figure of the gallery, checked or not, as vector and as image at twice the resolution.</td></tr>
+      <tr><td><code>tables/</code> (8 .csv files)</td><td>Every table of Section 10.4.</td></tr>
+      <tr><td><code>figures/</code> (11 .svg and 11 .png)</td><td>Every figure of the gallery, checked or not, as vector and as image at twice the resolution.</td></tr>
     </tbody>
   </table>
-  <p>The file and folder names inside the package are the same in both interface languages. To repeat the analysis the project file is enough: when you open it, the app recomputes every result from the saved data and settings. The tables, figures and report are for anyone who wants to check without opening the app. The files go into the .zip uncompressed: texts and SVGs weigh little, and the package opens with any archive program.</p>
+  <p>To repeat the analysis the project file is enough: when you open it, the app recomputes every result from the saved data and settings. The tables, figures and report are for anyone who wants to check without opening the app. The files go into the .zip uncompressed: texts and SVGs weigh little, and the package opens with any archive program.</p>
   <div class="caja nota">
     <div class="caja-t"><span class="ico">i</span>The package does not leave your computer</div>
     <p>Everything is built in the browser and downloaded to your downloads folder. If the photomicrographs are not yours or are unpublished, remember that they travel inside the project file: share it with the same care as the images.</p>
@@ -104,7 +104,7 @@
   </ul>
   <p>Each figure downloads with <span class="ui">SVG</span>, a vector that scales without losing sharpness and can be edited in any drawing program, or with <span class="ui">PNG</span>, an image at three times the screen resolution. Both come out in the colors of the light theme even if the app is in the dark one. The <span class="ui">In the report</span> checkbox decides whether the figure goes into the report; the <span class="ui">Figures</span> box of the report card updates at once. The checkboxes are not saved in the project: when you open another one, they are all checked again.</p>
   <h3>The cut-out karyogram</h3>
-  <p>The karyogram is the classic figure of a cytogenetics paper: the chromosomes of one cell cut out of the photograph, straightened and arranged in pairs. The app builds it on its own with the <b>first cell of the accession that has an image and all its chromosomes traced, with their centromere, and grouped</b> in Block 3. It straightens each chromosome along its trace, puts the two homologues together, orders the pairs like the karyotype, aligns the centromeres on a dotted line and writes the number and type of each pair underneath. The pairs go in rows of seven (of eight, if there are more than twelve), with a scale bar at the end.</p>
+  <p>The karyogram is the classic figure of a cytogenetics paper: the chromosomes of one cell cut out of the photograph, straightened and arranged in pairs. The app builds it on its own with the <b>first cell of the accession that has an image and all its chromosomes traced, with their centromere, and grouped</b> in Block 3. It straightens each chromosome along its trace, puts the two homologs together, orders the pairs like the karyotype, aligns the centromeres on a dotted line and writes the number and type of each pair underneath. The pairs go in rows of seven (of eight, if there are more than twelve), with a scale bar at the end.</p>
   <figure class="w80">
     <div class="marco"><img src="../img/en/b10-cariograma.png" alt="The karyogram of the maize example: ten pairs of chromosomes cut out and straightened in two rows, with their number, their type and a 5-micron bar"></div>
     <figcaption><b>Figure 10.3.</b> The karyogram of cell 1 of the maize example: ten pairs in two rows, with the heterochromatin knobs visible as dark bands, the satellite of pair 6 (sm-sat) and a 5 µm bar. At the top, the title: “Landrace maize · Texcoco · Cell 1 (image) · 2n = 2x = 20 = 8m + 10sm + 2sm-sat”.</figcaption>
@@ -123,7 +123,7 @@
     <div class="marco"><img src="../img/en/b10-editor.png" alt="The figure editor panel on its General tab"></div>
     <figcaption><b>Figure 10.5.</b> The editor ✎ on the Huatusco idiogram, on the <span class="ui">General</span> tab: title, subtitle and footnote inside the figure; font, size, color and weights; background and frame.</figcaption>
   </figure>
-  <p>On <span class="ui">General</span> you type a <span class="ui">Title (empty = none)</span>, a <span class="ui">Subtitle</span> and a footnote inside the figure, and you adjust the title size and alignment, the <span class="ui">Font family</span>, the <span class="ui">Size of every text</span>, the <span class="ui">Colour of every text</span>, the <span class="ui">Line weight</span>, the <span class="ui">Point size</span>, the <span class="ui">Background</span> and a <span class="ui">Border around the whole figure</span>. The other tabs change the axes, the colors of each series, the place of the legend, any text and the annotations: notes, panel letters and arrows dragged on the figure, and lines or bands at a value of the axis. <span class="ui">Undo everything on this figure</span> returns it to how the app drew it; <span class="ui">Copy the style to every figure</span> applies the same settings to the others; and <span class="ui">Export</span> downloads it. The edits are remembered in the browser and applied again when the figure is redrawn.</p>
+  <p>On <span class="ui">General</span> you type a <span class="ui">Title (empty = none)</span>, a <span class="ui">Subtitle</span> and a footnote inside the figure, and you adjust the title size and alignment, the <span class="ui">Font family</span>, the <span class="ui">Size of every text</span>, the <span class="ui">Color of every text</span>, the <span class="ui">Line weight</span>, the <span class="ui">Point size</span>, the <span class="ui">Background</span> and a <span class="ui">Border around the whole figure</span>. The other tabs change the axes, the colors of each series, the place of the legend, any text and the annotations: notes, panel letters and arrows dragged on the figure, and lines or bands at a value of the axis. <span class="ui">Undo everything on this figure</span> returns it to how the app drew it; <span class="ui">Copy the style to every figure</span> applies the same settings to the others; and <span class="ui">Export</span> downloads it. The edits are remembered in the browser and applied again when the figure is redrawn.</p>
   <div class="caja nota">
     <div class="caja-t"><span class="ico">i</span>The fonts are those of your computer</div>
     <p>The figures use the fonts installed on your computer; the app downloads none. If you send an SVG to someone else, it may show in another, similar font on their computer. To make it look the same everywhere, export as vector PDF or PNG from the studio.</p>
@@ -144,23 +144,23 @@
     <caption><b>Table 10.3.</b> The tables a project can have and their file</caption>
     <thead><tr><th style="width:1.65in">Table</th><th style="width:1.45in">File</th><th>Columns</th></tr></thead>
     <tbody>
-      <tr><td>Accessions</td><td><code>accesiones</code></td><td>name, taxon, locality, latitude, longitude, x</td></tr>
-      <tr><td>Measurements per chromosome</td><td><code>mediciones</code></td><td>accession, taxon, cell, chromosome, p, q, satellite, satellite arm, unit (µm or px) and source (trace or typed)</td></tr>
-      <tr><td>Karyotype (pairs)</td><td><code>cariotipo</code></td><td>pair, cells, p, q, length, relative length and centromeric index with their deviations, arm ratio, class, satellite and unit</td></tr>
-      <tr><td>Asymmetry indices</td><td><code>asimetria</code></td><td>2n, THL and the twelve indices, the Stebbins category and the computation mode</td></tr>
-      <tr><td>Meiotic configurations per cell</td><td><code>meiosis_configuraciones</code></td><td>accession, plant, cell and the number of each configuration (I, rod and ring II, III, IV, V, VI)</td></tr>
-      <tr><td>Abnormalities by phase</td><td><code>meiosis_anormalidades</code></td><td>accession, plant, phase, normal and each abnormality</td></tr>
-      <tr><td>Tetrads</td><td><code>tetradas</code></td><td>accession, plant, normal, with micronuclei, dyads, triads and polyads</td></tr>
-      <tr><td>Pollen viability</td><td><code>polen</code></td><td>accession, plant, viable and inviable</td></tr>
-      <tr><td>2n counts</td><td><code>conteos</code></td><td>accession, cell and 2n</td></tr>
-      <tr><td>Flow cytometry</td><td><code>citometria</code></td><td>accession, sample, standard, peaks and CV of standard and sample, 2C, 1C and 1Cx in pg and 2C in Mbp</td></tr>
-      <tr><td><i>Allium</i> test</td><td><code>mitosis_allium</code></td><td>treatment, replicate, cells in each phase and each aberration</td></tr>
-      <tr><td>Bands and signals</td><td><code>senales</code></td><td>pair, homologue, arm, position, size, probe, cell and region</td></tr>
-      <tr><td>Comparison matrix</td><td><code>matriz_comparacion</code></td><td>the Block 8 variables for each accession or taxon, with their source</td></tr>
-      <tr><td>Distance matrix</td><td><code>distancias</code></td><td>the square matrix of the rows that entered the clustering</td></tr>
+      <tr><td>Accessions</td><td><code>accessions</code></td><td>name, taxon, locality, latitude, longitude, x</td></tr>
+      <tr><td>Measurements per chromosome</td><td><code>measurements</code></td><td>accession, taxon, cell, chromosome, p, q, satellite, satellite arm, unit (µm or px) and source (trace or typed)</td></tr>
+      <tr><td>Karyotype (pairs)</td><td><code>karyotype</code></td><td>pair, cells, p, q, length, relative length and centromeric index with their deviations, arm ratio, class, satellite and unit</td></tr>
+      <tr><td>Asymmetry indices</td><td><code>asymmetry</code></td><td>2n, THL and the twelve indices, the Stebbins category and the computation mode</td></tr>
+      <tr><td>Meiotic configurations per cell</td><td><code>meiosis_configurations</code></td><td>accession, plant, cell and the number of each configuration (I, rod and ring II, III, IV, V, VI)</td></tr>
+      <tr><td>Abnormalities by phase</td><td><code>meiosis_abnormalities</code></td><td>accession, plant, phase, normal and each abnormality</td></tr>
+      <tr><td>Tetrads</td><td><code>tetrads</code></td><td>accession, plant, normal, with micronuclei, dyads, triads and polyads</td></tr>
+      <tr><td>Pollen viability</td><td><code>pollen</code></td><td>accession, plant, viable and inviable</td></tr>
+      <tr><td>2n counts</td><td><code>counts</code></td><td>accession, cell and 2n</td></tr>
+      <tr><td>Flow cytometry</td><td><code>cytometry</code></td><td>accession, sample, standard, peaks and CV of standard and sample, 2C, 1C and 1Cx in pg and 2C in Mbp</td></tr>
+      <tr><td><i>Allium</i> test</td><td><code>allium_mitosis</code></td><td>treatment, replicate, cells in each phase and each aberration</td></tr>
+      <tr><td>Bands and signals</td><td><code>signals</code></td><td>pair, homolog, arm, position, size, probe, cell and region</td></tr>
+      <tr><td>Comparison matrix</td><td><code>comparison_matrix</code></td><td>the Block 8 variables for each accession or taxon, with their source</td></tr>
+      <tr><td>Distance matrix</td><td><code>distances</code></td><td>the square matrix of the rows that entered the clustering</td></tr>
     </tbody>
   </table>
-  <p>A table appears only if the project has its data: with the maize example, which has no comparison, there are seven. Each block also has its own downloads (the karyotype in Block 3, the indices in Block 4, the record tables of Blocks 5 to 8); those here are the same, together. In English the column headers are in English, but the file names stay as in the table above.</p>
+  <p>A table appears only if the project has its data: with the maize example, which has no comparison, there are seven. Each block also has its own downloads (the karyotype in Block 3, the indices in Block 4, the record tables of Blocks 5 to 8); those here are the same, together. In the Spanish interface the file names and column headers are in Spanish.</p>
 
   <!-- 10.5 -->
   <h2 id="s10-5"><span class="num">10.5</span>Written methods</h2>
@@ -170,11 +170,11 @@
     <div class="marco"><img src="../img/en/b10-metodos.png" alt="The written methods card with its controls and the first paragraphs of the chayote"></div>
     <figcaption><b>Figure 10.8.</b> The start of the methods of the chayote example: the simulated-data note, the measurement (without images: “The length of both arms and, when present, of the satellite was recorded…”), the karyotype with the formulas and haploid lengths of the four accessions, and the asymmetry with MCA, CVCL, CVCI and the Stebbins category of each one.</figcaption>
   </figure>
-  <p>The paragraphs come from what the project has, one per topic, and only if there are data: the measurement (how many chromosomes, cells and accessions, and how they were measured); the karyotype (how homologues were paired, what was computed, the classification with its limit convention, how the fundamental number was counted and the formulas); the asymmetry (the recommended indices, the others and the type of deviation); the chromosome number (the mode of the counted cells); meiosis, cytometry and the <i>Allium</i> test; bands and signals; the comparison (variables, distance, clustering, cophenetic correlation, components and evolution of the number); and a final paragraph with the version of the app. With the chayote there are eight paragraphs and 21 references. The comparison paragraph, with the opening setting of <span class="ui">Incomplete rows</span>, says that 4 accessions were compared, adds “Only the rows with every variable were included.”, gives the cophenetic correlation r = 0.870 and 93.0% of the variance in the first two components, and says that the minimum cost of the evolution of the number was 11, with n = 11 at the root. If you choose to compare each pair on the variables it shares, the paragraph says so: “Each pair was compared on the variables both have.”</p>
+  <p>The paragraphs come from what the project has, one per topic, and only if there are data: the measurement (how many chromosomes, cells and accessions, and how they were measured); the karyotype (how homologs were paired, what was computed, the classification with its limit convention, how the fundamental number was counted and the formulas); the asymmetry (the recommended indices, the others and the type of deviation); the chromosome number (the mode of the counted cells); meiosis, cytometry and the <i>Allium</i> test; bands and signals; the comparison (variables, distance, clustering, cophenetic correlation, components and evolution of the number); and a final paragraph with the version of the app. With the chayote there are eight paragraphs and 21 references. The comparison paragraph, with the opening setting of <span class="ui">Incomplete rows</span>, says that 4 accessions were compared, adds “Only the rows with every variable were included.”, gives the cophenetic correlation r = 0.870 and 93.0% of the variance in the first two components, and says that the minimum cost of the evolution of the number was 11, with n = 11 at the root. If you choose to compare each pair on the variables it shares, the paragraph says so: “Each pair was compared on the variables both have.”</p>
   <p>The measurement paragraph changes with where the measurements came from. Without images, as in the chayote, it says “The length of both arms and, when present, of the satellite was recorded; the length of the satellite was added to its arm.” With images it describes the tracing on the photomicrographs, and if only some cells have them it says so; in the maize example: “100 chromosomes were measured in 5 metaphase cells of 1 accession (<i>Zea mays</i>); one of them was measured on photomicrographs calibrated with a scale bar and the other 4 from typed measurements.” Scientific names go in italics, with the rank words in roman: <i>Sechium edule</i> subsp. <i>sylvestre</i>.</p>
   <div class="caja importante">
     <div class="caja-t"><span class="ico">!</span>It is a draft: always check it</div>
-    <p>The app writes <i>what</i> was done with the data it has, not what it does not know: where the material came from, how many plants were used, which microscope and camera, the pretreatment and the stain. Nor does it know <i>why</i> you chose a classification or an index. Complete the text with that, remove what you will not report and adapt the wording to the journal. If the project is an example, the first line warns about it: delete it only when the data are yours. In the English text the references keep some Spanish forms (“2.ª ed.”, “Londres”, “Nueva York”): change them to the journal’s style.</p>
+    <p>The app writes <i>what</i> was done with the data it has, not what it does not know: where the material came from, how many plants were used, which microscope and camera, the pretreatment and the stain. Nor does it know <i>why</i> you chose a classification or an index. Complete the text with that, remove what you will not report and adapt the wording to the journal. If the project is an example, the first line warns about it: delete it only when the data are yours.</p>
   </div>
 
   <div class="caja regla">
@@ -191,7 +191,7 @@
 
   <div class="caja error">
     <div class="caja-t"><span class="ico">✕</span>When something goes wrong</div>
-    <p><b>“The project has no figures yet”.</b> Open an example or measure cells in Block 2; without a karyotype there are no idiograms. <b>“There are no tables yet.”</b> The project is empty. <b>The karyogram does not appear.</b> No cell of the accession has an image with all its chromosomes traced, with centromere and grouped in Block 3. <b>“Could not copy; use «Download».”</b> The browser did not allow the clipboard: download the .txt. <b>“Could not build the package: …”</b> It is usually a lack of memory with very large images; try again with other tabs closed, or save the project with <code>Ctrl + S</code> and download the tables and figures separately. <b>The report does not print.</b> Use <span class="ui">Download the report (HTML)</span> and open it to print from there.</p>
+    <p><b>“The project has no figures yet”.</b> Open an example or measure cells in Block 2; without a karyotype there are no idiograms. <b>“There are no tables yet.”</b> The project is empty. <b>The karyogram does not appear.</b> No cell of the accession has an image with all its chromosomes traced, with centromere and grouped in Block 3. <b>“Could not copy; use “Download”.”</b> The browser did not allow the clipboard: download the .txt. <b>“Could not build the package: …”</b> It is usually a lack of memory with very large images; try again with other tabs closed, or save the project with <code>Ctrl + S</code> and download the tables and figures separately. <b>The report does not print.</b> Use <span class="ui">Download the report (HTML)</span> and open it to print from there.</p>
   </div>
 </section>
 
