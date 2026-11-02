@@ -78,6 +78,10 @@
   </table>
   <p>Without a header, the columns are read by their number: 2 columns, <b>p q</b> (a new cell); 3, <b>chromosome p q</b>; 4, <b>cell chromosome p q</b>; 5 to 7, <b>accession cell chromosome p q [satellite] [arm]</b>. A row without a valid number for p (≥ 0) and for q (&gt; 0) is skipped, and the message says which. A satellite goes on the q arm if the arm column says q, l, largo or long; otherwise, on p. Accessions that do not exist are created with the name the column brings; if the table has a taxon but no accession, one accession is created per taxon, and the taxon is written into the accession. Rows with neither accession nor taxon go to the chosen accession, and a new one is created only if needed: pasting a table that names its accessions does not leave an empty “Accession 1” behind. A cell whose unit column says <i>px</i> (an uncalibrated cell exported earlier) stays in pixels, and the message warns about it: “One cell comes in pixels (not calibrated).”</p>
   <p>So the <code>measurements.csv</code> file written by Block 2 (accession, taxon, cell, chromosome, p, q, satellite, satellite arm, unit, source) can be pasted back without losing anything; the <i>source</i> column is ignored.</p>
+  <pre class="archivo">accession;cell;chromosome;p;q;satellite;arm
+Huatusco;C1;1;1,42;1,66;0,38;p
+Huatusco;C1;2;1,35;1,52;;
+Huatusco;C1;3;0,98;1,95;;</pre>
 
   <h3>A.2 · What the app writes</h3>
   <table class="compacta ficheros">
