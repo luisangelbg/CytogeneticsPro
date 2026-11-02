@@ -244,6 +244,37 @@ function slug(s) {
     .normalize('NFD').replace(new RegExp('[\\u0300-\\u036f]', 'g'), '')
     .replace(/[^\w\-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 60) || 'cytogeneticspro';
 }
+/* a file name in the language of the interface: with the interface in English
+   the Spanish stem at the start of the name (before «_», «.», «/» or «-») is
+   replaced by its English one; the rest (names of accessions, extensions)
+   stays as it is. In Spanish the name is returned untouched. */
+const FILE_EN = [
+  ['polen', 'pollen'], ['configuraciones', 'configurations'], ['fases', 'phases'], ['tetradas', 'tetrads'], ['mediciones', 'measurements'],
+  ['informe', 'report'], ['proyecto', 'project'], ['tablas', 'tables'], ['figuras', 'figures'], ['tabla', 'table'], ['figura', 'figure'],
+  ['accesiones', 'accessions'], ['LEEME', 'README'], ['cariotipo', 'karyotype'], ['cariotipos', 'karyotypes'], ['asimetria', 'asymmetry'],
+  ['indices_asimetria', 'asymmetry_indices'], ['dispersion_asimetria', 'asymmetry_scatter'], ['meiosis_configuraciones', 'meiosis_configurations'],
+  ['meiosis_anormalidades', 'meiosis_abnormalities'], ['anormalidades', 'abnormalities'], ['observado_esperado', 'observed_expected'],
+  ['viabilidad_polen', 'pollen_viability'], ['conteos', 'counts'], ['numeros_basicos', 'base_numbers'], ['citometria', 'cytometry'],
+  ['histograma_citometria', 'cytometry_histogram'], ['histograma', 'histogram'], ['prueba_allium', 'allium_test'], ['mitosis_allium', 'allium_mitosis'],
+  ['sondas', 'probes'], ['senales', 'signals'], ['idiograma_senales', 'signal_idiogram'], ['mapa_fisico', 'physical_map'],
+  ['otros_taxones', 'other_taxa'], ['matriz_comparacion', 'comparison_matrix'], ['distancias', 'distances'], ['dendrograma', 'dendrogram'],
+  ['idiogramas_paralelo', 'parallel_idiograms'], ['evolucion_numero', 'number_evolution'], ['mapa_citotipos', 'cytotype_map'],
+  ['idiograma', 'idiogram'], ['cariograma', 'karyogram'], ['division_celular', 'cell_division'], ['ejercicio_metafase', 'metaphase_exercise'],
+].sort((a, b) => b[0].length - a[0].length);
+function fileLang(name, lang) {
+  const L = lang || (window.I18N && I18N.lang);
+  name = String(name);
+  if (L !== 'en') return name;
+  for (const [es, en] of FILE_EN) if (name.startsWith(es) && (name.length === es.length || /[_./-]/.test(name[es.length]))) return en + name.slice(es.length);
+  return name;
+}
+/* an author–year citation in the language asked (by default, that of the
+   interface): «Sharma y Sharma 1980» → «Sharma and Sharma 1980»,
+   «Doležel, Greilhuber y Suda 2007» → «Doležel, Greilhuber and Suda 2007» */
+function citeLang(c, lang) {
+  const L = lang || (window.I18N && I18N.lang);
+  return L === 'en' && c != null ? String(c).replace(/ y (?=\p{Lu})/gu, ' and ') : c;
+}
 function readFileText(file) {
   return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result)); r.onerror = () => rej(r.error); r.readAsText(file); });
 }
@@ -357,7 +388,7 @@ function newProject() {
   blockDone();
 }
 function saveProjectFile() {
-  const name = slug(state.meta.title || (state.accessions[0] && state.accessions[0].taxon) || 'proyecto') + '.cytogeneticspro.json';
+  const name = slug(state.meta.title || (state.accessions[0] && state.accessions[0].taxon) || T('proyecto', 'project')) + '.cytogeneticspro.json';
   download(projectJSON(), name, 'application/json');
   toast(T('Proyecto guardado: ', 'Project saved: ') + name, 'success');
 }

@@ -28,13 +28,14 @@
     counts: state.ploidy.counts.length, fcm: state.ploidy.fcm.length, mitosis: state.ploidy.mitosis.length,
     signals: state.bands.signals.length, compare: !!(window.Block8 && Block8.analyse().CL),
   });
-  /* the full reference of an author–year citation, from the list of Home */
-  function refFor(cite) {
+  /* the full reference of an author–year citation, from the list of Home, in
+     the language asked (Spanish when none is given) */
+  function refFor(cite, lang) {
     const m = /^(\S+?)(?:\s|,).*?(\d{4})/.exec(cite.replace(/^Barrera-Guzmán.*/, ''));
     if (!m || !window.Home) return null;
     const first = m[1].replace(/,$/, '');
     const r = Home.REFS.find(x => x[0].startsWith(first) && x[0].includes(m[2] + '.'));
-    return r ? r[0] : null;
+    return r ? (Home.refLang ? Home.refLang(r[0], lang) : r[0]) : null;
   }
   const stripTags = s => String(s).replace(/<[^>]+>/g, '');
   /* a scientific name in italics, with the rank words in roman: «Sechium edule subsp. sylvestre» */
@@ -73,7 +74,7 @@
       const scheme = sch ? narr(cite(sch.ref)) : w('límites definidos por el usuario', 'limits defined by the user');
       const forms = H.karyo.map(a => { const K = Block3.karyo(a.id); return `${esc(accName(a.id))}: ${esc(K.formula)}, ${w('longitud haploide', 'haploid length')} ${fmtFixed(K.thl, 2)} ${esc(K.unit || 'µm')}`; });
       P.push(w(`Los homólogos se emparejaron por longitud e índice centromérico y se revisaron a mano; los valores de cada par son la media (± desviación estándar) entre células. Se calcularon la longitud absoluta y relativa (porcentaje del juego haploide), el índice centromérico (IC = 100 p / (p + q)) y la razón de brazos (r = q / p), y los cromosomas se clasificaron según ${scheme}${S.scheme === 'levan' ? ' (el valor justo en un límite se asignó a la clase más mediana)' : ''}. El número fundamental contó dos brazos en los cromosomas m y sm y ${S.stArms === 2 ? 'dos' : 'uno'} en los st y t. Fórmulas cariotípicas: ${forms.join('; ')}.`,
-        `Homologues were paired by length and centromeric index and checked by hand; the values of each pair are the mean (± standard deviation) among cells. Absolute and relative length (percentage of the haploid set), centromeric index (CI = 100 p / (p + q)) and arm ratio (r = q / p) were computed, and the chromosomes were classified after ${scheme}${S.scheme === 'levan' ? ' (a value exactly on a limit was assigned to the more median class)' : ''}. The fundamental number counted two arms in m and sm chromosomes and ${S.stArms === 2 ? 'two' : 'one'} in st and t. Karyotype formulas: ${forms.join('; ')}.`));
+        `Homologs were paired by length and centromeric index and checked by hand; the values of each pair are the mean (± standard deviation) among cells. Absolute and relative length (percentage of the haploid set), centromeric index (CI = 100 p / (p + q)) and arm ratio (r = q / p) were computed, and the chromosomes were classified after ${scheme}${S.scheme === 'levan' ? ' (a value exactly on a limit was assigned to the more median class)' : ''}. The fundamental number counted two arms in m and sm chromosomes and ${S.stArms === 2 ? 'two' : 'one'} in st and t. Karyotype formulas: ${forms.join('; ')}.`));
       const As = H.karyo.map(a => ({ a, r: Block4.asym(a.id) })).filter(x => x.r);
       if (As.length) {
         const vals = As.map(x => `${esc(accName(x.a.id))}: MCA = ${fmtFixed(x.r.R.MCA, 2)}, CVCL = ${fmtFixed(x.r.R.CVCL, 2)}, CVCI = ${fmtFixed(x.r.R.CVCI, 2)}, ${w('categoría', 'category')} ${esc(x.r.R.stebbins)}`);
@@ -88,7 +89,7 @@
         const nc = state.meiosis.configs.length;
         parts.push(w(`En ${plural(nc, 'célula', 'células')} en metafase I se registraron las configuraciones (univalentes, bivalentes en varilla y en anillo, multivalentes) y se estimaron los quiasmas por célula y por bivalente y el índice de recombinación (n + quiasmas por célula) (${cite('Sybenga 1975')}; ${cite('Colombo 1992')})`,
           `In ${plural(nc, 'metaphase I cell', 'metaphase I cells')} the configurations (univalents, rod and ring bivalents, multivalents) were recorded and the chiasmata per cell and per bivalent and the recombination index (n + chiasmata per cell) were estimated (Sybenga 1975; Colombo 1992)`));
-        if (state.meiosis.hyp) parts.push(w(`las frecuencias observadas se compararon con las esperadas bajo un modelo de apareamiento al azar de los extremos de los homólogos según la fórmula genómica (${cite('Jackson y Casey 1982')}), con una prueba de χ²`, `the observed frequencies were compared with those expected under a model of random pairing of the ends of the homologues according to the genomic formula (Jackson and Casey 1982), with a χ² test`));
+        if (state.meiosis.hyp) parts.push(w(`las frecuencias observadas se compararon con las esperadas bajo un modelo de apareamiento al azar de los extremos de los homólogos según la fórmula genómica (${cite('Jackson y Casey 1982')}), con una prueba de χ²`, `the observed frequencies were compared with those expected under a model of random pairing of the ends of the homologs according to the genomic formula (Jackson and Casey 1982), with a χ² test`));
       }
       if (H.tetrads) parts.push(w(`el índice meiótico se calculó como el porcentaje de tétradas normales (${cite('Love 1951')}), con intervalos de ${cite('Wilson 1927')}`, `the meiotic index was computed as the percentage of normal tetrads (Love 1951), with Wilson (1927) intervals`));
       if (H.pollen) parts.push(w(`la viabilidad del polen se estimó por tinción diferencial (${cite('Alexander 1969')}) con intervalos de Wilson (1927) y de ${cite('Clopper y Pearson 1934')}, y la homogeneidad entre plantas con las pruebas de χ² y G (${cite('Sokal y Rohlf 1995')})`, `pollen viability was estimated by differential staining (Alexander 1969) with Wilson (1927) and Clopper and Pearson (1934) intervals, and the homogeneity among plants with χ² and G tests (Sokal and Rohlf 1995)`));
@@ -119,7 +120,7 @@
       cite('Guerra 2000', 'Jiang y Gill 2006');
       const used = Bands.probes().filter(p => state.bands.signals.some(s => s.probe === p.id)).map(p => esc(p.name));
       P.push(w(`Las bandas y señales (${list(used, L)}) se registraron por par, homólogo, brazo y posición relativa desde el centrómero (0) hasta el telómero (1), y se clasificaron como proximales (< 1/3 del brazo), intersticiales o terminales (> 0.8) (Guerra 2000; Jiang y Gill 2006); un sitio presente en un solo homólogo se contó como heteromorfismo.`,
-        `Bands and signals (${list(used, L)}) were recorded by pair, homologue, arm and relative position from the centromere (0) to the telomere (1), and classed as proximal (< 1/3 of the arm), interstitial or terminal (> 0.8) (Guerra 2000; Jiang and Gill 2006); a site present on one homologue only was counted as a heteromorphism.`));
+        `Bands and signals (${list(used, L)}) were recorded by pair, homolog, arm and relative position from the centromere (0) to the telomere (1), and classed as proximal (< 1/3 of the arm), interstitial or terminal (> 0.8) (Guerra 2000; Jiang and Gill 2006); a site present on one homolog only was counted as a heteromorphism.`));
     }
     if (H.compare) {
       const A = Block8.analyse(), s = Block8.settings(), names = A.V.map(k => varName(k, L));
@@ -140,7 +141,7 @@
       P.push(t);
     }
     P.push(w(`Todos los cálculos se hicieron con CytogeneticsPro ${APP_VERSION} (Barrera-Guzmán 2026), programa libre de la LABG Suite que funciona en el navegador, sin conexión.`, `All computations were done with CytogeneticsPro ${APP_VERSION} (Barrera-Guzmán 2026), free software of the LABG Suite that runs in the browser, offline.`));
-    const refs = [...cites].map(refFor).filter(Boolean);
+    const refs = [...cites].map(c => refFor(c, lang)).filter(Boolean);
     const C = window.Home ? Home.citeText() : null;
     if (C) refs.push(L ? C.apaEn : C.apa);
     return { paragraphs: P, refs: [...new Set(refs)].sort((a, b) => stripTags(a).localeCompare(stripTags(b))), cites: [...cites] };
@@ -178,7 +179,7 @@
     if (H.fcm) add('citometria', 'Citometría de flujo', 'Flow cytometry', [[T('accesión', 'accession'), T('muestra', 'sample'), T('patrón', 'standard'), T('pico_patron', 'standard_peak'), T('pico_muestra', 'sample_peak'), 'CV_' + T('patron', 'standard'), 'CV_' + T('muestra', 'sample'), '2C_pg', '1C_pg', '1Cx_pg', '2C_Mbp']]
       .concat(state.ploidy.fcm.map(r => { const g = Block6.run(r) || {}; return [accName(r.acc), r.sample || '', r.std || '', r.stdPeak, r.samplePeak, r.cvStd ?? '', r.cvSample ?? '', g.c2 ?? '', g.c1 ?? '', g.c1x ?? '', g.mbp2 ?? '']; })));
     if (H.mitosis) add('mitosis_allium', 'Prueba de Allium', 'Allium test', objRows(state.ploidy.mitosis, ['id']));
-    if (H.signals) add('senales', 'Bandas y señales', 'Bands and signals', [[T('accesión', 'accession'), T('par', 'pair'), T('homólogo', 'homologue'), T('brazo', 'arm'), T('posición', 'position'), T('tamaño', 'size'), T('sonda', 'probe'), T('célula', 'cell'), T('región', 'region')]]
+    if (H.signals) add('senales', 'Bandas y señales', 'Bands and signals', [[T('accesión', 'accession'), T('par', 'pair'), T('homólogo', 'homolog'), T('brazo', 'arm'), T('posición', 'position'), T('tamaño', 'size'), T('sonda', 'probe'), T('célula', 'cell'), T('región', 'region')]]
       .concat(state.bands.signals.map(s => [accName(s.acc), s.pair, s.homolog || '', s.arm === 's' ? 'p' : 'q', s.pos, s.size ?? '', (Bands.probe(s.probe) || {}).name || s.probe, s.cell || '', isFinite(+s.pos) ? T(Bands.POS_NAMES[Bands.posClass(+s.pos)]) : ''])));
     if (window.Block8) {
       const R = Block8.rows();

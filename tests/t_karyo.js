@@ -1,7 +1,7 @@
 {
 /* CytogeneticsPro — tests of karyotype.js: the classification of Levan et al.
    (1964) and Guerra (1986) at their limits, the normalization of the arms,
-   the grouping of homologues, the means over cells, the formula and the
+   the grouping of homologs, the means over cells, the formula and the
    fundamental number. */
 sec('Cariotipo: clasificación de Levan et al. (1964) en los límites');
 const C = (s, l, sc, o) => Karyo.classify(s, l, sc || 'levan', o);

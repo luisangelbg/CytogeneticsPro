@@ -72,7 +72,12 @@
   const FIXED = [['Testigo (agua destilada)', 'Control (distilled water)'], ['Población diploide', 'Diploid population'], ['Población tetraploide', 'Tetraploid population'],
     ['Población hexaploide', 'Hexaploid population'], ['Tetraploide con patrón de tomate', 'Tetraploid with tomato standard'], ['Especie ficticia A', 'Fictitious species A'],
     ['Maíz criollo · Texcoco', 'Landrace maize · Texcoco'], ['Chayote silvestre · Coscomatepec', 'Wild chayote · Coscomatepec'], ['Cebolla · raíces', 'Onion · roots'],
-    ['Banda C (nudo)', 'C-band (knob)'], ['ADNr 45S (NOR)', '45S rDNA (NOR)'], ['ADNr 45S', '45S rDNA'], ['ADNr 5S', '5S rDNA']];
+    ['Banda C (nudo)', 'C-band (knob)'], ['ADNr 45S (NOR)', '45S rDNA (NOR)'], ['ADNr 45S', '45S rDNA'], ['ADNr 5S', '5S rDNA'],
+    /* the titles of the examples */
+    ['Zea mays (ejemplo simulado)', 'Zea mays (simulated example)'],
+    ['Sechium edule: tres accesiones cultivadas y una silvestre (ejemplo simulado)', 'Sechium edule: three cultivated accessions and a wild one (simulated example)'],
+    ['Serie poliploide ficticia (2x, 4x, 6x)', 'Fictitious polyploid series (2x, 4x, 6x)'],
+    ['Allium cepa: prueba de citotoxicidad (ejemplo simulado)', 'Allium cepa: cytotoxicity test (simulated example)']];
   function localize(text, lang) {
     if (typeof text !== 'string' || !text) return text;
     const en = lang === 'en', from = en ? 0 : 1, to = en ? 1 : 0;
@@ -90,6 +95,7 @@
   function localizeProject(lang) {
     if (!state.meta || !state.meta.example) return;
     const L = v => localize(v, lang);
+    state.meta.title = L(state.meta.title);
     state.accessions.forEach(a => { a.name = L(a.name); a.taxon = L(a.taxon); });
     state.cells.forEach(c => { c.label = L(c.label); });
     ['configs', 'phases', 'tetrads', 'pollen'].forEach(k => (state.meiosis[k] || []).forEach(r => { if (r.ind != null) r.ind = L(r.ind); if (r.id != null && k === 'pollen') r.id = L(r.id); }));
@@ -125,7 +131,7 @@
     blockDone();
     const to = STEP_OF[key] || 2;
     goStep(stepOn(to) ? to : (stepOn(2) ? 2 : 1));
-    toast(T('Ejemplo abierto: ', 'Example opened: ') + (D.meta.title || key) + T(' · datos simulados', ' · simulated data'), 'success');
+    toast(T('Ejemplo abierto: ', 'Example opened: ') + (localize(D.meta.title, I18N.lang) || key) + T(' · datos simulados', ' · simulated data'), 'success');
     return true;
   }
 

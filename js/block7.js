@@ -37,7 +37,7 @@
       rows: () => B().signals, filter: s => s.acc === cur, fileName: () => 'senales_' + slug(accName(cur)),
       newRow: () => ({ acc: cur, pair: curPair || 1, homolog: '', arm: 's', pos: 0.5, size: 0.08, probe: (Bands.probes()[0] || {}).id }),
       columns: [{ key: 'pair', es: 'Par', en: 'Pair', type: 'int', width: '4em', min: 1 },
-        { key: 'homolog', es: 'Homólogo', en: 'Homologue', type: 'select', options: [['', 'los dos', 'both'], ['1', '1', '1'], ['2', '2', '2'], ['3', '3', '3'], ['4', '4', '4']] },
+        { key: 'homolog', es: 'Homólogo', en: 'Homolog', type: 'select', options: [['', 'los dos', 'both'], ['1', '1', '1'], ['2', '2', '2'], ['3', '3', '3'], ['4', '4', '4']] },
         { key: 'arm', es: 'Brazo', en: 'Arm', type: 'select', options: [['s', 'p (corto)', 'p (short)'], ['l', 'q (largo)', 'q (long)']] },
         { key: 'pos', es: 'Posición (0–1)', en: 'Position (0–1)', type: 'num', width: '5em' },
         { key: 'size', es: 'Tamaño (0–1)', en: 'Size (0–1)', type: 'num', width: '5em' },
@@ -96,8 +96,8 @@
       { key: 'k', label: L2('Tipo', 'Kind'), get: r => { const k = Bands.KINDS.find(x => x[0] === r.probe.kind); return k ? T(k[1], k[2]) : r.probe.kind; } },
       { key: 'sites', label: L2('Sitios por juego', 'Sites per set'), num: true, get: r => fmtNum(r.sites, 1) }, { key: 'pairs', label: L2('Pares', 'Pairs'), get: r => r.pairs.join(', ') },
       { key: 'where', label: L2('Dónde', 'Where'), get: r => r.list.map(s => `${s.pair}${s.arm}${s.homolog ? '(' + s.homolog + ')' : ''} ${Math.round(s.pos * 100)} %`).join('; ') },
-      { key: 'cls', label: L2('Regiones', 'Regions'), get: r => cls(r.classes) }, { key: 'het', label: L2('En un solo homólogo', 'On one homologue only'), num: true, get: r => r.hetero }], S,
-      { foot: S.some(r => r.hetero) ? `<tr><td colspan="7" class="hint">${L2('Un sitio en un solo homólogo cuenta medio en los sitios por juego y en las regiones, igual que en la tabla de todas las accesiones y en el Bloque 8; «(1)» en «Dónde» dice en qué homólogo está.', 'A site on one homologue only counts as half in the sites per set and in the regions, as in the table of all the accessions and in Block 8; “(1)” in “Where” tells which homologue it is on.')}</td></tr>` : '' });
+      { key: 'cls', label: L2('Regiones', 'Regions'), get: r => cls(r.classes) }, { key: 'het', label: L2('En un solo homólogo', 'On one homolog only'), num: true, get: r => r.hetero }], S,
+      { foot: S.some(r => r.hetero) ? `<tr><td colspan="7" class="hint">${L2('Un sitio en un solo homólogo cuenta medio en los sitios por juego y en las regiones, igual que en la tabla de todas las accesiones y en el Bloque 8; «(1)» en «Dónde» dice en qué homólogo está.', 'A site on one homolog only counts as half in the sites per set and in the regions, as in the table of all the accessions and in Block 8; “(1)” in “Where” tells which homolog it is on.')}</td></tr>` : '' });
     const C = Bands.concordance(cur);
     if (!C) el('b7Conc').innerHTML = `<p class="hint">${L2('No hay señales registradas célula por célula en esta accesión.', 'There are no signals recorded cell by cell in this accession.')}</p>`;
     else buildTable('b7Conc', [{ key: 'pair', label: L2('Par', 'Pair'), num: true }, { key: 'probe', label: L2('Sonda', 'Probe'), get: r => r.probe.name }, { key: 'arm', label: L2('Brazo', 'Arm') },
@@ -108,7 +108,7 @@
     const probes = Bands.probes().filter(p => B().signals.some(s => s.probe === p.id));
     buildTable('b7All', [{ key: 'a', label: L2('Accesión', 'Accession'), get: a => a.name || a.taxon }]
       .concat(probes.map(p => ({ key: p.id, label: esc(p.name), num: true, get: a => { const c = Bands.siteCounts(a.id)[p.id]; return c ? fmtNum(c, 1) : '0'; } }))), accs,
-      { foot: `<tr><td colspan="${probes.length + 1}" class="hint">${L2('Sitios por juego cromosómico; un sitio en un solo homólogo cuenta medio.', 'Sites per chromosome set; a site on one homologue only counts as half.')}</td></tr>` });
+      { foot: `<tr><td colspan="${probes.length + 1}" class="hint">${L2('Sitios por juego cromosómico; un sitio en un solo homólogo cuenta medio.', 'Sites per chromosome set; a site on one homolog only counts as half.')}</td></tr>` });
   }
   function renderAll() { clickProbeOptions(); renderIdio(); renderMap(); renderSummary(); }
   function render() {

@@ -45,7 +45,7 @@ function basePairs(B) {
   });
 }
 /* one measured cell: a condensation factor for the whole cell, and the error
-   of measuring each arm of each homologue */
+   of measuring each arm of each homolog */
 function measuredCell(pairs, k, cv) {
   const f = 1 + 0.08 * norm(), out = [];
   pairs.forEach((pp, j) => {

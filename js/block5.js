@@ -96,7 +96,7 @@
   }
   function exportPalyno() {
     const rows = ofAcc(M().pollen).map(r => { const n = (+r.viable || 0) + (+r.inviable || 0); return [r.id, n, n ? +(100 * (+r.inviable || 0) / n).toFixed(3) : '', +r.viable || 0, +r.inviable || 0]; });
-    download(toDelimited([['landrace_code', 'n_granos_completos', 'pct_atipico', 'viables', 'inviables']].concat(rows)), 'polen_' + slug(accName(cur)) + '_palynopro.csv', 'text/csv;charset=utf-8');
+    download(toDelimited([['landrace_code', 'n_granos_completos', 'pct_atipico', 'viables', 'inviables']].concat(rows)), fileLang('polen_' + slug(accName(cur)) + '_palynopro.csv'), 'text/csv;charset=utf-8');
   }
 
   /* ---------------- configurations ---------------- */

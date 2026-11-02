@@ -80,7 +80,7 @@
       if (a.dataset.act === 'add') {
         all().push(newRow());
         commit(cellId(all().length - 1, cols.findIndex(c => !c.get)));
-      } else if (a.dataset.act === 'csv') download(toDelimited(toRows()), (typeof cfg.fileName === 'function' ? cfg.fileName() : cfg.fileName || 'tabla') + '.csv', 'text/csv;charset=utf-8');
+      } else if (a.dataset.act === 'csv') download(toDelimited(toRows()), fileLang((typeof cfg.fileName === 'function' ? cfg.fileName() : cfg.fileName || 'tabla') + '.csv'), 'text/csv;charset=utf-8');
       else if (a.dataset.act === 'import') host.querySelector('input[data-act="file"]').click();
       else if (a.dataset.act === 'clear') {
         if (!window.confirm(T('¿Borrar todas las filas de esta tabla?', 'Delete every row of this table?'))) return;

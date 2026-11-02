@@ -385,7 +385,7 @@
     for (let v = Math.ceil(c / st) * st; v <= d; v += st) g += `<line class="grid" x1="${r1(X(a))}" x2="${r1(X(b))}" y1="${r1(Y(v))}" y2="${r1(Y(v))}"/>`;
     g += '</g>';
     const deg = (v, pos, neg) => `${Math.abs(+v.toFixed(4))}° ${v >= 0 ? pos : neg}`;
-    for (let v = Math.ceil(a / st) * st; v <= b; v += st) g += `<text class="tick" data-role="xtick" x="${r1(X(v))}" y="${r1(Y(c) + 15)}" font-size="${o.font - 2}" text-anchor="middle">${deg(v, 'E', 'O')}</text>`;
+    for (let v = Math.ceil(a / st) * st; v <= b; v += st) g += `<text class="tick" data-role="xtick" x="${r1(X(v))}" y="${r1(Y(c) + 15)}" font-size="${o.font - 2}" text-anchor="middle">${deg(v, 'E', T('O', 'W'))}</text>`;
     for (let v = Math.ceil(c / st) * st; v <= d; v += st) g += `<text class="tick" data-role="ytick" x="${r1(X(a) - 5)}" y="${r1(Y(v) + 4)}" font-size="${o.font - 2}" text-anchor="end">${deg(v, 'N', 'S')}</text>`;
     g += `<rect class="ax" data-role="axis" x="${r1(X(a))}" y="${r1(Y(d))}" width="${r1((b - a) * k * s)}" height="${r1((d - c) * s)}" fill="none"/>`;
     const labs = [];

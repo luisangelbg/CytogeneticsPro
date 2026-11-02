@@ -126,7 +126,7 @@
     });
     ex.pairs.forEach(p => {
       const mem = G.items.filter(it => it.truePair === p.pair);
-      if (!mem[0].pairOk) showMessage(box, 'warning', esc(T(`Los cromosomas ${mem.map(m => m.i).join(' y ')} son homólogos (el par ${p.pair}, de ${fmtFixed(p.c, 2)} µm).`, `Chromosomes ${mem.map(m => m.i).join(' and ')} are homologues (pair ${p.pair}, ${fmtFixed(p.c, 2)} µm long).`)));
+      if (!mem[0].pairOk) showMessage(box, 'warning', esc(T(`Los cromosomas ${mem.map(m => m.i).join(' y ')} son homólogos (el par ${p.pair}, de ${fmtFixed(p.c, 2)} µm).`, `Chromosomes ${mem.map(m => m.i).join(' and ')} are homologs (pair ${p.pair}, ${fmtFixed(p.c, 2)} µm long).`)));
       else if (mem[0].pair !== p.pair) showMessage(box, 'info', esc(T(`Los cromosomas ${mem.map(m => m.i).join(' y ')} forman bien un par, pero por su longitud es el par ${p.pair}.`, `Chromosomes ${mem.map(m => m.i).join(' and ')} form a right pair, but by its length it is pair ${p.pair}.`)));
     });
     if (G.pairsOk === G.n && G.orderOk === G.n && G.typesOk === G.total) showMessage(box, 'success', esc(T('¡Cariotipo correcto! Puedes ver la solución con las medidas.', 'Right karyotype! You can see the solution with the measurements.')));
@@ -202,7 +202,7 @@
     const steps = Teach.protocolSteps({ pre: el('b9PPre').value, hyd: el('b9PHyd').value, stain: el('b9PStain').value });
     const sp = el('b9PSpecies').value.trim();
     const cites = [...new Set(steps.map(s => s[4]))];
-    const refs = cites.map(refFor).filter(Boolean).sort();
+    const refs = cites.map(refFor).filter(Boolean).map(r => Home.refLang(r, I18N.lang)).sort();
     const rows = Array.from({ length: 8 }, () => '<tr><td></td><td></td><td></td><td></td><td></td></tr>').join('');
     const mats = pick(['Semillas o bulbos sanos', 'Papel filtro y cajas de Petri, o frascos con agua', 'Frascos con tapa para pretratar y fijar', 'Pinzas finas, bisturí o navaja, aguja de disección', 'Portaobjetos, cubreobjetos y papel filtro', 'Baño de agua o estufa a 60 °C (o a 37 °C para la digestión enzimática)', 'Microscopio con objetivos de 40× y 100× (inmersión)', 'Los reactivos de los pasos elegidos'],
       ['Healthy seeds or bulbs', 'Filter paper and Petri dishes, or jars with water', 'Capped vials to pretreat and fix', 'Fine forceps, scalpel or razor blade, dissecting needle', 'Slides, coverslips and filter paper', 'Water bath or oven at 60 °C (or 37 °C for the enzyme digestion)', 'Microscope with 40× and 100× (immersion) objectives', 'The reagents of the chosen steps']);
@@ -213,7 +213,7 @@
       `<tr><td>${esc(T('Grupo', 'Group'))}:</td><td class="line"></td><td>${esc(T('Material', 'Material'))}:</td><td class="line">${esc(sp)}</td></tr></table>` +
       `<h2>${esc(T('Objetivo', 'Aim'))}</h2><p>${esc(T('Obtener metafases mitóticas, contar el número cromosómico (2n) y fotografiar células para armar el cariotipo.', 'Obtain mitotic metaphases, count the chromosome number (2n) and photograph cells to build the karyotype.'))}</p>` +
       `<h2>${esc(T('Materiales', 'Materials'))}</h2><ul>${mats.map(m => `<li>${esc(m)}</li>`).join('')}</ul>` +
-      `<h2>${esc(T('Procedimiento', 'Procedure'))}</h2><ol class="pr-steps">${steps.map(s => `<li><b>${esc(T(s[0], s[1]))}.</b> ${esc(T(s[2], s[3]))} <span class="pr-src">(${esc(s[4])})</span></li>`).join('')}</ol>` +
+      `<h2>${esc(T('Procedimiento', 'Procedure'))}</h2><ol class="pr-steps">${steps.map(s => `<li><b>${esc(T(s[0], s[1]))}.</b> ${esc(T(s[2], s[3]))} <span class="pr-src">(${esc(citeLang(s[4]))})</span></li>`).join('')}</ol>` +
       `<h2>${esc(T('Seguridad', 'Safety'))}</h2><ul>${Teach.SAFETY.map(s => `<li>${esc(T(s[0], s[1]))}</li>`).join('')}</ul>` +
       `<h2>${esc(T('Registro', 'Record'))}</h2><table class="pr-table"><thead><tr><th>${esc(T('Preparación', 'Slide'))}</th><th>${esc(T('Célula', 'Cell'))}</th><th>${esc(T('Fase', 'Phase'))}</th><th>${esc(T('2n contado', '2n counted'))}</th><th>${esc(T('Observaciones', 'Notes'))}</th></tr></thead><tbody>${rows}</tbody></table>` +
       `<h2>${esc(T('Dibujos', 'Drawings'))}</h2><div class="pr-draw"><div>${esc(T('Una metafase', 'A metaphase'))}</div><div>${esc(T('Una anafase', 'An anaphase'))}</div></div>` +

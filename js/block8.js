@@ -357,7 +357,7 @@
     el('b8Nwk').addEventListener('click', () => {
       const A = last && last.A;
       if (!A || !A.CL) { toast(T('Todavía no hay dendrograma.', 'There is no dendrogram yet.'), 'warning'); return; }
-      download(Compare.clusterNewick(A.CL.tree, labelsOf(A)) + '\n', 'dendrograma_' + settings().method + '.nwk', 'text/plain;charset=utf-8');
+      download(Compare.clusterNewick(A.CL.tree, labelsOf(A)) + '\n', fileLang('dendrograma_' + settings().method + '.nwk'), 'text/plain;charset=utf-8');
     });
     el('b8Tips').addEventListener('change', e => {
       const i = e.target.closest('.tip-n2');

@@ -154,9 +154,9 @@
       return { a, n: runs.length, c2: m, sd: c2.length > 1 ? Stats.sd(c2) : NaN, L, c1x: L ? m / L : NaN, flags: [...new Set(runs.flatMap(r => r.flags))] };
     }).filter(r => r.n);
     buildTable('b6FcmSum', [{ key: 'a', label: L2('Accesión', 'Accession'), get: r => r.a.name || r.a.taxon }, { key: 'n', label: L2('Corridas', 'Runs'), num: true },
-      { key: 'c2', label: '2C (pg)', num: true, get: r => fmtMS(r.c2, r.sd, 3) }, { key: 'mb', label: '2C (Mpb)', num: true, get: r => fmtNum(Ploidy.pgToMbp(r.c2), 0) },
+      { key: 'c2', label: '2C (pg)', num: true, get: r => fmtMS(r.c2, r.sd, 3) }, { key: 'mb', label: T('2C (Mpb)', '2C (Mbp)'), num: true, get: r => fmtNum(Ploidy.pgToMbp(r.c2), 0) },
       { key: 'c1', label: '1C (pg)', num: true, get: r => fmtFixed(r.c2 / 2, 3) }, { key: 'L', label: L2('Nivel', 'Level'), num: true, get: r => r.L ? r.L + 'x' : '—' },
-      { key: 'c1x', label: '1Cx (pg)', num: true, get: r => fmtFixed(r.c1x, 3) }, { key: 'mbx', label: '1Cx (Mpb)', num: true, get: r => fmtNum(Ploidy.pgToMbp(r.c1x), 0) }], sum);
+      { key: 'c1x', label: '1Cx (pg)', num: true, get: r => fmtFixed(r.c1x, 3) }, { key: 'mbx', label: T('1Cx (Mpb)', '1Cx (Mbp)'), num: true, get: r => fmtNum(Ploidy.pgToMbp(r.c1x), 0) }], sum);
     sum.forEach(r => {
       if (r.flags.includes('cv')) showMessage('b6FcmMsg', 'warning', T(`«${esc(r.a.name)}»: algún pico tiene un CV mayor de 5 %.`, `“${esc(r.a.name)}”: some peak has a CV above 5 %.`), T('Repite la preparación: un CV alto suele ser núcleos dañados o restos.', 'Repeat the preparation: a high CV is usually damaged nuclei or debris.'));
       if (r.flags.includes('far')) showMessage('b6FcmMsg', 'warning', T(`«${esc(r.a.name)}»: la muestra y el patrón difieren más de tres veces en su contenido de ADN.`, `“${esc(r.a.name)}”: sample and standard differ more than threefold in DNA content.`), T('Tan lejos, la respuesta del citómetro puede dejar de ser lineal: elige un patrón de tamaño más cercano al de la muestra, sin que los picos se encimen (Doležel, Greilhuber y Suda 2007).', 'That far apart, the response of the cytometer may stop being linear: choose a standard closer in size to the sample, without overlapping peaks (Doležel, Greilhuber and Suda 2007).'));

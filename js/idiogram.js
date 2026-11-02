@@ -12,7 +12,7 @@
 /* CytogeneticsPro — the idiogram (Idio).
 
    Draws a karyotype to scale as SVG: centromeres aligned on one line, short
-   arms up and long arms down, each pair (or each homologue) with its number
+   arms up and long arms down, each pair (or each homolog) with its number
    and class, satellites beyond their secondary constriction, bands and
    in-situ hybridization signals in the colour of their probe, an axis or a
    scale bar, and a legend. Colours come from CSS variables of the theme, so
@@ -65,7 +65,7 @@
     out += `<rect class="idio-cen" x="${r1(x - w * 0.22)}" y="${r1(ys - 0.5)}" width="${r1(w * 0.44)}" height="${r1(gap + 1)}" fill="${fill}"/>`;
     /* bands and signals */
     const M = (c.marks || []).filter(m => !(m.homolog != null && k != null && m.homolog !== k + 1)).map(m => {
-      /* a mark of one homologue (1, 2…): on that homologue only in the diploid
+      /* a mark of one homolog (1, 2…): on that homolog only in the diploid
          view; on half the width (a heteromorphism) when one chromosome stands for the pair */
       const len = m.arm === 'l' ? lLen : sLen, dir = m.arm === 'l' ? 1 : -1, yc = m.arm === 'l' ? yl : ys;
       const half = Math.max(1.2, (m.size || 0.06) * len / 2);
@@ -162,7 +162,7 @@
       const longest = Math.max(...o.legend.map(e => String(e.label).length));
       const colW = 18 + longest * o.font * 0.58 + 10;
       /* a column at the right; below the chromosomes when the figure is already
-         wide (the homologues of a large karyotype), so it never ends up beyond
+         wide (the homologs of a large karyotype), so it never ends up beyond
          the width of the page */
       const below = o.legendPos === 'bottom' || (o.legendPos !== 'right' && width + colW > 720);
       legend = `<g data-role="legend" class="idio-legend">`;
@@ -200,7 +200,7 @@
   }
 
   /* pairs from a karyotype of Karyo.build, with its order, the satellites and,
-     if asked, the homologues of the first cell (diploid view) */
+     if asked, the homologs of the first cell (diploid view) */
   function fromKaryotype(K, extra) {
     const e = extra || {};
     return K.pairs.map((p, i) => ({
@@ -211,7 +211,7 @@
       marks: e.marks ? e.marks[i] || [] : [],
     }));
   }
-  /* the homologues of group i averaged over the cells, homologue by homologue
+  /* the homologs of group i averaged over the cells, homolog by homolog
      (the longer one first), for the diploid idiogram */
   function homologsOf(K, i) {
     const cells = K.cells.map(c => c.groups[i]).filter(Boolean);

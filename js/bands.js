@@ -45,7 +45,7 @@
   const POS_NAMES = { proximal: ['proximal', 'proximal'], interstitial: ['intersticial', 'interstitial'], terminal: ['terminal', 'terminal'] };
   const valid = s => s && s.probe && +s.pair >= 1 && (s.arm === 's' || s.arm === 'l') && isFinite(+s.pos);
 
-  /* the pattern of an accession: one entry per pair, probe, arm and homologue */
+  /* the pattern of an accession: one entry per pair, probe, arm and homolog */
   function pattern(acc) {
     const all = state.bands.signals.filter(s => s.acc === acc && valid(s));
     const own = all.filter(s => !s.cell);
@@ -80,7 +80,7 @@
     return probes().filter(p => used.includes(p.id)).map(p => ({ label: p.name, color: p.color }));
   }
   /* the weight of a site when sites are counted per chromosome set: one on
-     both homologues counts 1; one on a single homologue (a heteromorphism),
+     both homologs counts 1; one on a single homolog (a heteromorphism),
      half. The same rule everywhere: the pattern (Block 7), all the
      accessions (Block 7) and the comparison (Block 8). */
   const weight = s => (s.homolog ? 0.5 : 1);
@@ -139,7 +139,7 @@
     const labels = (pair.marks || []).map(m => {
       const len = (m.arm === 'l' ? lL : sL), dir = m.arm === 'l' ? 1 : -1;
       const yy = y0r + dir * (1.5 + m.pos * len * sc);
-      return { yy, text: `${m.probe} · ${m.arm === 'l' ? 'q' : 'p'} ${Math.round(m.pos * 100)} % · ${fmtFixed(m.pos * len, 2)} ${o.unit}${m.homolog ? ' · ' + T('homólogo ', 'homologue ') + m.homolog : ''}`, color: m.color };
+      return { yy, text: `${m.probe} · ${m.arm === 'l' ? 'q' : 'p'} ${Math.round(m.pos * 100)} % · ${fmtFixed(m.pos * len, 2)} ${o.unit}${m.homolog ? ' · ' + T('homólogo ', 'homolog ') + m.homolog : ''}`, color: m.color };
     }).sort((a, b) => a.yy - b.yy);
     let last = -1e9;
     labels.forEach(L => {

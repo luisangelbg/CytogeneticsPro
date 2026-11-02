@@ -749,7 +749,7 @@
         if (ended) return;
         w.cancelled = true;
         try { o.cancel(); } catch (e) { /* la app decide */ }
-        announce(T('Cancelado', 'Cancelled'));
+        announce(T('Cancelado', 'Canceled'));
         w.close();
       });
     }

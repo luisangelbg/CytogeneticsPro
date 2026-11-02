@@ -115,7 +115,7 @@
     if (pAcc.length) h += `<h3>${esc(T('Viabilidad del polen', 'Pollen viability'))}</h3>` + Report.htmlTable([[T('Accesión', 'Accession'), T('Granos', 'Grains'), T('% viables', '% viable'), T('Wilson 95 %', 'Wilson 95 %')]]
       .concat(pAcc.map(a => { const P = Meiosis.pollen(state.meiosis.pollen.filter(r => r.acc === a.id), 0.95); return [accName(a.id), P.n, fmtFixed(100 * P.p, 1), fmtFixed(100 * P.wilson.lo, 1) + ' – ' + fmtFixed(100 * P.wilson.hi, 1)]; })));
     const fAcc = state.accessions.filter(a => state.ploidy.fcm.some(r => r.acc === a.id));
-    if (fAcc.length) h += `<h3>${esc(T('Contenido de ADN', 'DNA content'))}</h3>` + Report.htmlTable([[T('Accesión', 'Accession'), T('Corridas', 'Runs'), '2C (pg)', '1Cx (pg)', '2C (Mpb)']]
+    if (fAcc.length) h += `<h3>${esc(T('Contenido de ADN', 'DNA content'))}</h3>` + Report.htmlTable([[T('Accesión', 'Accession'), T('Corridas', 'Runs'), '2C (pg)', '1Cx (pg)', T('2C (Mpb)', '2C (Mbp)')]]
       .concat(fAcc.map(a => { const G = state.ploidy.fcm.filter(r => r.acc === a.id).map(r => Block6.run(r)).filter(Boolean); const m = f => { const v = G.map(f).filter(isFinite); return v.length ? fmtMS(Stats.mean(v), v.length > 1 ? Stats.sd(v) : null, 3) : ''; }; return [accName(a.id), G.length, m(g => g.c2), m(g => g.c1x), m(g => g.mbp2)]; })));
     if (state.ploidy.mitosis.length) {
       const trts = [...new Set(state.ploidy.mitosis.map(r => r.trt))];
@@ -161,31 +161,31 @@
     const d = new Date().toISOString().slice(0, 10);
     return ['CytogeneticsPro ' + APP_VERSION + ' · paquete reproducible / reproducible package', d, '',
       'ES', 'Este paquete contiene el proyecto y todo lo que la aplicación calculó con él.', 'Para repetir el análisis: abre CytogeneticsPro (index.html, con doble clic) y carga el archivo del proyecto con «Abrir proyecto» (Ctrl+O). Todos los resultados se vuelven a calcular a partir de los datos.', '',
-      'EN', 'This package holds the project and everything the application computed with it.', 'To repeat the analysis: open CytogeneticsPro (index.html, by double click) and load the project file with «Open project» (Ctrl+O). Every result is computed again from the data.', '',
+      'EN', 'This package holds the project and everything the application computed with it.', 'To repeat the analysis: open CytogeneticsPro (index.html, by double click) and load the project file with “Open project” (Ctrl+O). Every result is computed again from the data.', '',
       state.meta.example ? 'Datos simulados (ejemplo de la aplicación) / Simulated data (an example of the application).\n' : '',
-      'Archivos / Files:'].concat(files.map(f => '  ' + f)).concat(['', 'Cita / Citation:', stripTags(Home.citeText().apa), '']).join('\r\n');
+      'Archivos / Files:'].concat(files.map(f => '  ' + f)).concat(['', 'Cita / Citation:', stripTags(T(Home.citeText().apa, Home.citeText().apaEn)), '']).join('\r\n');
   }
   const stripTags = s => String(s).replace(/<[^>]+>/g, '');
   async function buildPackage(work) {
     if (!figs.length) await renderFigs();
     const files = [], base = slug(state.meta.title || (state.accessions[0] && accName(state.accessions[0].id)) || 'cytogeneticspro').slice(0, 40).replace(/_[^_]*$/, '') || 'cytogeneticspro';
-    files.push({ name: 'proyecto_' + base + '.json', data: projectJSON() });
-    files.push({ name: 'informe.html', data: await reportHtml() });
+    files.push({ name: fileLang('proyecto_' + base + '.json'), data: projectJSON() });
+    files.push({ name: fileLang('informe.html'), data: await reportHtml() });
     files.push({ name: 'metodos_es.txt', data: '﻿' + Report.methodsText('es') });
     files.push({ name: 'methods_en.txt', data: '﻿' + Report.methodsText('en') });
-    Report.tables().forEach(t => files.push({ name: 'tablas/' + t.id + '.csv', data: toDelimited(t.rows) }));
+    Report.tables().forEach(t => files.push({ name: fileLang('tablas/') + fileLang(t.id + '.csv'), data: toDelimited(t.rows) }));
     for (let i = 0; i < figs.length; i++) {
       if (work) work.update((i + 1) / (figs.length + 1));
       const s = figText(i);
       if (!s) continue;
-      files.push({ name: 'figuras/' + figs[i].id + '.svg', data: s });
+      files.push({ name: fileLang('figuras/') + fileLang(figs[i].id + '.svg'), data: s });
       try {
         const svg = el('b10Fig' + i).querySelector('svg');
         const b = await Fig.pngBlob(svg, 2);
-        files.push({ name: 'figuras/' + figs[i].id + '.png', data: new Uint8Array(await b.arrayBuffer()) });
+        files.push({ name: fileLang('figuras/') + fileLang(figs[i].id + '.png'), data: new Uint8Array(await b.arrayBuffer()) });
       } catch (e) { /* a figure that cannot be drawn as PNG keeps its SVG */ }
     }
-    files.unshift({ name: 'LEEME.txt', data: '﻿' + readme(files.map(f => f.name)) });
+    files.unshift({ name: fileLang('LEEME.txt'), data: '﻿' + readme(files.map(f => f.name)) });
     return { blob: Zip.make(files), name: 'cytogeneticspro_' + base + '.zip', files };
   }
 
@@ -211,7 +211,7 @@
     el('b10MLang').addEventListener('change', e => { e.target.dataset.touched = '1'; renderMethods(); });
     el('b10MCopy').addEventListener('click', async () => {
       try { await navigator.clipboard.writeText(Report.methodsText(el('b10MLang').value)); toast(T('Métodos copiados.', 'Methods copied.'), 'success'); }
-      catch (e) { toast(T('No se pudo copiar; usa «Descargar».', 'Could not copy; use «Download».'), 'warning'); }
+      catch (e) { toast(T('No se pudo copiar; usa «Descargar».', 'Could not copy; use “Download”.'), 'warning'); }
     });
     el('b10MSave').addEventListener('click', () => download('﻿' + Report.methodsText(el('b10MLang').value), el('b10MLang').value === 'en' ? 'methods.txt' : 'metodos.txt', 'text/plain;charset=utf-8'));
     el('b10Tables').addEventListener('click', e => {
@@ -220,13 +220,13 @@
       const t = Report.tables().find(x => x.id === b.dataset.tab);
       if (!t) return;
       const tsv = b.dataset.fmt === 'tsv';
-      download(toDelimited(t.rows, tsv ? '\t' : ','), t.id + (tsv ? '.tsv' : '.csv'), tsv ? 'text/tab-separated-values;charset=utf-8' : 'text/csv;charset=utf-8');
+      download(toDelimited(t.rows, tsv ? '\t' : ','), fileLang(t.id + (tsv ? '.tsv' : '.csv')), tsv ? 'text/tab-separated-values;charset=utf-8' : 'text/csv;charset=utf-8');
     });
     el('b10Figs').addEventListener('change', e => { const c = e.target.closest('[data-fig]'); if (c) { if (c.checked) off.delete(c.dataset.fig); else off.add(c.dataset.fig); renderTiles(); } });
     el('b10FigAll').addEventListener('click', () => { off.clear(); el('b10Figs').querySelectorAll('[data-fig]').forEach(c => { c.checked = true; }); renderTiles(); });
     el('b10FigNone').addEventListener('click', () => { figs.forEach(f => off.add(f.id)); el('b10Figs').querySelectorAll('[data-fig]').forEach(c => { c.checked = false; }); renderTiles(); });
     el('b10Print').addEventListener('click', async () => { Report.printHtml(await reportHtml()); state.results.report = Date.now(); blockDone(); });
-    el('b10Html').addEventListener('click', async () => { download(await reportHtml(), 'informe_' + slug(state.meta.title || 'cytogeneticspro') + '.html', 'text/html;charset=utf-8'); state.results.report = Date.now(); blockDone(); });
+    el('b10Html').addEventListener('click', async () => { download(await reportHtml(), fileLang('informe_' + slug(state.meta.title || 'cytogeneticspro') + '.html'), 'text/html;charset=utf-8'); state.results.report = Date.now(); blockDone(); });
     el('b10Zip').addEventListener('click', async () => {
       if (busy) return;
       busy = true;

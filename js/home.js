@@ -21,7 +21,7 @@
     { n: 2, es: 'Imágenes y medición', en: 'Images and measurement', tag: ['Medir', 'Measure'],
       d: ['Fotomicrografías calibradas con la barra de micras: contar con marcadores, trazar cada cromosoma con su curvatura, marcar centrómero y satélites, brillo, contraste y deshacer; o capturar las medidas a mano.', 'Micrographs calibrated with the micron bar: count with markers, trace each chromosome along its curvature, mark centromere and satellites, brightness, contrast and undo; or type the measurements by hand.'] },
     { n: 3, es: 'Cariotipo', en: 'Karyotype', tag: ['Ordenar', 'Arrange'],
-      d: ['Homólogos emparejados por longitud e índice centromérico, con corrección por arrastre; promedios entre células, clasificación de Levan, fórmula cariotípica, número fundamental e idiograma a escala.', 'Homologues paired by length and centromeric index, corrected by dragging; means over cells, Levan classification, karyotype formula, fundamental number and idiogram to scale.'] },
+      d: ['Homólogos emparejados por longitud e índice centromérico, con corrección por arrastre; promedios entre células, clasificación de Levan, fórmula cariotípica, número fundamental e idiograma a escala.', 'Homologs paired by length and centromeric index, corrected by dragging; means over cells, Levan classification, karyotype formula, fundamental number and idiogram to scale.'] },
     { n: 4, es: 'Asimetría', en: 'Asymmetry', tag: ['Describir', 'Describe'],
       d: ['TF%, AsK%, Syi, Rec, A1, A2, A, CVCL, CVCI, MCA, AI, DI y las categorías de Stebbins, con qué mide cada índice y cuáles se recomiendan hoy.', 'TF%, AsK%, Syi, Rec, A1, A2, A, CVCL, CVCI, MCA, AI, DI and the Stebbins categories, with what each index measures and which are recommended today.'] },
     { n: 5, es: 'Meiosis', en: 'Meiosis', tag: ['Aparear', 'Pair'],
@@ -42,7 +42,7 @@
     ['Preparar', 'Prepare', 'raíces, anteras, tinción', 'roots, anthers, staining'],
     ['Contar', 'Count', 'el número 2n', 'the number 2n'],
     ['Medir', 'Measure', 'cada brazo, a escala', 'each arm, to scale'],
-    ['Ordenar', 'Arrange', 'homólogos e idiograma', 'homologues and idiogram'],
+    ['Ordenar', 'Arrange', 'homólogos e idiograma', 'homologs and idiogram'],
     ['Describir', 'Describe', 'asimetría y fórmula', 'asymmetry and formula'],
     ['Comparar', 'Compare', 'citotipos y taxones', 'cytotypes and taxa'],
     ['Publicar', 'Publish', 'figuras, métodos, paquete', 'figures, methods, package'],
@@ -51,7 +51,7 @@
   const EXAMPLES = [
     { k: 'zea', t: '<i>Zea mays</i> · 2n = 20', tag: ['Bloques 2, 3, 4 y 7', 'Blocks 2, 3, 4 and 7'],
       d: ['Cinco células medidas, con una metafase dibujada para trazarla, el satélite del par 6 y nudos heterocromáticos.', 'Five measured cells, with a drawn metaphase to trace, the satellite of pair 6 and heterochromatic knobs.'] },
-    { k: 'sechium', t: '<i>Sechium edule</i> · 2n = 28 y 24', tag: ['Bloques 3, 7 y 8', 'Blocks 3, 7 and 8'],
+    { k: 'sechium', t: '<i>Sechium edule</i> · 2n = 28 ' + L2('y', 'and') + ' 24', tag: ['Bloques 3, 7 y 8', 'Blocks 3, 7 and 8'],
       d: ['Tres accesiones cultivadas con 2n = 28 y una silvestre con 2n = 24, con señales de ADNr, coordenadas y un árbol para la evolución del número.', 'Three cultivated accessions with 2n = 28 and a wild one with 2n = 24, with rDNA signals, coordinates and a tree for number evolution.'] },
     { k: 'poly', t: L2('Serie poliploide ficticia', 'Fictitious polyploid series') + ' · 2x, 4x, 6x', tag: ['Bloques 5 y 6', 'Blocks 5 and 6'],
       d: ['Configuraciones meióticas célula por célula, polen, tétradas, conteos y citometría con su histograma.', 'Meiotic configurations cell by cell, pollen, tetrads, counts and cytometry with its histogram.'] },
@@ -154,6 +154,15 @@
     ['Wilson EB. 1927. Probable inference, the law of succession, and statistical inference. <i>Journal of the American Statistical Association</i> 22: 209–212.', 'est'],
     ['Zuo L, Yuan Q. 2011. The difference between the heterogeneity of the centromeric index and intrachromosomal asymmetry. <i>Plant Systematics and Evolution</i> 297: 141–145.', 'asy'],
   ];
+  /* a reference of the list in the language asked: in English the editions and
+     the cities lose their Spanish forms (2.ª ed. → 2nd ed., Londres → London);
+     titles and names stay as published */
+  const ORD = n => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th'));
+  function refLang(r, lang) {
+    if (lang !== 'en' || r == null) return r;
+    return String(r).replace(/(\d+)\.ª ed\./g, (m, n) => ORD(+n) + ' ed.').replace(/Londres/g, 'London').replace(/Nueva York/g, 'New York')
+      .replace(/Berlín/g, 'Berlin').replace(/Documento en línea/g, 'Online document');
+  }
   const REF_TOPICS = Object.assign({ tec: ['Técnicas', 'Techniques'] }, FAMS);
 
   /* ---------------- theory ---------------- */
@@ -165,21 +174,21 @@
     { h: ['Dónde está el centrómero: m, sm, st y t', 'Where the centromere is: m, sm, st and t'], tag: ['Bloque 3', 'Block 3'],
       fig: ['levan', 'Las cuatro clases de Levan et al. (1964) por la razón de brazos r = q/p.', 'The four classes of Levan et al. (1964) by the arm ratio r = q/p.'],
       es: '<p>La <b>razón de brazos</b> r = q/p y el <b>índice centromérico</b> IC = 100·p/(p + q) dicen dónde está el centrómero. Levan, Fredga y Sandberg (1964) fijaron los nombres que se usan hoy: <b>metacéntrico</b> (m, r hasta 1.7), <b>submetacéntrico</b> (sm, hasta 3.0), <b>subtelocéntrico</b> (st, hasta 7.0) y <b>telocéntrico</b> (t, más de 7.0); M y T son los casos exactos r = 1 y r = ∞. Guerra (1986) propuso juntar st y t en «acrocéntrico». La app usa los límites de Levan, pero puedes cambiarlos.</p>',
-      en: '<p>The <b>arm ratio</b> r = q/p and the <b>centromeric index</b> CI = 100·p/(p + q) say where the centromere is. Levan, Fredga and Sandberg (1964) set the names used today: <b>metacentric</b> (m, r up to 1.7), <b>submetacentric</b> (sm, up to 3.0), <b>subtelocentric</b> (st, up to 7.0) and <b>telocentric</b> (t, above 7.0); M and T are the exact cases r = 1 and r = ∞. Guerra (1986) proposed merging st and t into «acrocentric». The app uses Levan\'s limits, but you can change them.</p>' },
+      en: '<p>The <b>arm ratio</b> r = q/p and the <b>centromeric index</b> CI = 100·p/(p + q) say where the centromere is. Levan, Fredga and Sandberg (1964) set the names used today: <b>metacentric</b> (m, r up to 1.7), <b>submetacentric</b> (sm, up to 3.0), <b>subtelocentric</b> (st, up to 7.0) and <b>telocentric</b> (t, above 7.0); M and T are the exact cases r = 1 and r = ∞. Guerra (1986) proposed merging st and t into “acrocentric”. The app uses Levan\'s limits, but you can change them.</p>' },
     { h: ['Cariotipo, idiograma y fórmula', 'Karyotype, idiogram and formula'], tag: ['Bloque 3', 'Block 3'],
       es: '<p>El <b>cariotipo</b> es el conjunto de cromosomas de una especie descrito por su número, su tamaño y su forma. Los homólogos se emparejan y se ordenan, casi siempre de mayor a menor. El <b>idiograma</b> es su dibujo esquemático a escala, hecho con los promedios de varias células, porque una sola célula puede estar más o menos condensada. La <b>longitud relativa</b> (el porcentaje de cada par en la longitud del juego haploide) corrige esa diferencia de condensación.</p><p>La <b>fórmula cariotípica</b> resume el cariotipo: 2n = 2x = 20 = 14m + 6sm quiere decir 20 cromosomas, dos juegos de 10, catorce metacéntricos y seis submetacéntricos. El <b>número fundamental</b> cuenta los brazos: dos por cada m o sm y uno por cada st o t.</p>',
-      en: '<p>The <b>karyotype</b> is the chromosome complement of a species described by its number, size and shape. Homologues are paired and ordered, almost always from longest to shortest. The <b>idiogram</b> is its schematic drawing to scale, made from the means of several cells, because a single cell may be more or less condensed. The <b>relative length</b> (the percentage of each pair in the length of the haploid set) corrects for that difference in condensation.</p><p>The <b>karyotype formula</b> sums it up: 2n = 2x = 20 = 14m + 6sm means 20 chromosomes, two sets of 10, fourteen metacentric and six submetacentric. The <b>fundamental number</b> counts the arms: two for each m or sm and one for each st or t.</p>' },
+      en: '<p>The <b>karyotype</b> is the chromosome complement of a species described by its number, size and shape. Homologs are paired and ordered, almost always from longest to shortest. The <b>idiogram</b> is its schematic drawing to scale, made from the means of several cells, because a single cell may be more or less condensed. The <b>relative length</b> (the percentage of each pair in the length of the haploid set) corrects for that difference in condensation.</p><p>The <b>karyotype formula</b> sums it up: 2n = 2x = 20 = 14m + 6sm means 20 chromosomes, two sets of 10, fourteen metacentric and six submetacentric. The <b>fundamental number</b> counts the arms: two for each m or sm and one for each st or t.</p>' },
     { h: ['Asimetría: dos cosas distintas', 'Asymmetry: two different things'], tag: ['Bloque 4', 'Block 4'],
       fig: ['asym', 'Mismo número de cromosomas, distinta asimetría.', 'Same chromosome number, different asymmetry.'],
       es: '<p>Un cariotipo es <b>simétrico</b> cuando sus cromosomas son parecidos en tamaño y casi todos metacéntricos, y <b>asimétrico</b> cuando hay cromosomas de tamaños muy distintos o con el centrómero cerca de un extremo. Stebbins (1971) vio que en muchos grupos de plantas la evolución lleva de cariotipos simétricos a asimétricos y propuso doce categorías, de 1A (simétrico) a 4C.</p><p>Son dos fenómenos: la asimetría <b>intracromosómica</b> (dónde están los centrómeros) y la <b>intercromosómica</b> (cuánto varían las longitudes). Por eso un solo índice no basta. Se han propuesto muchos; varios son redundantes (AsK% = 100 − TF%; Syi es función de TF%). Peruzzi y Eroğlu (2013) recomiendan describirla con <b>MCA</b> (intra) y <b>CVCL</b> (inter), y Paszko (2006) añadió <b>CVCI</b>, que mide la heterogeneidad de las posiciones del centrómero.</p>',
       en: '<p>A karyotype is <b>symmetric</b> when its chromosomes are similar in size and nearly all metacentric, and <b>asymmetric</b> when there are chromosomes of very different sizes or with the centromere near one end. Stebbins (1971) saw that in many plant groups evolution goes from symmetric to asymmetric karyotypes and proposed twelve categories, from 1A (symmetric) to 4C.</p><p>These are two phenomena: <b>intrachromosomal</b> asymmetry (where the centromeres are) and <b>interchromosomal</b> asymmetry (how much the lengths vary). That is why one index is not enough. Many have been proposed; several are redundant (AsK% = 100 − TF%; Syi is a function of TF%). Peruzzi and Eroğlu (2013) recommend describing it with <b>MCA</b> (intra) and <b>CVCL</b> (inter), and Paszko (2006) added <b>CVCI</b>, which measures the heterogeneity of centromere positions.</p>' },
     { h: ['La mitosis y el conteo de 2n', 'Mitosis and the count of 2n'], tag: ['Bloques 2 y 6', 'Blocks 2 and 6'],
       es: '<p>Los cromosomas se cuentan y se miden en <b>metafase mitótica</b>, cuando están más condensados, casi siempre en puntas de raíz. Un <b>pretratamiento</b> (agua helada, 8-hidroxiquinoleína, colchicina) detiene las células en metafase y acorta los cromosomas; luego se <b>fija</b>, se <b>hidroliza</b>, se <b>tiñe</b> (orceína, carmín o Feulgen) y se <b>aplasta</b>. El número <b>2n</b> se cuenta en varias células; la <b>moda</b> es el número de la planta, y las células con números distintos suelen ser cromosomas perdidos o encimados al aplastar.</p><p>El <b>índice mitótico</b> (células en división entre células observadas) y las aberraciones en las fases son la base de la prueba de <i>Allium</i> para medir la toxicidad de una sustancia (Fiskesjö 1985).</p>',
-      en: '<p>Chromosomes are counted and measured at <b>mitotic metaphase</b>, when they are most condensed, almost always in root tips. A <b>pretreatment</b> (ice water, 8-hydroxyquinoline, colchicine) arrests the cells at metaphase and shortens the chromosomes; then they are <b>fixed</b>, <b>hydrolysed</b>, <b>stained</b> (orcein, carmine or Feulgen) and <b>squashed</b>. The number <b>2n</b> is counted in several cells; the <b>mode</b> is the number of the plant, and cells with other numbers are usually chromosomes lost or overlapping in the squash.</p><p>The <b>mitotic index</b> (dividing cells over cells observed) and the aberrations in the phases are the basis of the <i>Allium</i> test for the toxicity of a substance (Fiskesjö 1985).</p>' },
+      en: '<p>Chromosomes are counted and measured at <b>mitotic metaphase</b>, when they are most condensed, almost always in root tips. A <b>pretreatment</b> (ice water, 8-hydroxyquinoline, colchicine) arrests the cells at metaphase and shortens the chromosomes; then they are <b>fixed</b>, <b>hydrolyzed</b>, <b>stained</b> (orcein, carmine or Feulgen) and <b>squashed</b>. The number <b>2n</b> is counted in several cells; the <b>mode</b> is the number of the plant, and cells with other numbers are usually chromosomes lost or overlapping in the squash.</p><p>The <b>mitotic index</b> (dividing cells over cells observed) and the aberrations in the phases are the basis of the <i>Allium</i> test for the toxicity of a substance (Fiskesjö 1985).</p>' },
     { h: ['La meiosis: apareamiento, quiasmas y configuraciones', 'Meiosis: pairing, chiasmata and configurations'], tag: ['Bloque 5', 'Block 5'],
       fig: ['meiosis', 'Las configuraciones más comunes en diacinesis y metafase I.', 'The most common configurations at diakinesis and metaphase I.'],
       es: '<p>En la profase I los homólogos se aparean y se entrecruzan; cada entrecruzamiento se ve en diacinesis como un <b>quiasma</b>. Un <b>bivalente en anillo</b> tiene quiasmas en los dos brazos y uno <b>en varilla</b>, en uno solo; un <b>univalente</b> es un cromosoma sin pareja. Contar las configuraciones de cada célula da la frecuencia de quiasmas y el <b>índice de recombinación</b> (número haploide más quiasmas por célula).</p><p>En un <b>autopoliploide</b> hay más de dos homólogos de cada cromosoma y pueden aparearse varios a la vez: aparecen <b>trivalentes</b> y <b>cuadrivalentes</b>. En un <b>alopoliploide</b> cada cromosoma se aparea sólo con el de su propio genoma y se forman bivalentes. Comparar lo observado con lo esperado bajo cada hipótesis (Jackson y Casey 1982) ayuda a decidir el origen de un poliploide. Una meiosis irregular deja tétradas anormales y polen inviable: el <b>índice meiótico</b> (Love 1951) y la tinción del polen lo miden.</p>',
-      en: '<p>In prophase I homologues pair and cross over; each crossover is seen at diakinesis as a <b>chiasma</b>. A <b>ring bivalent</b> has chiasmata in both arms and a <b>rod bivalent</b> in one only; a <b>univalent</b> is a chromosome without a partner. Counting the configurations of each cell gives the chiasma frequency and the <b>recombination index</b> (haploid number plus chiasmata per cell).</p><p>In an <b>autopolyploid</b> there are more than two homologues of each chromosome and several may pair at once: <b>trivalents</b> and <b>quadrivalents</b> appear. In an <b>allopolyploid</b> each chromosome pairs only with the one of its own genome and bivalents form. Comparing the observed with the expected under each hypothesis (Jackson and Casey 1982) helps decide the origin of a polyploid. An irregular meiosis leaves abnormal tetrads and inviable pollen: the <b>meiotic index</b> (Love 1951) and pollen staining measure it.</p>' },
+      en: '<p>In prophase I homologs pair and cross over; each crossover is seen at diakinesis as a <b>chiasma</b>. A <b>ring bivalent</b> has chiasmata in both arms and a <b>rod bivalent</b> in one only; a <b>univalent</b> is a chromosome without a partner. Counting the configurations of each cell gives the chiasma frequency and the <b>recombination index</b> (haploid number plus chiasmata per cell).</p><p>In an <b>autopolyploid</b> there are more than two homologs of each chromosome and several may pair at once: <b>trivalents</b> and <b>quadrivalents</b> appear. In an <b>allopolyploid</b> each chromosome pairs only with the one of its own genome and bivalents form. Comparing the observed with the expected under each hypothesis (Jackson and Casey 1982) helps decide the origin of a polyploid. An irregular meiosis leaves abnormal tetrads and inviable pollen: the <b>meiotic index</b> (Love 1951) and pollen staining measure it.</p>' },
     { h: ['Ploidía, número básico, aneuploidía y disploidía', 'Ploidy, base number, aneuploidy and dysploidy'], tag: ['Bloques 6 y 8', 'Blocks 6 and 8'],
       fig: ['ploidy', 'Un diploide y un tetraploide con el mismo número básico.', 'A diploid and a tetraploid with the same base number.'],
       es: '<p>El <b>número básico x</b> es el número de cromosomas de un juego monoploide del grupo; el <b>nivel de ploidía</b> es cuántos juegos tiene una planta (2n = 4x = 28 con x = 7 es un tetraploide). Los niveles múltiplos de x forman una <b>serie euploide</b>. Ganar o perder cromosomas sueltos es <b>aneuploidía</b> (2n = 2x + 1, un trisómico). La <b>disploidía</b> es otra cosa: un cambio del número básico por fusiones o fisiones de cromosomas, sin cambiar la cantidad de ADN de golpe (Guerra 2008; Schubert y Lysak 2011). El Bloque 8 reconstruye estos eventos sobre un árbol.</p>',
@@ -274,28 +283,32 @@
         host.querySelectorAll('li').forEach(li => { li.hidden = !!b.dataset.t && li.dataset.t !== b.dataset.t; });
       });
     }
-    host.innerHTML = REFS.map(r => `<li data-t="${r[1]}">${r[0]} <span class="ref-topic">${L2(REF_TOPICS[r[1]][0], REF_TOPICS[r[1]][1])}</span></li>`).join('');
+    host.innerHTML = REFS.map(r => `<li data-t="${r[1]}">${L2(r[0], refLang(r[0], 'en'))} <span class="ref-topic">${L2(REF_TOPICS[r[1]][0], REF_TOPICS[r[1]][1])}</span></li>`).join('');
   }
-  /* cited by its author, title and version; there is no DOI yet */
+  /* cited by its author, title and version; there is no DOI yet. The English
+     citation carries the English title */
   const CITE_TITLE = 'CytogeneticsPro: citogenética vegetal en el navegador';
+  const CITE_TITLE_EN = 'CytogeneticsPro: plant cytogenetics in the browser';
   function citeText() {
+    const bib = title => `@software{barreraguzman2026cytogeneticspro,\n  author  = {Barrera-Guzmán, Luis Ángel},\n  title   = {${title}},\n  version = {${APP_VERSION}},\n  year    = {2026},\n  note    = {LABG Suite}\n}`;
     return {
       apa: `Barrera-Guzmán, L. Á. (2026). <i>${CITE_TITLE}</i> (versión ${APP_VERSION}) [Programa de cómputo]. LABG Suite.`,
-      apaEn: `Barrera-Guzmán, L. Á. (2026). <i>${CITE_TITLE}</i> (version ${APP_VERSION}) [Computer software]. LABG Suite.`,
-      bib: `@software{barreraguzman2026cytogeneticspro,\n  author  = {Barrera-Guzmán, Luis Ángel},\n  title   = {${CITE_TITLE}},\n  version = {${APP_VERSION}},\n  year    = {2026},\n  note    = {LABG Suite}\n}`,
+      apaEn: `Barrera-Guzmán, L. Á. (2026). <i>${CITE_TITLE_EN}</i> (version ${APP_VERSION}) [Computer software]. LABG Suite.`,
+      bib: bib(CITE_TITLE),
+      bibEn: bib(CITE_TITLE_EN),
     };
   }
   function buildCite() {
     const C = citeText();
     const a = el('citeApa'), b = el('citeBib');
     if (a) a.innerHTML = L2(C.apa, C.apaEn);
-    if (b) b.textContent = C.bib;
+    if (b) b.innerHTML = L2(esc(C.bib), esc(C.bibEn));
     const copy = (btn, text) => btn && btn.addEventListener('click', () => {
       const done = () => toast(T('Copiado', 'Copied'), 'success');
       if (navigator.clipboard) navigator.clipboard.writeText(text()).then(done, () => {}); else done();
     });
     copy(el('copyApa'), () => T(C.apa, C.apaEn).replace(/<[^>]+>/g, ''));
-    copy(el('copyBib'), () => C.bib);
+    copy(el('copyBib'), () => T(C.bib, C.bibEn));
   }
   /* every picture is drawn again when the language changes: their labels are
      written with T() at drawing time */
@@ -358,5 +371,5 @@
   });
   document.addEventListener('themechange', () => { /* the pictures use CSS variables: nothing to redraw */ });
 
-  window.Home = { BLOCKS, METHODS, REFS, FAMS, REF_TOPICS, THEORY, EXAMPLES, citeText, CITE_TITLE, paintArt };
+  window.Home = { BLOCKS, METHODS, REFS, FAMS, REF_TOPICS, THEORY, EXAMPLES, citeText, CITE_TITLE, CITE_TITLE_EN, refLang, citeLang, paintArt };
 })();

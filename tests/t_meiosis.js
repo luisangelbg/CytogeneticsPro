@@ -1,7 +1,7 @@
 {
 /* CytogeneticsPro — tests of meiosis.js: chiasmata counted from the
    configurations, the recombination index, the expectation model checked
-   against closed forms worked by hand (a pair, three and four homologues),
+   against closed forms worked by hand (a pair, three and four homologs),
    conservation of chromosomes and chiasmata, the meiotic index and pollen. */
 sec('Meiosis: una célula');
 let c = Meiosis.cell({ IIring: 5, IIrod: 2 });

@@ -21,11 +21,11 @@
       formula (AAAA autotetraploid, AABB allotetraploid, AAAABB…).
 
    The model of expectation, stated so it can be checked by hand: every
-   chromosome has two arms; at the end of each arm the homologues of a group
+   chromosome has two arms; at the end of each arm the homologs of a group
    pair two by two at random (with an odd number, one end stays unpaired),
    independently at the two ends; every paired arm forms a chiasma with
    probability c, independently. A configuration is a set of chromosomes held
-   together by chiasmata: chain (open) or ring (closed). With four homologues
+   together by chiasmata: chain (open) or ring (closed). With four homologs
    the two ends choose the same partners with probability 1/3, so pairing in a
    quadrivalent happens with probability 2/3 (Sybenga 1975); the frequencies
    of every configuration follow the same counting as the models of Jackson
@@ -171,7 +171,7 @@
     return out;
   }
   /* the components (paths and cycles) of the graph made by the pairing of the
-     left ends (pl) and of the right ends (pr) of m homologues */
+     left ends (pl) and of the right ends (pr) of m homologs */
   function components(pl, pr) {
     const m = pl.length, seen = new Array(m).fill(false), out = [];
     const deg = i => (pl[i] >= 0 ? 1 : 0) + (pr[i] >= 0 ? 1 : 0);
@@ -197,7 +197,7 @@
     }
     return out;
   }
-  /* the distribution of the configurations of one group of m homologues */
+  /* the distribution of the configurations of one group of m homologs */
   const groupCache = new Map();
   function group(m, c) {
     const key = m + ':' + c;

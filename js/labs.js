@@ -55,7 +55,7 @@
     const t = el('lab1Arms');
     if (!t) return;
     const head = `<thead><tr><th>${L2('Par', 'Pair')}</th><th class="num" title="${T('brazo corto', 'short arm')}">p (µm)</th><th class="num" title="${T('brazo largo', 'long arm')}">q (µm)</th>` +
-      `<th class="num">IC</th><th class="num">r</th><th>${L2('Clase', 'Class')}</th></tr></thead>`;
+      `<th class="num">${L2('IC', 'CI')}</th><th class="num">r</th><th>${L2('Clase', 'Class')}</th></tr></thead>`;
     const rows = chrs.map((c, i) => {
       const p = K.pairs[i];
       const id = 'lab1-' + i;
@@ -74,7 +74,7 @@
       host.innerHTML = Asym.ORDER.map(k => {
         const m = Asym.INDICES.find(x => x.k === k), v = A[k];
         const d = ['A1', 'A2', 'A'].includes(k) ? 3 : 2;
-        return `<div class="idx-tile${m.recommended ? ' rec' : ''}" title="${esc(m.f)} — ${esc(m.ref)}"><div class="k"><span>${m.name}</span><span class="kind ${m.kind}">${T(kindName[m.kind])}</span></div>` +
+        return `<div class="idx-tile${m.recommended ? ' rec' : ''}" title="${esc(m.f)} — ${esc(citeLang(m.ref))}"><div class="k"><span>${m.name}</span><span class="kind ${m.kind}">${T(kindName[m.kind])}</span></div>` +
           `<div class="v">${isFinite(v) ? fmtFixed(v, d) : '—'}</div></div>`;
       }).join('');
     }
@@ -204,7 +204,7 @@
     ], keys.map(k => ({ k, e: E.perCell[k], p: 100 * E.perCell[k] * Meiosis.keyInfo(k).size / E.chromosomes })));
     drawCell(f, x, c);
     const n2 = E.chromosomes, mv = E.multivalentShare;
-    /* with four or five homologues only one multivalent fits: the expectation is then a probability */
+    /* with four or five homologs only one multivalent fits: the expectation is then a probability */
     const one = E.groups.every(m => m < 6);
     el('lab2Status').innerHTML = L2(
       `Fórmula genómica <b>${f}</b> con x = ${x}: 2n = ${f.length}x = ${n2}. Se esperan <b>${fmtFixed(E.xtaPerCell, 1)} quiasmas por célula</b> (${E.pairedArms} brazos apareados × c). ` +
@@ -213,8 +213,8 @@
         ' Con c = 1 se llega al máximo que permite el apareamiento al azar.'
         : 'Con apareamiento sólo dentro de cada genoma no hay multivalentes: todo son bivalentes y univalentes.'),
       `Genome formula <b>${f}</b> with x = ${x}: 2n = ${f.length}x = ${n2}. <b>${fmtFixed(E.xtaPerCell, 1)} chiasmata per cell</b> are expected (${E.pairedArms} paired arms × c). ` +
-      (mv > 1e-9 ? (one ? `Each group of homologues forms a multivalent with probability <b>${fmtFixed(100 * mv, 1)} %</b>, and a cell has <b>${fmtFixed(mv * x, 2)}</b> on average.`
-        : `Each group of homologues forms <b>${fmtFixed(mv, 3)}</b> multivalents on average, and a cell, <b>${fmtFixed(mv * x, 2)}</b>.`) +
+      (mv > 1e-9 ? (one ? `Each group of homologs forms a multivalent with probability <b>${fmtFixed(100 * mv, 1)} %</b>, and a cell has <b>${fmtFixed(mv * x, 2)}</b> on average.`
+        : `Each group of homologs forms <b>${fmtFixed(mv, 3)}</b> multivalents on average, and a cell, <b>${fmtFixed(mv * x, 2)}</b>.`) +
         ' With c = 1 the maximum that random pairing allows is reached.'
         : 'With pairing only within each genome there are no multivalents: everything is bivalents and univalents.'));
   }

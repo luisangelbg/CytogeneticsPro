@@ -32,7 +32,7 @@
     let res;
     if (o.mode === 'cells' && K.cells.length) {
       /* the indices with every chromosome of the cell; the length of ONE set is
-         the sum over the groups of the mean length of their homologues (not
+         the sum over the groups of the mean length of their homologs (not
          the whole complement of the cell) */
       const per = K.cells.map(c => {
         const gs = c.groups.filter(g => g && g.homolog.length);
@@ -86,7 +86,7 @@
       { key: 'THL', label: L2('Juego', 'Set') + ' (' + rows[0].unit + ')', num: true, html: true, get: r => show(r, 'THL') },
     ].concat(ks.map(k => {
       const m = Asym.INDICES.find(x => x.k === k);
-      return { key: k, label: `<abbr title="${esc(m.f + ' — ' + m.ref)}">${esc(m.name)}</abbr>${m.recommended ? ' ★' : ''}`, num: true, html: true, get: r => show(r, k) };
+      return { key: k, label: `<abbr title="${esc(m.f + ' — ' + citeLang(m.ref))}">${esc(m.name)}</abbr>${m.recommended ? ' ★' : ''}`, num: true, html: true, get: r => show(r, k) };
     })).concat([{ key: 'st', label: 'Stebbins', get: r => r.R.stebbins }]);
     buildTable('b4Table', cols, rows, { className: 'fit', foot: `<tr><td colspan="${cols.length}" class="hint">${L2(
       `★ recomendados (Peruzzi y Eroğlu 2013). ${rows[0].mode === 'cells' ? 'Media ± de entre células' : 'Sobre las medias de los pares'}; desviación ${opts().pop ? 'poblacional (n)' : 'muestral (n − 1)'}.`,
@@ -157,7 +157,7 @@
   function renderInfo() {
     const kind = { intra: ['intracromosómica', 'intrachromosomal'], inter: ['intercromosómica', 'interchromosomal'], both: ['las dos', 'both'] };
     el('b4Info').innerHTML = Asym.INDICES.map((m, i) => `<details class="acc"${i < 1 ? ' open' : ''}><summary>${esc(m.name)} <span class="acc-tag">${L2(kind[m.kind][0], kind[m.kind][1])}${m.recommended ? ' · ★' : ''}${m.historical ? ' · ' + L2('histórico', 'historical') : ''}${m.redundant ? ' · ' + L2('redundante', 'redundant') : ''}</span></summary>` +
-      `<div class="acc-body"><p><code>${esc(m.f)}</code> · ${esc(m.ref)}</p><p>${L2(m.es, m.en)}</p></div></details>`).join('');
+      `<div class="acc-body"><p><code>${esc(m.f)}</code> · ${L2(esc(m.ref), esc(citeLang(m.ref, 'en')))}</p><p>${L2(m.es, m.en)}</p></div></details>`).join('');
   }
   /* CSV with every index of every accession */
   function csvRows() {
@@ -187,8 +187,8 @@
       if (!disVars.length) disVars = [k];
       renderDis(ready().map(a => asym(a.id)).filter(Boolean));
     });
-    el('b4Csv').addEventListener('click', () => download(toDelimited(csvRows()), 'indices_asimetria.csv', 'text/csv;charset=utf-8'));
-    el('b4Tsv').addEventListener('click', () => download(toDelimited(csvRows(), '\t'), 'indices_asimetria.tsv', 'text/tab-separated-values;charset=utf-8'));
+    el('b4Csv').addEventListener('click', () => download(toDelimited(csvRows()), fileLang('indices_asimetria.csv'), 'text/csv;charset=utf-8'));
+    el('b4Tsv').addEventListener('click', () => download(toDelimited(csvRows(), '\t'), fileLang('indices_asimetria.tsv'), 'text/tab-separated-values;charset=utf-8'));
     el('panel-4').addEventListener('click', e => {
       const g = e.target.closest('[data-goto]'); if (g) goStep(g.dataset.goto);
       const x = e.target.closest('[data-example]'); if (x) Examples.open(x.dataset.example);

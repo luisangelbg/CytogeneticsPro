@@ -11,7 +11,7 @@
 
 /* CytogeneticsPro — Block 3, the karyotype.
    For each accession: the measured cells → Karyo.build with the settings of
-   this block; the board where the homologues of each cell are checked and
+   this block; the board where the homologs of each cell are checked and
    corrected (drag one chromosome onto another to swap them, or select one and
    then the other); the karyotype table, its formula and totals; the idiogram.
    state.karyo[accession] keeps the result for Blocks 4, 7, 8 and 10. */
@@ -107,12 +107,12 @@
     const sizes = K.cells.map(c => c.n2), mo = Stats.modes(sizes);
     if (mo.table.size > 1) showMessage('b3Msg', 'warning', T(`Las células no tienen el mismo número de cromosomas (${[...mo.table.keys()].join(', ')}).`, `The cells do not have the same number of chromosomes (${[...mo.table.keys()].join(', ')}).`),
       T('Los pares de las células incompletas se promedian con los que tengan; revisa el emparejamiento.', 'The pairs of incomplete cells are averaged with what they have; check the pairing.'));
-    if (K.n2 % K.k) showMessage('b3Msg', 'info', T(`Con ${K.n2} cromosomas y ${K.k} homólogos por grupo queda un grupo incompleto.`, `With ${K.n2} chromosomes and ${K.k} homologues per group one group is incomplete.`));
+    if (K.n2 % K.k) showMessage('b3Msg', 'info', T(`Con ${K.n2} cromosomas y ${K.k} homólogos por grupo queda un grupo incompleto.`, `With ${K.n2} chromosomes and ${K.k} homologs per group one group is incomplete.`));
     const cvBad = K.pairs.filter(p => p.n > 1 && p.c.sd / p.c.mean > 0.2);
     if (cvBad.length) showMessage('b3Msg', 'info', T(`Los pares ${cvBad.map(p => p.j + 1).join(', ')} varían más de 20 % entre células.`, `Pairs ${cvBad.map(p => p.j + 1).join(', ')} vary by more than 20 % among cells.`),
-      T('Puede ser condensación distinta (mira la longitud relativa) o un homólogo mal emparejado.', 'It may be different condensation (look at the relative length) or a mispaired homologue.'));
+      T('Puede ser condensación distinta (mira la longitud relativa) o un homólogo mal emparejado.', 'It may be different condensation (look at the relative length) or a mispaired homolog.'));
   }
-  /* ---------- the board of homologues ---------- */
+  /* ---------- the board of homologs ---------- */
   function glyph(ch, H, unitPx, c) {
     /* a straightened picture when the chromosome was traced on an image, a drawing to scale otherwise */
     const src = (state.cells.find(x => x.id === c.id) || {});
@@ -277,7 +277,7 @@
     const host = el('b3Idio');
     if (!K) { host.innerHTML = ''; return; }
     const o = idioOpts();
-    /* the deviation among cells belongs to the pairs: the view of the homologues does not draw it */
+    /* the deviation among cells belongs to the pairs: the view of the homologs does not draw it */
     const dip = o.view === 'diploid';
     el('b3Sd').disabled = dip; el('b3SdNote').hidden = !dip;
     if (!o.title) { const A = accession(curAcc) || {}; el('b3Title').placeholder = (A.taxon ? A.taxon + ' · ' : '') + (A.name || ''); }
@@ -317,12 +317,12 @@
       if (tgt && tgt.dataset.id !== id) swap(id, tgt.dataset.id);
       else { const row = e.target.closest('.kb-row'); if (row) moveTo(id, +row.dataset.g); }
     });
-    el('b3Csv').addEventListener('click', () => { const K = karyo(curAcc); if (K) download(toDelimited([HEAD()].concat(tableRows(K, curAcc))), 'cariotipo_' + slug(accName(curAcc)) + '.csv', 'text/csv;charset=utf-8'); });
-    el('b3Tsv').addEventListener('click', () => { const K = karyo(curAcc); if (K) download(toDelimited([HEAD()].concat(tableRows(K, curAcc)), '\t'), 'cariotipo_' + slug(accName(curAcc)) + '.tsv', 'text/tab-separated-values;charset=utf-8'); });
+    el('b3Csv').addEventListener('click', () => { const K = karyo(curAcc); if (K) download(toDelimited([HEAD()].concat(tableRows(K, curAcc))), fileLang('cariotipo_' + slug(accName(curAcc)) + '.csv'), 'text/csv;charset=utf-8'); });
+    el('b3Tsv').addEventListener('click', () => { const K = karyo(curAcc); if (K) download(toDelimited([HEAD()].concat(tableRows(K, curAcc)), '\t'), fileLang('cariotipo_' + slug(accName(curAcc)) + '.tsv'), 'text/tab-separated-values;charset=utf-8'); });
     el('b3CsvAll').addEventListener('click', () => {
       const rows = [HEAD()];
       state.accessions.forEach(a => { const K = karyo(a.id); if (K) rows.push(...tableRows(K, a.id)); });
-      download(toDelimited(rows), 'cariotipos.csv', 'text/csv;charset=utf-8');
+      download(toDelimited(rows), fileLang('cariotipos.csv'), 'text/csv;charset=utf-8');
     });
     el('panel-3').addEventListener('click', e => {
       const g = e.target.closest('[data-goto]'); if (g) goStep(g.dataset.goto);

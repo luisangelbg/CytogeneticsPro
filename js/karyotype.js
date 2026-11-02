@@ -12,7 +12,7 @@
 /* CytogeneticsPro — the karyotype engine (Karyo).
 
    From the measured arms of every chromosome of every cell it builds the
-   karyotype of an accession: homologues grouped, groups averaged over cells,
+   karyotype of an accession: homologs grouped, groups averaged over cells,
    relative lengths, centromeric index, arm ratio, the class of each pair
    under a configurable scheme, the karyotype formula, the total length of the
    complement and the fundamental number.
@@ -100,9 +100,9 @@
     return { s, l, c, ci: centIndex(s, l), r: armRatio(s, l), sat, satArm: sat ? satArm : null, swapped, src: ch };
   }
 
-  /* ---------------- grouping homologues inside one cell ----------------
+  /* ---------------- grouping homologs inside one cell ----------------
      Chromosomes are sorted by length and cut into consecutive groups of k (2
-     for homologous pairs; the ploidy level for groups of homologues of an
+     for homologous pairs; the ploidy level for groups of homologs of an
      autopolyploid); then swaps between groups are tried while they lower the
      total within-group dissimilarity: the squared difference in length (as a
      percentage of the mean length of the cell) plus the squared difference in

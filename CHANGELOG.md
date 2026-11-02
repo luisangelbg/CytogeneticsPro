@@ -1,5 +1,32 @@
 # Cambios de CytogeneticsPro
 
+## Versión 1.0.0 · Correcciones de la interfaz inglesa — 1 de noviembre de 2026
+
+Sin cambio de versión. Problemas que sólo se veían con la interfaz en inglés y salieron al traducir el manual. En
+español no cambia nada visible.
+
+- **Textos en español con la interfaz en inglés**: la ficha del chayote dice «2n = 28 and 24»; la cita inglesa lleva
+  el título inglés «CytogeneticsPro: plant cytogenetics in the browser» (APA, BibTeX, métodos y `README.txt`), la
+  española sigue igual; los títulos de los cuatro ejemplos salen en el idioma de la interfaz; las citas de los índices
+  de asimetría y de la hoja de práctica llevan «and» («Greilhuber and Speta 1976», «Sharma and Sharma 1980»); las
+  referencias inglesas (Inicio, métodos, informe y hoja de práctica) dicen «2nd/3rd/6th ed.», «London», «New York»,
+  «Berlin» y «Online document» (`Home.refLang`, `Report.refFor(cita, idioma)`); «2C (Mbp)» y «1Cx (Mbp)» en la tabla
+  de contenido de ADN del Bloque 6 y del informe; longitud oeste «W» en el mapa de citotipos; rótulo «CI» en la tabla
+  del laboratorio del Inicio y en las del Bloque 2.
+- **Ortografía estadounidense**: «homolog(s)» en lugar de «homologue(s)» en toda la interfaz inglesa (teoría,
+  bloques, glosario, preguntas, métodos e informe); «print dialog» y «checked» en el Bloque 10; «hydrolyzed» en la
+  teoría; en las copias de los módulos comunes, «color», «gray», «center(ed)» y «Canceled» (editor ✎, estudio de
+  figuras y esperas).
+- **Comillas**: “Download”, “Open project” (`README.txt`) y “acrocentric” en lugar de «» en los textos ingleses.
+- **Diseño**: a 1400 px, la opción «Estimated from the data» de «Chiasma per arm, c» (Bloque 5) ya no se corta: en
+  inglés su columna tiene sitio (en español siguen las cuatro columnas iguales).
+- **Nombres de archivo** en el idioma de la interfaz (`fileLang`): con la interfaz en inglés, `measurements.csv/.tsv`,
+  `*_annotated.png`, `karyotype_*.csv`, `asymmetry_indices.csv`, `configurations_*`, `phases_*`, `tetrads_*`,
+  `pollen_*`, `counts_*`, `cytometry_*`, `signals_*`, `probes.csv`, `other_taxa.csv`, `dendrogram_*.nwk`, las tablas y
+  figuras de cada bloque (`idiogram_*`, `cytotype_map`, …) y el informe `report_*.html`; en el .zip, `README.txt`,
+  `project_*.json`, `report.html`, `tables/` (`accessions.csv`, …) y `figures/`. En español los nombres no cambian.
+- 684 pruebas (25 nuevas, en `tests/t_english.js`); validación: 9 310 comparaciones, 0 fallan.
+
 ## Versión 1.0.0 · Correcciones halladas al escribir el manual — 1 de noviembre de 2026
 
 Sin cambio de versión. Treinta errores que salieron al escribir y capturar el manual.

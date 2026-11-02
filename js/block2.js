@@ -287,7 +287,7 @@
       const N = Karyo.normalize({ p: m.p, q: m.q, sat: m.sat, satArm: m.satArm }, { includeSat: state.settings.includeSat });
       body += `<dl class="sel-dl"><dt>p</dt><dd>${fmtFixed(m.p, 2)} ${u}</dd><dt>q</dt><dd>${fmtFixed(m.q, 2)} ${u}</dd>` +
         (m.sat ? `<dt>${L2('satélite', 'satellite')}</dt><dd>${fmtFixed(m.sat, 2)} ${u} (${m.satArm})</dd>` : '') +
-        `<dt>${L2('total', 'total')}</dt><dd>${fmtFixed(m.total, 2)} ${u}</dd><dt>IC</dt><dd>${fmtFixed(N.ci, 1)}</dd><dt>r</dt><dd>${isFinite(N.r) ? fmtFixed(N.r, 2) : '∞'}</dd>` +
+        `<dt>${L2('total', 'total')}</dt><dd>${fmtFixed(m.total, 2)} ${u}</dd><dt>${L2('IC', 'CI')}</dt><dd>${fmtFixed(N.ci, 1)}</dd><dt>r</dt><dd>${isFinite(N.r) ? fmtFixed(N.r, 2) : '∞'}</dd>` +
         `<dt>${L2('clase', 'class')}</dt><dd>${Karyo.classify(N.s, N.l, state.settings.scheme) || '—'}</dd></dl>`;
     }
     body += `<div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" data-act="nosat"${ch.sc == null ? ' disabled' : ''}>${L2('Quitar el satélite', 'Remove the satellite')}</button>` +
@@ -316,7 +316,7 @@
       ? `<td class="num">${v == null ? '—' : fmtFixed(v, 2)}</td>`
       : `<td class="num"><input type="number" step="0.01" min="0" id="${id(r.ch, f)}" data-ch="${esc(r.ch.id)}" data-f="${f}" value="${v == null || !isFinite(v) ? '' : v}" ${lab(r, f, es, en)}></td>`;
     host.innerHTML = `<table class="b2-tab"><thead><tr><th>${L2('Cromosoma', 'Chromosome')}</th><th class="num">p (${unit})</th><th class="num">q (${unit})</th>` +
-      `<th class="num">${L2('Satélite', 'Satellite')} (${unit})</th><th>${L2('Brazo', 'Arm')}</th><th class="num">${L2('Total', 'Total')}</th><th class="num">IC</th><th class="num">r</th><th>${L2('Clase', 'Class')}</th><th>${L2('Origen', 'Source')}</th><th><span class="sr-only">${L2('Acciones', 'Actions')}</span></th></tr></thead><tbody>` +
+      `<th class="num">${L2('Satélite', 'Satellite')} (${unit})</th><th>${L2('Brazo', 'Arm')}</th><th class="num">${L2('Total', 'Total')}</th><th class="num">${L2('IC', 'CI')}</th><th class="num">r</th><th>${L2('Clase', 'Class')}</th><th>${L2('Origen', 'Source')}</th><th><span class="sr-only">${L2('Acciones', 'Actions')}</span></th></tr></thead><tbody>` +
       rows.map(r => `<tr${editor && editor.sel === r.ch.id ? ' class="sel"' : ''}>` +
         (r.traced ? `<td>${esc(r.ch.label)}</td>` : `<td><input type="text" size="4" data-ch="${esc(r.ch.id)}" data-f="label" value="${esc(r.ch.label)}" ${lab(r, 'label', 'Nombre', 'Name')}></td>`) +
         cellIn(r, 'p', r.p, 'Brazo corto', 'Short arm') + cellIn(r, 'q', r.q, 'Brazo largo', 'Long arm') + cellIn(r, 'sat', r.sat || (r.traced ? 0 : null), 'Satélite', 'Satellite') +
@@ -443,7 +443,7 @@
       const c = cell();
       if (!c || !c.image) return;
       const cv = await Img.annotated(c, state.images[c.image]);
-      cv.toBlob(b => download(b, slug(accName(c.acc) + '_' + c.label) + '_anotada.png'), 'image/png');
+      cv.toBlob(b => download(b, slug(accName(c.acc) + '_' + c.label) + T('_anotada.png', '_annotated.png')), 'image/png');
     });
     el('b2Um').addEventListener('change', () => {
       const c = cell(), v = num(el('b2Um').value);
@@ -532,8 +532,8 @@
       const n = el(`b2v-${ch.id}-p`); if (n) n.focus();
     });
     el('b2CsvCell').addEventListener('click', () => { const c = cell(); if (c) download(toDelimited(csvRows([c])), slug(accName(c.acc) + '_' + c.label) + '.csv', 'text/csv;charset=utf-8'); });
-    el('b2CsvAll').addEventListener('click', () => download(toDelimited(csvRows(state.cells)), 'mediciones.csv', 'text/csv;charset=utf-8'));
-    el('b2TsvAll').addEventListener('click', () => download(toDelimited(csvRows(state.cells), '\t'), 'mediciones.tsv', 'text/tab-separated-values;charset=utf-8'));
+    el('b2CsvAll').addEventListener('click', () => download(toDelimited(csvRows(state.cells)), fileLang('mediciones.csv'), 'text/csv;charset=utf-8'));
+    el('b2TsvAll').addEventListener('click', () => download(toDelimited(csvRows(state.cells), '\t'), fileLang('mediciones.tsv'), 'text/tab-separated-values;charset=utf-8'));
   }
   /* every measurement as rows: accession, cell, chromosome, p, q, satellite, arm, unit, source */
   function csvRows(cells) {

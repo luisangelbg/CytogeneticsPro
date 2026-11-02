@@ -36,7 +36,7 @@
     return `<g transform="translate(${r1(cx)} ${r1(cy)}) rotate(${r1(ang)})"><path d="${d}" fill="${fill}"/>` +
       `<rect x="${r1(-w * 0.9)}" y="${r1(-g - 0.4)}" width="${r1(w * 1.8)}" height="${r1(2 * g + 0.8)}" rx="${r1(g)}" fill="${fill}" opacity=".55"/>${extra || ''}</g>`;
   }
-  /* a meiotic configuration as a pictogram: ring or chain of k homologues;
+  /* a meiotic configuration as a pictogram: ring or chain of k homologs;
      a univalent is a single short chromosome. Chiasmata are the dots. */
   function config(key, cx, cy, size, rot) {
     const ring = key[0] === 'r', k = +key.slice(1);

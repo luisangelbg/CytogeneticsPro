@@ -94,7 +94,7 @@
     const block = b.closest('.fig-block');
     const svg = block && block.querySelector('.fig-canvas svg, svg.idio, svg.fig');
     if (!svg) { toast(T('Todavía no hay figura.', 'There is no figure yet.')); return; }
-    const name = slug((block.dataset.name || block.querySelector('.fig-head h4')?.textContent || 'figura').trim());
+    const name = fileLang(slug((block.dataset.name || block.querySelector('.fig-head h4')?.textContent || 'figura').trim()));
     save(svg, name, b.dataset.fmt).catch(err => toast(T('No se pudo exportar: ', 'Could not export: ') + err.message, 'error'));
   });
 
